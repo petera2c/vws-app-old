@@ -13,6 +13,6 @@ var firebaseConfig = {
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
-if (window.location.hostname !== "localhost") initializeAnalytics(firebaseApp);
+// if (window.location.hostname !== "localhost") initializeAnalytics(firebaseApp);
 
 export default firebaseApp;

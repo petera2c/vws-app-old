@@ -1,6 +1,6 @@
 import React, { Component, useState } from "react";
 
-import Container from "../../containers/Container";
+import Container from "../../containers/Container/Container";
 
 const ReportModal = ({ close, submit }: any) => {
   const [abuse, setAbuse] = useState<boolean>();

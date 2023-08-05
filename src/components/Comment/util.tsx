@@ -47,7 +47,7 @@ export const getCommentHasLiked = async (
   commentID: string,
   isMounted: any,
   setHasLiked: any,
-  userID: string
+  userID?: string
 ) => {
   const snapshot = await getDoc(
     doc(db, "comment_likes", commentID + "|||" + userID)

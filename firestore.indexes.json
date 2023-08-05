@@ -1,0 +1,285 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "chat_queue",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "helper",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "server_timestamp",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "chat_queue",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "venter",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "server_timestamp",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "comments",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "userID",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "server_timestamp",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "comments",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "ventID",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "like_counter",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "comments",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "ventID",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "server_timestamp",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "comments",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "ventID",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "server_timestamp",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "conversations",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "members",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "last_updated",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "conversations",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "members",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "last_updated",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "notifications",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "userID",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "server_timestamp",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "notifications",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "userID",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "server_timestamp",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "quotes",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "formatted_date",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "like_counter",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "quotes",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "is_featured",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "server_timestamp",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "rewards",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "userID",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "server_timestamp",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "vents",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "like_counter",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "server_timestamp",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "vents",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "new_tags",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "like_counter",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "vents",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "new_tags",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "server_timestamp",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "vents",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "new_tags",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "server_timestamp",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "vents",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "userID",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "server_timestamp",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "vents",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "userID",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "server_timestamp",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "vents",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "ventID",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "server_timestamp",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

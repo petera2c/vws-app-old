@@ -76,7 +76,7 @@ export const countdown = (
   isMounted: any,
   dayjsTimeout: any,
   setTimeout: any,
-  setTimeOutFormatted: any
+  setTimeOutFormatted?: any
 ) => {
   if (isMounted()) {
     setTimeout((oldUserVentTimeOut: any) => {
@@ -169,7 +169,7 @@ const getInvalidCharacters = (displayName: string) => {
   return invalidCharacters;
 };
 
-export const getIsUserOnline = (setIsUserOnline: any, userID: string) => {
+export const getIsUserOnline = (setIsUserOnline: any, userID?: string) => {
   const dbRef = ref(db2, "status/" + userID);
 
   onValue(dbRef, (snapshot) => {

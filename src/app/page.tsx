@@ -4,19 +4,19 @@ import Cookies from "universal-cookie";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Button, Space } from "antd";
 
-import Container from "../components/containers/Container";
+import Container from "../components/containers/Container/Container";
 import LoadingHeart from "../components/views/loaders/Heart";
-import MakeAd from "../components/MakeAd";
-import NewVentComponent from "../components/NewVent";
-import Page from "../components/containers/Page";
+import MakeAd from "../components/MakeAd/MakeAd";
+import Page from "../components/containers/Page/Page";
 import SubscribeColumn from "../components/SubscribeColumn";
-import Vent from "../components/Vent";
+import Vent from "../components/Vent/Vent";
 
 import { UserContext } from "../context";
 
 import { useIsMounted } from "../util";
 import { getVents, getWhatPage, newVentListener } from "./util";
 import Link from "next/link";
+import NewVentComponent from "@/components/NewVent/NewVent";
 
 const cookies = new Cookies();
 

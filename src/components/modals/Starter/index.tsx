@@ -2,14 +2,14 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 import LoginModal from "../Login";
 import SignUpModal from "../SignUp";
-import ForgotPasswordModal from "../ForgotPassword";
+import ForgotPasswordModal from "../ForgotPassword/ForgotPassword";
 
 function StarterModal({
   activeModal = "",
   setActiveModal,
 }: {
   activeModal?: string | boolean;
-  setActiveModal?: Dispatch<SetStateAction<boolean>>;
+  setActiveModal?: any;
 }) {
   const [localActiveModal, setLocalActiveModal] = useState(activeModal);
 

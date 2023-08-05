@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import Container from "../../containers/Container";
+import Container from "../../containers/Container/Container";
 
 import { getIsMobileOrTablet } from "../../../util";
 import { login } from "./util";

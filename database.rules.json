@@ -1,0 +1,72 @@
+{
+  "rules": {
+    "block_check_new": {
+      "$uid": {
+        ".read": "$uid === auth.uid",
+        ".write": "$uid === auth.uid",
+
+        "$uid2": {
+          ".read": "$uid === auth.uid || $uid2 === auth.uid",
+          ".write": "$uid === auth.uid"
+        }
+      }
+    },
+    "feed": {
+      "$uid": {
+        ".read": true,
+        ".write": false,
+        ".indexOn": ["server_timestamp", "userID"]
+      }
+    },
+    "following": {
+      "$uid": {
+        ".read": "$uid === auth.uid",
+        ".write": "$uid === auth.uid"
+      }
+    },
+    "followers": {
+      ".read": false,
+      ".write": false
+    },
+    "following_total": {
+      "$uid": {
+        ".read": "$uid === auth.uid",
+        ".write": false
+      }
+    },
+    "has_been_sent_checkup_email": {
+      "$uid": {
+        ".read": false,
+        ".write": false
+      },
+      ".indexOn": ".value"
+    },
+    "is_typing": {
+      "$conversationID": {
+        "$uid": {
+          ".read": true,
+          ".write": "$uid === auth.uid"
+        }
+      }
+    },
+    "muted": {
+      "$conversationID": {
+        "$uid": {
+          ".read": "$uid === auth.uid",
+          ".write": "$uid === auth.uid"
+        }
+      }
+    },
+    "status": {
+      ".read": true,
+      "$uid": {
+        ".write": "$uid === auth.uid"
+      },
+      ".indexOn": ["index", "state"]
+    },
+    "total_online_users2": {
+      ".read": true,
+      ".write": false
+    }
+  }
+}

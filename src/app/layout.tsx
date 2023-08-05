@@ -10,14 +10,13 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Nunito } from "next/font/google";
 
 import ANT_THEME_CUSTOMIZATION from "@/styles/AntDCustom";
-import Header from "@/components/Header";
 import MobileHeader from "@/components/Header/MobileHeader";
 
 import Head from "next/head";
 import { RootStyleRegistry } from "@/components/RootStyleRegistry";
 
 import "../styles/global.css";
-import Container from "@/components/containers/Container";
+import Container from "@/components/containers/Container/Container";
 import { Suspense, useEffect, useRef, useState } from "react";
 import LoadingHeart from "@/components/views/loaders/Heart";
 import Sidebar from "@/components/Sidebar";
@@ -34,6 +33,7 @@ import {
 } from "./util";
 
 import "../config/firebase_init";
+import Header from "@/components/Header/Header";
 
 const nunito = Nunito({ subsets: ["latin"] });
 

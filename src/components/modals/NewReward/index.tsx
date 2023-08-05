@@ -6,11 +6,11 @@ import { faMeteor } from "@fortawesome/pro-duotone-svg-icons/faMeteor";
 import { faStarShooting } from "@fortawesome/pro-duotone-svg-icons/faStarShooting";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import Container from "../../containers/Container";
+import Container from "../../containers/Container/Container";
 import { getIsMobileOrTablet } from "../../../util";
 
 function NewRewardModal({ close, newReward }) {
-  const [isMobileOrTablet, setIsMobileOrTablet] = useState();
+  const [isMobileOrTablet, setIsMobileOrTablet] = useState<boolean>();
   const [canClose, setCanClose] = useState(false);
 
   useEffect(() => {

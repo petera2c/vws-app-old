@@ -1,0 +1,179 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /admin_notifications/{adminNotificationID} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /chat_queue/{uid} {
+      allow read: if true;
+      allow write: if request.auth.uid == uid;
+    }
+
+    match /comments/{commentID} {
+      allow read: if true;
+      allow write, update: if request.auth.uid == request.resource.data.userID && (!(get(/databases/$(database)/documents/users_display_name/$(request.auth.uid)).data.keys().hasAny(['karma'])) || get(/databases/$(database)/documents/users_display_name/$(request.auth.uid)).data.karma > -50);
+      allow delete: if request.auth.uid == resource.data.userID || get(/databases/$(database)/documents/vents/$(resource.data.ventID)).data.userID == request.auth.uid;
+    }
+    match /comment_likes/{commentIDUserID} {
+      allow read, write: if request.auth.uid == resource.data.userID || request.auth.uid == commentIDUserID.split('\\|\\|\\|')[1];
+    }
+    match /comment_reports/{commentIDUserID} {
+      allow read, write: if request.auth.uid == resource.data.userID || request.auth.uid == commentIDUserID.split('\\|\\|\\|')[1];
+    }
+
+    match /conversations/{conversationID} {
+      allow read: if request.auth.uid in resource.data.members;
+      allow create: if request.auth.uid in request.resource.data.members && (!(get(/databases/$(database)/documents/users_display_name/$(request.auth.uid)).data.keys().hasAny(['karma'])) || get(/databases/$(database)/documents/users_display_name/$(request.auth.uid)).data.karma > -50);
+      allow update: if request.auth.uid in resource.data.members && (!(get(/databases/$(database)/documents/users_display_name/$(request.auth.uid)).data.keys().hasAny(['karma'])) || get(/databases/$(database)/documents/users_display_name/$(request.auth.uid)).data.karma > -50) && !request.resource.data.diff(resource.data).affectedKeys()
+        .hasAny(['group_owner','is_group', 'server_timestamp']);
+      allow delete: if false;
+    }
+    match /conversation_extra_data/{conversationID} {
+      match /messages/{messagesID} {
+        allow read: if true;
+        allow write: if request.auth.uid == request.resource.data.userID && (!(get(/databases/$(database)/documents/users_display_name/$(request.auth.uid)).data.keys().hasAny(['karma'])) || get(/databases/$(database)/documents/users_display_name/$(request.auth.uid)).data.karma > -50);
+        allow update: if request.auth.uid == resource.data.userID
+          && request.auth.uid == request.resource.data.userID;
+        allow delete: if request.auth.uid == resource.data.userID;
+
+        match /is_chat_update {
+          allow read: if true;
+          allow write: if false;
+        }
+      }
+    }
+
+    match /invite_uid/{secondUID} {
+      allow read: if resource.data.primary_uid == request.auth.uid;
+      allow write: if false;
+    }
+    match /invited_users/{uid} {
+      allow write: if request.auth.uid == uid;
+      allow read: if false;
+    }
+
+    match /notifications/{notificationID} {
+      allow read: if request.auth.uid == resource.data.userID;
+      allow create, delete: if false;
+      allow update: if request.auth.uid == resource.data.userID && request.auth.uid == request.resource.data.userID;
+    }
+
+    match /quote_likes/{quoteIDUserID} {
+      allow read, write: if request.auth.uid == resource.data.userID || request.auth.uid == quoteIDUserID.split('\\|\\|\\|')[1];
+    }
+    match /quote_reports/{quoteIDUserID} {
+      allow read, write: if request.auth.uid == resource.data.userID || request.auth.uid == quoteIDUserID.split('\\|\\|\\|')[1];
+    }
+    match /quotes/{quoteID} {
+      allow read: if true;
+      allow create: if request.auth.uid == request.resource.data.userID;
+      allow update: if request.auth.uid == resource.data.userID && request.auth.uid == request.resource.data.userID;
+      allow delete: if request.auth.uid == resource.data.userID;
+
+      match /formatted_date {
+        allow read: if true;
+        allow write: if false;
+      }
+      match /is_featured {
+        allow read: if true;
+        allow write: if false;
+      }
+      match /like_counter {
+        allow read: if true;
+        allow write: if false;
+      }
+      match /report_counter {
+        allow read: if true;
+        allow write: if false;
+      }
+      match /server_timestamp {
+        allow read: if true;
+        allow write: if false;
+      }
+    }
+
+    match /rewards/{rewardID} {
+      allow read, delete: if request.auth.uid == resource.data.userID;
+      allow write: if false;
+    }
+
+    match /total_users_online/{randomID} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /unread_conversations_count/{userID} {
+      allow read, write: if request.auth.uid == userID;
+    }
+
+    match /user_rewards/{userID} {
+      allow read: if request.auth.uid == userID;
+      allow write: if false;
+    }
+    match /user_expo_tokens/{userID} {
+      allow read, write: if request.auth.uid == userID;
+    }
+    match /user_matches/{userID} {
+      allow read, write: if request.auth.uid == userID;
+    }
+    match /user_mobile_app_rating/{userID} {
+      allow read, write: if request.auth.uid == userID;
+    }
+    match /user_subscription/{userID} {
+      allow read, write: if request.auth.uid == userID;
+    }
+    match /user_vent_timeout/{userID} {
+      allow read: if request.auth.uid == userID;
+      allow write: if false;
+    }
+    match /users/{userID} {
+      allow read, write: if request.auth.uid == userID;
+    }
+    match /users_display_name/{userID} {
+      allow read: if true;
+      allow write: if request.auth.uid == userID;
+
+      match /is_admin {
+        allow read: if true;
+        allow write: if false;
+      }
+      match /karma {
+        allow read: if true;
+        allow write: if false;
+      }
+    }
+    match /users_info/{userID} {
+      allow read: if true;
+      allow write: if request.auth.uid == userID;
+
+      match /last_birthday_post {
+        allow read: if true;
+        allow write: if false;
+      }
+    }
+    match /users_settings/{userID} {
+      allow read, write: if request.auth.uid == userID;
+    }
+
+
+    match /vents/{ventID} {
+      allow read: if true;
+      allow create: if request.auth.uid == request.resource.data.userID && (!(get(/databases/$(database)/documents/users_display_name/$(request.auth.uid)).data.keys().hasAny(['karma'])) || get(/databases/$(database)/documents/users_display_name/$(request.auth.uid)).data.karma > -50);
+      allow update: if request.auth.uid == request.resource.data.userID && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['trending_score_day','trending_score_week', 'trending_score_month'])
+      allow delete: if request.auth.uid == resource.data.userID;
+    }
+    match /vent_likes/{ventIDUserID} {
+      allow read, write: if request.auth.uid == resource.data.userID || request.auth.uid == ventIDUserID.split('\\|\\|\\|')[1];
+    }
+    match /vent_reports/{ventIDUserID} {
+      allow read, write: if request.auth.uid == request.resource.data.userID || request.auth.uid == ventIDUserID.split('\\|\\|\\|')[1];
+    }
+    match /vent_tags/{tagID} {
+      allow read: if true;
+      allow write: if false;
+    }
+  }
+}

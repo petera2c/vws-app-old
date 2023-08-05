@@ -3,8 +3,8 @@ import useState from "react-usestateref";
 import { sendEmailVerification } from "@firebase/auth";
 import { Button, message, Space } from "antd";
 
-import Container from "../containers/Container";
-import HandleOutsideClick from "../containers/HandleOutsideClick";
+import Container from "../containers/Container/Container";
+import HandleOutsideClick from "../containers/HandleOutsideClick/HandleOutsideClick";
 import DisplayName from "../views/DisplayName";
 import StarterModal from "../modals/Starter";
 
