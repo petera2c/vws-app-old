@@ -8,7 +8,7 @@ import {
 import { db } from "../../config/db_init";
 import dayjs from "dayjs";
 
-export const getQuotes = async (isMounted: any, setQuotes: any) => {
+export const getQuotes = async (setQuotes: any) => {
   const snapshot = await getDocs(
     query(
       collection(db, "quotes"),
@@ -18,10 +18,9 @@ export const getQuotes = async (isMounted: any, setQuotes: any) => {
     )
   );
 
-  if (isMounted())
-    setQuotes(
-      snapshot.docs.map((doc) => {
-        return { id: doc.id, doc, ...doc.data() };
-      })
-    );
+  setQuotes(
+    snapshot.docs.map((doc) => {
+      return { id: doc.id, doc, ...doc.data() };
+    })
+  );
 };

@@ -11,10 +11,9 @@ import {
 import { db } from "../../config/db_init";
 
 import { getEndAtValueTimestamp } from "../../util";
-import Vent from "@/types/Vent";
+import Vent from "@/types/VentType";
 
 export const getTagVents = async (
-  isMounted: any,
   setCanLoadMoreVents: any,
   setVents: any,
   tagID: string,
@@ -32,7 +31,7 @@ export const getTagVents = async (
     )
   );
 
-  if (!isMounted()) return;
+  return;
 
   let newVents: any[] = [];
 

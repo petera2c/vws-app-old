@@ -16,7 +16,6 @@ import {
   getUserAvatars,
   isPageActive,
   signOut2,
-  useIsMounted,
 } from "../../util";
 import {
   conversationsListener,
@@ -51,7 +50,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 function Header() {
-  const isMounted = useIsMounted();
   const pathname = usePathname();
   const navigate = useRouter();
   const { search } = location;
@@ -85,41 +83,29 @@ function Header() {
     let newConversationsListenerUnsubscribe: any;
     let newNotificationsListenerUnsubscribe: any;
 
-    chatQueueListenerUnsubscribe = chatQueueEmptyListener(
-      isMounted,
-      setQueueLength
-    );
+    chatQueueListenerUnsubscribe = chatQueueEmptyListener(setQueueLength);
     getTotalOnlineUsers((totalOnlineUsers: number) => {
-      if (isMounted()) {
-        setTotalOnlineUsers(totalOnlineUsers);
-        getUserAvatars(isMounted, setFirstOnlineUsers);
-      }
+      setTotalOnlineUsers(totalOnlineUsers);
+      getUserAvatars(setFirstOnlineUsers);
     });
 
     if (user) {
       if (pathname === "/chat")
-        resetUnreadConversationCount(
-          isMounted,
-          setUnreadConversationsCount,
-          user.uid
-        );
+        resetUnreadConversationCount(setUnreadConversationsCount, user.uid);
 
       conversationsUnsubscribe = conversationsListener(navigate, user.uid);
       isUserInQueueUnsubscribe = isUserInQueueListener(
-        isMounted,
         setIsUserInQueue,
         user.uid
       );
 
       newConversationsListenerUnsubscribe = getUnreadConversations(
-        isMounted,
         pathname.substring(0, 7) === "/search",
         pathname,
         setUnreadConversationsCount,
         user.uid
       );
       newNotificationsListenerUnsubscribe = newNotificationsListener(
-        isMounted,
         setNotificationCounter,
         setNotifications,
         user
@@ -145,7 +131,6 @@ function Header() {
         newConversationsListenerUnsubscribe();
     };
   }, [
-    isMounted,
     isUserInQueueRef,
     navigate,
     pathname,

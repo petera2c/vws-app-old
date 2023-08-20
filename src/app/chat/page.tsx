@@ -9,7 +9,6 @@ import {
   capitolizeFirstChar,
   getIsMobileOrTablet,
   getUserBasicInfo,
-  useIsMounted,
 } from "../../util";
 import {
   getConversationPartnerUserID,
@@ -50,8 +49,6 @@ function Chat({
   setIsCreateGroupModalVisible?: any;
   userID: any;
 }) {
-  console.log(activeConversation);
-  const isMounted = useIsMounted();
   const router = useRouter();
 
   const dummyRef = useRef<any>();
@@ -93,7 +90,6 @@ function Chat({
     ) {
       isUserTypingUnsubscribe = isUserTypingListener(
         activeConversation.id,
-        isMounted,
         isUserTypingTimeout,
         getConversationPartnerUserID(activeConversation.members, userID),
         scrollToBottom,
@@ -115,16 +111,13 @@ function Chat({
             tempArray.push(newBasicUserInfo);
           }, chatMemberIDArray[index]);
         }
-        if (isMounted()) {
-          setActiveChatUserBasicInfos(tempArray);
-        }
+        setActiveChatUserBasicInfos(tempArray);
       };
       getAllMemberData(chatMemberIDArray);
     }
 
     getMessages(
       activeConversation.id,
-      isMounted,
       [],
       scrollToBottom,
       setCanLoadMore,
@@ -133,7 +126,6 @@ function Chat({
 
     messageListenerUnsubscribe = messageListener(
       activeConversation.id,
-      isMounted,
       scrollToBottom,
       setMessages
     );
@@ -146,7 +138,6 @@ function Chat({
   }, [
     activeConversation,
     isChatInConversationsArray,
-    isMounted,
     setActiveChatUserBasicInfos,
     userID,
   ]);
@@ -223,7 +214,7 @@ function Chat({
           <Button
             onClick={() => {
               setActiveConversation(false);
-              router.push("/chat");
+              router.push("/conversations");
             }}
           >
             Go Back
@@ -250,7 +241,6 @@ function Chat({
               onClick={() =>
                 getMessages(
                   activeConversation.id,
-                  isMounted,
                   messages,
                   scrollToBottom,
                   setCanLoadMore,

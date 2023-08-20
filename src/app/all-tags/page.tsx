@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 
 import SubscribeColumn from "../../components/SubscribeColumn";
 
-import { useIsMounted } from "../../util";
 import { getTags } from "./util";
 import Page from "@/components/containers/Page/Page";
 import Container from "@/components/containers/Container/Container";
@@ -11,13 +10,11 @@ import Link from "next/link";
 import Tag from "@/types/Tag";
 
 const AllTags = () => {
-  const isMounted = useIsMounted();
-
   const [tags, setTags] = useState<Tag[]>([]);
 
   useEffect(() => {
     getTags(setTags);
-  }, [isMounted, setTags, tags]);
+  }, [setTags, tags]);
 
   return (
     <Page className="br-grey-2 pt32 px16 pb16">

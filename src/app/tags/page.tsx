@@ -7,19 +7,18 @@ import Page from "../../../components/containers/Page";
 import SubscribeColumn from "../../components/SubscribeColumn";
 import Vent from "../../../components/Vent";
 
-import { useIsMounted, viewTagFunction } from "../../util";
+import { viewTagFunction } from "../../util";
 import { getTagVents } from "./util";
 
 function IndividualTag() {
   const { tagID } = useParams();
-  const isMounted = useIsMounted();
 
   const [canLoadMoreVents, setCanLoadMoreVents] = useState(true);
   const [vents, setVents] = useState([]);
 
   useEffect(() => {
-    getTagVents(isMounted, setCanLoadMoreVents, setVents, tagID);
-  }, [isMounted, setVents, tagID]);
+    getTagVents(setCanLoadMoreVents, setVents, tagID);
+  }, [setVents, tagID]);
 
   return (
     <Page
@@ -57,13 +56,7 @@ function IndividualTag() {
           {canLoadMoreVents && (
             <Button
               onClick={() => {
-                getTagVents(
-                  isMounted,
-                  setCanLoadMoreVents,
-                  setVents,
-                  tagID,
-                  vents
-                );
+                getTagVents(setCanLoadMoreVents, setVents, tagID, vents);
               }}
               size="large"
               type="primary"

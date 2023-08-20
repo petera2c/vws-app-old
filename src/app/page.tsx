@@ -13,7 +13,6 @@ import Vent from "../components/Vent/Vent";
 
 import { UserContext } from "../context";
 
-import { useIsMounted } from "../util";
 import { getVents, getWhatPage, newVentListener } from "./util";
 import Link from "next/link";
 import NewVentComponent from "@/components/NewVent/NewVent";
@@ -21,8 +20,6 @@ import NewVentComponent from "@/components/NewVent/NewVent";
 const cookies = new Cookies();
 
 function VentsPage() {
-  const isMounted = useIsMounted();
-
   const { user } = useContext(UserContext);
 
   const [vents, setVents] = useState([]);
@@ -47,17 +44,13 @@ function VentsPage() {
     setVents([]);
     setCanLoadMore(true);
 
-    getVents(isMounted, setCanLoadMore, setVents, user, null, whatPage);
-    newVentListenerUnsubscribe = newVentListener(
-      isMounted,
-      setWaitingVents,
-      whatPage
-    );
+    getVents(setCanLoadMore, setVents, user, null, whatPage);
+    newVentListenerUnsubscribe = newVentListener(setWaitingVents, whatPage);
 
     return () => {
       if (newVentListenerUnsubscribe) return newVentListenerUnsubscribe();
     };
-  }, [isMounted, pathname, search, setCanLoadMore, user]);
+  }, [pathname, search, setCanLoadMore, user]);
 
   return (
     <Page className="pa16" id="scrollable-div">
@@ -157,14 +150,7 @@ function VentsPage() {
                 </Container>
               }
               next={() =>
-                getVents(
-                  isMounted,
-                  setCanLoadMore,
-                  setVents,
-                  user,
-                  vents,
-                  whatPage
-                )
+                getVents(setCanLoadMore, setVents, user, vents, whatPage)
               }
               scrollableTarget="scrollable-div"
             >

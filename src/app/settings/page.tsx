@@ -10,11 +10,7 @@ import LoadingHeart from "../../components/views/loaders/Heart";
 import SubscribeColumn from "../../components/SubscribeColumn";
 
 import { UserContext } from "../../context";
-import {
-  getIsMobileOrTablet,
-  getUserBasicInfo,
-  useIsMounted,
-} from "../../util";
+import { getIsMobileOrTablet, getUserBasicInfo } from "../../util";
 import { getBlockedUsers, unblockUser } from "../account/util";
 import Container from "@/components/containers/Container/Container";
 import Page from "@/components/containers/Page/Page";
@@ -23,7 +19,6 @@ import UserBasicInfo from "@/types/UserBasicInfo";
 
 function SettingsSection() {
   const { user } = useContext(UserContext);
-  const isMounted = useIsMounted();
 
   const [blockedUsers, setBlockedUsers] = useState([]);
   const [canLoadMore, setCanLoadMore] = useState(false);
@@ -46,8 +41,8 @@ function SettingsSection() {
   };
 
   useEffect(() => {
-    if (isMounted()) setIsMobileOrTablet(getIsMobileOrTablet());
-  }, [isMounted]);
+    setIsMobileOrTablet(getIsMobileOrTablet());
+  }, []);
 
   if (!settingsSnapshot || !settingsSnapshot.data())
     return (
@@ -227,7 +222,7 @@ function SettingsSection() {
                 } else
                   getBlockedUsers(
                     [],
-                    isMounted,
+
                     setBlockedUsers,
                     setCanLoadMore,
                     user!.uid
@@ -250,7 +245,7 @@ function SettingsSection() {
                 onClick={() => {
                   getBlockedUsers(
                     blockedUsers,
-                    isMounted,
+
                     setBlockedUsers,
                     setCanLoadMore,
                     user!.uid
@@ -283,14 +278,13 @@ const UserDisplay = ({
   setBlockedUsers: any;
   userID: string;
 }) => {
-  const isMounted = useIsMounted();
   const [userBasicInfo, setUserBasicInfo] = useState<UserBasicInfo>();
 
   useEffect(() => {
     getUserBasicInfo((userBasicInfo: UserBasicInfo) => {
-      if (isMounted()) setUserBasicInfo(userBasicInfo);
+      setUserBasicInfo(userBasicInfo);
     }, blockedUserID);
-  }, [blockedUserID, isMounted]);
+  }, [blockedUserID]);
 
   return (
     <button

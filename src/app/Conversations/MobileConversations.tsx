@@ -7,7 +7,7 @@ import StarterModal from "../../components/modals/Starter";
 import ConversationOption from "../../components/ConversationOption";
 import Chat from "../chat/page";
 
-import { useIsMounted, userSignUpProgress } from "../../util";
+import { userSignUpProgress } from "../../util";
 
 import {
   getConversations,
@@ -20,9 +20,6 @@ import Container from "@/components/containers/Container/Container";
 import Link from "next/link";
 
 function MobileConversations() {
-  const isMounted = useIsMounted();
-  //const location = useLocation();
-  //const { search } = location;
   const { user } = useContext(UserContext);
 
   const [activeConversation, setActiveConversation] =
@@ -37,17 +34,14 @@ function MobileConversations() {
 
     if (user) {
       newMessageListenerUnsubscribe = mostRecentConversationListener(
-        isMounted,
         setConversations,
         user.uid
       );
 
       getConversations(
         [],
-        isMounted,
         (newConversations: ConversationType[]) =>
           setInitialConversationsAndActiveConversation(
-            isMounted,
             newConversations,
             false,
             setActiveConversation,
@@ -61,7 +55,7 @@ function MobileConversations() {
     return () => {
       if (newMessageListenerUnsubscribe) newMessageListenerUnsubscribe();
     };
-  }, [isMounted, user]);
+  }, [user]);
 
   return (
     <Page className="bg-blue-2">
@@ -99,16 +93,13 @@ function MobileConversations() {
             onClick={() => {
               getConversations(
                 conversations,
-                isMounted,
                 (newConversations: ConversationType[]) => {
-                  if (isMounted()) {
-                    if (newConversations.length < 5) setCanLoadMore(false);
+                  if (newConversations.length < 5) setCanLoadMore(false);
 
-                    setConversations((oldConversations) => [
-                      ...oldConversations,
-                      ...newConversations,
-                    ]);
-                  }
+                  setConversations((oldConversations) => [
+                    ...oldConversations,
+                    ...newConversations,
+                  ]);
                 },
                 user?.uid
               );

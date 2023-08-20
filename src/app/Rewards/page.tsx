@@ -6,7 +6,7 @@ import { Progress, Space, Tooltip } from "antd";
 
 import { UserContext } from "../../context";
 
-import { getIsMobileOrTablet, useIsMounted } from "../../util";
+import { getIsMobileOrTablet } from "../../util";
 import {
   calculateMilestone,
   getNextMilestone,
@@ -20,7 +20,6 @@ import Reward from "@/types/Reward";
 dayjs.extend(relativeTime);
 
 function RewardsPage() {
-  const isMounted = useIsMounted();
   const { user } = useContext(UserContext);
 
   const [isMobileOrTablet, setIsMobileOrTablet] = useState<boolean>();
@@ -31,10 +30,10 @@ function RewardsPage() {
     setIsMobileOrTablet(getIsMobileOrTablet());
 
     if (user) {
-      getUserRecentRewards(isMounted, setRecentRewards, user.uid);
-      getUserRewardsProgress(isMounted, setUserRewards, user.uid);
+      getUserRecentRewards(setRecentRewards, user.uid);
+      getUserRewardsProgress(setUserRewards, user.uid);
     }
-  }, [isMounted, user]);
+  }, [user]);
 
   return (
     <Page className="pa16">

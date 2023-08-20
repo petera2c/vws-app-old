@@ -9,13 +9,13 @@ export const createShareLink = (secondUID) => {
   return link;
 };
 
-export const getSecondUID = async (isMounted, setSecondUID, uid) => {
+export const getSecondUID = async (setSecondUID, uid) => {
   const snapshot = await getDocs(
     query(collection(db, "invite_uid"), where("primary_uid", "==", uid))
   );
 
   if (snapshot.docs && snapshot.docs.length > 0) {
     const doc = snapshot.docs[0];
-    if (isMounted()) setSecondUID(doc.id);
+    setSecondUID(doc.id);
   }
 };

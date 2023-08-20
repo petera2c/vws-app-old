@@ -18,7 +18,6 @@ import {
   getIsUserOnline,
   getUserBasicInfo,
   hasUserBlockedUser,
-  useIsMounted,
   userSignUpProgress,
 } from "../../util";
 import { findPossibleUsersToTag } from "../Vent/util";
@@ -47,7 +46,6 @@ function Comment({
   commentIndex: number;
   setComments: any;
 }) {
-  const isMounted = useIsMounted();
   const { user } = useContext(UserContext);
 
   const [comment, setComment] = useState(comment2);
@@ -65,32 +63,27 @@ function Comment({
     if (user) {
       getCommentHasLiked(
         commentID,
-        isMounted,
+
         (hasLiked: boolean) => {
-          if (isMounted()) setHasLiked(hasLiked);
+          setHasLiked(hasLiked);
         },
         user.uid
       );
-      hasUserBlockedUser(
-        isMounted,
-        user.uid,
-        comment.userID,
-        setIsContentBlocked
-      );
+      hasUserBlockedUser(user.uid, comment.userID, setIsContentBlocked);
     }
 
     getUserBasicInfo((newBasicUserInfo: UserBasicInfo) => {
-      if (isMounted()) setUserBasicInfo(newBasicUserInfo);
+      setUserBasicInfo(newBasicUserInfo);
     }, comment.userID);
 
     isUserOnlineSubscribe = getIsUserOnline((isUserOnline: any) => {
-      if (isMounted()) setIsUserOnline(isUserOnline.state);
+      setIsUserOnline(isUserOnline.state);
     }, comment.userID);
 
     return () => {
       if (isUserOnlineSubscribe) off(isUserOnlineSubscribe);
     };
-  }, [commentID, comment.text, comment.userID, isMounted, user]);
+  }, [commentID, comment.text, comment.userID, user]);
 
   if (isContentBlocked) return <div />;
 
@@ -212,7 +205,7 @@ function Comment({
             await likeOrUnlikeComment(comment, hasLiked, user);
             await getCommentHasLiked(
               commentID,
-              isMounted,
+
               setHasLiked,
               user?.uid
             );

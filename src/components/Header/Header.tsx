@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import useState from "react-usestateref";
 import { sendEmailVerification } from "@firebase/auth";
-import { Button, Dropdown, message } from "antd";
+import { Button, Dropdown, Input, message } from "antd";
 
 import { UserContext } from "../../context";
-import { isPageActive, useIsMounted, signOut2 } from "../../util";
+import { isPageActive, signOut2 } from "../../util";
 import {
   conversationsListener,
   newNotificationsListener,
@@ -38,7 +38,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 function Header() {
-  const isMounted = useIsMounted();
   const navigate = useRouter();
   const pathname = usePathname();
   const { search } = location;
@@ -66,15 +65,10 @@ function Header() {
     let newNotificationsListenerUnsubscribe: any;
 
     if (user) {
-      if (pathname === "/chat")
-        resetUnreadConversationCount(
-          isMounted,
-          setUnreadConversationsCount,
-          user.uid
-        );
+      if (pathname === "/conversations")
+        resetUnreadConversationCount(setUnreadConversationsCount, user.uid);
 
       getNotifications(
-        isMounted,
         [],
         undefined,
         setNotificationCounter,
@@ -84,19 +78,16 @@ function Header() {
 
       conversationsUnsubscribe = conversationsListener(navigate, user.uid);
       isUserInQueueUnsubscribe = isUserInQueueListener(
-        isMounted,
         setIsUserInQueue,
         user.uid
       );
       newConversationsListenerUnsubscribe = getUnreadConversations(
-        isMounted,
         pathname.substring(0, 7) === "/search",
         pathname,
         setUnreadConversationsCount,
         user.uid
       );
       newNotificationsListenerUnsubscribe = newNotificationsListener(
-        isMounted,
         setNotificationCounter,
         setNotifications,
         user
@@ -122,7 +113,7 @@ function Header() {
       if (newNotificationsListenerUnsubscribe)
         newNotificationsListenerUnsubscribe();
     };
-  }, [isMounted, isUserInQueueRef, navigate, pathname, setIsUserInQueue, user]);
+  }, [isUserInQueueRef, navigate, pathname, setIsUserInQueue, user]);
 
   return (
     <Container className="column x-fill">
@@ -172,13 +163,11 @@ function Header() {
                 )}
               </Link>
             </Container>
-            <Container className="full-center bg-grey-4 py4 px8 br4">
-              <FontAwesomeIcon className="grey-5 mr8" icon={faSearch} />
-              <input
+            <Container className="full-center">
+              <Input
                 autoFocus={
                   pathname.substring(0, 7) === "/search" ? true : false
                 }
-                className="no-border bg-grey-4 br4"
                 onChange={(e) => {
                   setVentSearchString(e.target.value);
 
@@ -189,6 +178,9 @@ function Header() {
                     navigate.push("/search?" + e.target.value);
                 }}
                 placeholder="Search"
+                prefix={
+                  <FontAwesomeIcon className="grey-5 mr8" icon={faSearch} />
+                }
                 type="text"
                 value={ventSearchString}
               />
@@ -199,22 +191,14 @@ function Header() {
               </Button>
             </Link>
           </Container>
-          <Container className="full-center wrap">
+          <Container className="full-center wrap gap8">
             {!user && (
-              <button
-                className="blue fw-300 mx32"
-                onClick={() => setActiveModal("login")}
-              >
-                Login
-              </button>
+              <Button onClick={() => setActiveModal("login")}>Login</Button>
             )}
             {!user && (
-              <button
-                className="white blue-fade px32 py8 br4"
-                onClick={() => setActiveModal("signUp")}
-              >
+              <Button onClick={() => setActiveModal("signUp")} type="primary">
                 Sign Up
-              </button>
+              </Button>
             )}
             {user && (
               <Container className="align-center gap16">

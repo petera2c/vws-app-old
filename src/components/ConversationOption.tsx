@@ -11,7 +11,6 @@ import {
   capitolizeFirstChar,
   getIsUserOnline,
   getUserBasicInfo,
-  useIsMounted,
 } from "../util";
 import {
   conversationListener,
@@ -52,7 +51,6 @@ function ConversationOption({
   setConversations: any;
   userID: string;
 }) {
-  const isMounted = useIsMounted();
   const router = useRouter();
 
   const unsubFromConversationUpdates: any = useRef(false);
@@ -70,7 +68,7 @@ function ConversationOption({
   useEffect(() => {
     unsubFromConversationUpdates.current = conversationListener(
       conversation,
-      isMounted,
+
       setConversations
     );
 
@@ -89,18 +87,16 @@ function ConversationOption({
           tempArray.push(newBasicUserInfo);
         }, chatMemberIDArray[index]);
       }
-      if (isMounted()) {
-        setUserBasicInfoArray(tempArray);
+      setUserBasicInfoArray(tempArray);
 
-        if (isActive) setActiveChatUserBasicInfos(tempArray);
-      }
+      if (isActive) setActiveChatUserBasicInfos(tempArray);
     };
     getAllMemberData(chatMemberIDArray);
 
     if (isActive && (!hasSeen || conversation.go_to_inbox))
       readConversation(conversation, userID);
 
-    getIsChatMuted(conversation.id, isMounted, setIsMuted, userID);
+    getIsChatMuted(conversation.id, setIsMuted, userID);
 
     return () => {
       if (unsubFromConversationUpdates.current)
@@ -110,7 +106,7 @@ function ConversationOption({
     conversation,
     hasSeen,
     isActive,
-    isMounted,
+
     setActiveChatUserBasicInfos,
     setConversations,
     userID,
@@ -291,7 +287,6 @@ function DisplayOnlineAndName({
   style?: any;
   userBasicInfo?: UserBasicInfo;
 }) {
-  const isMounted = useIsMounted();
   const [isUserOnline, setIsUserOnline] = useState(false);
 
   useEffect(() => {
@@ -299,7 +294,7 @@ function DisplayOnlineAndName({
 
     if (!chatName)
       isUserOnlineSubscribe = getIsUserOnline((isUserOnlineObj: any) => {
-        if (isUserOnlineObj && isUserOnlineObj.state && isMounted()) {
+        if (isUserOnlineObj && isUserOnlineObj.state) {
           if (isUserOnlineObj.state === "online") setIsUserOnline(true);
           else setIsUserOnline(false);
         }
@@ -308,7 +303,7 @@ function DisplayOnlineAndName({
     return () => {
       if (isUserOnlineSubscribe) off(isUserOnlineSubscribe);
     };
-  }, [chatName, isMounted, userBasicInfo]);
+  }, [chatName, userBasicInfo]);
 
   return (
     <Container className="flex-fill align-center ov-hidden gap8" style={style}>

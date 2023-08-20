@@ -19,6 +19,7 @@ import { db } from "../../config/db_init";
 import { message } from "antd";
 
 import { calculateKarma, userSignUpProgress } from "../../util";
+import Tag from "@/types/Tag";
 
 dayjs.extend(utc);
 
@@ -26,12 +27,12 @@ const TITLE_LENGTH_MINIMUM = 0;
 const TITLE_LENGTH_MAXIMUM = 100;
 
 export const checks = (
-  isUserKarmaSufficient,
-  setStarterModal,
-  user,
-  userBasicInfo,
-  ventID,
-  userVentTimeOut
+  isUserKarmaSufficient: any,
+  setStarterModal: any,
+  user: any,
+  userBasicInfo: any,
+  ventID: string,
+  userVentTimeOut: any
 ) => {
   if (userVentTimeOut && !ventID) {
     return () => () => message.info("You need to wait to vent again");
@@ -57,7 +58,7 @@ export const checks = (
   return false;
 };
 
-export const checkVentTitle = (title) => {
+export const checkVentTitle = (title: string) => {
   if (title.length > TITLE_LENGTH_MAXIMUM) {
     message.info("Title is too long! :(");
     return false;
@@ -72,8 +73,8 @@ export const checkVentTitle = (title) => {
   return true;
 };
 
-export const getQuote = async (isMounted, setQuote) => {
-  const yesterdaysFormattedDate = new dayjs(Timestamp.now().toMillis())
+export const getQuote = async (setQuote: any) => {
+  const yesterdaysFormattedDate = dayjs(Timestamp.now().toMillis())
     .utcOffset(0)
     .subtract(1, "days")
     .format("MM-DD-YYYY");
@@ -90,14 +91,15 @@ export const getQuote = async (isMounted, setQuote) => {
   if (
     quotesSnapshot.docs &&
     quotesSnapshot.docs[0] &&
-    quotesSnapshot.docs[0].data() &&
-    isMounted()
+    quotesSnapshot.docs[0].data()
   ) {
     const author = await getDoc(
       doc(db, "users_display_name", quotesSnapshot.docs[0].data().userID)
     );
 
-    const displayName = author.data() ? author.data().displayName : "Anonymous";
+    const displayName = author.data()
+      ? author.data()?.displayName
+      : "Anonymous";
     setQuote({
       displayName,
       id: quotesSnapshot.docs[0].id,
@@ -106,7 +108,7 @@ export const getQuote = async (isMounted, setQuote) => {
   }
 };
 
-export const getTags = async (setSearchedVentTags, setVentTags) => {
+export const getTags = async (setSearchedVentTags: any, setVentTags: any) => {
   const snapshot = await getDocs(query(collection(db, "vent_tags")));
 
   const tags = [];
@@ -121,14 +123,14 @@ export const getTags = async (setSearchedVentTags, setVentTags) => {
   setVentTags(tags);
 };
 
-export const getUserVentTimeOut = async (callback, userID) => {
+export const getUserVentTimeOut = async (callback: any, userID: string) => {
   const userVentTimeOutDoc = await getDoc(doc(db, "user_vent_timeout", userID));
 
   let timeOutDate;
-  const currentDate = new dayjs();
+  const currentDate = dayjs();
 
   if (userVentTimeOutDoc.exists()) {
-    timeOutDate = new dayjs(userVentTimeOutDoc.data().value);
+    timeOutDate = dayjs(userVentTimeOutDoc.data().value);
   }
 
   if (timeOutDate && currentDate.diff(timeOutDate) < 0) callback(timeOutDate);
@@ -136,23 +138,20 @@ export const getUserVentTimeOut = async (callback, userID) => {
 };
 
 export const getVent = async (
-  isMounted,
-  setDescription,
-  setTags,
-  setTitle,
-  ventID
+  setDescription: any,
+  setTags: any,
+  setTitle: any,
+  ventID: string
 ) => {
   const ventDoc = await getDoc(doc(db, "vents", ventID));
 
   const vent = ventDoc.data();
 
-  if (!isMounted()) return;
-
   if (vent) {
     setDescription(vent.description);
     setTags(
       vent.new_tags
-        ? vent.new_tags.map((tag) => {
+        ? vent.new_tags.map((tag: Tag) => {
             return { objectID: tag };
           })
         : []
@@ -162,12 +161,12 @@ export const getVent = async (
 };
 
 export const saveVent = async (
-  callback,
-  isBirthdayPost,
-  tags,
-  ventObject,
-  ventID,
-  user
+  callback: any,
+  isBirthdayPost: boolean,
+  tags: any,
+  ventObject: any,
+  ventID: string,
+  user: any
 ) => {
   if (!ventID) {
     ventObject.server_timestamp = Timestamp.now().toMillis();
@@ -209,8 +208,8 @@ export const selectEncouragingMessage = () => {
   ];
 };
 
-export const updateTags = (setTags, tag) => {
-  setTags((oldTags) => {
+export const updateTags = (setTags: any, tag: any) => {
+  setTags((oldTags: Tag[]) => {
     if (
       oldTags &&
       oldTags.findIndex((oldTag) => oldTag.objectID === tag.objectID) >= 0

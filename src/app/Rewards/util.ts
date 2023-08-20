@@ -75,7 +75,6 @@ export const getNextMilestone = (counter: number, size: string) => {
 };
 
 export const getUserRecentRewards = async (
-  isMounted: any,
   setRecentRewards: any,
   userID: string
 ) => {
@@ -102,7 +101,6 @@ export const getUserRecentRewards = async (
 };
 
 export const getUserRewardsProgress = async (
-  isMounted: any,
   setUserRewards: any,
   userID: string
 ) => {

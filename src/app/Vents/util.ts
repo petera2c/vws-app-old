@@ -19,7 +19,6 @@ import { db, db2 } from "../../config/db_init";
 import { getEndAtValueTimestamp } from "../../util";
 
 export const getVents = async (
-  isMounted,
   setCanLoadMore,
   setVents,
   user,
@@ -74,7 +73,7 @@ export const getVents = async (
       )
     );
   }
-  if (!isMounted()) return;
+  return;
 
   if (snapshot && snapshot.docs && snapshot.docs.length > 0) {
     let newVents = snapshot.docs.map((doc) => ({
@@ -106,17 +105,15 @@ export const getVents = async (
       newVents.shift();
     }
 
-    if (isMounted()) {
-      if (newVents.length < 10) setCanLoadMore(false);
+    if (newVents.length < 10) setCanLoadMore(false);
 
-      if (vents) {
-        return setVents((oldVents) => {
-          if (oldVents) return [...oldVents, ...newVents];
-          else return newVents;
-        });
-      } else {
-        return setVents(newVents);
-      }
+    if (vents) {
+      return setVents((oldVents) => {
+        if (oldVents) return [...oldVents, ...newVents];
+        else return newVents;
+      });
+    } else {
+      return setVents(newVents);
     }
   } else return setCanLoadMore(false);
 };
@@ -132,12 +129,7 @@ export const getWhatPage = (pathname) => {
   return "";
 };
 
-export const newVentListener = (
-  isMounted,
-  setWaitingVents,
-  whatPage,
-  first = true
-) => {
+export const newVentListener = (setWaitingVents, whatPage, first = true) => {
   if (whatPage !== "recent") return;
 
   const unsubscribe = onSnapshot(
@@ -154,15 +146,14 @@ export const newVentListener = (
           querySnapshot.docChanges()[0].type === "added" ||
           querySnapshot.docChanges()[0].type === "removed"
         ) {
-          if (isMounted())
-            setWaitingVents((vents) => [
-              ...vents,
-              {
-                doc: querySnapshot.docs[0],
-                id: querySnapshot.docs[0].id,
-                ...querySnapshot.docs[0].data(),
-              },
-            ]);
+          setWaitingVents((vents) => [
+            ...vents,
+            {
+              doc: querySnapshot.docs[0],
+              id: querySnapshot.docs[0].id,
+              ...querySnapshot.docs[0].data(),
+            },
+          ]);
         }
       }
     }

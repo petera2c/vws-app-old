@@ -12,18 +12,13 @@ import {
   isUserInQueueListener,
   leaveQueue,
 } from "../../components/Header/util";
-import {
-  getIsMobileOrTablet,
-  useIsMounted,
-  userSignUpProgress,
-} from "../../util";
+import { getIsMobileOrTablet, userSignUpProgress } from "../../util";
 import { joinQueue } from "./util";
 import Page from "@/components/containers/Page/Page";
 import Container from "@/components/containers/Container/Container";
 import { faHandsHelping } from "@fortawesome/free-solid-svg-icons";
 
 function ChatWithStrangersPage() {
-  const isMounted = useIsMounted();
   const { user } = useContext(UserContext);
 
   const [isMobileOrTablet, setIsMobileOrTablet] = useState<boolean>();
@@ -37,7 +32,6 @@ function ChatWithStrangersPage() {
 
     if (user)
       isUserInQueueUnsubscribe = isUserInQueueListener(
-        isMounted,
         setIsUserInQueue,
         user.uid
       );
@@ -45,7 +39,7 @@ function ChatWithStrangersPage() {
     return () => {
       if (isUserInQueueUnsubscribe) isUserInQueueUnsubscribe();
     };
-  }, [isMounted, user]);
+  }, [user]);
 
   return (
     <Page className="pa16">

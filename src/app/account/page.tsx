@@ -16,7 +16,7 @@ import {
   politicalBeliefsList,
   religiousBeliefsList,
 } from "../../PersonalOptions";
-import { calculateKarma, getIsMobileOrTablet, useIsMounted } from "../../util";
+import { calculateKarma, getIsMobileOrTablet } from "../../util";
 import { deleteAccountAndAllData, getUser, updateUser } from "./util";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Container from "@/components/containers/Container/Container";
@@ -33,7 +33,6 @@ import Page from "@/components/containers/Page/Page";
 import DeleteAccountModal from "@/components/modals/DeleteAccount/DeleteAccount";
 
 const AccountSection = () => {
-  const isMounted = useIsMounted();
   const { user, userBasicInfo, setUserBasicInfo } = useContext(UserContext);
 
   const [bio, setBio] = useState("");
@@ -73,10 +72,10 @@ const AccountSection = () => {
     setIsMobileOrTablet(getIsMobileOrTablet());
 
     getUser((userInfo: any) => {
-      if (isMounted()) setAccountInfo(userInfo);
-      if (userInfo && isMounted()) setUserInfo(userInfo);
-    }, user?.uid);
-  }, [isMounted, user]);
+      setAccountInfo(userInfo);
+      if (userInfo) setUserInfo(userInfo);
+    }, user!.uid);
+  }, [user]);
 
   return (
     <Page className="pa16">

@@ -34,7 +34,7 @@ import { message } from "antd";
 
 import { displayNameErrors, getEndAtValueTimestamp } from "../../util";
 import Comment from "@/types/Comment";
-import Vent from "@/types/Vent";
+import Vent from "@/types/VentType";
 import UserBasicInfo from "@/types/UserBasicInfo";
 
 const deleteAccountField = async (field: any, userID: string) => {
@@ -50,7 +50,6 @@ export const deleteAccountAndAllData = async () => {
 };
 
 export const followOrUnfollowUser = async (
-  isMounted: any,
   option: any,
   setIsFollowing: any,
   userID: string,
@@ -61,7 +60,7 @@ export const followOrUnfollowUser = async (
     option ? option : null
   );
 
-  if (isMounted()) setIsFollowing(option);
+  setIsFollowing(option);
   message.success(
     option ? "Followed Successfully :)" : "Unfollowed Successfully :)"
   );
@@ -69,7 +68,6 @@ export const followOrUnfollowUser = async (
 
 export const getBlockedUsers = async (
   blockedUsers: any,
-  isMounted: any,
   setBlockedUsers: any,
   setCanLoadMore: any,
   userID: string
@@ -86,8 +84,6 @@ export const getBlockedUsers = async (
       limitToFirst(10)
     )
   );
-
-  if (!isMounted()) return;
 
   let newBlockedUsers: any = [];
 
@@ -113,7 +109,6 @@ export const getBlockedUsers = async (
 };
 
 export const getIsFollowing = async (
-  isMounted: any,
   setIsFollowing: any,
   userID: string,
   userIDToFollow: string
@@ -122,7 +117,7 @@ export const getIsFollowing = async (
     ref(db2, "following/" + userID + "/" + userIDToFollow)
   );
 
-  if (isMounted()) setIsFollowing(isFollowingDoc.val());
+  setIsFollowing(isFollowingDoc.val());
 };
 
 export const getUser = async (callback: any, userID: string) => {
@@ -137,7 +132,6 @@ export const getUser = async (callback: any, userID: string) => {
 };
 
 export const getUsersComments = async (
-  isMounted: any,
   search: string,
   setCanLoadMoreComments: any,
   setComments: any,
@@ -154,8 +148,6 @@ export const getUsersComments = async (
       limit(10)
     )
   );
-
-  if (!isMounted()) return;
 
   if (snapshot.docs && snapshot.docs.length > 0) {
     let newComments = snapshot.docs.map((doc) => ({
@@ -177,7 +169,6 @@ export const getUsersComments = async (
 };
 
 export const getUsersVents = async (
-  isMounted: any,
   search: string,
   setCanLoadMoreVents: any,
   setVents: any,
@@ -194,8 +185,6 @@ export const getUsersVents = async (
       limit(10)
     )
   );
-
-  if (!isMounted()) return;
 
   if (snapshot.docs && snapshot.docs.length > 0) {
     let newVents = snapshot.docs.map((doc) => ({

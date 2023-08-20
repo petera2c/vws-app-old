@@ -21,7 +21,6 @@ import {
   getUserBasicInfo,
   hasUserBlockedUser,
   isUserAccountNew,
-  useIsMounted,
   userSignUpProgressFunction,
   viewTagFunction,
 } from "../../util";
@@ -40,7 +39,7 @@ import {
 } from "./util";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import Vent from "@/types/Vent";
+import Vent from "@/types/VentType";
 import UserBasicInfo from "@/types/UserBasicInfo";
 import MakeAvatar from "../views/MakeAvatar";
 import {
@@ -74,7 +73,6 @@ function Vent({
   ventID,
   ventInit,
 }: any) {
-  const isMounted = useIsMounted();
   const router = useRouter();
   const textInput = useRef(null);
 
@@ -104,26 +102,20 @@ function Vent({
 
     const ventSetUp = (newVent: Vent) => {
       isUserOnlineSubscribe = getIsUserOnline((isUserOnline: any) => {
-        if (isMounted()) setIsUserOnline(isUserOnline.state);
+        setIsUserOnline(isUserOnline.state);
       }, newVent.userID);
 
       setPartialLink(getVentPartialLink(newVent));
       setVentPreview(getVentDescription(previewMode, newVent));
 
-      if (setTitle && newVent && newVent.title && isMounted())
-        setTitle(newVent.title);
+      if (setTitle && newVent && newVent.title) setTitle(newVent.title);
 
       getUserBasicInfo((author: UserBasicInfo) => {
-        if (isMounted()) setAuthor(author);
+        setAuthor(author);
       }, newVent.userID);
 
       if (user)
-        hasUserBlockedUser(
-          isMounted,
-          user.uid,
-          newVent.userID,
-          setIsContentBlocked
-        );
+        hasUserBlockedUser(user.uid, newVent.userID, setIsContentBlocked);
 
       setIsUserAccountNewLocal(isUserAccountNew(userBasicInfo));
 
@@ -131,7 +123,7 @@ function Vent({
         userSignUpProgressFunction(setStarterModal, user)
       );
 
-      if (isMounted()) setVent(newVent);
+      setVent(newVent);
     };
 
     if (!ventInit) {
@@ -140,7 +132,6 @@ function Vent({
 
     if (!searchPreviewMode && displayCommentField)
       newCommentListenerUnsubscribe = newVentCommentListener(
-        isMounted,
         setCanLoadMoreComments,
         setComments,
         user ? user.uid : "",
@@ -151,7 +142,7 @@ function Vent({
       getVentComments(
         "First",
         undefined,
-        isMounted,
+
         setCanLoadMoreComments,
         setComments,
         false,
@@ -162,7 +153,7 @@ function Vent({
     if (user && !searchPreviewMode)
       ventHasLiked(
         (newHasLiked: boolean) => {
-          if (isMounted()) setHasLiked(newHasLiked);
+          setHasLiked(newHasLiked);
         },
         user.uid,
         ventID
@@ -174,7 +165,7 @@ function Vent({
     };
   }, [
     displayCommentField,
-    isMounted,
+
     previewMode,
     searchPreviewMode,
     setTitle,
@@ -390,7 +381,7 @@ function Vent({
                             getVentComments(
                               "First",
                               [],
-                              isMounted,
+
                               setCanLoadMoreComments,
                               setComments,
                               false,
@@ -408,7 +399,7 @@ function Vent({
                             getVentComments(
                               "Best",
                               [],
-                              isMounted,
+
                               setCanLoadMoreComments,
                               setComments,
                               false,
@@ -426,7 +417,7 @@ function Vent({
                             getVentComments(
                               "Last",
                               [],
-                              isMounted,
+
                               setCanLoadMoreComments,
                               setComments,
                               false,
@@ -465,7 +456,7 @@ function Vent({
                         getVentComments(
                           activeSort,
                           comments,
-                          isMounted,
+
                           setCanLoadMoreComments,
                           setComments,
                           true,

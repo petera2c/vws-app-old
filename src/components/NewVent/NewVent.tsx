@@ -15,7 +15,6 @@ import {
   countdown,
   getIsMobileOrTablet,
   isUserKarmaSufficient,
-  useIsMounted,
   viewTagFunction,
 } from "../../util";
 import {
@@ -31,7 +30,7 @@ import Link from "next/link";
 import MakeAvatar from "../views/MakeAvatar";
 import Quote from "@/types/Quote";
 import { faQuestionCircle, faTimes } from "@fortawesome/free-solid-svg-icons";
-import Vent from "@/types/Vent";
+import Vent from "@/types/VentType";
 import { useRouter } from "next/navigation";
 import Tag from "@/types/Tag";
 import Emoji from "../Emoji/Emoji";
@@ -40,7 +39,6 @@ const TITLE_LENGTH_MINIMUM = 0;
 const TITLE_LENGTH_MAXIMUM = 100;
 
 function NewVentComponent({ isBirthdayPost, miniVersion, ventID }: any) {
-  const isMounted = useIsMounted();
   const { user, userBasicInfo } = useContext(UserContext);
 
   const [description, setDescription] = useState("");
@@ -66,16 +64,14 @@ function NewVentComponent({ isBirthdayPost, miniVersion, ventID }: any) {
   useEffect(() => {
     let interval: any;
 
-    if (isMounted()) {
-      setPlaceholderText(selectEncouragingMessage());
-      setIsMobileOrTablet(getIsMobileOrTablet());
-    }
+    setPlaceholderText(selectEncouragingMessage());
+    setIsMobileOrTablet(getIsMobileOrTablet());
 
     getTags(setSearchedVentTags, setVentTags);
 
-    if (ventID) getVent(isMounted, setDescription, setTags, setTitle, ventID);
+    if (ventID) getVent(setDescription, setTags, setTitle, ventID);
 
-    getQuote(isMounted, setQuote);
+    getQuote(setQuote);
 
     if (user) {
       getUserVentTimeOut((res: any) => {
@@ -87,17 +83,12 @@ function NewVentComponent({ isBirthdayPost, miniVersion, ventID }: any) {
           ventID,
           res
         );
-        if (isMounted()) setPostingDisableFunction(temp);
+        setPostingDisableFunction(temp);
 
         if (res) {
           interval = setInterval(
             () =>
-              countdown(
-                isMounted,
-                res,
-                setUserVentTimeOut,
-                setUserVentTimeOutFormatted
-              ),
+              countdown(res, setUserVentTimeOut, setUserVentTimeOutFormatted),
             1000
           );
         }
@@ -111,12 +102,12 @@ function NewVentComponent({ isBirthdayPost, miniVersion, ventID }: any) {
         ventID,
         false
       );
-      if (isMounted()) setPostingDisableFunction(temp);
+      setPostingDisableFunction(temp);
     }
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [isMounted, user, userBasicInfo, ventID]);
+  }, [user, userBasicInfo, ventID]);
 
   return (
     <HandleOutsideClick
@@ -159,7 +150,7 @@ function NewVentComponent({ isBirthdayPost, miniVersion, ventID }: any) {
           <TextArea
             className="x-fill py8 px16 br4"
             onChange={(event) => {
-              if (postingDisableFunction) return postingDisableFunction();
+              // if (postingDisableFunction) return postingDisableFunction();
 
               setDescription(event.target.value);
             }}
@@ -220,7 +211,6 @@ function NewVentComponent({ isBirthdayPost, miniVersion, ventID }: any) {
         {!isMinified && (
           <Space className="x-fill" direction="vertical">
             <h5 className="fw-400">Tag this vent</h5>
-
             <input
               className="x-fill py8 px16 br4"
               onChange={(e) => {

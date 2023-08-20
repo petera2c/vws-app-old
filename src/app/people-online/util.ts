@@ -2,7 +2,6 @@ import { get, limitToLast, orderByChild, query, ref } from "@firebase/database";
 import { db2 } from "../../config/db_init";
 
 export const getOnlineUsers = (
-  isMounted: any,
   setCanLoadMoreUsers: any,
   setOnlineUsers: any,
   fetchUsersCount: any
@@ -26,9 +25,7 @@ export const getOnlineUsers = (
         }
       });
 
-      if (isMounted()) {
-        if (usersArray.length < fetchUsersCount) setCanLoadMoreUsers(false);
-        setOnlineUsers(usersArray);
-      }
+      if (usersArray.length < fetchUsersCount) setCanLoadMoreUsers(false);
+      setOnlineUsers(usersArray);
     });
 };

@@ -2,9 +2,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Button } from "antd";
 
-import Container from "../../../components/containers/Container";
 import NotificationList from "../../components/NotificationList";
-import Page from "../../../components/containers/Page";
 
 import { UserContext } from "../../context";
 
@@ -12,10 +10,11 @@ import {
   getNotifications,
   newNotificationsListener,
 } from "../../components/Header/util";
-import { getIsMobileOrTablet, useIsMounted } from "../../util";
+import { getIsMobileOrTablet } from "../../util";
+import Container from "@/components/containers/Container/Container";
+import Page from "@/components/containers/Page/Page";
 
 function NotificationsPage() {
-  const isMounted = useIsMounted();
   const { user } = useContext(UserContext);
 
   const [canShowLoadMore, setCanShowLoadMore] = useState(true);
@@ -23,20 +22,12 @@ function NotificationsPage() {
   const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
-    if (isMounted()) setIsMobileOrTablet(getIsMobileOrTablet());
+    setIsMobileOrTablet(getIsMobileOrTablet());
 
-    let newNotificationsListenerUnsubscribe;
+    let newNotificationsListenerUnsubscribe: any;
 
-    getNotifications(
-      isMounted,
-      [],
-      setCanShowLoadMore,
-      undefined,
-      setNotifications,
-      user
-    );
+    getNotifications([], setCanShowLoadMore, undefined, setNotifications, user);
     newNotificationsListenerUnsubscribe = newNotificationsListener(
-      isMounted,
       undefined,
       setNotifications,
       user
@@ -46,7 +37,7 @@ function NotificationsPage() {
       if (newNotificationsListenerUnsubscribe)
         newNotificationsListenerUnsubscribe();
     };
-  }, [isMounted, user]);
+  }, [user]);
 
   return (
     <Page
@@ -71,7 +62,6 @@ function NotificationsPage() {
           <Button
             onClick={() =>
               getNotifications(
-                isMounted,
                 notifications,
                 setCanShowLoadMore,
                 undefined,

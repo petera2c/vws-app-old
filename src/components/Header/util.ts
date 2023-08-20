@@ -56,7 +56,6 @@ export const getMobileOperatingSystem = () => {
 };
 
 export const getNotifications = async (
-  isMounted: any,
   notifications: any,
   setCanShowLoadMore: any,
   setNotificationCounter: any,
@@ -74,7 +73,6 @@ export const getNotifications = async (
       limit(10)
     )
   );
-  if (!isMounted) return;
 
   let newNotifications: any = [];
 
@@ -106,7 +104,6 @@ export const getNotifications = async (
 };
 
 export const newNotificationsListener = (
-  isMounted: any,
   setNotificationCounter: any,
   setNotifications: any,
   user: any,
@@ -125,8 +122,7 @@ export const newNotificationsListener = (
       } else if (
         snapshot.docs &&
         snapshot.docs[0] &&
-        !snapshot.docs[0].data().hasSeen &&
-        isMounted()
+        !snapshot.docs[0].data().hasSeen
       ) {
         if (setNotificationCounter)
           setNotificationCounter((oldAmount: any) => {
@@ -151,7 +147,6 @@ export const newNotificationsListener = (
 };
 
 export const getUnreadConversations = (
-  isMounted: any,
   isOnSearchPage: any,
   pathname: any,
   setUnreadConversations: any,
@@ -164,16 +159,12 @@ export const getUnreadConversations = (
       if (doc.data() && doc.data()?.count) {
         if (!first && !isOnSearchPage) soundNotify();
         if (pathname === "/chat" && doc.data()?.count > 0) {
-          return resetUnreadConversationCount(
-            isMounted,
-            setUnreadConversations,
-            userID
-          );
+          return resetUnreadConversationCount(setUnreadConversations, userID);
         }
 
-        if (isMounted()) setUnreadConversations(doc.data()?.count);
+        setUnreadConversations(doc.data()?.count);
       } else {
-        if (isMounted()) setUnreadConversations(0);
+        setUnreadConversations(0);
       }
       first = false;
     }
@@ -201,14 +192,12 @@ export const howCompleteIsUserProfile = (
 };
 
 export const isUserInQueueListener = (
-  isMounted: any,
   setIsUserInQueue: any,
   userID: string
 ) => {
   const unsubscribe = onSnapshot(doc(db, "chat_queue", userID), (doc) => {
-    if (doc.data() && doc.data()?.userID === userID && isMounted())
-      setIsUserInQueue(true);
-    else if (isMounted()) setIsUserInQueue(false);
+    if (doc.data() && doc.data()?.userID === userID) setIsUserInQueue(true);
+    else setIsUserInQueue(false);
   });
 
   return unsubscribe;
@@ -234,11 +223,9 @@ export const readNotifications = (
 };
 
 export const resetUnreadConversationCount = (
-  isMounted: any,
   setUnreadConversationsCount: any,
   userID: string
 ) => {
-  if (isMounted())
-    setDoc(doc(db, "unread_conversations_count", userID), { count: 0 });
-  if (isMounted()) setUnreadConversationsCount(0);
+  setDoc(doc(db, "unread_conversations_count", userID), { count: 0 });
+  setUnreadConversationsCount(0);
 };

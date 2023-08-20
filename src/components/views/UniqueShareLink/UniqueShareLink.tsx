@@ -3,18 +3,16 @@ import { Button, message } from "antd";
 
 import Container from "../../containers/Container/Container";
 
-import { useIsMounted } from "../../../util";
 import { createShareLink, getSecondUID } from "./util";
 
 function UniqueShareLink({ user }: { user: any }) {
-  const isMounted = useIsMounted();
   const [secondUID, setSecondUID] = useState("");
 
   useEffect(() => {
     if (user) {
-      getSecondUID(isMounted, setSecondUID, user.uid);
+      getSecondUID(setSecondUID, user.uid);
     }
-  }, [isMounted, user]);
+  }, [user]);
 
   return (
     <Container className="x-fill align-start gap8">

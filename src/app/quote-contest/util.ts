@@ -46,7 +46,6 @@ export const deleteQuote = async (
 };
 
 export const getCanUserCreateQuote = async (
-  isMounted: any,
   setCanUserCreateQuote: any,
   userID: string
 ) => {
@@ -63,13 +62,9 @@ export const getCanUserCreateQuote = async (
     )
   );
 
-  if (
-    userQuotesTodaySnapshot.docs &&
-    userQuotesTodaySnapshot.docs.length > 0 &&
-    isMounted()
-  )
+  if (userQuotesTodaySnapshot.docs && userQuotesTodaySnapshot.docs.length > 0)
     setCanUserCreateQuote(false);
-  else if (isMounted()) setCanUserCreateQuote(true);
+  else setCanUserCreateQuote(true);
 };
 
 export const getHasUserLikedQuote = async (
@@ -89,7 +84,6 @@ export const getHasUserLikedQuote = async (
 };
 
 export const getQuotes = async (
-  isMounted: any,
   setCanLoadMoreQuotes: any,
   setQuotes: any,
   quotes?: Quote[]
@@ -107,7 +101,7 @@ export const getQuotes = async (
     )
   );
 
-  if (!isMounted()) return;
+  return;
 
   let newQuotes: any[] = [];
 
@@ -160,7 +154,7 @@ export const reportQuote = (option: any, quoteID: string, userID: string) => {
 
 export const saveQuote = async (
   canUserCreateQuote: boolean,
-  isMounted: any,
+
   quote: string,
   quoteID: string,
   setCanUserCreateQuote: any,
@@ -175,14 +169,12 @@ export const saveQuote = async (
   if (quoteID) {
     await updateDoc(doc(db, "quotes", quoteID), { userID, value: quote });
 
-    if (isMounted()) {
-      setQuotes((oldQuotes: Quote[]) => {
-        const quoteIndex = oldQuotes.findIndex((quote) => quote.id === quoteID);
-        oldQuotes[quoteIndex].value = quote;
-        return [...oldQuotes];
-      });
-      setMyQuote("");
-    }
+    setQuotes((oldQuotes: Quote[]) => {
+      const quoteIndex = oldQuotes.findIndex((quote) => quote.id === quoteID);
+      oldQuotes[quoteIndex].value = quote;
+      return [...oldQuotes];
+    });
+    setMyQuote("");
     message.success("Updated successfully! :)");
   } else if (canUserCreateQuote) {
     const newQuote = await addDoc(collection(db, "quotes"), {
@@ -194,14 +186,12 @@ export const saveQuote = async (
 
     message.success("Quote saved!");
 
-    if (isMounted()) {
-      setQuotes((oldQuotes: Quote[]) => [
-        { id: newQuote.id, doc: newQuoteDoc, ...newQuoteDoc.data() },
-        ...oldQuotes,
-      ]);
-      setCanUserCreateQuote(false);
-      setMyQuote("");
-    }
+    setQuotes((oldQuotes: Quote[]) => [
+      { id: newQuote.id, doc: newQuoteDoc, ...newQuoteDoc.data() },
+      ...oldQuotes,
+    ]);
+    setCanUserCreateQuote(false);
+    setMyQuote("");
   } else {
     message.error("You can only create one quote per day");
   }

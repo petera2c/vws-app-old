@@ -8,6 +8,7 @@ import Container from "../../containers/Container/Container";
 import { getIsMobileOrTablet } from "../../../util";
 import { login } from "./util";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { Input } from "antd";
 
 const LoginModal = ({ setActiveModal }: any) => {
   const { register, handleSubmit } = useForm();
@@ -38,7 +39,7 @@ const LoginModal = ({ setActiveModal }: any) => {
             })}
           >
             <Container className="x-fill column px32 py16">
-              <input
+              <Input
                 className="py8 px16 mb8 br4"
                 type="text"
                 placeholder="Email Address"
@@ -47,7 +48,7 @@ const LoginModal = ({ setActiveModal }: any) => {
                 })}
               />
               <Container className="x-fill full-center">
-                <input
+                <Input
                   className="flex-fill py8 px16 mb8 br4"
                   type={canSeePassword ? "" : "password"}
                   placeholder="Password"

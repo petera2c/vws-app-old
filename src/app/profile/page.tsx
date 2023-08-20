@@ -1,33 +1,17 @@
 "use client";
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
 import { off } from "firebase/database";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import InfiniteScroll from "react-infinite-scroll-component";
-import loadable from "@loadable/component";
 import { Button, Dropdown, Space } from "antd";
 
-import { faBaby } from "@fortawesome/pro-solid-svg-icons/faBaby";
-import { faComments } from "@fortawesome/pro-duotone-svg-icons/faComments";
-import { faComet } from "@fortawesome/pro-solid-svg-icons/faComet";
-import { faEllipsisV } from "@fortawesome/pro-solid-svg-icons/faEllipsisV";
-import { faGlassCheers } from "@fortawesome/pro-solid-svg-icons/faGlassCheers";
-import { faLandmark } from "@fortawesome/pro-solid-svg-icons/faLandmark";
-import { faPray } from "@fortawesome/pro-solid-svg-icons/faPray";
-import { faSchool } from "@fortawesome/pro-solid-svg-icons/faSchool";
-import { faUserLock } from "@fortawesome/pro-solid-svg-icons/faUserLock";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import Comment from "../../components/Comment";
-import ConfirmAlertModal from "../../components/modals/ConfirmAlert";
-import Container from "../../components/containers/Container";
 import KarmaBadge from "../../components/views/KarmaBadge";
 import LoadingHeart from "../../components/views/loaders/Heart";
-import Page from "../../components/containers/Page";
 import StarterModal from "../../components/modals/Starter";
 import SubscribeColumn from "../../components/SubscribeColumn";
-import Vent from "../../components/Vent";
 
 import { UserContext } from "../../context";
 
@@ -45,7 +29,6 @@ import {
   getIsMobileOrTablet,
   getIsUserOnline,
   getUserBasicInfo,
-  useIsMounted,
   userSignUpProgress,
 } from "../../util";
 import {
@@ -55,13 +38,15 @@ import {
   getUsersComments,
   getUsersVents,
 } from "../account/util";
+import UserBasicInfo from "@/types/UserBasicInfo";
+import Container from "@/components/containers/Container/Container";
+import Page from "@/components/containers/Page/Page";
 
 const MakeAvatar = loadable(() => import("../../components/views/MakeAvatar"));
 
 dayjs.extend(relativeTime);
 
 function ProfileSection() {
-  const isMounted = useIsMounted();
   const { user } = useContext(UserContext);
 
   const navigate = useNavigate();
@@ -85,45 +70,39 @@ function ProfileSection() {
   if (search) search = search.substring(1);
   if (!search && user) search = user.uid;
 
-  const isActive = (page) => {
+  const isActive = (page: string) => {
     if (page) return " active";
     else return "";
   };
 
   useEffect(() => {
-    let isUserOnlineSubscribe;
+    let isUserOnlineSubscribe: any;
     setIsMobileOrTablet(getIsMobileOrTablet());
 
     setVents([]);
     setComments([]);
 
     if (search) {
-      isUserOnlineSubscribe = getIsUserOnline((isUserOnline) => {
-        if (isMounted()) setIsUserOnline(isUserOnline);
+      isUserOnlineSubscribe = getIsUserOnline((isUserOnline: boolean) => {
+        setIsUserOnline(isUserOnline);
       }, search);
-      getUserBasicInfo((userBasicInfo) => {
-        if (isMounted()) setUserBasicInfo(userBasicInfo);
+      getUserBasicInfo((userBasicInfo: UserBasicInfo) => {
+        setUserBasicInfo(userBasicInfo);
       }, search);
-      getUser((userInfo) => {
-        if (isMounted()) setUserInfo(userInfo);
+      getUser((userInfo: any) => {
+        setUserInfo(userInfo);
 
-        if (user) getIsFollowing(isMounted, setIsFollowing, user.uid, search);
+        if (user) getIsFollowing(setIsFollowing, user.uid, search);
       }, search);
     } else navigate("/");
 
-    getUsersVents(isMounted, search, setCanLoadMoreVents, setVents, []);
-    getUsersComments(
-      isMounted,
-      search,
-      setCanLoadMoreComments,
-      setComments,
-      []
-    );
+    getUsersVents(search, setCanLoadMoreVents, setVents, []);
+    getUsersComments(search, setCanLoadMoreComments, setComments, []);
 
     return () => {
       if (isUserOnlineSubscribe) off(isUserOnlineSubscribe);
     };
-  }, [isMounted, navigate, search, user]);
+  }, [navigate, search, user]);
 
   return (
     <Page
@@ -293,7 +272,6 @@ function ProfileSection() {
                         }
 
                         followOrUnfollowUser(
-                          isMounted,
                           !isFollowing,
                           setIsFollowing,
                           user.uid,
@@ -409,13 +387,7 @@ function ProfileSection() {
                 </Container>
               }
               next={() =>
-                getUsersVents(
-                  isMounted,
-                  search,
-                  setCanLoadMoreVents,
-                  setVents,
-                  vents
-                )
+                getUsersVents(search, setCanLoadMoreVents, setVents, vents)
               }
               scrollableTarget="scrollable-div"
             >
@@ -461,7 +433,6 @@ function ProfileSection() {
                   className="mt16"
                   onClick={() =>
                     getUsersComments(
-                      isMounted,
                       search,
                       setCanLoadMoreComments,
                       setComments,

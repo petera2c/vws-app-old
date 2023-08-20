@@ -37,7 +37,6 @@ import ConversationType from "@/types/ConversationType";
 
 export const conversationListener = (
   currentConversation: any,
-  isMounted: any,
   setConversations: any
 ) => {
   const unsubscribe = onSnapshot(
@@ -45,24 +44,23 @@ export const conversationListener = (
     (doc) => {
       const updatedConversation: any = { id: doc.id, ...doc.data() };
 
-      if (isMounted)
-        setConversations((oldConversations: any) => {
-          const indexOfUpdatedConversation = oldConversations.findIndex(
-            (conversation: any) => conversation.id === updatedConversation.id
-          );
+      setConversations((oldConversations: any) => {
+        const indexOfUpdatedConversation = oldConversations.findIndex(
+          (conversation: any) => conversation.id === updatedConversation.id
+        );
 
-          for (let index in updatedConversation) {
-            if (!oldConversations[indexOfUpdatedConversation]) continue;
-            oldConversations[indexOfUpdatedConversation][index] =
-              updatedConversation[index];
-          }
+        for (let index in updatedConversation) {
+          if (!oldConversations[indexOfUpdatedConversation]) continue;
+          oldConversations[indexOfUpdatedConversation][index] =
+            updatedConversation[index];
+        }
 
-          oldConversations.sort((a: any, b: any) =>
-            a.last_updated < b.last_updated ? 1 : -1
-          );
+        oldConversations.sort((a: any, b: any) =>
+          a.last_updated < b.last_updated ? 1 : -1
+        );
 
-          return [...oldConversations];
-        });
+        return [...oldConversations];
+      });
     }
   );
 
@@ -124,18 +122,18 @@ export const getConversationPartnerUserID = (members: any, userID: string) => {
 
 export const getIsChatMuted = (
   conversationID: string,
-  isMounted: any,
+
   setIsMuted: any,
   userID: string
 ) => {
   get(ref(db2, "muted/" + conversationID + "/" + userID)).then((doc) => {
-    if (isMounted()) setIsMuted(doc.val());
+    setIsMuted(doc.val());
   });
 };
 
 export const isUserTypingListener = (
   conversationID: string,
-  isMounted: any,
+
   isUserTypingTimeout: any,
   partnerID: string,
   scrollToBottom: any,
@@ -148,57 +146,53 @@ export const isUserTypingListener = (
     dbRef = ref(db2, "is_typing/" + conversationID + "/" + partnerID);
 
     onValue(dbRef, (snapshot) => {
-      if (isMounted()) {
-        if (isTimestampWithinSeconds(snapshot.val())) {
-          setShowPartnerIsTyping(true);
-          setTimeout(scrollToBottom, 800);
+      if (isTimestampWithinSeconds(snapshot.val())) {
+        setShowPartnerIsTyping(true);
+        setTimeout(scrollToBottom, 800);
 
-          if (isUserTypingTimeout.current) {
-            clearTimeout(isUserTypingTimeout.current);
-          }
-          isUserTypingTimeout.current = setTimeout(() => {
-            setShowPartnerIsTyping(false);
-          }, 3000);
-        } else {
-          setShowPartnerIsTyping(false);
+        if (isUserTypingTimeout.current) {
+          clearTimeout(isUserTypingTimeout.current);
         }
+        isUserTypingTimeout.current = setTimeout(() => {
+          setShowPartnerIsTyping(false);
+        }, 3000);
+      } else {
+        setShowPartnerIsTyping(false);
       }
     });
   } else {
     dbRef = ref(db2, conversationID);
 
     onValue(dbRef, (snapshot) => {
-      if (isMounted()) {
-        const test = snapshot.val();
-        for (let index in test) {
-          if (index === userID) continue;
-          if (isTimestampWithinSeconds(test[index])) {
-            setNumberOfUsersTyping((currentArray: any) => {
-              if (
-                currentArray.findIndex((userID: string) => userID === index) !==
-                -1
-              )
-                return currentArray;
-              else {
-                currentArray.push(index);
-                return [...currentArray];
-              }
-            });
-            setTimeout(scrollToBottom, 400);
-
-            if (isUserTypingTimeout.current) {
-              clearTimeout(isUserTypingTimeout.current);
+      const test = snapshot.val();
+      for (let index in test) {
+        if (index === userID) continue;
+        if (isTimestampWithinSeconds(test[index])) {
+          setNumberOfUsersTyping((currentArray: any) => {
+            if (
+              currentArray.findIndex((userID: string) => userID === index) !==
+              -1
+            )
+              return currentArray;
+            else {
+              currentArray.push(index);
+              return [...currentArray];
             }
-            isUserTypingTimeout.current = setTimeout(() => {
-              setNumberOfUsersTyping((currentArray: any) => {
-                currentArray.splice(
-                  currentArray.findIndex((userID: string) => userID === index),
-                  1
-                );
-                return [...currentArray];
-              });
-            }, 3000);
+          });
+          setTimeout(scrollToBottom, 400);
+
+          if (isUserTypingTimeout.current) {
+            clearTimeout(isUserTypingTimeout.current);
           }
+          isUserTypingTimeout.current = setTimeout(() => {
+            setNumberOfUsersTyping((currentArray: any) => {
+              currentArray.splice(
+                currentArray.findIndex((userID: string) => userID === index),
+                1
+              );
+              return [...currentArray];
+            });
+          }, 3000);
         }
       }
     });
@@ -213,7 +207,7 @@ export const isTimestampWithinSeconds = (timestamp: number) => {
 
 export const messageListener = (
   conversationID: string,
-  isMounted: any,
+
   scrollToBottom: any,
   setMessages: any,
   first = true
@@ -232,17 +226,15 @@ export const messageListener = (
           querySnapshot.docChanges()[0].type === "added" ||
           querySnapshot.docChanges()[0].type === "removed"
         ) {
-          if (isMounted()) {
-            console.log(querySnapshot.docs[0].data().body);
-            setMessages((oldMessages: MessageType[]) => [
-              ...oldMessages,
-              {
-                id: querySnapshot.docs[0].id,
-                ...querySnapshot.docs[0].data(),
-                doc: querySnapshot.docs[0],
-              },
-            ]);
-          }
+          console.log(querySnapshot.docs[0].data().body);
+          setMessages((oldMessages: MessageType[]) => [
+            ...oldMessages,
+            {
+              id: querySnapshot.docs[0].id,
+              ...querySnapshot.docs[0].data(),
+              doc: querySnapshot.docs[0],
+            },
+          ]);
           setTimeout(() => {
             scrollToBottom();
           }, 200);
@@ -256,7 +248,7 @@ export const messageListener = (
 
 export const getConversations = async (
   conversations: any,
-  isMounted: any,
+
   setConversations: any,
   userID?: string
 ) => {
@@ -281,12 +273,12 @@ export const getConversations = async (
     });
   });
 
-  if (isMounted()) setConversations(newConversations);
+  setConversations(newConversations);
 };
 
 export const getMessages = async (
   conversationID: string,
-  isMounted: any,
+
   messages: any,
   scrollToBottom: any,
   setCanLoadMore: any,
@@ -304,8 +296,6 @@ export const getMessages = async (
       limit(10)
     )
   );
-
-  if (!isMounted()) return;
 
   if (snapshot.docs && snapshot.docs.length > 0) {
     let newMessages: any = [];
@@ -332,7 +322,6 @@ export const getMessages = async (
 };
 
 export const mostRecentConversationListener = (
-  isMounted: any,
   setConversations: any,
   userID: string,
   first = true
@@ -350,7 +339,7 @@ export const mostRecentConversationListener = (
 
       if (first) {
         first = false;
-      } else if (conversationDoc && isMounted()) {
+      } else if (conversationDoc) {
         setConversations((oldConversations: any) => {
           const isConversationAlreadyListening = oldConversations.some(
             (obj: any) => obj.id === conversationDoc.id
@@ -419,18 +408,15 @@ export const setConversationIsTyping = (
 };
 
 export const setInitialConversationsAndActiveConversation = async (
-  isMounted: any,
   newConversations: any,
   openFirstChat: any,
   setActiveConversation: any,
   setCanLoadMore: any,
   setConversations: any
 ) => {
-  if (!isMounted()) return;
-
   const search = window.location.search;
 
-  if (newConversations.length < 5 && isMounted()) setCanLoadMore(false);
+  if (newConversations.length < 5) setCanLoadMore(false);
 
   if (search) {
     const foundConversation = newConversations.find(
@@ -460,5 +446,5 @@ export const setInitialConversationsAndActiveConversation = async (
     setActiveConversation(newConversations[0]);
   } else setActiveConversation(false);
 
-  if (isMounted()) setConversations(newConversations);
+  setConversations(newConversations);
 };

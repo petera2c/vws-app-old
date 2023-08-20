@@ -2,11 +2,7 @@
 import React, { useEffect, useState } from "react";
 import dayjs from "dayjs";
 
-import {
-  capitolizeFirstChar,
-  getUserBasicInfo,
-  useIsMounted,
-} from "../../util";
+import { capitolizeFirstChar, getUserBasicInfo } from "../../util";
 import { getQuotes } from "./util";
 import Page from "@/components/containers/Page/Page";
 import Container from "@/components/containers/Container/Container";
@@ -15,15 +11,13 @@ import Quote from "@/types/Quote";
 import Link from "next/link";
 
 function QuoteWinnersPage() {
-  const isMounted = useIsMounted();
-
   const [quotes, setQuotes] = useState<Quote[]>([]);
   const [thisMonthYearFormatted, setThisMonthYearFormatted] = useState<any>();
 
   useEffect(() => {
-    if (isMounted()) setThisMonthYearFormatted(dayjs().format("MMMM YYYY"));
-    getQuotes(isMounted, setQuotes);
-  }, [isMounted, setQuotes]);
+    setThisMonthYearFormatted(dayjs().format("MMMM YYYY"));
+    getQuotes(setQuotes);
+  }, [setQuotes]);
 
   return (
     <Page className="align-center gap16 pa32">
@@ -44,14 +38,13 @@ function QuoteWinnersPage() {
 }
 
 function QuoteDisplay({ quote }: { quote: Quote }) {
-  const isMounted = useIsMounted();
   const [userBasicInfo, setUserBasicInfo] = useState<UserBasicInfo>();
 
   useEffect(() => {
     getUserBasicInfo((userBasicInfo: UserBasicInfo) => {
-      if (isMounted()) setUserBasicInfo(userBasicInfo);
+      setUserBasicInfo(userBasicInfo);
     }, quote.userID);
-  }, [isMounted, quote, setUserBasicInfo]);
+  }, [quote, setUserBasicInfo]);
 
   return (
     <Container className="column x-fill bg-white br8 gap8 pa16">

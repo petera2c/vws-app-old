@@ -52,12 +52,10 @@ export const capitolizeFirstLetterOfEachWord = (string: any) => {
     .replace(/(^\w{1})|(\s{1}\w{1})/g, (match: any) => match.toUpperCase());
 };
 
-export const chatQueueEmptyListener = (isMounted: any, setQueueLength: any) => {
+export const chatQueueEmptyListener = (setQueueLength: any) => {
   const unsubscribe = onSnapshot(
     query(collection(db, "chat_queue"), limit(10)),
     (snapshot) => {
-      if (!isMounted()) return;
-
       if (snapshot.docs && snapshot.docs.length > 0)
         setQueueLength(snapshot.docs.length);
       else setQueueLength(-1);
@@ -73,20 +71,17 @@ export const combineObjectWithID = (id: string, object: any) => {
 };
 
 export const countdown = (
-  isMounted: any,
   dayjsTimeout: any,
   setTimeout: any,
   setTimeOutFormatted?: any
 ) => {
-  if (isMounted()) {
-    setTimeout((oldUserVentTimeOut: any) => {
-      if (setTimeOutFormatted) {
-        setTimeOutFormatted(formatSeconds(oldUserVentTimeOut));
-      }
-      if (oldUserVentTimeOut) return oldUserVentTimeOut - 1;
-      else return Math.round(Number(dayjs(dayjsTimeout).diff(dayjs())) / 1000);
-    });
-  }
+  setTimeout((oldUserVentTimeOut: any) => {
+    if (setTimeOutFormatted) {
+      setTimeOutFormatted(formatSeconds(oldUserVentTimeOut));
+    }
+    if (oldUserVentTimeOut) return oldUserVentTimeOut - 1;
+    else return Math.round(Number(dayjs(dayjsTimeout).diff(dayjs())) / 1000);
+  });
 };
 
 export const displayNameErrors = (displayName: string) => {
@@ -199,7 +194,7 @@ export const getUserBasicInfo = async (callback: any, userID: string) => {
   callback(authorDoc.exists() ? { ...authorDoc.data(), id: authorDoc.id } : {});
 };
 
-export const getUserAvatars = (isMounted: any, setFirstOnlineUsers: any) => {
+export const getUserAvatars = (setFirstOnlineUsers: any) => {
   get(query2(ref(db2, "status"), limitToLast(3), orderByChild("index"))).then(
     async (snapshot) => {
       let usersOnline: any = [];
@@ -227,13 +222,12 @@ export const getUserAvatars = (isMounted: any, setFirstOnlineUsers: any) => {
           });
       }
 
-      if (isMounted()) setFirstOnlineUsers(onlineUsersAvatars);
+      setFirstOnlineUsers(onlineUsersAvatars);
     }
   );
 };
 
 export const hasUserBlockedUser = async (
-  isMounted: any,
   userID: string,
   userID2: string,
   callback: any
@@ -244,8 +238,6 @@ export const hasUserBlockedUser = async (
   const block2 = await get(
     ref(db2, "block_check_new/" + userID2 + "/" + userID)
   );
-
-  if (!isMounted()) return;
 
   if (block1.val() || block2.val()) return callback(true);
   else return callback(false);
@@ -303,17 +295,6 @@ export const urlify = (text: string) =>
       {match}
     </a>
   ));
-
-export const useIsMounted = () => {
-  const isMountedRef = useRef(true);
-  const isMounted = useCallback(() => isMountedRef.current, []);
-
-  useEffect(() => {
-    return () => void (isMountedRef.current = false);
-  }, []);
-
-  return isMounted;
-};
 
 export const userSignUpProgress = (user: any, noAlert?: boolean) => {
   if (!user) {

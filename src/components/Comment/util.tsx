@@ -45,7 +45,7 @@ export const editComment = async (
 
 export const getCommentHasLiked = async (
   commentID: string,
-  isMounted: any,
+
   setHasLiked: any,
   userID?: string
 ) => {
@@ -56,7 +56,7 @@ export const getCommentHasLiked = async (
   if (!snapshot || !snapshot.data()) return;
   let value = snapshot.data();
   value = value?.liked;
-  if (isMounted()) setHasLiked(Boolean(value));
+  setHasLiked(Boolean(value));
 };
 
 export const likeOrUnlikeComment = async (

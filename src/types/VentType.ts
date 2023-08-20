@@ -1,8 +1,8 @@
-type Vent = {
+type VentType = {
   id: string;
   userID: string;
   server_timestamp: any;
   title: string;
 };
 
-export default Vent;
+export default VentType;

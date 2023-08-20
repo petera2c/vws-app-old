@@ -20,7 +20,6 @@ import {
   getIsMobileOrTablet,
   getUserBasicInfo,
   hasUserBlockedUser,
-  useIsMounted,
   userSignUpProgress,
 } from "../../util";
 import {
@@ -43,7 +42,6 @@ import {
 import UserBasicInfo from "@/types/UserBasicInfo";
 
 function QuoteContestPage() {
-  const isMounted = useIsMounted();
   const { user, userBasicInfo } = useContext(UserContext);
 
   const [canLoadMoreQuotes, setCanLoadMoreQuotes] = useState(true);
@@ -58,24 +56,24 @@ function QuoteContestPage() {
   useEffect(() => {
     setIsMobileOrTablet(getIsMobileOrTablet());
 
-    if (user) getCanUserCreateQuote(isMounted, setCanUserCreateQuote, user.uid);
-    getQuotes(isMounted, setCanLoadMoreQuotes, setQuotes);
+    if (user) getCanUserCreateQuote(setCanUserCreateQuote, user.uid);
+    getQuotes(setCanLoadMoreQuotes, setQuotes);
     let timeLeftDayjs = dayjs().utcOffset(0).add(1, "day");
     timeLeftDayjs = timeLeftDayjs.set("hour", 0);
     timeLeftDayjs = timeLeftDayjs.set("minute", 0);
     timeLeftDayjs = timeLeftDayjs.set("hour", 0);
     timeLeftDayjs = timeLeftDayjs.set("hour", 0);
 
-    countdown(isMounted, timeLeftDayjs, setContestTimeLeft);
+    countdown(timeLeftDayjs, setContestTimeLeft);
     let interval = setInterval(
-      () => countdown(isMounted, timeLeftDayjs, setContestTimeLeft),
+      () => countdown(timeLeftDayjs, setContestTimeLeft),
       1000
     );
 
     return () => {
       clearInterval(interval);
     };
-  }, [isMounted, user]);
+  }, [user]);
 
   return (
     <Page className="pa16">
@@ -113,12 +111,7 @@ function QuoteContestPage() {
               {canLoadMoreQuotes && (
                 <Button
                   onClick={() =>
-                    getQuotes(
-                      isMounted,
-                      setCanLoadMoreQuotes,
-                      setQuotes,
-                      quotes
-                    )
+                    getQuotes(setCanLoadMoreQuotes, setQuotes, quotes)
                   }
                   type="primary"
                 >
@@ -168,7 +161,7 @@ function QuoteContestPage() {
                   if (myQuote)
                     saveQuote(
                       canUserCreateQuote,
-                      isMounted,
+
                       myQuote,
                       quoteID!,
                       setCanUserCreateQuote,
@@ -216,8 +209,6 @@ const Quote = ({
   setStarterModal: any;
   user: any;
 }) => {
-  const isMounted = useIsMounted();
-
   const [author, setAuthor] = useState<UserBasicInfo>();
   const [hasLiked, setHasLiked] = useState<boolean>();
   const [isContentBlocked, setIsContentBlocked] = useState();
@@ -225,25 +216,20 @@ const Quote = ({
 
   useEffect(() => {
     getUserBasicInfo((author: any) => {
-      if (isMounted()) setAuthor(author);
+      setAuthor(author);
     }, quote.userID);
 
     if (user) {
-      hasUserBlockedUser(
-        isMounted,
-        user.uid,
-        quote.userID,
-        setIsContentBlocked
-      );
+      hasUserBlockedUser(user.uid, quote.userID, setIsContentBlocked);
       getHasUserLikedQuote(
         quote.id,
         (hasLiked: boolean) => {
-          if (isMounted()) setHasLiked(hasLiked);
+          setHasLiked(hasLiked);
         },
         user.uid
       );
     }
-  }, [isMounted, quote.id, quote.userID, user]);
+  }, [quote.id, quote.userID, user]);
 
   if (isContentBlocked) return <div />;
 

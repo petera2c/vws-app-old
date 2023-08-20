@@ -7,7 +7,7 @@ import KarmaBadge from "../../views/KarmaBadge";
 
 import { UserContext } from "../../../context";
 
-import { getIsUserOnline, getUserBasicInfo, useIsMounted } from "../../../util";
+import { getIsUserOnline, getUserBasicInfo } from "../../../util";
 import { saveGroup } from "./util";
 import UserBasicInfo from "@/types/UserBasicInfo";
 import MakeAvatar from "@/components/views/MakeAvatar";
@@ -17,7 +17,6 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 const GROUP_MAX = 5;
 
 function GroupChatCreateModal({ close, groupChatEditting }: any) {
-  const isMounted = useIsMounted();
   const userContext = useContext(UserContext);
   const userBasicInfo = userContext?.userBasicInfo;
 
@@ -37,15 +36,14 @@ function GroupChatCreateModal({ close, groupChatEditting }: any) {
     if (groupChatEditting && groupChatEditting.members) {
       for (let index in groupChatEditting.members) {
         getUserBasicInfo((userBasicInfo: UserBasicInfo) => {
-          if (isMounted())
-            setExistingUsers((existingUsers) => {
-              existingUsers.push(userBasicInfo);
-              return [...existingUsers];
-            });
+          setExistingUsers((existingUsers) => {
+            existingUsers.push(userBasicInfo);
+            return [...existingUsers];
+          });
         }, groupChatEditting.members[index]);
       }
     }
-  }, [groupChatEditting, isMounted]);
+  }, [groupChatEditting]);
 
   const isNewGroupChatOrOwner =
     !groupChatEditting ||
@@ -226,14 +224,14 @@ function GroupChatCreateModal({ close, groupChatEditting }: any) {
 }
 
 // function HitDisplay({ existingUsers, hit, setUsers }) {
-//   const isMounted = useIsMounted();
+//
 //   const [userBasicInfo, setUserBasicInfo] = useState();
 
 //   useEffect(() => {
 //     getUserBasicInfo((userBasicInfo) => {
-//       if (isMounted()) setUserBasicInfo(userBasicInfo);
+//        setUserBasicInfo(userBasicInfo);
 //     }, hit.objectID);
-//   }, [hit, isMounted, setUserBasicInfo]);
+//   }, [hit, setUserBasicInfo]);
 
 //   return (
 //     <Container
@@ -278,14 +276,13 @@ function DisplayExistingUser({
   user,
   userBasicInfo,
 }: any) {
-  const isMounted = useIsMounted();
   const [isUserOnline, setIsUserOnline] = useState(false);
 
   useEffect(() => {
     let isUserOnlineSubscribe: any;
 
     isUserOnlineSubscribe = getIsUserOnline((isUserOnlineObj: any) => {
-      if (isUserOnlineObj && isUserOnlineObj.state && isMounted()) {
+      if (isUserOnlineObj && isUserOnlineObj.state) {
         if (isUserOnlineObj.state === "online") setIsUserOnline(true);
         else setIsUserOnline(false);
       }
@@ -294,7 +291,7 @@ function DisplayExistingUser({
     return () => {
       if (isUserOnlineSubscribe) off(isUserOnlineSubscribe);
     };
-  }, [isMounted, user]);
+  }, [user]);
 
   return (
     <Container className="align-center br4 gap8">

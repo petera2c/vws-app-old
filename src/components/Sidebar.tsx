@@ -11,7 +11,6 @@ import {
   getTotalOnlineUsers,
   getUserAvatars,
   isPageActive,
-  useIsMounted,
 } from "../util";
 import Link from "next/link";
 import MakeAvatar from "./views/MakeAvatar";
@@ -28,7 +27,6 @@ import {
 import { usePathname } from "next/navigation";
 
 function Sidebar() {
-  const isMounted = useIsMounted();
   const pathname = usePathname();
 
   const {
@@ -43,21 +41,16 @@ function Sidebar() {
   useEffect(() => {
     let chatQueueListenerUnsubscribe: any;
 
-    chatQueueListenerUnsubscribe = chatQueueEmptyListener(
-      isMounted,
-      setQueueLength
-    );
+    chatQueueListenerUnsubscribe = chatQueueEmptyListener(setQueueLength);
 
     getTotalOnlineUsers((totalOnlineUsers: number) => {
-      if (isMounted()) {
-        setTotalOnlineUsers(totalOnlineUsers);
-        getUserAvatars(isMounted, setFirstOnlineUsers);
-      }
+      setTotalOnlineUsers(totalOnlineUsers);
+      getUserAvatars(setFirstOnlineUsers);
     });
     return () => {
       if (chatQueueListenerUnsubscribe) chatQueueListenerUnsubscribe();
     };
-  }, [isMounted, setFirstOnlineUsers, setTotalOnlineUsers]);
+  }, [setFirstOnlineUsers, setTotalOnlineUsers]);
 
   return (
     <Space

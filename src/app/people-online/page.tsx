@@ -5,7 +5,7 @@ import { Button } from "antd";
 import UserComp from "../../components/User";
 
 import { OnlineUsersContext } from "../../context";
-import { getTotalOnlineUsers, getUserAvatars, useIsMounted } from "../../util";
+import { getTotalOnlineUsers, getUserAvatars } from "../../util";
 import { getOnlineUsers } from "./util";
 import Page from "@/components/containers/Page/Page";
 import Container from "@/components/containers/Container/Container";
@@ -13,8 +13,6 @@ import Container from "@/components/containers/Container/Container";
 const FETCH_USER_INIT_COUNT = 6;
 
 function OnlineUsers() {
-  const isMounted = useIsMounted();
-
   const [canLoadMoreUsers, setCanLoadMoreUsers] = useState(true);
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [userLoadCount, setUserLoadCount] = useState(FETCH_USER_INIT_COUNT);
@@ -24,24 +22,11 @@ function OnlineUsers() {
 
   useEffect(() => {
     getTotalOnlineUsers((totalOnlineUsers: number) => {
-      if (isMounted()) {
-        getOnlineUsers(
-          isMounted,
-          setCanLoadMoreUsers,
-          setOnlineUsers,
-          userLoadCount
-        );
-        setTotalOnlineUsers(totalOnlineUsers);
-        getUserAvatars(isMounted, setFirstOnlineUsers);
-      }
+      getOnlineUsers(setCanLoadMoreUsers, setOnlineUsers, userLoadCount);
+      setTotalOnlineUsers(totalOnlineUsers);
+      getUserAvatars(setFirstOnlineUsers);
     });
-  }, [
-    isMounted,
-    setFirstOnlineUsers,
-    setOnlineUsers,
-    setTotalOnlineUsers,
-    userLoadCount,
-  ]);
+  }, [setFirstOnlineUsers, setOnlineUsers, setTotalOnlineUsers, userLoadCount]);
 
   return (
     <Page className="column align-center bg-blue-2 gap16 pa16">

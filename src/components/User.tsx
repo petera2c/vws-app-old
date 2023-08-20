@@ -22,7 +22,6 @@ import {
   calculateKarma,
   capitolizeFirstChar,
   getUserBasicInfo,
-  useIsMounted,
   userSignUpProgress,
 } from "../util";
 import UserBasicInfo from "@/types/UserBasicInfo";
@@ -48,7 +47,6 @@ const UserComponent = ({
   showMessageUser,
   userID,
 }: any) => {
-  const isMounted = useIsMounted();
   const { user } = useContext(UserContext);
 
   const [userInfo, setUserInfo] = useState<UserBasicInfo>();
@@ -58,12 +56,10 @@ const UserComponent = ({
 
   useEffect(() => {
     getUserBasicInfo((newUserInfo: UserBasicInfo) => {
-      if (isMounted()) {
-        setUserInfo(newUserInfo);
-        setKarmaPoints(calculateKarma(newUserInfo));
-      }
+      setUserInfo(newUserInfo);
+      setKarmaPoints(calculateKarma(newUserInfo));
     }, userID);
-  }, [isMounted, userID]);
+  }, [userID]);
 
   return (
     <Link

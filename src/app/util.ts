@@ -28,10 +28,9 @@ import { db, db2 } from "../config/db_init";
 import dayjs from "dayjs";
 
 import { getEndAtValueTimestamp } from "../util";
-import Vent from "@/types/Vent";
+import Vent from "@/types/VentType";
 
 export const getIsUsersBirthday = async (
-  isMounted: any,
   setIsUsersBirthday: any,
   userID: string
 ) => {
@@ -45,7 +44,7 @@ export const getIsUsersBirthday = async (
     (!userInfoDoc.data()?.last_birthday ||
       dayjs().diff(dayjs(userInfoDoc.data()?.last_birthday), "day") >= 365)
   ) {
-    if (isMounted.current) setIsUsersBirthday(true);
+    setIsUsersBirthday(true);
     await updateDoc(doc(db, "users_info", userInfoDoc.id), {
       last_birthday: Timestamp.now().toMillis(),
     });
@@ -53,7 +52,6 @@ export const getIsUsersBirthday = async (
 };
 
 export const getIsUserSubscribed = async (
-  isMounted: any,
   setUserSubscription: any,
   userID: string
 ) => {
@@ -61,12 +59,11 @@ export const getIsUserSubscribed = async (
     doc(db, "user_subscription", userID)
   );
 
-  if (userSubscriptionDoc.data() && isMounted.current)
+  if (userSubscriptionDoc.data())
     setUserSubscription(userSubscriptionDoc.data());
 };
 
 export const newRewardListener = (
-  isMounted: any,
   setNewReward: any,
   userID: string,
   first = true
@@ -81,11 +78,7 @@ export const newRewardListener = (
     (querySnapshot) => {
       if (first) {
         first = false;
-      } else if (
-        querySnapshot.docs &&
-        querySnapshot.docs[0] &&
-        isMounted.current
-      ) {
+      } else if (querySnapshot.docs && querySnapshot.docs[0]) {
         setNewReward(() => {
           return {
             id: querySnapshot.docs[0].id,
@@ -135,7 +128,6 @@ export const setIsUserOnlineToDatabase = (uid: any) => {
 };
 
 export const getVents = async (
-  isMounted: any,
   setCanLoadMore: any,
   setVents: any,
   user: any,
@@ -190,7 +182,6 @@ export const getVents = async (
       )
     );
   }
-  if (!isMounted()) return;
 
   if (snapshot && snapshot.docs && snapshot.docs.length > 0) {
     let newVents = snapshot.docs.map((doc: any) => ({
@@ -222,17 +213,15 @@ export const getVents = async (
       newVents.shift();
     }
 
-    if (isMounted()) {
-      if (newVents.length < 10) setCanLoadMore(false);
+    if (newVents.length < 10) setCanLoadMore(false);
 
-      if (vents) {
-        return setVents((oldVents: any) => {
-          if (oldVents) return [...oldVents, ...newVents];
-          else return newVents;
-        });
-      } else {
-        return setVents(newVents);
-      }
+    if (vents) {
+      return setVents((oldVents: any) => {
+        if (oldVents) return [...oldVents, ...newVents];
+        else return newVents;
+      });
+    } else {
+      return setVents(newVents);
     }
   } else return setCanLoadMore(false);
 };
@@ -249,7 +238,6 @@ export const getWhatPage = (pathname: string) => {
 };
 
 export const newVentListener = (
-  isMounted: () => boolean,
   setWaitingVents: any,
   whatPage: string,
   first = true
@@ -270,15 +258,14 @@ export const newVentListener = (
           querySnapshot.docChanges()[0].type === "added" ||
           querySnapshot.docChanges()[0].type === "removed"
         ) {
-          if (isMounted())
-            setWaitingVents((vents: Vent[]) => [
-              ...vents,
-              {
-                doc: querySnapshot.docs[0],
-                id: querySnapshot.docs[0].id,
-                ...querySnapshot.docs[0].data(),
-              },
-            ]);
+          setWaitingVents((vents: Vent[]) => [
+            ...vents,
+            {
+              doc: querySnapshot.docs[0],
+              id: querySnapshot.docs[0].id,
+              ...querySnapshot.docs[0].data(),
+            },
+          ]);
         }
       }
     }

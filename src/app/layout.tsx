@@ -52,8 +52,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const isMounted = useRef(false);
-
   const [firstOnlineUsers, setFirstOnlineUsers] = useState([]);
   const [isUsersBirthday, setIsUsersBirthday] = useState(false);
   const [newReward, setNewReward] = useState();
@@ -63,7 +61,6 @@ export default function RootLayout({
   const [loading, setLoading] = useState(true);
 
   onAuthStateChanged(getAuth(), (user) => {
-    if (!isMounted.current) return;
     if (loading) setLoading(false);
 
     if (user) setUser(user);
@@ -89,15 +86,10 @@ export default function RootLayout({
     if (user && user.uid) {
       setUserOnlineStatus("online", user.uid);
       getTotalOnlineUsers((totalOnlineUsers: number) => {
-        if (isMounted.current) {
-          setTotalOnlineUsers(totalOnlineUsers);
-          getUserAvatars(
-            () => isMounted.current,
-            (firstOnlineUsers: []) => {
-              if (isMounted.current) setFirstOnlineUsers(firstOnlineUsers);
-            }
-          );
-        }
+        setTotalOnlineUsers(totalOnlineUsers);
+        getUserAvatars((firstOnlineUsers: []) => {
+          setFirstOnlineUsers(firstOnlineUsers);
+        });
       });
     }
   };
@@ -111,29 +103,21 @@ export default function RootLayout({
   });
 
   useEffect(() => {
-    isMounted.current = true;
-
     let newRewardListenerUnsubscribe: any;
     if (user) {
-      newRewardListenerUnsubscribe = newRewardListener(
-        isMounted,
-        setNewReward,
-        user.uid
-      );
-      getIsUsersBirthday(isMounted, setIsUsersBirthday, user.uid);
+      newRewardListenerUnsubscribe = newRewardListener(setNewReward, user.uid);
+      getIsUsersBirthday(setIsUsersBirthday, user.uid);
       setIsUserOnlineToDatabase(user.uid);
 
       getUserBasicInfo((newBasicUserInfo: UserBasicInfo) => {
-        if (isMounted.current) setUserBasicInfo(newBasicUserInfo);
+        setUserBasicInfo(newBasicUserInfo);
       }, user.uid);
     }
 
     return () => {
-      isMounted.current = false;
-
       if (newRewardListenerUnsubscribe) newRewardListenerUnsubscribe();
     };
-  }, [isMounted, user]);
+  }, [user]);
 
   return (
     <html lang="en">
@@ -182,7 +166,7 @@ export default function RootLayout({
                           }
                         >
                           <Hydrate>
-                            <div className="flex flex-col grow overflow-hidden p-8">
+                            <div className="flex column flex-fill overflow-hidden p-8">
                               {children}
                             </div>
                             <ReactQueryDevtools initialIsOpen={false} />

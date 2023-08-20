@@ -8,11 +8,7 @@ import StarterModal from "../../components/modals/Starter";
 
 import { UserContext } from "../../context";
 
-import {
-  getIsMobileOrTablet,
-  useIsMounted,
-  userSignUpProgress,
-} from "../../util";
+import { getIsMobileOrTablet, userSignUpProgress } from "../../util";
 import {
   getConversations,
   mostRecentConversationListener,
@@ -26,7 +22,6 @@ import ConversationOption from "@/components/ConversationOption";
 import CreateGroupChatModal from "@/components/modals/CreateGroupChat/CreateGroupChat";
 
 function Conversations() {
-  const isMounted = useIsMounted();
   const { user } = useContext(UserContext);
 
   const [activeChatUserBasicInfos, setActiveChatUserBasicInfos] = useState();
@@ -45,17 +40,14 @@ function Conversations() {
     if (user) {
       setStarterModal(false);
       newMessageListenerUnsubscribe = mostRecentConversationListener(
-        isMounted,
         setConversations,
         user.uid
       );
 
       getConversations(
         [],
-        isMounted,
         (newConversations: ConversationType[]) =>
           setInitialConversationsAndActiveConversation(
-            isMounted,
             newConversations,
             true,
             setActiveConversation,
@@ -69,7 +61,7 @@ function Conversations() {
     return () => {
       if (newMessageListenerUnsubscribe) newMessageListenerUnsubscribe();
     };
-  }, [isMounted, user]);
+  }, [user]);
 
   return (
     <Page className="bg-blue-2 ov-hidden">
@@ -120,18 +112,13 @@ function Conversations() {
               onClick={() => {
                 getConversations(
                   conversations,
-                  isMounted,
                   (newConversations: ConversationType[]) => {
-                    if (isMounted()) {
-                      if (newConversations.length < 5) setCanLoadMore(false);
+                    if (newConversations.length < 5) setCanLoadMore(false);
 
-                      setConversations(
-                        (oldConversations: ConversationType[]) => [
-                          ...oldConversations,
-                          ...newConversations,
-                        ]
-                      );
-                    }
+                    setConversations((oldConversations: ConversationType[]) => [
+                      ...oldConversations,
+                      ...newConversations,
+                    ]);
                   },
                   user?.uid
                 );
