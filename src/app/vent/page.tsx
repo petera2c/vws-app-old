@@ -1,22 +1,20 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-
-import Container from "../../../components/containers/Container";
-import Page from "../../../components/containers/Page";
-import SubscribeColumn from "../../components/SubscribeColumn";
-import Vent from "../../../components/Vent";
 
 import { getIsMobileOrTablet } from "../../util";
 import { getMeta } from "../vents/util";
+import { usePathname } from "next/navigation";
+import Page from "@/components/containers/Page/Page";
+import Vent from "@/components/Vent/Vent";
+import SubscribeColumn from "@/components/SubscribeColumn";
 
-const getVentIdFromURL = (pathname) => {
+const getVentIdFromURL = (pathname: string) => {
   if (pathname) {
     const ventIdStart = pathname.slice(6, pathname.length);
     let ventID = "";
-    for (let index in ventIdStart) {
-      if (ventIdStart[index] === "/") break;
-      ventID += ventIdStart[index];
+    for (let char of ventIdStart) {
+      if (char === "/") break;
+      ventID += char;
     }
 
     return ventID;
@@ -24,8 +22,7 @@ const getVentIdFromURL = (pathname) => {
 };
 
 function VentPage() {
-  const location = useLocation();
-  const { pathname } = location;
+  const pathname = usePathname();
 
   const [title, setTitle] = useState("");
   const [isMobileOrTablet, setIsMobileOrTablet] = useState<boolean>();
@@ -48,11 +45,11 @@ function VentPage() {
 
   return (
     <Page className="px16 pt16" title={title}>
-      <Container>
+      <div>
         {ventFound === false && <h4>Vent Not Found</h4>}
         {ventFound === undefined && ventID && (
-          <Container
-            className="column flex-fill"
+          <div
+            className="flex flex-col grow"
             style={{ maxWidth: isMobileOrTablet ? "" : "calc(100% - 316px)" }}
           >
             <Vent
@@ -64,10 +61,10 @@ function VentPage() {
               ventID={ventID}
               ventInit={ventFromMeta}
             />
-          </Container>
+          </div>
         )}
         <SubscribeColumn slot="3336443960" />
-      </Container>
+      </div>
     </Page>
   );
 }

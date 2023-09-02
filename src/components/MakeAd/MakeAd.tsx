@@ -1,12 +1,10 @@
 // import AdSense from "react-adsense";
 
-import Container from "../containers/Container/Container";
-
 function MakeAd({ banner, className, layoutKey, slot }: any) {
   if (banner) {
     if (process.env.NODE_ENV === "production")
       return (
-        <Container className={"x-fill column " + className}>
+        <div className={"w-full flex flex-col " + className}>
           {/* <AdSense.Google
             className="adsbygoogle"
             client="ca-pub-5185907024931065"
@@ -24,12 +22,12 @@ function MakeAd({ banner, className, layoutKey, slot }: any) {
               maxHeight: "300px",
             }}
           /> */}
-        </Container>
+        </div>
       );
     else
       return (
-        <Container
-          className={"x-fill full-center test3 br8 " + className}
+        <div
+          className={"flex w-full full-center test3 br8 " + className}
           style={{
             minWidth: "100px",
             width: "100%",
@@ -40,12 +38,12 @@ function MakeAd({ banner, className, layoutKey, slot }: any) {
           }}
         >
           <h1>Ad</h1>
-        </Container>
+        </div>
       );
   } else {
     if (process.env.NODE_ENV === "production")
       return (
-        <Container className={"x-fill " + className}>
+        <div className={"w-full " + className}>
           {/* <AdSense.Google
             className="adsbygoogle"
             client="ca-pub-5185907024931065"
@@ -62,12 +60,12 @@ function MakeAd({ banner, className, layoutKey, slot }: any) {
               maxHeight: "800px",
             }}
           /> */}
-        </Container>
+        </div>
       );
     else
       return (
-        <Container
-          className={"full-center test3 br8 " + className}
+        <div
+          className={"flex full-center test3 br8 " + className}
           style={{
             minWidth: "100px",
             width: "100%",
@@ -78,7 +76,7 @@ function MakeAd({ banner, className, layoutKey, slot }: any) {
           }}
         >
           <h1>Ad</h1>
-        </Container>
+        </div>
       );
   }
 }

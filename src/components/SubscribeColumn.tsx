@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 
-import Container from "./containers/Container/Container";
 import MakeAd from "./MakeAd/MakeAd";
 import UniqueShareLink from "./views/UniqueShareLink/UniqueShareLink";
 
@@ -18,12 +17,12 @@ function SubscribeColumn({
 
   if (!getIsMobileOrTablet())
     return (
-      <Container className="container ad column pl16">
-        <Container className="sticky top-0 column x-fill gap16">
+      <div className="container ad flex flex-col pl16">
+        <div className="sticky top-0 flex flex-col w-full gap16">
           {uniqueShareLink && <UniqueShareLink user={user} />}
           <MakeAd slot={slot} />
-        </Container>
-      </Container>
+        </div>
+      </div>
     );
   else return <div style={{ display: "none" }} />;
 }
@@ -32,11 +31,11 @@ export default SubscribeColumn;
 
 /*{user && !uniqueShareLink && (
   <Space
-    className="x-fill full-center bg-white pa16 br8"
+    className="w-full full-center bg-white pa16 br8"
     direction="vertical"
   >
-    <h4 className="tac">Become a Subscriber</h4>
-    <p className="tac">
+    <h4 className="text-center">Become a Subscriber</h4>
+    <p className="text-center">
       Vent With Strangers needs your help. Support our team to build
       the application our community needs. Please consider
       subscribing.

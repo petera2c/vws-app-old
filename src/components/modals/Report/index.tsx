@@ -1,6 +1,4 @@
-import React, { Component, useState } from "react";
-
-import Container from "../../containers/Container/Container";
+import React, { useState } from "react";
 
 const ReportModal = ({ close, submit }: any) => {
   const [abuse, setAbuse] = useState<boolean>();
@@ -32,15 +30,15 @@ const ReportModal = ({ close, submit }: any) => {
   };
 
   return (
-    <Container className="modal-container full-center" style={{ zIndex: 10 }}>
-      <Container className="modal container medium column ov-auto bg-white br4">
-        <Container className="x-fill justify-center bg-grey-10 py16">
-          <h4 className="grey-11 tac">Report</h4>
-        </Container>
-        <Container className="column x-fill pa16">
+    <div className="modal-container full-center" style={{ zIndex: 10 }}>
+      <div className="modal container medium flex flex-col overflow-auto bg-white br4">
+        <div className="w-full justify-center bg-grey-10 py16">
+          <h4 className="grey-11 text-center">Report</h4>
+        </div>
+        <div className="flex flex-col w-full pa16">
           <h6 className="blue bold mb16">Reasons for the report</h6>
-          <Container
-            className="clickable align-center mb16"
+          <div
+            className="clickable items-center mb16"
             onClick={() =>
               handleChange({
                 option: 1,
@@ -55,9 +53,9 @@ const ReportModal = ({ close, submit }: any) => {
               type="checkbox"
             />
             <p>Threatening or explicit violence</p>
-          </Container>
-          <Container
-            className="clickable align-center mb16"
+          </div>
+          <div
+            className="clickable items-center mb16"
             onClick={() =>
               handleChange({
                 abuse: !abuse,
@@ -72,9 +70,9 @@ const ReportModal = ({ close, submit }: any) => {
               type="checkbox"
             />
             <p>Commits abuse or is harmful</p>
-          </Container>
-          <Container
-            className="clickable align-center mb16"
+          </div>
+          <div
+            className="clickable items-center mb16"
             onClick={() =>
               handleChange({
                 option: 3,
@@ -89,9 +87,9 @@ const ReportModal = ({ close, submit }: any) => {
               type="checkbox"
             />
             <p>Private and personal information</p>
-          </Container>
-          <Container
-            className="clickable align-center mb16"
+          </div>
+          <div
+            className="clickable items-center mb16"
             onClick={() =>
               handleChange({
                 illegal: !illegal,
@@ -106,9 +104,9 @@ const ReportModal = ({ close, submit }: any) => {
               type="checkbox"
             />
             <p>Illegal activities</p>
-          </Container>
-          <Container
-            className="clickable align-center mb16"
+          </div>
+          <div
+            className="clickable items-center mb16"
             onClick={() =>
               handleChange({
                 malicious: !malicious,
@@ -123,10 +121,10 @@ const ReportModal = ({ close, submit }: any) => {
               type="checkbox"
             />
             <p>Malicious (Phishing, Scam, Spam)</p>
-          </Container>
-        </Container>
+          </div>
+        </div>
         {somethingChanged && (
-          <Container className="full-center border-top pa16">
+          <div className="full-center border-top pa16">
             <button
               className="button-2 py8 px32 mx4 br4"
               onClick={() => {
@@ -136,11 +134,11 @@ const ReportModal = ({ close, submit }: any) => {
             >
               Submit
             </button>
-          </Container>
+          </div>
         )}
-      </Container>
-      <Container className="modal-background" onClick={close} />
-    </Container>
+      </div>
+      <div className="modal-background" onClick={close} />
+    </div>
   );
 };
 

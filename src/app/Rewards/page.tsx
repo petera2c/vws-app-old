@@ -14,7 +14,6 @@ import {
   getUserRewardsProgress,
 } from "./util";
 import Page from "@/components/containers/Page/Page";
-import Container from "@/components/containers/Container/Container";
 import Reward from "@/types/Reward";
 
 dayjs.extend(relativeTime);
@@ -37,12 +36,12 @@ function RewardsPage() {
 
   return (
     <Page className="pa16">
-      <Container>
-        <Space className="column flex-fill" direction="vertical">
-          <Container className="column bg-white pa32 br8">
-            <h1 className="tac mb32">Your Upcoming Rewards</h1>
-            <Container className="gap32">
-              <Space className="flex-fill" direction="vertical" size="large">
+      <div>
+        <Space className="flex flex-col grow" direction="vertical">
+          <div className="flex flex-col bg-white pa32 br8">
+            <h1 className="text-center mb32">Your Upcoming Rewards</h1>
+            <div className="gap32">
+              <Space className="grow" direction="vertical" size="large">
                 <CounterDisplay
                   counter={userRewards?.created_vents_counter}
                   size="small"
@@ -62,7 +61,7 @@ function RewardsPage() {
                   title="Vent Supports Received"
                 />
               </Space>
-              <Space className="flex-fill" direction="vertical" size="large">
+              <Space className="grow" direction="vertical" size="large">
                 <CounterDisplay
                   counter={userRewards?.created_comments_counter}
                   size="small"
@@ -82,7 +81,7 @@ function RewardsPage() {
                   title="Comment Supports Received"
                 />
               </Space>
-              <Space className="flex-fill" direction="vertical" size="large">
+              <Space className="grow" direction="vertical" size="large">
                 <CounterDisplay
                   counter={userRewards?.created_quotes_counter}
                   size="small"
@@ -108,23 +107,23 @@ function RewardsPage() {
                   title="Quote Contests Won"
                 />
               </Space>
-            </Container>
-          </Container>
-          <Container className="column flex-fill gap8">
+            </div>
+          </div>
+          <div className="flex flex-col grow gap8">
             <h1>Recent Rewards</h1>
             {recentRewards.map((obj, index) => (
-              <Container
-                className="column x-fill bg-white pa16 br8"
+              <div
+                className="flex flex-col w-full bg-white pa16 br8"
                 key={index}
               >
                 <h6>{obj.title}</h6>
                 <p className="blue">+ {obj.karma_gained} Karma Points</p>
                 <p>{dayjs(obj.server_timestamp).fromNow()}</p>
-              </Container>
+              </div>
             ))}
-          </Container>
+          </div>
         </Space>
-      </Container>
+      </div>
     </Page>
   );
 }
@@ -141,7 +140,7 @@ const CounterDisplay = ({
   title: string;
 }) => {
   return (
-    <Space className="x-fill" direction="vertical">
+    <Space className="w-full" direction="vertical">
       <Space align="center">
         <h4>
           {counter}/{getNextMilestone(counter, size)}

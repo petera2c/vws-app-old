@@ -2,19 +2,21 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "antd";
 
-import Container from "../../../components/containers/Container";
-import Page from "../../../components/containers/Page";
 import SubscribeColumn from "../../components/SubscribeColumn";
-import Vent from "../../../components/Vent";
 
 import { viewTagFunction } from "../../util";
 import { getTagVents } from "./util";
+import Link from "next/link";
+import Page from "@/components/containers/Page/Page";
+import { useParams } from "next/navigation";
+import Vent from "@/components/Vent/Vent";
+import VentType from "@/types/VentType";
 
 function IndividualTag() {
   const { tagID } = useParams();
 
   const [canLoadMoreVents, setCanLoadMoreVents] = useState(true);
-  const [vents, setVents] = useState([]);
+  const [vents, setVents] = useState<VentType[]>([]);
 
   useEffect(() => {
     getTagVents(setCanLoadMoreVents, setVents, tagID);
@@ -31,17 +33,17 @@ function IndividualTag() {
       keywords={viewTagFunction(tagID)}
       title={`Vents About ${viewTagFunction(tagID)}`}
     >
-      <Container>
-        <Container className="column flex-fill gap16">
-          <Container className="column bg-white br8 gap16 pa32">
-            <h1 className="tac">{`Recent Vents About ${viewTagFunction(
+      <div>
+        <div className="flex flex-col grow gap16">
+          <div className="flex flex-col bg-white br8 gap16 pa32">
+            <h1 className="text-center">{`Recent Vents About ${viewTagFunction(
               tagID
             )}`}</h1>
-            <Link className="button-1 fs-22 tac" to="/tags">
+            <Link className="button-1 fs-22 text-center" href="/tags">
               View All Tags
             </Link>
-          </Container>
-          <Container className="column gap8">
+          </div>
+          <div className="flex flex-col gap8">
             {vents.map((vent, index) => (
               <Vent
                 key={vent.id}
@@ -52,7 +54,7 @@ function IndividualTag() {
                 ventInit={{ ...vent, id: vent.id }}
               />
             ))}
-          </Container>
+          </div>
           {canLoadMoreVents && (
             <Button
               onClick={() => {
@@ -64,9 +66,9 @@ function IndividualTag() {
               Load More Vents
             </Button>
           )}
-        </Container>
+        </div>
         <SubscribeColumn slot="3444073995" />
-      </Container>
+      </div>
     </Page>
   );
 }

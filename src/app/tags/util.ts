@@ -17,7 +17,7 @@ export const getTagVents = async (
   setCanLoadMoreVents: any,
   setVents: any,
   tagID: string,
-  vents: Vent[]
+  vents?: Vent[]
 ) => {
   let startAt = getEndAtValueTimestamp(vents);
 

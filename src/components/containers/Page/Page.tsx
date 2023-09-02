@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ReactGA from "react-ga";
 
-import Container from "../Container/Container";
 import { usePathname, useSearchParams } from "next/navigation";
+import { getMetaData } from "./util";
 
 const Page = ({
   children,
@@ -24,23 +24,17 @@ const Page = ({
       ReactGA.initialize("UA-140815372-2");
       ReactGA.pageview(pathname);
     }
-
-    import("./util").then((functions) => {
-      const { description, keywords, title } = functions.getMetaData(
-        pathname,
-        search
-      );
-      if (description) setDescription2(description);
-      if (keywords) setkeywords2(keywords);
-      if (title) settitle2(title);
-    });
+    const { description, keywords, title } = getMetaData(pathname, "search");
+    if (description) setDescription2(description);
+    if (keywords) setkeywords2(keywords);
+    if (title) settitle2(title);
 
     window.scrollTo(0, 0);
   }, [pathname, search]);
 
   return (
-    <Container
-      className={"column flex-fill ov-auto bg-blue-2 " + className}
+    <div
+      className={"flex flex-col grow overflow-auto bg-blue-2 " + className}
       id={id}
       style={style}
     >
@@ -71,7 +65,7 @@ const Page = ({
       </Helmet> */}
 
       {children}
-    </Container>
+    </div>
   );
 };
 

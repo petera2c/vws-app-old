@@ -8,7 +8,6 @@ import { OnlineUsersContext } from "../../context";
 import { getTotalOnlineUsers, getUserAvatars } from "../../util";
 import { getOnlineUsers } from "./util";
 import Page from "@/components/containers/Page/Page";
-import Container from "@/components/containers/Container/Container";
 
 const FETCH_USER_INIT_COUNT = 6;
 
@@ -29,8 +28,8 @@ function OnlineUsers() {
   }, [setFirstOnlineUsers, setOnlineUsers, setTotalOnlineUsers, userLoadCount]);
 
   return (
-    <Page className="column align-center bg-blue-2 gap16 pa16">
-      <Container className="justify-center wrap  gap16">
+    <Page className="flex flex-col items-center bg-blue-2 gap16 pa16">
+      <div className="justify-center wrap  gap16">
         {onlineUsers.map(({ lastOnline, userID }, index) => {
           return (
             <UserComp
@@ -42,7 +41,7 @@ function OnlineUsers() {
             />
           );
         })}
-      </Container>
+      </div>
       {canLoadMoreUsers && (
         <Button
           onClick={() =>

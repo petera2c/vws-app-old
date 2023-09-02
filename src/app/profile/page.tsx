@@ -39,18 +39,33 @@ import {
   getUsersVents,
 } from "../account/util";
 import UserBasicInfo from "@/types/UserBasicInfo";
-import Container from "@/components/containers/Container/Container";
 import Page from "@/components/containers/Page/Page";
-
-const MakeAvatar = loadable(() => import("../../components/views/MakeAvatar"));
+import ConfirmAlertModal from "@/components/modals/ConfirmAlert/ConfirmAlert";
+import Link from "next/link";
+import {
+  faBaby,
+  faComments,
+  faEllipsisV,
+  faGlassCheers,
+  faLandmark,
+  faPray,
+  faSchool,
+  faSpaceShuttle,
+  faUserLock,
+} from "@fortawesome/free-solid-svg-icons";
+import { useRouter } from "next/navigation";
+import MakeAvatar from "@/components/views/MakeAvatar";
+import Comment from "@/components/Comment/Comment";
+import CommentType from "@/types/CommentType";
+import Vent from "@/components/Vent/Vent";
+import VentType from "@/types/VentType";
 
 dayjs.extend(relativeTime);
 
 function ProfileSection() {
+  const router = useRouter();
   const { user } = useContext(UserContext);
 
-  const navigate = useNavigate();
-  const location = useLocation();
   let { search } = location;
 
   const [blockModal, setBlockModal] = useState(false);
@@ -58,11 +73,11 @@ function ProfileSection() {
   const [canLoadMoreVents, setCanLoadMoreVents] = useState(true);
   const [isFollowing, setIsFollowing] = useState();
   const [isMobileOrTablet, setIsMobileOrTablet] = useState<boolean>();
-  const [isUserOnline, setIsUserOnline] = useState(false);
+  const [isUserOnline, setIsUserOnline] = useState<any>(false);
   const [postsSection, setPostsSection] = useState(true);
   const [starterModal, setStarterModal] = useState(false);
-  const [userBasicInfo, setUserBasicInfo] = useState({});
-  const [userInfo, setUserInfo] = useState({});
+  const [userBasicInfo, setUserBasicInfo] = useState<UserBasicInfo>();
+  const [userInfo, setUserInfo] = useState<any>({});
 
   const [vents, setVents] = useState([]);
   const [comments, setComments] = useState([]);
@@ -70,7 +85,7 @@ function ProfileSection() {
   if (search) search = search.substring(1);
   if (!search && user) search = user.uid;
 
-  const isActive = (page: string) => {
+  const isActive = (page: boolean) => {
     if (page) return " active";
     else return "";
   };
@@ -94,7 +109,7 @@ function ProfileSection() {
 
         if (user) getIsFollowing(setIsFollowing, user.uid, search);
       }, search);
-    } else navigate("/");
+    } else router.push("/");
 
     getUsersVents(search, setCanLoadMoreVents, setVents, []);
     getUsersComments(search, setCanLoadMoreComments, setComments, []);
@@ -102,7 +117,7 @@ function ProfileSection() {
     return () => {
       if (isUserOnlineSubscribe) off(isUserOnlineSubscribe);
     };
-  }, [navigate, search, user]);
+  }, [search, user]);
 
   return (
     <Page
@@ -115,88 +130,83 @@ function ProfileSection() {
           : null
       }
     >
-      <Container className="flex-fill x-fill">
-        <Container
-          className="column flex-fill gap16"
+      <div className="grow w-full">
+        <div
+          className="flex flex-col grow gap16"
           style={{
             maxWidth: isMobileOrTablet ? "" : "calc(100% - 316px)",
           }}
         >
           {search && (
-            <Container className="column x-fill ov-hidden bg-white pa16 gap8 br8">
-              <Container className="x-fill full-center">
+            <div className="flex flex-col w-full overflow-hidden bg-white pa16 gap8 br8">
+              <div className="w-full full-center">
                 <MakeAvatar
-                  displayName={userBasicInfo.displayName}
+                  displayName={userBasicInfo?.displayName}
                   size="large"
                   userBasicInfo={userBasicInfo}
                 />
-              </Container>
+              </div>
 
-              <Container className="wrap gap16">
-                <Container className="column">
-                  <Container className="align-center gap8">
-                    {isUserOnline && isUserOnline.state === "online" && (
+              <div className="wrap gap16">
+                <div className="flex flex-col">
+                  <div className="items-center gap8">
+                    {isUserOnline && isUserOnline?.state === "online" && (
                       <div className="online-dot" />
                     )}
                     <h1 className="ellipsis">
-                      {capitolizeFirstChar(userBasicInfo.displayName)}
+                      {capitolizeFirstChar(userBasicInfo?.displayName)}
                     </h1>
                     <KarmaBadge userBasicInfo={userBasicInfo} />
-                  </Container>
+                  </div>
                   <p>{calculateKarma(userBasicInfo)} Karma Points</p>
-                </Container>
+                </div>
 
-                {(Boolean(
-                  new dayjs().year() - new dayjs(userInfo.birth_date).year()
-                ) ||
+                {(Boolean(dayjs().year() - dayjs(userInfo.birth_date).year()) ||
                   userInfo.gender ||
                   userInfo.pronouns) && (
-                  <Container>
+                  <div>
                     {Boolean(
-                      new dayjs().year() - new dayjs(userInfo.birth_date).year()
+                      dayjs().year() - dayjs(userInfo.birth_date).year()
                     ) && (
-                      <Container className="column">
+                      <div className="flex flex-col">
                         <h6>Age</h6>
                         <p>
-                          {new dayjs().diff(
-                            new dayjs(userInfo.birth_date),
-                            "years"
-                          )}
+                          {dayjs().diff(dayjs(userInfo.birth_date), "years")}
                         </p>
-                      </Container>
+                      </div>
                     )}
 
                     {userInfo.gender && (
-                      <Container className="column ml8">
+                      <div className="flex flex-col ml8">
                         <h6>Gender</h6>
                         <p>{userInfo.gender}</p>
-                      </Container>
+                      </div>
                     )}
                     {userInfo.pronouns && (
-                      <Container className="column ml8">
+                      <div className="flex flex-col ml8">
                         <h6>Pronouns</h6>
                         <p>{userInfo.pronouns}</p>
-                      </Container>
+                      </div>
                     )}
-                  </Container>
+                  </div>
                 )}
-                {userBasicInfo.server_timestamp && (
-                  <Container className="column">
+                {userBasicInfo?.server_timestamp && (
+                  <div className="flex flex-col">
                     <h6>Created Account</h6>
                     <p>
-                      {new dayjs(userBasicInfo.server_timestamp).format(
+                      {dayjs(userBasicInfo.server_timestamp).format(
                         "MMMM D YYYY"
                       )}
                     </p>
-                  </Container>
+                  </div>
                 )}
-              </Container>
+              </div>
 
               {userInfo.bio && (
-                <Container className="column">
+                <div className="flex flex-col">
                   <h6>Bio</h6>
                   <p className="break-word grey-1">{userInfo.bio}</p>
-                </Container>
+                </div>
               )}
 
               {(userInfo.education !== undefined ||
@@ -204,44 +214,44 @@ function ProfileSection() {
                 userInfo.partying !== undefined ||
                 userInfo.politics !== undefined ||
                 userInfo.religion !== undefined) && (
-                <Container className="wrap gap8">
+                <div className="wrap gap8">
                   {userInfo.education !== undefined && (
-                    <Container className="border-all align-center px8 py4 br4">
+                    <div className="border-all items-center px8 py4 br4">
                       <FontAwesomeIcon className="mr8" icon={faSchool} />
                       <p>{educationList[userInfo.education]}</p>
-                    </Container>
+                    </div>
                   )}
                   {userInfo.kids !== undefined && (
-                    <Container className="border-all align-center px8 py4 br4">
+                    <div className="border-all items-center px8 py4 br4">
                       <FontAwesomeIcon className="mr8" icon={faBaby} />
                       <p>{kidsList[userInfo.kids]}</p>
-                    </Container>
+                    </div>
                   )}
                   {userInfo.partying !== undefined && (
-                    <Container className="border-all align-center px8 py4 br4">
+                    <div className="border-all items-center px8 py4 br4">
                       <FontAwesomeIcon className="mr8" icon={faGlassCheers} />
                       <p>{partyingList[userInfo.partying]}</p>
-                    </Container>
+                    </div>
                   )}
                   {userInfo.politics !== undefined && (
-                    <Container className="border-all align-center px8 py4 br4">
+                    <div className="border-all items-center px8 py4 br4">
                       <FontAwesomeIcon className="mr8" icon={faLandmark} />
                       <p>{politicalBeliefsList[userInfo.politics]}</p>
-                    </Container>
+                    </div>
                   )}
                   {userInfo.religion !== undefined && (
-                    <Container className="border-all align-center px8 py4 br4">
+                    <div className="border-all items-center px8 py4 br4">
                       <FontAwesomeIcon className="mr8" icon={faPray} />
                       <p>{userInfo.religion}</p>
-                    </Container>
+                    </div>
                   )}
-                </Container>
+                </div>
               )}
-              {userBasicInfo.displayName &&
+              {userBasicInfo?.displayName &&
                 search &&
                 (user ? search !== user.uid : true) && (
-                  <Container className="align-center justify-between">
-                    <Container
+                  <div className="items-center justify-between">
+                    <div
                       className="button-2 wrap px16 py8 br8"
                       onClick={() => {
                         const userInteractionIssues = userSignUpProgress(user);
@@ -252,15 +262,15 @@ function ProfileSection() {
                           return;
                         }
 
-                        startConversation(navigate, user, search);
+                        // startConversation(user);
                       }}
                     >
                       <FontAwesomeIcon className="mr8" icon={faComments} />
                       <p className="ic ellipsis">
                         Message {capitolizeFirstChar(userBasicInfo.displayName)}
                       </p>
-                    </Container>
-                    <Container
+                    </div>
+                    <div
                       className="button-2 wrap px16 py8 br8"
                       onClick={() => {
                         const userInteractionIssues = userSignUpProgress(user);
@@ -274,26 +284,26 @@ function ProfileSection() {
                         followOrUnfollowUser(
                           !isFollowing,
                           setIsFollowing,
-                          user.uid,
+                          user!.uid,
                           userBasicInfo.id
                         );
                       }}
                     >
                       <FontAwesomeIcon
                         className="mr8"
-                        icon={faComet}
+                        icon={faSpaceShuttle}
                         size="2x"
                       />
                       <p className="ic ellipsis">
                         {isFollowing ? "Unfollow" : "Follow"}{" "}
                         {capitolizeFirstChar(userBasicInfo.displayName)}
                       </p>
-                    </Container>
-                  </Container>
+                    </div>
+                  </div>
                 )}
 
-              <Container className="x-fill align-center justify-between">
-                <Container>
+              <div className="w-full items-center justify-between">
+                <div>
                   {isUserOnline &&
                     (isUserOnline.index || isUserOnline.last_online) && (
                       <p>
@@ -305,28 +315,28 @@ function ProfileSection() {
                         ).fromNow()}
                       </p>
                     )}
-                </Container>
-                {userBasicInfo.displayName &&
+                </div>
+                {userBasicInfo?.displayName &&
                   search &&
                   user &&
                   search !== user.uid && (
                     <Dropdown
                       overlay={
-                        <Container className="column x-fill bg-white border-all px16 py8 br8">
-                          <Container
-                            className="button-8 clickable align-center"
-                            onClick={(e) => {
+                        <div className="flex flex-col w-full bg-white border-all px16 py8 br8">
+                          <div
+                            className="button-8 clickable items-center"
+                            onClick={(e: any) => {
                               e.preventDefault();
                               setBlockModal(!blockModal);
                             }}
                           >
-                            <p className=" flex-fill">Block Person</p>
+                            <p className=" grow">Block Person</p>
                             <FontAwesomeIcon
                               className="ml8"
                               icon={faUserLock}
                             />
-                          </Container>
-                        </Container>
+                          </div>
+                        </div>
                       }
                       placement="bottomRight"
                       trigger={["click"]}
@@ -339,23 +349,23 @@ function ProfileSection() {
                       />
                     </Dropdown>
                   )}
-              </Container>
-            </Container>
+              </div>
+            </div>
           )}
 
           <h2 className="primary bold fs-26">Activity</h2>
-          <Container className="ov-hidden column bg-white br8">
-            <Container>
-              <Container
+          <div className="overflow-hidden flex flex-col bg-white br8">
+            <div>
+              <div
                 className={
                   "x-50 button-4 clickable full-center py16" +
                   isActive(postsSection)
                 }
                 onClick={() => setPostsSection(true)}
               >
-                <h5 className="tac ic">Posts</h5>
-              </Container>
-              <Container
+                <h5 className="text-center ic">Posts</h5>
+              </div>
+              <div
                 className={
                   "x-50 button-4 clickable full-center py16" +
                   isActive(!postsSection)
@@ -364,16 +374,16 @@ function ProfileSection() {
                   setPostsSection(false);
                 }}
               >
-                <h5 className="tac ic">Comments</h5>
-              </Container>
-            </Container>
-          </Container>
+                <h5 className="text-center ic">Comments</h5>
+              </div>
+            </div>
+          </div>
           {postsSection && (
             <InfiniteScroll
               dataLength={vents.length}
               endMessage={
                 vents.length !== 0 ? (
-                  <p className="primary tac mt16">
+                  <p className="primary text-center mt16">
                     <b>Yay! You have seen it all</b>
                   </p>
                 ) : (
@@ -382,21 +392,20 @@ function ProfileSection() {
               }
               hasMore={canLoadMoreVents}
               loader={
-                <Container className="x-fill full-center">
+                <div className="w-full full-center">
                   <LoadingHeart />
-                </Container>
+                </div>
               }
               next={() =>
                 getUsersVents(search, setCanLoadMoreVents, setVents, vents)
               }
               scrollableTarget="scrollable-div"
             >
-              <Space className="x-fill" direction="vertical" size="middle">
+              <Space className="w-full" direction="vertical" size="middle">
                 {vents &&
-                  vents.map((vent, index) => (
+                  vents.map((vent: VentType, index) => (
                     <Vent
                       key={index}
-                      navigate={navigate}
                       previewMode={true}
                       ventID={vent.id}
                       ventInit={vent}
@@ -407,13 +416,16 @@ function ProfileSection() {
             </InfiniteScroll>
           )}
           {!postsSection && (
-            <Container className="x-fill column">
+            <div className="w-full flex flex-col">
               {comments && comments.length > 0 && (
-                <Container className="column bg-white br8 px32 py16">
+                <div className="flex flex-col bg-white br8 px32 py16">
                   {comments &&
-                    comments.map((comment, index) => {
+                    comments.map((comment: CommentType, index) => {
                       return (
-                        <Link key={index} to={"/vent/" + comment.ventID + "/"}>
+                        <Link
+                          key={index}
+                          href={"/vent/" + comment.ventID + "/"}
+                        >
                           <Comment
                             arrayLength={comments.length}
                             commentID={comment.id}
@@ -424,7 +436,7 @@ function ProfileSection() {
                         </Link>
                       );
                     })}
-                </Container>
+                </div>
               )}
               {comments && comments.length === 0 && <h4>No comments found.</h4>}
               {canLoadMoreComments && (
@@ -445,23 +457,23 @@ function ProfileSection() {
                   Load More Comments
                 </Button>
               )}
-            </Container>
+            </div>
           )}
           {((!vents && postsSection) || (!comments && !postsSection)) && (
-            <Container className="x-fill full-center">
+            <div className="w-full full-center">
               <LoadingHeart />
-            </Container>
+            </div>
           )}
-        </Container>
+        </div>
 
         <SubscribeColumn slot="8314288538" />
-      </Container>
+      </div>
       {blockModal && (
         <ConfirmAlertModal
           close={() => setBlockModal(false)}
           message="Blocking this user will remove you from all conversations with this user and you will no longer see any of their vents or comments. Are you sure you would like to block this user?"
           submit={() => {
-            blockUser(user.uid, search);
+            blockUser(user!.uid, search);
           }}
           title="Block User"
         />

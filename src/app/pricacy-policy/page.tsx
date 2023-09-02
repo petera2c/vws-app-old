@@ -4,7 +4,7 @@ import React from "react";
 
 const PrivacyPage = () => {
   return (
-    <Page className="column bg-blue-2">
+    <Page className="flex flex-col bg-blue-2">
       <h1>Privacy Policy for Vent With Strangers</h1>
       <p>
         At Vent With Strangers, accessible from www.ventwithstrangers.com, one

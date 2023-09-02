@@ -8,7 +8,6 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons/faTrash";
 import { faUserLock } from "@fortawesome/free-solid-svg-icons/faUserLock";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import Container from "./containers/Container/Container";
 import ReportModal from "./modals/Report";
 
 import { blockUser } from "../util";
@@ -27,7 +26,7 @@ const OptionsComponent = ({
   const [reportModal, setReportModal] = useState<boolean>();
 
   return (
-    <Container
+    <div
       onClick={(e: any) => {
         e.preventDefault();
         e.stopPropagation();
@@ -35,10 +34,10 @@ const OptionsComponent = ({
     >
       <Dropdown
         overlay={
-          <Container className="column bg-white shadow-2 br8 gap8 pa16">
+          <div className="flex flex-col bg-white shadow-2 br8 gap8 pa16">
             {objectUserID === userID && (
-              <Container
-                className="button-8 clickable align-center justify-between gap8"
+              <div
+                className="button-8 clickable items-center justify-between gap8"
                 onClick={(e: any) => {
                   e.preventDefault();
                   editFunction(objectID);
@@ -46,11 +45,11 @@ const OptionsComponent = ({
               >
                 <p className="ic">Edit</p>
                 <FontAwesomeIcon icon={faEdit} />
-              </Container>
+              </div>
             )}
             {objectUserID === userID && (
-              <Container
-                className="button-8 clickable align-center justify-between gap8"
+              <div
+                className="button-8 clickable items-center justify-between gap8"
                 onClick={(e: any) => {
                   e.preventDefault();
                   deleteFunction(objectID);
@@ -58,11 +57,11 @@ const OptionsComponent = ({
               >
                 <p className="ic">Delete</p>
                 <FontAwesomeIcon icon={faTrash} />
-              </Container>
+              </div>
             )}
             {objectUserID !== userID && (
-              <Container
-                className="button-8 clickable align-center justify-between gap8"
+              <div
+                className="button-8 clickable items-center justify-between gap8"
                 onClick={(e: any) => {
                   e.preventDefault();
                   if (canUserInteractFunction) return canUserInteractFunction();
@@ -72,11 +71,11 @@ const OptionsComponent = ({
               >
                 <p className="ic">Report</p>
                 <FontAwesomeIcon icon={faExclamationTriangle} />
-              </Container>
+              </div>
             )}
             {objectUserID !== userID && (
-              <Container
-                className="button-8 clickable align-center justify-between gap8"
+              <div
+                className="button-8 clickable items-center justify-between gap8"
                 onClick={(e: any) => {
                   e.preventDefault();
                   if (canUserInteractFunction) return canUserInteractFunction();
@@ -86,16 +85,16 @@ const OptionsComponent = ({
               >
                 <p className="ic">Block User</p>
                 <FontAwesomeIcon icon={faUserLock} />
-              </Container>
+              </div>
             )}
-          </Container>
+          </div>
         }
         placement="bottomRight"
         trigger={["click"]}
       >
-        <Container className="clickable pa16">
+        <div className="clickable pa16">
           <FontAwesomeIcon className="grey-9" icon={faEllipsisV} />
-        </Container>
+        </div>
       </Dropdown>
 
       {reportModal && (
@@ -120,7 +119,7 @@ const OptionsComponent = ({
           title="Block User"
         />
       )}
-    </Container>
+    </div>
   );
 };
 

@@ -3,8 +3,6 @@ import { useForm } from "react-hook-form";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import Container from "../../containers/Container/Container";
-
 import { getIsMobileOrTablet } from "../../../util";
 import { login } from "./util";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
@@ -21,24 +19,24 @@ const LoginModal = ({ setActiveModal }: any) => {
   }, [setIsMobileOrTablet]);
 
   return (
-    <Container className="modal-container">
-      <Container
+    <div className="modal-container">
+      <div
         className={
-          "modal column align-center ov-auto bg-white br4 " +
+          "modal flex flex-col items-center overflow-auto bg-white br4 " +
           (isMobileOrTablet ? "mx8" : "container medium")
         }
       >
-        <Container className="x-fill justify-center bg-blue py16">
-          <h4 className="tac white">Sign In</h4>
-        </Container>
-        <Container className="x-fill column">
+        <div className="w-full justify-center bg-blue py16">
+          <h4 className="text-center white">Sign In</h4>
+        </div>
+        <div className="w-full flex flex-col">
           <form
-            className="x-fill column"
+            className="w-full flex flex-col"
             onSubmit={handleSubmit((formData) => {
               login(formData, setActiveModal);
             })}
           >
-            <Container className="x-fill column px32 py16">
+            <div className="w-full flex flex-col px32 py16">
               <Input
                 className="py8 px16 mb8 br4"
                 type="text"
@@ -47,9 +45,9 @@ const LoginModal = ({ setActiveModal }: any) => {
                   required: "Required",
                 })}
               />
-              <Container className="x-fill full-center">
+              <div className="w-full full-center">
                 <Input
-                  className="flex-fill py8 px16 mb8 br4"
+                  className="grow py8 px16 mb8 br4"
                   type={canSeePassword ? "" : "password"}
                   placeholder="Password"
                   {...register("password", {
@@ -61,9 +59,9 @@ const LoginModal = ({ setActiveModal }: any) => {
                   icon={faEye}
                   onClick={() => setCanSeePassword(!canSeePassword)}
                 />
-              </Container>
+              </div>
               <p
-                className="tac clickable mb8"
+                className="text-center clickable mb8"
                 onClick={(e) => {
                   e.preventDefault();
                   setActiveModal("forgotPassword");
@@ -72,14 +70,14 @@ const LoginModal = ({ setActiveModal }: any) => {
                 Have you forgotten your password?{" "}
                 <span className="underline blue">Password reset</span>
               </p>
-            </Container>
+            </div>
 
-            <Container className="column x-fill full-center border-top px32 py16">
-              <button className="x-fill bg-blue white py8 br4" type="submit">
+            <div className="flex flex-col w-full full-center border-top px32 py16">
+              <button className="w-full bg-blue white py8 br4" type="submit">
                 Sign In
               </button>
 
-              <p className="x-fill tac mt8">
+              <p className="w-full text-center mt8">
                 Don't have an account?&nbsp;{" "}
                 <span
                   className="clickable blue"
@@ -91,18 +89,18 @@ const LoginModal = ({ setActiveModal }: any) => {
                   Create Account
                 </span>
               </p>
-            </Container>
+            </div>
           </form>
-        </Container>
-      </Container>
-      <Container
+        </div>
+      </div>
+      <div
         className="modal-background"
         onClick={(e: any) => {
           e.preventDefault();
           setActiveModal("");
         }}
       />
-    </Container>
+    </div>
   );
 };
 

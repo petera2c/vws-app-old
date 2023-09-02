@@ -16,7 +16,6 @@ import Head from "next/head";
 import { RootStyleRegistry } from "@/components/RootStyleRegistry";
 
 import "../styles/global.css";
-import Container from "@/components/containers/Container/Container";
 import { Suspense, useEffect, useRef, useState } from "react";
 import LoadingHeart from "@/components/views/loaders/Heart";
 import Sidebar from "@/components/Sidebar";
@@ -147,34 +146,34 @@ export default function RootLayout({
                     totalOnlineUsers,
                   }}
                 >
-                  <Container className="screen-container column">
+                  <div className="screen-container column">
                     {!(window.screen.width < 940) ? (
                       <Header />
                     ) : (
                       <MobileHeader />
                     )}
 
-                    <Container className="flex-fill ov-hidden">
-                      {!(window.screen.width < 940) && <Sidebar />}
+                    <div className="flex grow overflow-hidden">
+                      {window.screen.width > 940 && <Sidebar />}
 
                       {!loading && (
                         <Suspense
                           fallback={
-                            <Container className="flex-fill justify-center bg-blue-2">
+                            <div className="flex grow justify-center bg-blue-2">
                               <LoadingHeart />
-                            </Container>
+                            </div>
                           }
                         >
                           <Hydrate>
-                            <div className="flex column flex-fill overflow-hidden p-8">
+                            <div className="flex flex-col grow overflow-hidden p-8">
                               {children}
                             </div>
                             <ReactQueryDevtools initialIsOpen={false} />
                           </Hydrate>
                         </Suspense>
                       )}
-                    </Container>
-                  </Container>
+                    </div>
+                  </div>
                 </OnlineUsersContext.Provider>
               </UserContext.Provider>
             </QueryClientProvider>

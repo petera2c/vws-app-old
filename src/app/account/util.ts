@@ -33,7 +33,7 @@ import { db, db2 } from "../../config/db_init";
 import { message } from "antd";
 
 import { displayNameErrors, getEndAtValueTimestamp } from "../../util";
-import Comment from "@/types/Comment";
+import Comment from "@/types/CommentType";
 import Vent from "@/types/VentType";
 import UserBasicInfo from "@/types/UserBasicInfo";
 

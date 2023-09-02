@@ -15,7 +15,6 @@ import {
 import { getIsMobileOrTablet, userSignUpProgress } from "../../util";
 import { joinQueue } from "./util";
 import Page from "@/components/containers/Page/Page";
-import Container from "@/components/containers/Container/Container";
 import { faHandsHelping } from "@fortawesome/free-solid-svg-icons";
 
 function ChatWithStrangersPage() {
@@ -43,18 +42,18 @@ function ChatWithStrangersPage() {
 
   return (
     <Page className="pa16">
-      <Container className="">
-        <Container className="column flex-fill full-center gap32">
-          <Container className="container medium column align-center bg-white br8 pa32">
-            <h1 className="tac">Chat With Strangers</h1>
-            <p className="tac">
+      <div className="">
+        <div className="flex flex-col grow full-center gap32">
+          <div className="container medium flex flex-col items-center bg-white br8 pa32">
+            <h1 className="text-center">Chat With Strangers</h1>
+            <p className="text-center">
               This button will only connect you with someone you have no current
               conversations with :)
             </p>
-          </Container>
+          </div>
           {isUserInQueue ? (
-            <Container
-              className="container medium column button-6 bg-white border-all2 br8"
+            <div
+              className="container medium flex flex-col button-6 bg-white border-all2 br8"
               onClick={() => {
                 const userInteractionIssues = userSignUpProgress(user);
 
@@ -66,9 +65,9 @@ function ChatWithStrangersPage() {
                 leaveQueue(user?.uid!);
               }}
             >
-              <Container
+              <div
                 className={
-                  "column x-fill flex-fill full-center " +
+                  "flex flex-col w-full grow full-center " +
                   (isMobileOrTablet ? "py32" : "py64")
                 }
               >
@@ -77,12 +76,12 @@ function ChatWithStrangersPage() {
                   icon={faPersonToDoor}
                   size="2x"
                 /> */}
-                <h2 className="ic tac">Leave Queue</h2>
-              </Container>
-            </Container>
+                <h2 className="ic text-center">Leave Queue</h2>
+              </div>
+            </div>
           ) : (
-            <Container
-              className="container medium column button-6 bg-white border-all2 br8"
+            <div
+              className="container medium flex flex-col button-6 bg-white border-all2 br8"
               onClick={() => {
                 const userInteractionIssues = userSignUpProgress(user);
 
@@ -91,12 +90,12 @@ function ChatWithStrangersPage() {
                   return;
                 }
 
-                joinQueue(user?.uid);
+                joinQueue(user!.uid);
               }}
             >
-              <Container
+              <div
                 className={
-                  "column x-fill flex-fill full-center " +
+                  "flex flex-col w-full grow full-center " +
                   (isMobileOrTablet ? "py32" : "py64")
                 }
               >
@@ -105,13 +104,13 @@ function ChatWithStrangersPage() {
                   icon={faHandsHelping}
                   size="2x"
                 />
-                <h2 className="ic tac">Start Chatting</h2>
-              </Container>
-            </Container>
+                <h2 className="ic text-center">Start Chatting</h2>
+              </div>
+            </div>
           )}
-        </Container>
+        </div>
         <SubscribeColumn slot="1591936277" />
-      </Container>
+      </div>
       {starterModal && (
         <StarterModal
           activeModal={starterModal}

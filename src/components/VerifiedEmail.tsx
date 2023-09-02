@@ -1,28 +1,35 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Space } from "antd";
 
-import Page from "../../../components/containers/Page";
-
 import { handleVerifyEmail } from "./util";
+import { useRouter, useSearchParams } from "next/navigation";
+import Page from "./containers/Page/Page";
 
 function VerifiedEmail() {
   const [verifiedSuccessfully, setVerifiedSuccessly] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
 
-  const location = useLocation();
-  let { search } = location;
-  const navigate = useNavigate();
+  const search = useSearchParams();
+  const router = useRouter();
 
   useEffect(() => {
     if (!search) return;
-    const oobCode = /oobCode=([^&]+)/.exec(search)[1];
+    const oobCode = /oobCode=([^&]+)/.exec(search.toString())?.[1];
 
-    handleVerifyEmail(navigate, oobCode, setErrorMessage, setVerifiedSuccessly);
-  }, [navigate, search]);
+    handleVerifyEmail(
+      router.push,
+      oobCode,
+      setErrorMessage,
+      setVerifiedSuccessly
+    );
+  }, [router.push, search]);
 
   return (
-    <Page className="column bg-blue-2" description="" title="Email Verified">
+    <Page
+      className="flex flex-col bg-blue-2"
+      description=""
+      title="Email Verified"
+    >
       <Space align="center" className="py32" direction="vertical">
         <Space
           align="center"
@@ -31,7 +38,7 @@ function VerifiedEmail() {
           size="small"
         >
           <Space direction="vertical">
-            <h1 className="tac">
+            <h1 className="text-center">
               {!errorMessage
                 ? verifiedSuccessfully
                   ? "Email Verified successfully :)"
@@ -39,7 +46,7 @@ function VerifiedEmail() {
                 : "Please try again :'("}
             </h1>
 
-            <p className="tac mb16">
+            <p className="text-center mb16">
               {!errorMessage
                 ? verifiedSuccessfully
                   ? "Click continue' to go home!"

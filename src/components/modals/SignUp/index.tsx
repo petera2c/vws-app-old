@@ -3,14 +3,13 @@ import { useForm } from "react-hook-form";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import Container from "../../containers/Container/Container";
-
 import { UserContext } from "../../../context";
 import { getIsMobileOrTablet } from "../../../util";
 import { signUp } from "./util";
 import { useRouter } from "next/router";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 
-function SignUpModal({ setActiveModal }: any) {
+const SignUpModal = ({ setActiveModal }: any) => {
   const router = useRouter();
   const { register, handleSubmit } = useForm();
 
@@ -24,29 +23,28 @@ function SignUpModal({ setActiveModal }: any) {
   }, [setIsMobileOrTablet]);
 
   return (
-    <Container className="modal-container full-center">
-      <Container
+    <div className="modal-container full-center">
+      <div
         className={
-          "modal column align-center ov-auto bg-white br4 " +
+          "modal flex flex-col items-center overflow-auto bg-white br4 " +
           (isMobileOrTablet ? "mx8" : "container medium")
         }
       >
-        <Container className="x-fill justify-center bg-blue py16">
-          <h4 className="tac white">Create an Account</h4>
-        </Container>
+        <div className="w-full justify-center bg-blue py16">
+          <h4 className="text-center white">Create an Account</h4>
+        </div>
 
-        <Container className="x-fill column">
+        <div className="w-full flex flex-col">
           <form
-            className="x-fill column"
+            className="w-full flex flex-col"
             onSubmit={handleSubmit((data) => {
-              signUp(data, navigate, setActiveModal, setUserBasicInfo);
+              signUp(data, router, setActiveModal, setUserBasicInfo);
             })}
           >
-            <Container className="x-fill column px32 py16">
+            <div className="w-full flex flex-col px32 py16">
               <input
                 className="py8 px16 mb8 br4"
                 type="text"
-                name="displayName"
                 placeholder="Display Name"
                 {...register("displayName", {
                   required: "Required",
@@ -54,7 +52,6 @@ function SignUpModal({ setActiveModal }: any) {
               />
               <input
                 className="py8 px16 br4"
-                name="email"
                 type="text"
                 placeholder="Email Address"
                 {...register("email", {
@@ -64,31 +61,29 @@ function SignUpModal({ setActiveModal }: any) {
               <p className="fw-400 mb8">
                 (Your email address will never be shown to anyone.)
               </p>
-              <Container className="x-fill wrap">
-                <Container
+              <div className="w-full wrap">
+                <div
                   className={
-                    "column " + (isMobileOrTablet ? "x-100" : "x-50 pr8")
+                    "flex flex-col " + (isMobileOrTablet ? "x-100" : "x-50 pr8")
                   }
                 >
                   <input
                     className="py8 px16 mb8 br4"
-                    name="password"
                     type={canSeePassword ? "" : "password"}
                     placeholder="Password"
                     {...register("password", {
                       required: "Required",
                     })}
                   />
-                </Container>
-                <Container
+                </div>
+                <div
                   className={
-                    "column " + (isMobileOrTablet ? "x-100" : "x-50 pl8")
+                    "flex flex-col " + (isMobileOrTablet ? "x-100" : "x-50 pl8")
                   }
                 >
-                  <Container className="x-fill full-center">
+                  <div className="w-full full-center">
                     <input
                       className="py8 px16 mb8 br4"
-                      name="passwordConfirm"
                       type={canSeePassword ? "" : "password"}
                       placeholder="Confirm Password"
                       {...register("passwordConfirm", {
@@ -102,16 +97,16 @@ function SignUpModal({ setActiveModal }: any) {
                       icon={faEye}
                       onClick={() => setCanSeePassword(!canSeePassword)}
                     />
-                  </Container>
-                </Container>
-              </Container>
-            </Container>
-            <Container className="column x-fill full-center border-top px32 py16">
-              <button className="x-fill bg-blue white py8 br4" type="submit">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col w-full full-center border-top px32 py16">
+              <button className="w-full bg-blue white py8 br4" type="submit">
                 Create Account
               </button>
 
-              <p className="x-fill tac mt8">
+              <p className="w-full text-center mt8">
                 Already have an account?&nbsp;
                 <span
                   className="clickable blue"
@@ -123,19 +118,19 @@ function SignUpModal({ setActiveModal }: any) {
                   Login
                 </span>
               </p>
-            </Container>
+            </div>
           </form>
-        </Container>
-      </Container>
-      <Container
+        </div>
+      </div>
+      <div
         className="modal-background"
         onClick={(e) => {
           e.preventDefault();
           setActiveModal("");
         }}
       />
-    </Container>
+    </div>
   );
-}
+};
 
 export default SignUpModal;

@@ -6,7 +6,6 @@ import SubscribeColumn from "../../components/SubscribeColumn";
 
 import { UserContext } from "../../context";
 import Page from "@/components/containers/Page/Page";
-import Container from "@/components/containers/Container/Container";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBirthdayCake } from "@fortawesome/free-solid-svg-icons";
 import NewVentComponent from "@/components/NewVent/NewVent";
@@ -19,19 +18,19 @@ const NewVentPage = () => {
 
   return (
     <Page className="pa16" title="Happy Birthday!">
-      <Container>
-        <Container className="column flex-fill gap16">
-          <Container className="full-center gap8">
-            <h1 className="tac">Happy Birthday! ☺️ ☺️</h1>
+      <div>
+        <div className="flex flex-col grow gap16">
+          <div className="full-center gap8">
+            <h1 className="text-center">Happy Birthday! ☺️ ☺️</h1>
             <FontAwesomeIcon className="blue" icon={faBirthdayCake} size="5x" />
-          </Container>
+          </div>
           <NewVentComponent
             isBirthdayPost
             ventID={search ? search.substring(1) : null}
           />
-        </Container>
+        </div>
         <SubscribeColumn slot="3226323822" />
-      </Container>
+      </div>
       {starterModal && (
         <StarterModal
           activeModal={starterModal}

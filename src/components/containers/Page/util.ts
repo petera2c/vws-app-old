@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 
-export const getMetaData = (page, search) => {
+export const getMetaData = (page: string, search: string) => {
   let description = "";
   let keywords = "";
   let title = "";

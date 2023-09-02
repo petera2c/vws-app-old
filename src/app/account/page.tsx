@@ -19,7 +19,6 @@ import {
 import { calculateKarma, getIsMobileOrTablet } from "../../util";
 import { deleteAccountAndAllData, getUser, updateUser } from "./util";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Container from "@/components/containers/Container/Container";
 import {
   faBirthdayCake,
   faEye,
@@ -79,63 +78,66 @@ const AccountSection = () => {
 
   return (
     <Page className="pa16">
-      <Container>
-        <Container className="flex-fill column">
-          <form className="flex-fill column bg-white pa16 mb2 br8">
+      <div>
+        <div className="grow flex flex-col">
+          <form className="grow flex flex-col bg-white pa16 mb2 br8">
             <h6 className="blue bold mb16">Personal Information</h6>
-            <Container className="wrap">
-              <Container
+            <div className="wrap">
+              <div
                 className={
-                  "column pr8 mb16 " + (isMobileOrTablet ? "x-100" : "x-50")
+                  "flex flex-col pr8 mb16 " +
+                  (isMobileOrTablet ? "x-100" : "x-50")
                 }
               >
                 <p className="mb8">Display Name</p>
-                <Container className="full-center bg-grey-4 py4 px8 br4">
+                <div className="full-center bg-grey-4 py4 px8 br4">
                   <FontAwesomeIcon className="grey-5 mr8" icon={faMonument} />
                   <input
-                    className="x-fill no-border bg-grey-4 br4"
+                    className="w-full no-border bg-grey-4 br4"
                     onChange={(e) => setDisplayName(e.target.value)}
                     placeholder="Art Vandalay"
                     type="text"
                     value={displayName}
                   />
-                </Container>
-              </Container>
-              <Container
+                </div>
+              </div>
+              <div
                 className={
-                  "column pr8 mb16 " + (isMobileOrTablet ? "x-100" : "x-50")
+                  "flex flex-col pr8 mb16 " +
+                  (isMobileOrTablet ? "x-100" : "x-50")
                 }
               >
                 <p className="mb8">Email</p>
-                <Container className="full-center bg-grey-4 py4 px8 br4">
+                <div className="full-center bg-grey-4 py4 px8 br4">
                   <FontAwesomeIcon className="grey-5 mr8" icon={faPaperPlane} />
                   <Input
-                    className="x-fill no-border bg-grey-4 br4"
+                    className="w-full no-border bg-grey-4 br4"
                     onChange={(e) => setEmail(e.target.value)}
                     name="email"
                     placeholder="artvandalay@gmail.com"
                     type="text"
                     value={email || ""}
                   />
-                </Container>
-              </Container>
-            </Container>
+                </div>
+              </div>
+            </div>
 
-            <Container className="wrap">
-              <Container
+            <div className="wrap">
+              <div
                 className={
-                  "column pr8 mb16 " + (isMobileOrTablet ? "x-100" : "x-50")
+                  "flex flex-col pr8 mb16 " +
+                  (isMobileOrTablet ? "x-100" : "x-50")
                 }
               >
                 <p className="mb8">Gender</p>
-                <Container className="full-center bg-grey-4 py4 px8 br4">
+                <div className="full-center bg-grey-4 py4 px8 br4">
                   <FontAwesomeIcon className="grey-5 mr8" icon={faVenusMars} />
                   <FontAwesomeIcon
                     className="grey-5 mr8"
                     icon={faTransgenderAlt}
                   />
                   <input
-                    className="x-fill no-border bg-grey-4 br4"
+                    className="w-full no-border bg-grey-4 br4"
                     onChange={(e) => {
                       if (e.target.value.length > 50)
                         return message.info(
@@ -148,15 +150,16 @@ const AccountSection = () => {
                     type="text"
                     value={gender}
                   />
-                </Container>
-              </Container>
-              <Container
+                </div>
+              </div>
+              <div
                 className={
-                  "column pr8 mb16 " + (isMobileOrTablet ? "x-100" : "x-50")
+                  "flex flex-col pr8 mb16 " +
+                  (isMobileOrTablet ? "x-100" : "x-50")
                 }
               >
                 <p className="mb8">Pronouns</p>
-                <Container className="full-center bg-grey-4 py4 px8 br4">
+                <div className="full-center bg-grey-4 py4 px8 br4">
                   <FontAwesomeIcon className="grey-5 mr8" icon={faVenusMars} />
                   <FontAwesomeIcon
                     className="grey-5 mr8"
@@ -164,7 +167,7 @@ const AccountSection = () => {
                   />
                   <input
                     autoComplete="off"
-                    className="x-fill no-border bg-grey-4 br4"
+                    className="w-full no-border bg-grey-4 br4"
                     onChange={(e) => {
                       if (e.target.value.length > 50)
                         return message.info(
@@ -178,13 +181,13 @@ const AccountSection = () => {
                     type="text"
                     value={pronouns}
                   />
-                </Container>
-              </Container>
-            </Container>
+                </div>
+              </div>
+            </div>
 
             <p className="mb8">Bio</p>
             <TextArea
-              className="x-fill py8 px16 br4"
+              className="w-full py8 px16 br4"
               onChange={(event) => {
                 if (calculateKarma(userBasicInfo) < 20)
                   return message.info(
@@ -198,14 +201,14 @@ const AccountSection = () => {
               value={bio}
             />
 
-            <Container className="x-fill wrap">
-              <Container className="column pr8 mb16">
-                <Container className="align-center justify-start py8">
+            <div className="w-full wrap">
+              <div className="flex flex-col pr8 mb16">
+                <div className="items-center justify-start py8">
                   <p className="mr8 mb8">Birthday</p>
                   <FontAwesomeIcon className="grey-5" icon={faBirthdayCake} />
-                </Container>
+                </div>
 
-                <Container className="align-center">
+                <div className="items-center">
                   <DatePicker
                     value={
                       birthDate
@@ -226,16 +229,16 @@ const AccountSection = () => {
                     }}
                     size="large"
                   />
-                </Container>
+                </div>
 
                 <p className="mt32">
                   This information will be used to connect you with other users
                   with common interests. This information will not be sold or
                   shared with any 3rd party.
                 </p>
-                <Container className="x-fill column align-start justify-center py8 mt16">
+                <div className="w-full flex flex-col items-start justify-center py8 mt16">
                   <p className="mr8 mb8">Partying</p>
-                  <Container className="gap8 wrap">
+                  <div className="gap8 wrap">
                     {partyingList.map((str, index) => {
                       return (
                         <Button
@@ -255,12 +258,12 @@ const AccountSection = () => {
                         </Button>
                       );
                     })}
-                  </Container>
-                </Container>
+                  </div>
+                </div>
 
-                <Container className="x-fill column align-start justify-center py8 mt16">
+                <div className="w-full flex flex-col items-start justify-center py8 mt16">
                   <p className="mr8 mb8">Political Beliefs</p>
-                  <Container className="gap8 wrap">
+                  <div className="gap8 wrap">
                     {politicalBeliefsList.map((str, index) => {
                       return (
                         <Button
@@ -281,11 +284,11 @@ const AccountSection = () => {
                         </Button>
                       );
                     })}
-                  </Container>
-                </Container>
-                <Container className="x-fill column align-start justify-center py8 mt16">
+                  </div>
+                </div>
+                <div className="w-full flex flex-col items-start justify-center py8 mt16">
                   <p className="mr8 mb8">Religious Beliefs</p>
-                  <Container className="gap8 wrap">
+                  <div className="gap8 wrap">
                     {religiousBeliefsList.map((str, index) => {
                       return (
                         <Button
@@ -306,11 +309,11 @@ const AccountSection = () => {
                         </Button>
                       );
                     })}
-                  </Container>
-                </Container>
-                <Container className="x-fill column align-start justify-center py8 mt16">
+                  </div>
+                </div>
+                <div className="w-full flex flex-col items-start justify-center py8 mt16">
                   <p className="mr8 mb8">Education</p>
-                  <Container className="gap8 wrap">
+                  <div className="gap8 wrap">
                     {educationList.map((str, index) => {
                       return (
                         <Button
@@ -331,11 +334,11 @@ const AccountSection = () => {
                         </Button>
                       );
                     })}
-                  </Container>
-                </Container>
-                <Container className="x-fill column align-start justify-center py8 mt16">
+                  </div>
+                </div>
+                <div className="w-full flex flex-col items-start justify-center py8 mt16">
                   <p className="mb8 mr8">Do you have kids?</p>
-                  <Container className="gap8 wrap">
+                  <div className="gap8 wrap">
                     {kidsList.map((str, index) => {
                       return (
                         <Button
@@ -356,56 +359,57 @@ const AccountSection = () => {
                         </Button>
                       );
                     })}
-                  </Container>
-                </Container>
-              </Container>
-            </Container>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <h6 className="blue bold mb16">Change your Password</h6>
 
-            <Container className="wrap">
-              <Container
+            <div className="wrap">
+              <div
                 className={
-                  "column pr8 mb16 " + (isMobileOrTablet ? "x-100" : "x-50")
+                  "flex flex-col pr8 mb16 " +
+                  (isMobileOrTablet ? "x-100" : "x-50")
                 }
               >
                 <p className="mb8">New Password</p>
-                <Container className="full-center bg-grey-4 py4 px8 br4">
+                <div className="full-center bg-grey-4 py4 px8 br4">
                   <FontAwesomeIcon className="grey-5 mr8" icon={faUnlockAlt} />
 
                   <input
                     autoComplete="off"
-                    className="x-fill no-border bg-grey-4 br4"
+                    className="w-full no-border bg-grey-4 br4"
                     name="password-change"
                     onChange={(e) => setNewPassword(e.target.value)}
                     placeholder="*******"
                     type={canSeePassword ? "" : "password"}
                     value={newPassword}
                   />
-                </Container>
-              </Container>
-              <Container
+                </div>
+              </div>
+              <div
                 className={
-                  "column mb16 " + (isMobileOrTablet ? "x-100" : "x-50")
+                  "flex flex-col mb16 " + (isMobileOrTablet ? "x-100" : "x-50")
                 }
               >
                 <p className="mb8">Confirm Password</p>
-                <Container className="align-center">
-                  <Container className="flex-fill full-center bg-grey-4 py4 px8 br4">
+                <div className="items-center">
+                  <div className="grow full-center bg-grey-4 py4 px8 br4">
                     <FontAwesomeIcon
                       className="grey-5 mr8"
                       icon={faUnlockAlt}
                     />
                     <input
                       autoComplete="off"
-                      className="x-fill no-border bg-grey-4 br4"
+                      className="w-full no-border bg-grey-4 br4"
                       name="confirm-password-change"
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       placeholder="*******"
                       type={canSeePassword ? "" : "password"}
                       value={confirmPassword}
                     />
-                  </Container>
+                  </div>
                   <FontAwesomeIcon
                     className={
                       "clickable ml8 " + (canSeePassword ? "blue active" : "")
@@ -413,11 +417,11 @@ const AccountSection = () => {
                     icon={faEye}
                     onClick={() => setCanSeePassword(!canSeePassword)}
                   />
-                </Container>
-              </Container>
-            </Container>
+                </div>
+              </div>
+            </div>
           </form>
-          <Container className="full-center bg-white pa16 br8">
+          <div className="full-center bg-white pa16 br8">
             <Button
               className="flex full-center cancel py8 px32 mx4 br4"
               onClick={() => {
@@ -457,9 +461,9 @@ const AccountSection = () => {
             >
               Apply
             </Button>
-          </Container>
+          </div>
 
-          <Container className="mt16">
+          <div className="mt16">
             <Button
               className="button-1 grey-1"
               onClick={() => setDeleteAccountModal(true)}
@@ -468,10 +472,10 @@ const AccountSection = () => {
             >
               Delete Account and All Data
             </Button>
-          </Container>
-        </Container>
+          </div>
+        </div>
         <SubscribeColumn slot="1200594581" />
-      </Container>
+      </div>
       {deleteAccountModal && (
         <DeleteAccountModal
           close={() => setDeleteAccountModal(false)}

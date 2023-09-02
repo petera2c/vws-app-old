@@ -20,7 +20,6 @@ import {
   topArray,
 } from "./util";
 import Page from "@/components/containers/Page/Page";
-import Container from "@/components/containers/Container/Container";
 import UserBasicInfo from "@/types/UserBasicInfo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -59,16 +58,16 @@ const AvatarSection = () => {
 
   return (
     <Page className="pa16">
-      <Container className="x-fill flex-fill">
-        <Container className="column flex-fill">
-          <Container
-            className="ov-hidden gap16"
+      <div className="w-full grow">
+        <div className="flex flex-col grow">
+          <div
+            className="overflow-hidden gap16"
             style={{ maxHeight: "calc(70vh - 80px)" }}
           >
-            <Container className="column bg-white ov-auto pa16 br8">
+            <div className="flex flex-col bg-white overflow-auto pa16 br8">
               <button
                 className={
-                  "flex align-center grey-1 gap8 mb16 " +
+                  "flex items-center grey-1 gap8 mb16 " +
                   (activeSection === 0 ? "blue" : "")
                 }
                 onClick={() => setActiveSection(0)}
@@ -78,7 +77,7 @@ const AvatarSection = () => {
               </button>
               <button
                 className={
-                  "flex align-center grey-1 gap8 mb16 " +
+                  "flex items-center grey-1 gap8 mb16 " +
                   (activeSection === 1 ? "blue" : "")
                 }
                 onClick={() => setActiveSection(1)}
@@ -88,7 +87,7 @@ const AvatarSection = () => {
               </button>
               <button
                 className={
-                  "flex align-center grey-1 gap8 mb16 " +
+                  "flex items-center grey-1 gap8 mb16 " +
                   (activeSection === 2 ? "blue" : "")
                 }
                 onClick={() => setActiveSection(2)}
@@ -98,7 +97,7 @@ const AvatarSection = () => {
               </button>
               <button
                 className={
-                  "flex align-center grey-1 gap8 mb16 " +
+                  "flex items-center grey-1 gap8 mb16 " +
                   (activeSection === 3 ? "blue" : "")
                 }
                 onClick={() => setActiveSection(3)}
@@ -108,7 +107,7 @@ const AvatarSection = () => {
               </button>
               <button
                 className={
-                  "flex align-center grey-1 gap8 mb16 " +
+                  "flex items-center grey-1 gap8 mb16 " +
                   (activeSection === 4 ? "blue" : "")
                 }
                 onClick={() => setActiveSection(4)}
@@ -118,7 +117,7 @@ const AvatarSection = () => {
               </button>
               <button
                 className={
-                  "flex align-center grey-1 gap8 mb16 " +
+                  "flex items-center grey-1 gap8 mb16 " +
                   (activeSection === 5 ? "blue" : "")
                 }
                 onClick={() => setActiveSection(5)}
@@ -128,7 +127,7 @@ const AvatarSection = () => {
               </button>
               <button
                 className={
-                  "flex align-center grey-1 gap8 mb16 " +
+                  "flex items-center grey-1 gap8 mb16 " +
                   (activeSection === 6 ? "blue" : "")
                 }
                 onClick={() => setActiveSection(6)}
@@ -138,7 +137,7 @@ const AvatarSection = () => {
               </button>
               <button
                 className={
-                  "flex align-center grey-1 gap8 mb16 " +
+                  "flex items-center grey-1 gap8 mb16 " +
                   (activeSection === 7 ? "blue" : "")
                 }
                 onClick={() => setActiveSection(7)}
@@ -147,7 +146,7 @@ const AvatarSection = () => {
               </button>
               <button
                 className={
-                  "flex align-center grey-1 gap8 " +
+                  "flex items-center grey-1 gap8 " +
                   (activeSection === 8 ? "blue" : "")
                 }
                 onClick={() => setActiveSection(8)}
@@ -155,13 +154,13 @@ const AvatarSection = () => {
                 <FontAwesomeIcon icon={faPalette} />
                 Skin
               </button>
-            </Container>
-            <Container className="flex-fill column ov-auto bg-white br8">
+            </div>
+            <div className="grow flex flex-col overflow-auto bg-white br8">
               {sectionsArray[activeSection].map((obj, index) => (
-                <Container key={index}>
+                <div key={index}>
                   <button
                     className={
-                      "flex-fill grey-1 py16 " +
+                      "grow grey-1 py16 " +
                       (index !== sectionsArray[activeSection].length - 1
                         ? "border-bottom "
                         : " ") +
@@ -176,11 +175,11 @@ const AvatarSection = () => {
                   >
                     {obj.name}
                   </button>
-                </Container>
+                </div>
               ))}
-            </Container>
-          </Container>
-          <Container className="align-center justify-between mt16">
+            </div>
+          </div>
+          <div className="items-center justify-between mt16">
             <Avatar
               // @ts-ignore
               avatarStyle="Circle"
@@ -197,14 +196,14 @@ const AvatarSection = () => {
             />
             <button
               className="button-2 px16 py8 br4"
-              onClick={() => saveAvatar(avatar, setUserBasicInfo, user?.uid)}
+              onClick={() => saveAvatar(avatar, setUserBasicInfo, user!.uid)}
             >
               Save Avatar
             </button>
-          </Container>
-        </Container>
+          </div>
+        </div>
         <SubscribeColumn slot="9793400477" />
-      </Container>
+      </div>
     </Page>
   );
 };

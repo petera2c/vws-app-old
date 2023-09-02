@@ -22,7 +22,6 @@ import {
 import ConversationType from "@/types/ConversationType";
 import { useRouter } from "next/navigation";
 import UserBasicInfo from "@/types/UserBasicInfo";
-import Container from "./containers/Container/Container";
 import MakeAvatar from "./views/MakeAvatar";
 import ConfirmAlertModal from "./modals/ConfirmAlert/ConfirmAlert";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -115,9 +114,9 @@ function ConversationOption({
   if (!conversation) return <div>loading</div>;
 
   return (
-    <Container
+    <div
       className={
-        "x-fill relative align-center justify-between clickable pa8 br4 " +
+        "w-full relative items-center justify-between clickable pa8 br4 " +
         (isActive ? "bg-blue-1" : "")
       }
       onClick={() => {
@@ -126,14 +125,14 @@ function ConversationOption({
         router.push("/chat?" + conversation.id);
       }}
     >
-      <Container className="flex-fill column ov-hidden">
-        <Container className="align-center flex-fill gap4 mr16">
-          <Container
-            className="align-end"
+      <div className="grow flex flex-col overflow-hidden">
+        <div className="items-center grow gap4 mr16">
+          <div
+            className="items-end"
             style={{ width: userBasicInfoArray.length * 20 + 32 + "px" }}
           >
             {userBasicInfoArray.map((userBasicInfo) => (
-              <Container
+              <div
                 className="relative"
                 key={userBasicInfo.id}
                 style={{
@@ -145,9 +144,9 @@ function ConversationOption({
                   userBasicInfo={userBasicInfo}
                   size="small"
                 />
-              </Container>
+              </div>
             ))}
-          </Container>
+          </div>
 
           {(conversation.chat_name || userBasicInfoArray) && (
             <DisplayOnlineAndName
@@ -170,7 +169,7 @@ function ConversationOption({
               }
             />
           )}
-        </Container>
+        </div>
         {conversation.last_message && (
           <p
             className="description"
@@ -187,13 +186,13 @@ function ConversationOption({
         {conversation.last_updated && (
           <p>{dayjs(conversation.last_updated).fromNow()}</p>
         )}
-      </Container>
+      </div>
 
       <Dropdown
         overlay={
-          <Container className="column x-fill bg-white border-all px16 py8 br8">
-            <Container
-              className="button-8 clickable align-center"
+          <div className="flex flex-col w-full bg-white border-all px16 py8 br8">
+            <div
+              className="button-8 clickable items-center"
               onClick={() => {
                 setIsMuted(!isMuted);
                 muteChat(conversation.id, userID, !isMuted);
@@ -202,33 +201,31 @@ function ConversationOption({
                 );
               }}
             >
-              <p className="flex-fill ic">
-                {isMuted ? "Unmute " : "Mute "}Chat
-              </p>
+              <p className="grow ic">{isMuted ? "Unmute " : "Mute "}Chat</p>
               <FontAwesomeIcon
                 className="ml8"
                 icon={isMuted ? faVolumeDown : faVolumeUp}
               />
-            </Container>
-            <Container
-              className="button-8 clickable align-center"
+            </div>
+            <div
+              className="button-8 clickable items-center"
               onClick={() => {
                 setBlockModal(!blockModal);
               }}
             >
-              <p className="ic fw-400 flex-fill">Block User</p>
+              <p className="ic fw-400 grow">Block User</p>
               <FontAwesomeIcon className="ml8" icon={faUserLock} />
-            </Container>
-            <Container
-              className="button-9 clickable align-center"
+            </div>
+            <div
+              className="button-9 clickable items-center"
               onClick={() => {
                 setDeleteConversationConfirm(true);
               }}
             >
-              <p className="flex-fill ic">Leave Chat</p>
+              <p className="grow ic">Leave Chat</p>
               <FontAwesomeIcon className="ml8" icon={faTrash} />
-            </Container>
-          </Container>
+            </div>
+          </div>
         }
         placement="bottomRight"
         trigger={["click"]}
@@ -272,7 +269,7 @@ function ConversationOption({
           title="Block User"
         />
       )}
-    </Container>
+    </div>
   );
 }
 
@@ -306,7 +303,7 @@ function DisplayOnlineAndName({
   }, [chatName, userBasicInfo]);
 
   return (
-    <Container className="flex-fill align-center ov-hidden gap8" style={style}>
+    <div className="grow items-center overflow-hidden gap8" style={style}>
       <h6 className={"ellipsis " + (hasSeen ? "grey-1" : "primary")}>
         {chatName
           ? chatName
@@ -315,7 +312,7 @@ function DisplayOnlineAndName({
           : "Anonymous"}
       </h6>
       {!chatName && isUserOnline && <div className="online-dot" />}
-    </Container>
+    </div>
   );
 }
 

@@ -3,8 +3,6 @@ import { Space } from "antd";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import Container from "./containers/Container/Container";
-
 import { OnlineUsersContext } from "../context";
 import {
   chatQueueEmptyListener,
@@ -54,7 +52,7 @@ function Sidebar() {
 
   return (
     <Space
-      className="container small column ov-auto bg-white border-top pt8 px16 pb16"
+      className="container small flex flex-col overflow-auto bg-white border-top pt8 px16 pb16"
       direction="vertical"
     >
       <SideBarLink
@@ -126,22 +124,22 @@ const SideBarLink = ({
     return (
       <Link
         className={
-          "align-center button-4 clickable py8 " +
+          "items-center button-4 clickable py8 " +
           isPageActive(link, pathname) +
           (firstOnlineUsers ? " grid-2" : " grid-1")
         }
         href={link}
       >
-        <Container className="blue x-fill full-center">
+        <div className="blue w-full full-center">
           <FontAwesomeIcon icon={icon} style={{ fontSize: "1.25rem" }} />
-        </Container>
+        </div>
         <h5 className="ellipsis ic">{text}</h5>
         {firstOnlineUsers && (
-          <Container className="flex-fill align-end">
+          <div className="flex grow items-end">
             {firstOnlineUsers.map(
               (userBasicInfo: UserBasicInfo, index: number) => (
-                <Container
-                  className="avatar small align-end"
+                <div
+                  className="avatar small items-end"
                   key={userBasicInfo.id}
                   style={{
                     transform: `translateX(-${index * 28}px)`,
@@ -152,35 +150,35 @@ const SideBarLink = ({
                     userBasicInfo={userBasicInfo}
                     size="small"
                   />
-                </Container>
+                </div>
               )
             )}
             {totalOnlineUsers - firstOnlineUsers.length > 0 && (
-              <Container
+              <div
                 className="avatar very-small blue bg-blue-2"
                 style={{
                   transform: `translateX(-${firstOnlineUsers.length * 28}px)`,
                 }}
               >
                 +{totalOnlineUsers - firstOnlineUsers.length}
-              </Container>
+              </div>
             )}
-          </Container>
+          </div>
         )}
       </Link>
     );
 
   if (onClick)
     return (
-      <Container
-        className="x-fill align-center grid-1 button-4 clickable py8"
+      <div
+        className="w-full items-center grid-1 button-4 clickable py8"
         onClick={onClick}
       >
-        <Container className="flex x-fill full-center">
+        <div className="flex w-full full-center">
           <FontAwesomeIcon icon={icon} style={{ fontSize: "1.25rem" }} />
-        </Container>
+        </div>
         <h5 className="grey-1 ic">{text}</h5>
-      </Container>
+      </div>
     );
 
   return <></>;

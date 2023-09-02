@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { Space } from "antd";
+import { Button, Space } from "antd";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import Container from "./containers/Container/Container";
 import DisplayName from "./views/DisplayName";
 import StarterModal from "./modals/Starter";
 
@@ -63,20 +62,20 @@ const UserComponent = ({
 
   return (
     <Link
-      className="button-6 flex column container twentyvw ov-hidden bg-white br8 pa16"
+      className="button-6 flex flex flex-col container twentyvw overflow-hidden bg-white br8 pa16"
       href={"/profile?" + userID}
     >
-      <Container className="column x-fill flex-fill gap8">
-        <Container className="x-fill full-center">
+      <div className="flex flex-col w-full grow gap8">
+        <div className="w-full full-center">
           <MakeAvatar
             displayName={userInfo?.displayName}
             size="large"
             userBasicInfo={userInfo}
           />
-        </Container>
+        </div>
 
-        <Container className="flex-fill justify-end column gap4">
-          <Container className="x-fill align-center wrap gap8">
+        <div className="grow justify-end flex flex-col gap4">
+          <div className="w-full items-center wrap gap8">
             <DisplayName
               big
               displayName={userInfo?.displayName}
@@ -85,85 +84,90 @@ const UserComponent = ({
               noAvatar
               userBasicInfo={userInfo}
             />
-          </Container>
+          </div>
           <p className="lh-1">{karmaPoints} Karma Points</p>
-        </Container>
+        </div>
         {(userInfo?.birth_date || userInfo?.gender || userInfo?.pronouns) && (
-          <Container className="gap8">
+          <div className="gap8">
             {Boolean(dayjs().year() - dayjs(userInfo?.birth_date).year()) && (
-              <Container className="column">
+              <div className="flex flex-col">
                 <h6 className="fw-400">Age</h6>
                 <h6 className="grey-1 fw-400">
                   {dayjs().year() - dayjs(userInfo?.birth_date).year()}
                 </h6>
-              </Container>
+              </div>
             )}
 
             {userInfo?.gender && (
-              <Container className="column">
+              <div className="flex flex-col">
                 <h6 className="fw-400">Gender</h6>
                 <h6 className="grey-1 fw-400">{userInfo?.gender}</h6>
-              </Container>
+              </div>
             )}
             {userInfo?.pronouns && (
-              <Container className="column">
+              <div className="flex flex-col">
                 <h6 className="fw-400">Pronouns</h6>
                 <h6 className="grey-1 fw-400">{userInfo?.pronouns}</h6>
-              </Container>
+              </div>
             )}
-          </Container>
+          </div>
         )}
 
         {showAdditionaluserInformation && (
           <Space wrap>
             {additionalUserInfo?.education !== undefined && (
-              <Container className="border-all align-center px8 py4 br4">
+              <div className="border-all items-center px8 py4 br4">
                 <p>
                   <FontAwesomeIcon className="mr8" icon={faSchool} />
                   {educationList[additionalUserInfo?.education]}
                 </p>
-              </Container>
+              </div>
             )}
             {additionalUserInfo?.kids !== undefined && (
-              <Container className="border-all align-center px8 py4 br4">
+              <div className="border-all items-center px8 py4 br4">
                 <p>
                   <FontAwesomeIcon className="mr8" icon={faBaby} />
                   {kidsList[additionalUserInfo?.kids]}
                 </p>
-              </Container>
+              </div>
             )}
             {additionalUserInfo?.partying !== undefined && (
-              <Container className="border-all align-center px8 py4 br4">
+              <div className="border-all items-center px8 py4 br4">
                 <p>
                   <FontAwesomeIcon className="mr8" icon={faGlassCheers} />
                   {partyingList[additionalUserInfo?.partying]}
                 </p>
-              </Container>
+              </div>
             )}
             {additionalUserInfo?.politics !== undefined && (
-              <Container className="border-all align-center px8 py4 br4">
+              <div className="border-all items-center px8 py4 br4">
                 <p>
                   <FontAwesomeIcon className="mr8" icon={faLandmark} />
                   {politicalBeliefsList[additionalUserInfo?.politics]}
                 </p>
-              </Container>
+              </div>
             )}
             {additionalUserInfo?.religion !== undefined && (
-              <Container className="border-all align-center px8 py4 br4">
+              <div className="border-all items-center px8 py4 br4">
                 <p>
                   <FontAwesomeIcon className="mr8" icon={faPray} />
                   {additionalUserInfo?.religion}
                 </p>
-              </Container>
+              </div>
             )}
           </Space>
         )}
 
         {showMessageUser && (
-          <Container className="column flex-fill justify-end gap8">
+          <div className="flex flex-col grow justify-end gap8">
+            {lastOnline && (
+              <p className="w-full lh-1">
+                Last Seen: {dayjs(lastOnline).fromNow()}
+              </p>
+            )}
             {(!user || (user && user.uid !== userID)) && (
-              <button
-                className="x-fill button-2 px16 py8 br8"
+              <Button
+                className="w-full px16 py8 br8"
                 onClick={(e) => {
                   e.preventDefault();
 
@@ -176,21 +180,15 @@ const UserComponent = ({
 
                   startConversation(user, userID);
                 }}
+                icon={<FontAwesomeIcon className="mr8" icon={faComments} />}
+                type="primary"
               >
-                <FontAwesomeIcon className="mr8" icon={faComments} />
-                <p className="ic ellipsis">
-                  Message {capitolizeFirstChar(userInfo?.displayName)}
-                </p>
-              </button>
+                Message
+              </Button>
             )}
-            {lastOnline && (
-              <p className="x-fill lh-1">
-                Last Seen: {dayjs(lastOnline).fromNow()}
-              </p>
-            )}
-          </Container>
+          </div>
         )}
-      </Container>
+      </div>
       {starterModal && (
         <StarterModal
           activeModal={starterModal}

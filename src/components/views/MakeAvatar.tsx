@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
-import { capitolizeFirstChar } from "../../util";
-import { Avatar } from "antd";
 import UserBasicInfo from "@/types/UserBasicInfo";
+import { capitolizeFirstChar } from "../../util";
+import ReactNiceAvatar, { genConfig } from "react-nice-avatar";
 
 function MakeAvatar({
   className,
@@ -23,61 +23,51 @@ function MakeAvatar({
     );
   }, [displayName]);
 
+  const config = {
+    sex: "woman",
+    faceColor: "#F9C9B6",
+    earSize: "big",
+    eyeStyle: "circle",
+    noseStyle: "long",
+    mouthStyle: "laugh",
+    shirtStyle: "hoody",
+    glassesStyle: "none",
+    hairColor: "#506AF4",
+    hairStyle: "womanShort",
+    hatStyle: "none",
+    hatColor: "#77311D",
+    eyeBrowStyle: "upWoman",
+    shirtColor: "#9287FF",
+    bgColor: "#F48150",
+  };
+  // @ts-ignore
+  const myConfig = genConfig(config);
+
   if (userBasicInfo && userBasicInfo.avatar) {
     if (size === "large")
       return (
         <div className={"avatar large " + className}>
-          <Avatar
-            // @ts-ignore
-            avatarStyle="Circle"
-            topType={userBasicInfo.avatar.topType}
-            accessoriesType={userBasicInfo.avatar.accessoriesType}
-            hairColor={userBasicInfo.avatar.hairColor}
-            facialHairType={userBasicInfo.avatar.facialHairType}
-            clotheType={userBasicInfo.avatar.clotheType}
-            eyeType={userBasicInfo.avatar.eyeType}
-            eyebrowType={userBasicInfo.avatar.eyebrowType}
-            mouthType={userBasicInfo.avatar.mouthType}
-            skinColor={userBasicInfo.avatar.skinColor}
-            style={{ height: "100%" }}
+          <ReactNiceAvatar
+            style={{ minWidth: "3rem", minHeight: "3rem", height: "3rem" }}
+            {...myConfig}
           />
         </div>
       );
     else if (size === "small")
       return (
         <div className={"avatar small " + className}>
-          <Avatar
-            // @ts-ignore
-            avatarStyle="Circle"
-            topType={userBasicInfo.avatar.topType}
-            accessoriesType={userBasicInfo.avatar.accessoriesType}
-            hairColor={userBasicInfo.avatar.hairColor}
-            facialHairType={userBasicInfo.avatar.facialHairType}
-            clotheType={userBasicInfo.avatar.clotheType}
-            eyeType={userBasicInfo.avatar.eyeType}
-            eyebrowType={userBasicInfo.avatar.eyebrowType}
-            mouthType={userBasicInfo.avatar.mouthType}
-            skinColor={userBasicInfo.avatar.skinColor}
-            style={{ height: "100%" }}
+          <ReactNiceAvatar
+            style={{ minWidth: "3rem", minHeight: "3rem", height: "3rem" }}
+            {...myConfig}
           />
         </div>
       );
     else
       return (
         <div className={"avatar " + className}>
-          <Avatar
-            // @ts-ignore
-            avatarStyle="Circle"
-            topType={userBasicInfo.avatar.topType}
-            accessoriesType={userBasicInfo.avatar.accessoriesType}
-            hairColor={userBasicInfo.avatar.hairColor}
-            facialHairType={userBasicInfo.avatar.facialHairType}
-            clotheType={userBasicInfo.avatar.clotheType}
-            eyeType={userBasicInfo.avatar.eyeType}
-            eyebrowType={userBasicInfo.avatar.eyebrowType}
-            mouthType={userBasicInfo.avatar.mouthType}
-            skinColor={userBasicInfo.avatar.skinColor}
-            style={{ height: "100%" }}
+          <ReactNiceAvatar
+            style={{ minWidth: "3rem", minHeight: "3rem", height: "3rem" }}
+            {...myConfig}
           />
         </div>
       );

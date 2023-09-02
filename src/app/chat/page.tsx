@@ -20,7 +20,6 @@ import {
 } from "../conversations/util";
 import { useRouter } from "next/navigation";
 import UserBasicInfo from "@/types/UserBasicInfo";
-import Container from "@/components/containers/Container/Container";
 import { off } from "@firebase/database";
 import MakeAvatar from "@/components/views/MakeAvatar";
 import Link from "next/link";
@@ -142,12 +141,14 @@ function Chat({
     userID,
   ]);
 
+  console.log(activeConversation);
+
   return (
-    <Container className="column flex-fill x-fill full-center ov-hidden br4">
-      <Container className="justify-between x-fill border-bottom pa16">
-        <Container
+    <div className="flex flex-col grow w-full full-center overflow-hidden br4">
+      <div className="justify-between w-full border-bottom pa16">
+        <div
           className={
-            "align-center gap4 " +
+            "items-center gap4 " +
             (activeConversation.is_group ? "clickable" : "")
           }
           onClick={() => {
@@ -156,11 +157,11 @@ function Chat({
             setIsCreateGroupModalVisible(true);
           }}
         >
-          <Container className="align-end">
+          <div className="items-end">
             {activeChatUserBasicInfos &&
               activeChatUserBasicInfos.map(
                 (userBasicInfo: UserBasicInfo, index: number) => (
-                  <Container
+                  <div
                     className="relative"
                     key={userBasicInfo.id}
                     style={{ transform: "translateX(" + index * -28 + "px)" }}
@@ -170,10 +171,10 @@ function Chat({
                       userBasicInfo={userBasicInfo}
                       size="small"
                     />
-                  </Container>
+                  </div>
                 )
               )}
-          </Container>
+          </div>
 
           {!activeConversation.is_group &&
             activeChatUserBasicInfos &&
@@ -208,7 +209,7 @@ function Chat({
               {activeConversation?.chat_name}
             </h5>
           )}
-        </Container>
+        </div>
 
         {isMobileOrTablet && (
           <Button
@@ -220,19 +221,20 @@ function Chat({
             Go Back
           </Button>
         )}
-      </Container>
+      </div>
 
-      <Container className="column x-fill flex-fill ov-hidden px16">
+      <div className="flex flex-col w-full grow overflow-hidden px16">
         {!messages ||
           ((messages && messages.length) === 0 && (
-            <h4 className="tac">
+            <h4 className="text-center">
               The conversation has been started but no messages have been sent!
             </h4>
           ))}
 
-        <Container
+        <div
           className={
-            "column flex-fill ov-auto gap8 " + (canLoadMore ? "" : "pt8")
+            "flex flex-col grow overflow-auto gap8 " +
+            (canLoadMore ? "" : "pt8")
           }
         >
           {canLoadMore && (
@@ -277,16 +279,16 @@ function Chat({
             );
           })}
           <div ref={dummyRef} />
-        </Container>
-      </Container>
-      <Container
-        className="ease-in-out x-fill"
+        </div>
+      </div>
+      <div
+        className="ease-in-out w-full"
         style={{
           maxHeight: showPartnerIsTyping ? "56px" : "0",
         }}
       >
-        <Container className="bg-none ov-hidden full-center">
-          <Container className="align-end pl16">
+        <div className="bg-none overflow-hidden full-center">
+          <div className="items-end pl16">
             {activeChatUserBasicInfos && activeChatUserBasicInfos[0] && (
               <MakeAvatar
                 displayName={activeChatUserBasicInfos[0].displayName}
@@ -294,31 +296,31 @@ function Chat({
               />
             )}
             <h4>...</h4>
-          </Container>
-        </Container>
-      </Container>
-      <Container
-        className="ease-in-out x-fill"
+          </div>
+        </div>
+      </div>
+      <div
+        className="ease-in-out w-full"
         style={{
           maxHeight: arrayOfUsersTyping.length > 0 ? "56px" : "0",
         }}
       >
-        <Container className="bg-none ov-hidden full-center">
-          <Container className="align-end pl16">
+        <div className="bg-none overflow-hidden full-center">
+          <div className="items-end pl16">
             <p className="">
               {arrayOfUsersTyping.length}
               {arrayOfUsersTyping.length === 1 ? " person is " : " people are "}
               typing...
             </p>
-          </Container>
-        </Container>
-      </Container>
+          </div>
+        </div>
+      </div>
 
-      <Container className="column x-fill">
-        <Container
+      <div className="flex flex-col w-full">
+        <div
           className={
-            "x-fill border-top  " +
-            (isMobileOrTablet ? "" : "align-center pr16")
+            "w-full border-top  " +
+            (isMobileOrTablet ? "" : "items-center pr16")
           }
         >
           <textarea
@@ -381,9 +383,9 @@ function Chat({
           >
             Send
           </button>
-        </Container>
-      </Container>
-    </Container>
+        </div>
+      </div>
+    </div>
   );
 }
 

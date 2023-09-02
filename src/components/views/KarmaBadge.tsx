@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Tooltip } from "antd";
 
-import Container from "../containers/Container/Container";
 import UserBasicInfo from "@/types/UserBasicInfo";
 
 import { faMedal, faRocket } from "@fortawesome/free-solid-svg-icons";
@@ -75,9 +74,9 @@ const KarmaBadge = ({
         title={noTooltip ? "" : karma + " Karma Points"}
       >
         <span>
-          <Container
+          <div
             className="clickable"
-            onClick={(e: React.ChangeEvent<HTMLInputElement>) => {
+            onClick={(e) => {
               if (noOnClick) return;
               e.stopPropagation();
               e.preventDefault();
@@ -89,7 +88,7 @@ const KarmaBadge = ({
             }}
           >
             <h5 className="bg-blue white fw-400 px8 py4 br8">Moderator</h5>
-          </Container>
+          </div>
         </span>
       </Tooltip>
     );
@@ -129,9 +128,9 @@ const KarmaBadge = ({
         title={noTooltip ? "" : karma + " Karma Points"}
       >
         <span>
-          <Container
+          <div
             className="clickable"
-            onClick={(e: React.ChangeEvent<HTMLInputElement>) => {
+            onClick={(e) => {
               if (noOnClick) return;
               e.stopPropagation();
               e.preventDefault();
@@ -143,7 +142,7 @@ const KarmaBadge = ({
             }}
           >
             <FontAwesomeIcon icon={badgeIcon} color={badgeColor} size="2x" />
-          </Container>
+          </div>
         </span>
       </Tooltip>
     );

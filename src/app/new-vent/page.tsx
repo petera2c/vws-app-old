@@ -6,7 +6,6 @@ import SubscribeColumn from "../../components/SubscribeColumn";
 
 import { UserContext } from "../../context";
 import Page from "@/components/containers/Page/Page";
-import Container from "@/components/containers/Container/Container";
 import NewVentComponent from "@/components/NewVent/NewVent";
 
 function NewVentPage() {
@@ -23,12 +22,12 @@ function NewVentPage() {
 
   return (
     <Page className="pa16">
-      <Container>
-        <Container className="flex-fill">
+      <div>
+        <div className="grow">
           <NewVentComponent ventID={search ? search.substring(1) : null} />
-        </Container>
+        </div>
         <SubscribeColumn slot="3872937497" />
-      </Container>
+      </div>
 
       {starterModal && (
         <StarterModal

@@ -1,14 +1,18 @@
 import React, { useEffect, useRef } from "react";
 
-import Container from "../Container/Container";
-
-function HandleOutsideClickContainer(props) {
+function HandleOutsideClickContainer(props: {
+  className?: string;
+  children: any;
+  close: any;
+  style?: any;
+}) {
   const { children, close } = props;
   const someRef = useRef(null);
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (someRef && !someRef.current.contains(event.target)) close();
+    const handleClickOutside = (event: any) => {
+      // @ts-ignore
+      if (someRef && !someRef.current?.contains(event.target)) close();
     };
     document.addEventListener("mousedown", handleClickOutside);
 
@@ -18,9 +22,9 @@ function HandleOutsideClickContainer(props) {
   }, [close]);
 
   return (
-    <Container forwardedRef2={someRef} {...props}>
+    <div ref={someRef} {...props}>
       {children}
-    </Container>
+    </div>
   );
 }
 

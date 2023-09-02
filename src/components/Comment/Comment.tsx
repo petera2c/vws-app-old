@@ -7,7 +7,6 @@ import { faHeart } from "@fortawesome/free-regular-svg-icons/faHeart";
 import { faHeart as faHeart2 } from "@fortawesome/free-solid-svg-icons/faHeart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import Container from "../containers/Container/Container";
 import DisplayName from "../views/DisplayName";
 import Options from "../Options";
 import StarterModal from "../modals/Starter";
@@ -44,7 +43,7 @@ function Comment({
   comment2: any;
   commentID: string;
   commentIndex: number;
-  setComments: any;
+  setComments?: any;
 }) {
   const { user } = useContext(UserContext);
 
@@ -88,8 +87,8 @@ function Comment({
   if (isContentBlocked) return <div />;
 
   return (
-    <Container
-      className="x-fill column bg-white mt1"
+    <div
+      className="w-full flex flex-col bg-white mt1"
       style={{
         borderTopLeftRadius: commentIndex === 0 ? "8px" : "",
         borderTopRightRadius: commentIndex === 0 ? "8px" : "",
@@ -97,7 +96,7 @@ function Comment({
         borderBottomRightRadius: arrayLength - 1 === commentIndex ? "8px" : "",
       }}
     >
-      <Container className="justify-between py16">
+      <div className="justify-between py16">
         <DisplayName
           displayName={userBasicInfo?.displayName}
           isUserOnline={isUserOnline}
@@ -105,7 +104,7 @@ function Comment({
           userID={comment.userID}
         />
 
-        <Container className="relative column full-center">
+        <div className="relative flex flex-col full-center">
           {user && (
             <Options
               canUserInteractFunction={
@@ -135,12 +134,12 @@ function Comment({
               userID={user.uid}
             />
           )}
-        </Container>
-      </Container>
+        </div>
+      </div>
       {!editingComment && <p>{swapTags(comment.text)}</p>}
       {editingComment && (
-        <Container className="column x-fill align-end br8">
-          {/* <Container className="relative x-fill">
+        <div className="flex flex-col w-full items-end br8">
+          {/* <div className="relative w-full">
             <MentionsInput
               className="mentions"
               onChange={(e) => {
@@ -160,16 +159,16 @@ function Comment({
                 markup="@{{[[[__id__]]]||[[[__display__]]]}}"
                 renderSuggestion={(entry) => {
                   return (
-                    <Container className="button-7 column pa16" key={entry.id}>
+                    <div className="button-7 flex flex-col pa16" key={entry.id}>
                       <h6>{entry.display}</h6>
-                    </Container>
+                    </div>
                   );
                 }}
                 trigger="@"
               />
             </MentionsInput>
-          </Container> */}
-          <Container className="mt8">
+          </div> */}
+          <div className="mt8">
             <button
               className="button-5 px32 py8 mr8 br4"
               onClick={() => setEditingComment(false)}
@@ -186,12 +185,12 @@ function Comment({
             >
               Save
             </button>
-          </Container>
-        </Container>
+          </div>
+        </div>
       )}
-      <Container className="align-center justify-between wrap gap8 py16">
-        <Container
-          className="clickable align-center"
+      <div className="items-center justify-between wrap gap8 py16">
+        <div
+          className="clickable items-center"
           onClick={async (e: any) => {
             e.preventDefault();
 
@@ -222,14 +221,14 @@ function Comment({
           <p className="grey-5">
             {comment.like_counter ? comment.like_counter : 0}
           </p>
-        </Container>
-        <Container className="align-center">
+        </div>
+        <div className="items-center">
           <FontAwesomeIcon className="clickable grey-5 mr8" icon={faClock} />
           <p className="grey-5 fs-16">
             {dayjs(comment.server_timestamp).fromNow()}
           </p>
-        </Container>
-      </Container>
+        </div>
+      </div>
 
       {starterModal && (
         <StarterModal
@@ -237,7 +236,7 @@ function Comment({
           setActiveModal={setStarterModal}
         />
       )}
-    </Container>
+    </div>
   );
 }
 

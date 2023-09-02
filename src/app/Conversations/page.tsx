@@ -16,7 +16,6 @@ import {
 } from "./util";
 import ConversationType from "@/types/ConversationType";
 import Page from "@/components/containers/Page/Page";
-import Container from "@/components/containers/Container/Container";
 import Link from "next/link";
 import ConversationOption from "@/components/ConversationOption";
 import CreateGroupChatModal from "@/components/modals/CreateGroupChat/CreateGroupChat";
@@ -64,9 +63,9 @@ function Conversations() {
   }, [user]);
 
   return (
-    <Page className="bg-blue-2 ov-hidden">
-      <Container className="flex-fill x-fill gap4 ov-hidden pa4">
-        <Container className="container small column ov-auto bg-white br4 pa8">
+    <Page className="bg-blue-2 overflow-hidden">
+      <div className="grow w-full gap4 overflow-hidden pa4">
+        <div className="container small flex flex-col overflow-auto bg-white br4 pa8">
           {user && user.emailVerified && (
             <Button
               className="mb8"
@@ -82,7 +81,7 @@ function Conversations() {
           )}
           {conversations.length === 0 && (
             <Link className="" href="/people-online">
-              <h6 className="button-1 grey-1 tac">
+              <h6 className="button-1 grey-1 text-center">
                 Start a conversation with someone!
               </h6>
             </Link>
@@ -127,12 +126,12 @@ function Conversations() {
               Load More Conversations
             </button>
           )}
-        </Container>
+        </div>
 
-        <Container className="column flex-fill ov-hidden bg-white br4">
+        <div className="flex flex-col grow overflow-hidden bg-white br4">
           {!activeConversation && user && user.emailVerified && (
-            <Link className="grey-1 tac pa32" href="/people-online">
-              <h4 className="tac">
+            <Link className="grey-1 text-center pa32" href="/people-online">
+              <h4 className="text-center">
                 Check your messages from friends on Vent With Strangers,{" "}
               </h4>
               <h1 className="blue">See Who is Online :)</h1>
@@ -140,7 +139,7 @@ function Conversations() {
           )}
           {(!user || (user && !user.emailVerified)) && (
             <h4
-              className="button-1 grey-1 tac pa32"
+              className="button-1 grey-1 text-center pa32"
               onClick={() => {
                 if (!user) setStarterModal(true);
                 else {
@@ -173,8 +172,8 @@ function Conversations() {
                 userID={user.uid}
               />
             )}
-        </Container>
-      </Container>
+        </div>
+      </div>
       {starterModal && (
         <StarterModal
           activeModal={starterModal}

@@ -11,7 +11,6 @@ import { UserContext } from "../../context";
 
 import { getVents, getWhatPage, newVentListener } from "./util";
 import Page from "@/components/containers/Page/Page";
-import Container from "@/components/containers/Container/Container";
 import NewVentComponent from "@/components/NewVent/NewVent";
 import Link from "next/link";
 import Vent from "@/components/Vent/Vent";
@@ -55,15 +54,15 @@ function VentsPage() {
 
   return (
     <Page className="pa16" id="scrollable-div">
-      <Container className="flex-fill x-fill">
-        <Container className="column flex-fill gap16">
+      <div className="grow w-full">
+        <div className="flex flex-col grow gap16">
           <NewVentComponent miniVersion />
 
-          <Container className="x-fill full-center bg-white br8 gap16 pa16">
-            <Link className="flex-fill" href="/recent">
+          <div className="w-full full-center bg-white br8 gap16 pa16">
+            <Link className="grow" href="/recent">
               <h2
                 className={
-                  "button-3 fs-22 tac " +
+                  "button-3 fs-22 text-center " +
                   (whatPage === "recent" ? "active" : "")
                 }
               >
@@ -72,10 +71,10 @@ function VentsPage() {
             </Link>
 
             {user && (
-              <Link className="flex-fill" href="/my-feed">
+              <Link className="grow" href="/my-feed">
                 <h2
                   className={
-                    "button-3 fs-22 tac " +
+                    "button-3 fs-22 text-center " +
                     (whatPage === "my-feed" ? "active" : "")
                   }
                 >
@@ -84,10 +83,10 @@ function VentsPage() {
               </Link>
             )}
 
-            <Link className="flex-fill" href="/trending">
+            <Link className="grow" href="/trending">
               <h2
                 className={
-                  "button-3 fs-22 tac " +
+                  "button-3 fs-22 text-center " +
                   (whatPage === "trending" ||
                   whatPage === "trending-week" ||
                   whatPage === "trending-month"
@@ -98,15 +97,15 @@ function VentsPage() {
                 Trending
               </h2>
             </Link>
-          </Container>
+          </div>
           {(whatPage === "trending" ||
             whatPage === "trending-week" ||
             whatPage === "trending-month") && (
-            <Container className="x-fill full-center bg-white br8 gap16 pa16">
+            <div className="w-full full-center bg-white br8 gap16 pa16">
               <Link href="/trending">
                 <h2
                   className={
-                    "button-3 fs-22 tac " +
+                    "button-3 fs-22 text-center " +
                     (whatPage === "trending" ? "active" : "")
                   }
                 >
@@ -116,7 +115,7 @@ function VentsPage() {
               <Link href="/trending/this-week">
                 <h2
                   className={
-                    "button-3 fs-22 tac " +
+                    "button-3 fs-22 text-center " +
                     (whatPage === "trending-week" ? "active" : "")
                   }
                 >
@@ -126,39 +125,39 @@ function VentsPage() {
               <Link href="/trending/this-month">
                 <h2
                   className={
-                    "button-3 fs-22 tac " +
+                    "button-3 fs-22 text-center " +
                     (whatPage === "trending-month" ? "active" : "")
                   }
                 >
                   Trending This Month
                 </h2>
               </Link>
-            </Container>
+            </div>
           )}
 
           {vents && (
             <InfiniteScroll
               dataLength={vents.length}
               endMessage={
-                <p className="primary tac mt16">
+                <p className="primary text-center mt16">
                   <b>Yay! You have seen it all</b>
                 </p>
               }
               hasMore={canLoadMore}
               loader={
-                <Container className="x-fill full-center">
+                <div className="w-full full-center">
                   <LoadingHeart />
-                </Container>
+                </div>
               }
               next={() =>
                 getVents(setCanLoadMore, setVents, user, vents, whatPage)
               }
               scrollableTarget="scrollable-div"
             >
-              <Space className="x-fill" direction="vertical" size="large">
+              <Space className="w-full" direction="vertical" size="large">
                 {waitingVents.length > 0 && (
                   <Button
-                    className="x-fill "
+                    className="w-full "
                     onClick={() => {
                       setVents((vents) => [...waitingVents, ...vents]);
                       setWaitingVents([]);
@@ -172,7 +171,7 @@ function VentsPage() {
                 {vents &&
                   vents.map((vent: VentType, index) => {
                     return (
-                      <Container className="column x-fill gap8" key={vent.id}>
+                      <div className="flex flex-col w-full gap8" key={vent.id}>
                         <Vent
                           previewMode={true}
                           ventID={vent.id}
@@ -185,16 +184,16 @@ function VentsPage() {
                             slot="1835301248"
                           />
                         )}
-                      </Container>
+                      </div>
                     );
                   })}
               </Space>
             </InfiniteScroll>
           )}
-        </Container>
+        </div>
 
         <SubscribeColumn slot="7871419499" />
-      </Container>
+      </div>
     </Page>
   );
 }

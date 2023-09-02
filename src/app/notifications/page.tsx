@@ -11,7 +11,6 @@ import {
   newNotificationsListener,
 } from "../../components/Header/util";
 import { getIsMobileOrTablet } from "../../util";
-import Container from "@/components/containers/Container/Container";
 import Page from "@/components/containers/Page/Page";
 
 function NotificationsPage() {
@@ -41,23 +40,23 @@ function NotificationsPage() {
 
   return (
     <Page
-      className="justify-start align-center bg-blue-2 pa16"
+      className="justify-start items-center bg-blue-2 pa16"
       description=""
       keywords=""
       title="Notifications"
     >
-      <Container
+      <div
         className={
-          "column ov-visible gap16 " +
+          "flex flex-col overflow-visible gap16 " +
           (isMobileOrTablet ? "" : "container large")
         }
       >
-        <Container className="full-center bg-white ov-hidden br8 pa32">
-          <h1 className="fw-600 tac">Notifications</h1>
-        </Container>
-        <Container className="bg-white ov-hidden br8">
+        <div className="full-center bg-white overflow-hidden br8 pa32">
+          <h1 className="fw-600 text-center">Notifications</h1>
+        </div>
+        <div className="bg-white overflow-hidden br8">
           <NotificationList notifications={notifications} />
-        </Container>
+        </div>
         {canShowLoadMore && (
           <Button
             onClick={() =>
@@ -75,7 +74,7 @@ function NotificationsPage() {
             Load More
           </Button>
         )}
-      </Container>
+      </div>
     </Page>
   );
 }

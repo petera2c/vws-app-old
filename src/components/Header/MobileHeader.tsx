@@ -3,7 +3,6 @@ import useState from "react-usestateref";
 import { sendEmailVerification } from "@firebase/auth";
 import { Button, message, Space } from "antd";
 
-import Container from "../containers/Container/Container";
 import HandleOutsideClick from "../containers/HandleOutsideClick/HandleOutsideClick";
 import DisplayName from "../views/DisplayName";
 import StarterModal from "../modals/Starter";
@@ -27,8 +26,7 @@ import {
   readNotifications,
   resetUnreadConversationCount,
 } from "./util";
-import { usePathname } from "next/navigation";
-import { useRouter } from "next/router";
+import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -64,7 +62,6 @@ function Header() {
   const [notificationCounter, setNotificationCounter] = useState(0);
   const [notifications, setNotifications] = useState([]);
   const [queueLength, setQueueLength] = useState();
-  const [showMobileAppDownload, setShowMobileAppDownload] = useState(true);
   const [showNotificationDropdown, setShowNotificationDropdown] =
     useState(false);
   const [starterModal, setStarterModal] = useState<string | boolean>(false);
@@ -143,14 +140,14 @@ function Header() {
 
   return (
     <HandleOutsideClick
-      className="sticky top-0 relative column x-fill full-center bg-white border-top large active shadow-2"
+      className="sticky top-0 relative flex flex-col w-full full-center bg-white border-top large active shadow-2"
       close={() => {
         setAccountSectionActive(false);
         setMobileHeaderActive(false);
       }}
       style={{ zIndex: 10 }}
     >
-      <Container className="x-fill align-center justify-between border-bottom py8 px16">
+      <div className="w-full items-center justify-between border-bottom py8 px16">
         <Link href="/">
           <img
             alt="Go Home"
@@ -160,7 +157,7 @@ function Header() {
             style={{ height: "50px", width: "50px" }}
           />
         </Link>
-        <Container>
+        <div>
           {user && (
             <Link className="relative mr16" href="/notifications">
               <FontAwesomeIcon
@@ -190,7 +187,7 @@ function Header() {
             </Link>
           )}
 
-          <Container className="full-center border-all active pa8 br4">
+          <div className="full-center border-all active pa8 br4">
             <FontAwesomeIcon
               className="blue"
               icon={faBars}
@@ -199,32 +196,10 @@ function Header() {
                 setAccountSectionActive(false);
               }}
             />
-          </Container>
-        </Container>
-      </Container>
-      {showMobileAppDownload && (
-        <Container className="full-center border-top gap8 pa8">
-          <a
-            className="button-4"
-            href={
-              getMobileOperatingSystem() === "ios"
-                ? "https://apps.apple.com/us/app/vent-with-strangers/id1509120090"
-                : "https://play.google.com/store/apps/details?id=com.commontech.ventwithstrangers"
-            }
-            rel="noreferrer"
-            target="_blank"
-          >
-            <h4 className="tac">
-              Download the <span className="blue">Mobile App</span>
-            </h4>
-          </a>
-          <FontAwesomeIcon
-            className="button-9"
-            icon={faTimes}
-            onClick={() => setShowMobileAppDownload(false)}
-          />
-        </Container>
-      )}
+          </div>
+        </div>
+      </div>
+
       {(mobileHeaderActive || pathname.substring(0, 7) === "/search") && (
         <Space align="center" className="bg-grey-4 py4 px8 my8 br4">
           <FontAwesomeIcon
@@ -249,14 +224,14 @@ function Header() {
       {mobileHeaderActive && (
         <Space
           align="center"
-          className="mobile-header ov-auto shadow-2 pa16"
+          className="mobile-header overflow-auto shadow-2 pa16"
           direction="vertical"
           onClick={() => setMobileHeaderActive(false)}
           size="large"
           style={{ maxHeight: "70vh" }}
         >
           {user && (
-            <Container className="align-center column">
+            <div className="items-center column">
               <Space
                 align="center"
                 onClick={(e) => {
@@ -323,7 +298,7 @@ function Header() {
                     <p className="ic">Settings</p>
                   </Link>
                   <p
-                    className="tac fs-14"
+                    className="text-center fs-14"
                     onClick={() => {
                       signOut2(user.uid);
                     }}
@@ -333,7 +308,7 @@ function Header() {
                   </p>
                 </Space>
               )}
-            </Container>
+            </div>
           )}
 
           <Space align="center" direction="vertical" size="middle">
@@ -464,7 +439,7 @@ function Header() {
         </Space>
       )}
       {user && isUserInQueue && (
-        <Container className="x-fill full-center bg-white border-top gap8 py8 px16">
+        <div className="w-full full-center bg-white border-top gap8 py8 px16">
           <p>You are in queue to chat with a stranger</p>
           <Button
             onClick={() => leaveQueue(user.uid)}
@@ -473,11 +448,13 @@ function Header() {
           >
             Leave Queue
           </Button>
-        </Container>
+        </div>
       )}
       {user && !user.emailVerified && (
-        <Container className="x-fill full-center bg-blue-2">
-          <h4 className="tac mr16">Please verify your email address!</h4>
+        <div className="w-full full-center bg-blue-2">
+          <h4 className="text-center mr16">
+            Please verify your email address!
+          </h4>
           <button
             className="button-2 no-bold py8 px16 my16 br8"
             onClick={() => {
@@ -493,7 +470,7 @@ function Header() {
           >
             Re-send verification link
           </button>
-        </Container>
+        </div>
       )}
       {starterModal && (
         <StarterModal

@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import KarmaBadge from "../../components/views/KarmaBadge";
 import SubscribeColumn from "../../components/SubscribeColumn";
-import Container from "@/components/containers/Container/Container";
 import Page from "@/components/containers/Page/Page";
 import Link from "next/link";
 import {
@@ -20,19 +19,19 @@ function AboutUsPage() {
 
   return (
     <Page className="pa16">
-      <Container>
-        <Container className="flex-fill column bg-white br8 gap16 pa32">
-          <Container className="column gap8">
-            <h1 className="tac">Vent Online With People Who Care</h1>
-            <p className="tac fw-400 mb16">
+      <div>
+        <div className="grow flex flex-col bg-white br8 gap16 pa32">
+          <div className="flex flex-col gap8">
+            <h1 className="text-center">Vent Online With People Who Care</h1>
+            <p className="text-center fw-400 mb16">
               People care and help is here. Vent and chat anonymously to be a
               part of a community committed to making the world a better place.
               This is a website for people that want to be heard and people that
               want to listen. Your mental health is our priority.
             </p>
-          </Container>
+          </div>
 
-          <Container className="column gap8">
+          <div className="flex flex-col gap8">
             <Link href="/quote-contest">
               <h4>Daily Feel Good Quote Contest</h4>
             </Link>
@@ -41,9 +40,9 @@ function AboutUsPage() {
               contest will be show cased for the following day. Submit your
               quote to potentially win.
             </p>
-          </Container>
+          </div>
 
-          <Container className="column gap8">
+          <div className="flex flex-col gap8">
             <h4>What the Heck are Karma Points?</h4>
             <p>
               Karma Points are gained when your vent or comment gets upvoted or
@@ -53,13 +52,15 @@ function AboutUsPage() {
               </Link>
               . Karma points will be lost if you are reported.
             </p>
-          </Container>
+          </div>
 
-          <Container className="column">
-            <h4 className="tac">With Great Power Comes Great Responsibility</h4>
-            <Container className="column gap8">
-              <p className="tac">Click on a badge to learn more :)</p>
-              <Container className="x-fill full-center wrap gap16">
+          <div className="flex flex-col">
+            <h4 className="text-center">
+              With Great Power Comes Great Responsibility
+            </h4>
+            <div className="flex flex-col gap8">
+              <p className="text-center">Click on a badge to learn more :)</p>
+              <div className="w-full full-center wrap gap16">
                 <KarmaBadge
                   onClick={() => setActiveBadge(0)}
                   userBasicInfo={{ karma: 50 }}
@@ -92,8 +93,8 @@ function AboutUsPage() {
                   onClick={() => setActiveBadge(7)}
                   userBasicInfo={{ karma: 10000 }}
                 />
-              </Container>
-              <Container className="column x-fill full-center pb16">
+              </div>
+              <div className="flex flex-col w-full full-center pb16">
                 <h6>{badgeDescriptions[activeBadge].title}</h6>
                 <ul>
                   {badgeDescriptions[activeBadge].benefits.map(
@@ -102,14 +103,14 @@ function AboutUsPage() {
                     )
                   )}
                 </ul>
-              </Container>
-            </Container>
-          </Container>
+              </div>
+            </div>
+          </div>
 
-          <Container className="column gap8">
+          <div className="flex flex-col gap8">
             <h4>What Can You Do on VWS?</h4>
             <ul className="pl64">
-              <Container className="column gap8">
+              <div className="flex flex-col gap8">
                 <li>Chat anonymously with strangers</li>
                 <li>
                   <Link
@@ -125,14 +126,14 @@ function AboutUsPage() {
                   username
                 </li>
                 <li>Earn Karma Points</li>
-              </Container>
+              </div>
             </ul>
-          </Container>
+          </div>
 
-          <Container className="column gap8">
+          <div className="flex flex-col gap8">
             <h4>How Do You Gain Karma Points?</h4>
             <ul className="pl64">
-              <Container className="column gap8">
+              <div className="flex flex-col gap8">
                 <li>
                   <span className="green">+4</span> For an upvote on your
                   comment
@@ -150,20 +151,20 @@ function AboutUsPage() {
                   <span className="red">- 30</span> When you get reported (for a
                   valid reason)
                 </li>
-              </Container>
+              </div>
             </ul>
-          </Container>
+          </div>
 
-          <Container className="column gap8">
+          <div className="flex flex-col gap8">
             <h4>If you have any issues please email us at</h4>
             <p>
               <a className="blue" href="mailto:ventwithstrangers@gmail.com">
                 ventwithstrangers@gmail.com
               </a>
             </p>
-          </Container>
+          </div>
 
-          <Container className="column gap8">
+          <div className="flex flex-col gap8">
             <h4>Where Else Can You Access VWS?</h4>
             <ul className="pl64">
               <li>
@@ -183,9 +184,9 @@ function AboutUsPage() {
                 </a>
               </li>
             </ul>
-          </Container>
+          </div>
           <h6 className="bold">Follow Us on Social Media!</h6>
-          <Container className="gap16">
+          <div className="gap16">
             <a
               className="button-4 fs-20 pb4"
               href="https://blog.ventwithstrangers.com"
@@ -236,10 +237,10 @@ function AboutUsPage() {
                 }}
               />
             </a>
-          </Container>
-        </Container>
+          </div>
+        </div>
         <SubscribeColumn slot="1935732380" />
-      </Container>
+      </div>
     </Page>
   );
 }

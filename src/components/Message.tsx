@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { urlify } from "../util";
 import { deleteMessage } from "../app/conversations/util";
 import UserBasicInfo from "@/types/UserBasicInfo";
-import Container from "./containers/Container/Container";
 import {
   faExclamationTriangle,
   faTrash,
@@ -42,7 +41,7 @@ function Message({
 
   if (message.is_notice)
     return (
-      <Container className="x-fill">
+      <div className="w-full">
         {urlify(message.body).map((obj, index) => {
           return (
             <p className="grey-11 py8" key={index}>
@@ -50,22 +49,22 @@ function Message({
             </p>
           );
         })}
-      </Container>
+      </div>
     );
   else
     return (
-      <Container className="x-fill">
-        <Container
+      <div className="w-full">
+        <div
           className={
             "br4 " + (message.userID === userID ? "bg-blue" : "bg-blue-1")
           }
           style={{ maxWidth: "80%" }}
         >
-          <Container className="column flex-fill px16 py8">
+          <div className="flex flex-col grow px16 py8">
             {message.userID !== userID &&
               shouldShowDisplayName &&
               displayName && <p className="orange">{displayName}</p>}
-            <div className="flex-fill description ">
+            <div className="grow description ">
               {urlify(message.body).map((obj, index) => {
                 return (
                   <p
@@ -80,10 +79,10 @@ function Message({
                 );
               })}
             </div>
-          </Container>
-          <Container className="relative br4">
-            <Container
-              className="clickable align-end pr2"
+          </div>
+          <div className="relative br4">
+            <div
+              className="clickable items-end pr2"
               onClick={() => {
                 setMessageOptions(!messageOptions);
               }}
@@ -97,15 +96,15 @@ function Message({
               >
                 {dayjs(message.server_timestamp).format("h:mm A")}
               </p>
-            </Container>
+            </div>
             {messageOptions && (
               <div
                 className="absolute top-100 left-0 pt4"
                 style={{ zIndex: 1 }}
               >
-                <Container className="column x-fill bg-white border-all px16 py8 br8">
-                  <Container
-                    className="button-8 clickable align-center"
+                <div className="flex flex-col w-full bg-white border-all px16 py8 br8">
+                  <div
+                    className="button-8 clickable items-center"
                     onClick={(e: any) => {
                       e.preventDefault();
                       if (message.userID === userID) {
@@ -116,7 +115,7 @@ function Message({
                       }
                     }}
                   >
-                    <p className="flex-fill">
+                    <p className="grow">
                       {message.userID === userID
                         ? "Delete Message"
                         : "Report Message"}
@@ -129,12 +128,12 @@ function Message({
                           : faExclamationTriangle
                       }
                     />
-                  </Container>
-                </Container>
+                  </div>
+                </div>
               </div>
             )}
-          </Container>
-        </Container>
+          </div>
+        </div>
         {deleteMessageConfirm && (
           <ConfirmAlertModal
             close={() => setDeleteMessageConfirm(false)}
@@ -145,7 +144,7 @@ function Message({
             title="Delete Message"
           />
         )}
-      </Container>
+      </div>
     );
 }
 

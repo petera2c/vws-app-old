@@ -7,8 +7,7 @@ import { Button, Dropdown } from "antd";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import CommentType from "../../types/Comment";
-import Container from "../containers/Container/Container";
+import CommentType from "../../types/CommentType";
 import KarmaBadge from "../views/KarmaBadge";
 import LoadingHeart from "../views/loaders/Heart";
 import Options from "../Options";
@@ -53,7 +52,7 @@ dayjs.extend(relativeTime);
 
 const SmartLink = ({ children, className, disablePostOnClick, to }: any) => {
   if (disablePostOnClick || !to) {
-    return <Container className={className}>{children}</Container>;
+    return <div className={className}>{children}</div>;
   } else {
     return (
       <Link className={className} href={to}>
@@ -177,33 +176,33 @@ function Vent({
 
   if ((!vent || (vent && !vent.server_timestamp)) && isOnSingleVentPage)
     return (
-      <Container className="x-fill full-center">
+      <div className="w-full full-center">
         <LoadingHeart />
-      </Container>
+      </div>
     );
 
   if (isContentBlocked) return <div />;
 
   return (
-    <Container className="x-fill">
+    <div className="w-full">
       {vent && (
-        <Container className="x-fill column bg-white pt16 br8">
-          <Container
-            className={`column border-bottom gap8 py16 px32 ${
+        <div className="w-full flex flex-col bg-white pt16 br8">
+          <div
+            className={`flex flex-col border-bottom gap8 py16 px32 ${
               disablePostOnClick ? "" : "clickable"
             }`}
             onClick={() => {
               if (!disablePostOnClick) router.push(partialLink);
             }}
           >
-            <Container className="flex x-fill align-center gap4">
+            <div className="flex w-full items-center gap4">
               <MakeAvatar
                 displayName={author?.displayName}
                 userBasicInfo={author}
               />
-              <Container className="flex-fill align-center ov-hidden gap4">
+              <div className="grow items-center overflow-hidden gap4">
                 <Link
-                  className="ov-hidden"
+                  className="overflow-hidden"
                   onClick={(e) => e.stopPropagation()}
                   href={"/profile?" + author?.id}
                 >
@@ -213,9 +212,9 @@ function Vent({
                 </Link>
                 {isUserOnline === "online" && <div className="online-dot" />}
                 <KarmaBadge userBasicInfo={author} />
-              </Container>
+              </div>
               {vent.is_birthday_post && (
-                <Container className="align-center gap8">
+                <div className="items-center gap8">
                   <FontAwesomeIcon
                     className="orange"
                     icon={faBirthdayCake}
@@ -226,7 +225,7 @@ function Vent({
                     icon={faBirthdayCake}
                     size="3x"
                   />
-                </Container>
+                </div>
               )}
               {user && (
                 <Options
@@ -249,19 +248,19 @@ function Vent({
                   userID={user.uid}
                 />
               )}
-            </Container>
+            </div>
 
             {vent.new_tags && vent.new_tags.length > 0 && (
-              <Container className="wrap gap8">
+              <div className="wrap gap8">
                 {vent.new_tags.map((tag: string, index: number) => (
                   <Tag key={index} tag={tag} />
                 ))}
-              </Container>
+              </div>
             )}
-          </Container>
+          </div>
           <SmartLink
             className={
-              "main-container column border-bottom py16 px32 " +
+              "main-container flex flex-col border-bottom py16 px32 " +
               (disablePostOnClick ? "" : "clickable")
             }
             disablePostOnClick={disablePostOnClick}
@@ -279,16 +278,16 @@ function Vent({
             >
               {ventPreview}
             </p>
-            <Container className="x-fill align-center justify-end">
+            <div className="w-full items-center justify-end">
               <FontAwesomeIcon className="grey-5 mr8" icon={faClock} />
               <p className="grey-5 fs-16">
                 {dayjs(vent.server_timestamp).fromNow()}
               </p>
-            </Container>
+            </div>
           </SmartLink>
 
           {!searchPreviewMode && (
-            <Container
+            <div
               className={
                 "relative justify-between wrap py16 px32 gap8 " +
                 (!searchPreviewMode && displayCommentField
@@ -296,8 +295,8 @@ function Vent({
                   : "")
               }
             >
-              <Container className="align-center gap16">
-                <Container className="align-center gap4">
+              <div className="items-center gap16">
+                <div className="items-center gap4">
                   <img
                     alt="Support"
                     className={`clickable heart ${hasLiked ? "red" : "grey-5"}`}
@@ -326,10 +325,10 @@ function Vent({
                   <p className="grey-5">
                     {vent.like_counter ? vent.like_counter : 0}
                   </p>
-                </Container>
+                </div>
 
                 <SmartLink
-                  className="flex align-center gap4"
+                  className="flex items-center gap4"
                   disablePostOnClick={disablePostOnClick}
                   href={vent && vent.title && vent.id ? partialLink : ""}
                 >
@@ -346,10 +345,10 @@ function Vent({
                     {vent.comment_counter ? vent.comment_counter : 0}
                   </p>
                 </SmartLink>
-              </Container>
+              </div>
 
               {(!user || (user && user.uid !== vent.userID && author?.id)) && (
-                <Container
+                <div
                   className="button-2 wrap px16 py8 br8"
                   onClick={() => {
                     if (signUpProgressFunction) return signUpProgressFunction();
@@ -361,18 +360,18 @@ function Vent({
                   <p className="ic ellipsis">
                     Message {capitolizeFirstChar(author?.displayName)}
                   </p>
-                </Container>
+                </div>
               )}
-            </Container>
+            </div>
           )}
 
           {!searchPreviewMode && displayCommentField && comments && (
-            <Container className="column gap16">
+            <div className="flex flex-col gap16">
               {vent.comment_counter > 0 && (
-                <Container className="border-bottom px32 py16">
+                <div className="border-bottom px32 py16">
                   <Dropdown
                     overlay={
-                      <Container className="column bg-white shadow-2 pa8 br8">
+                      <div className="flex flex-col bg-white shadow-2 pa8 br8">
                         <p
                           className="button-4 py8"
                           onClick={() => {
@@ -427,16 +426,16 @@ function Vent({
                         >
                           Last
                         </p>
-                      </Container>
+                      </div>
                     }
                     trigger={["click"]}
                   >
                     <button className="blue">Sort By: {activeSort}</button>
                   </Dropdown>
-                </Container>
+                </div>
               )}
               {comments && comments.length > 0 && (
-                <Container className="column px32 pb16">
+                <div className="flex flex-col px32 pb16">
                   {comments.map((comment: CommentType, index) => {
                     return (
                       <Comment
@@ -468,25 +467,25 @@ function Vent({
                       Load More Comments
                     </button>
                   )}
-                </Container>
+                </div>
               )}
               {vent.comment_counter === 0 &&
                 (!comments || (comments && comments.length === 0)) && (
-                  <p className="tac px32 py16">
+                  <p className="text-center px32 py16">
                     There are no comments yet. Please help this person :)
                   </p>
                 )}
-            </Container>
+            </div>
           )}
           {displayCommentField && !comments && (
-            <Container className="x-fill full-center">
+            <div className="w-full full-center">
               <LoadingHeart />
-            </Container>
+            </div>
           )}
 
           {!searchPreviewMode && displayCommentField && (
-            <Container
-              className="sticky column x-fill bg-white border-top shadow-2 br8 pa16"
+            <div
+              className="sticky flex flex-col w-full bg-white border-top shadow-2 br8 pa16"
               style={{ bottom: 0 }}
             >
               {isUserAccountNewLocal && (
@@ -496,8 +495,8 @@ function Vent({
                   </Button>
                 </Link>
               )}
-              <Container className="flex-fill align-center gap8">
-                {/* <Container className="relative column flex-fill">
+              <div className="grow items-center gap8">
+                {/* <div className="relative flex flex-col grow">
                   <MentionsInput
                     className="mentions"
                     onChange={(e) => {
@@ -527,24 +526,24 @@ function Vent({
                       markup="@[__display__](__id__)"
                       renderSuggestion={(entry) => {
                         return (
-                          <Container className="flex-fill align-center pa8 gap8">
+                          <div className="grow items-center pa8 gap8">
                             <MakeAvatar
                               displayName={entry.displayName}
                               userBasicInfo={entry}
                             />
-                            <Container className="button-7">
+                            <div className="button-7">
                               <h5 className="ellipsis fw-400 mr8">
                                 {capitolizeFirstChar(entry.displayName)}
                               </h5>
-                            </Container>
+                            </div>
                             <KarmaBadge userBasicInfo={entry} noOnClick />
-                          </Container>
+                          </div>
                         );
                       }}
                       trigger="@"
                     />
                   </MentionsInput> 
-                </Container>
+                </div>
                 */}
                 <Button
                   onClick={async () => {
@@ -560,10 +559,10 @@ function Vent({
                 >
                   Send
                 </Button>
-              </Container>
-            </Container>
+              </div>
+            </div>
           )}
-        </Container>
+        </div>
       )}
 
       {starterModal && (
@@ -572,7 +571,7 @@ function Vent({
           setActiveModal={setStarterModal}
         />
       )}
-    </Container>
+    </div>
   );
 }
 

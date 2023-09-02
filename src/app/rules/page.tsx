@@ -4,22 +4,21 @@ import { Space } from "antd";
 
 import SubscribeColumn from "../../components/SubscribeColumn";
 import Page from "@/components/containers/Page/Page";
-import Container from "@/components/containers/Container/Container";
 
 function RulesPage() {
   return (
     <Page className="pa16">
-      <Container>
+      <div>
         <Space
-          className="flex-fill align-center bg-white pa32 br8"
+          className="grow items-center bg-white pa32 br8"
           direction="vertical"
           size="large"
         >
-          <h1 className="tac">VWS Rules</h1>
+          <h1 className="text-center">VWS Rules</h1>
 
           <ol>
             <Space direction="vertical" size="large">
-              <h4 className="tac">
+              <h4 className="text-center">
                 Failing to follow any of these rules will cause you to be
                 permanently banned without warning.
               </h4>
@@ -47,7 +46,7 @@ function RulesPage() {
           </ol>
         </Space>
         <SubscribeColumn slot="5139839598" />
-      </Container>
+      </div>
     </Page>
   );
 }

@@ -4,7 +4,6 @@ import { message, Space, Tooltip } from "antd";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import Container from "../containers/Container/Container";
 import HandleOutsideClick from "../containers/HandleOutsideClick/HandleOutsideClick";
 import StarterModal from "../modals/Starter";
 
@@ -111,34 +110,34 @@ function NewVentComponent({ isBirthdayPost, miniVersion, ventID }: any) {
 
   return (
     <HandleOutsideClick
-      className="x-fill column bg-white br8"
+      className="w-full flex flex-col bg-white br8"
       close={() => {
         if (miniVersion) setIsMinified(true);
       }}
     >
-      <Container
-        className={"column br4 pa32 " + (isMinified ? "gap8" : "gap16")}
+      <div
+        className={"flex flex-col br4 pa32 " + (isMinified ? "gap8" : "gap16")}
       >
         {!miniVersion && quote && (
-          <Container className="column flex-fill align-center">
-            <h1 className="fs-22 italic tac">"{quote.value}"</h1>
+          <div className="flex flex-col grow items-center">
+            <h1 className="fs-22 italic text-center">"{quote.value}"</h1>
             <Link href={"/profile?" + quote.userID}>
-              <p className="button-8 tac lh-1">
+              <p className="button-8 text-center lh-1">
                 - {capitolizeFirstChar(quote.displayName)}
               </p>
             </Link>
-          </Container>
+          </div>
         )}
         {!miniVersion && userVentTimeOut > 0 && !ventID && (
           <Space direction="vertical">
-            <p className="tac">
+            <p className="text-center">
               To avoid spam, people can only post once every few hours. With
               more Karma Points you can post more often. Please come back in
             </p>
-            <h1 className="tac">{userVentTimeOutFormatted}</h1>
+            <h1 className="text-center">{userVentTimeOutFormatted}</h1>
           </Space>
         )}
-        <Container className="align-center gap8">
+        <div className="flex items-center gap8">
           {(!isMobileOrTablet || (isMobileOrTablet && isMinified)) && (
             <Link href="/avatar">
               <MakeAvatar
@@ -148,7 +147,7 @@ function NewVentComponent({ isBirthdayPost, miniVersion, ventID }: any) {
             </Link>
           )}
           <TextArea
-            className="x-fill py8 px16 br4"
+            className="w-full py8 px16 br4"
             onChange={(event) => {
               // if (postingDisableFunction) return postingDisableFunction();
 
@@ -177,12 +176,12 @@ function NewVentComponent({ isBirthdayPost, miniVersion, ventID }: any) {
               }}
             />
           )}
-        </Container>
+        </div>
         {!isMinified && (
-          <Space className="x-fill" direction="vertical">
+          <Space className="w-full" direction="vertical">
             <h5 className="fw-400">Title</h5>
             <input
-              className="x-fill py8 px16 br4"
+              className="w-full py8 px16 br4"
               onChange={(e) => {
                 if (postingDisableFunction) return postingDisableFunction();
 
@@ -209,10 +208,10 @@ function NewVentComponent({ isBirthdayPost, miniVersion, ventID }: any) {
           </Space>
         )}
         {!isMinified && (
-          <Space className="x-fill" direction="vertical">
+          <Space className="w-full" direction="vertical">
             <h5 className="fw-400">Tag this vent</h5>
             <input
-              className="x-fill py8 px16 br4"
+              className="w-full py8 px16 br4"
               onChange={(e) => {
                 if (postingDisableFunction) return postingDisableFunction();
 
@@ -227,7 +226,7 @@ function NewVentComponent({ isBirthdayPost, miniVersion, ventID }: any) {
               value={tagText}
             />
             {searchedVentTags && searchedVentTags.length > 0 && (
-              <Container className="wrap gap8">
+              <div className="wrap gap8">
                 {searchedVentTags.map((tagHit: any) => (
                   <Tag
                     key={tagHit.id}
@@ -237,14 +236,14 @@ function NewVentComponent({ isBirthdayPost, miniVersion, ventID }: any) {
                     tags={tags}
                   />
                 ))}
-              </Container>
+              </div>
             )}
           </Space>
         )}
         {!isMinified && tags && tags.length > 0 && (
-          <Container className="column gap8">
+          <div className="flex flex-col gap8">
             <h5>Selected Tags</h5>
-            <Container className="x-fill wrap gap8">
+            <div className="w-full wrap gap8">
               {tags.map((tag: Tag, index) => (
                 <SelectedTag
                   postingDisableFunction={postingDisableFunction}
@@ -255,12 +254,12 @@ function NewVentComponent({ isBirthdayPost, miniVersion, ventID }: any) {
                   tags={tags}
                 />
               ))}
-            </Container>
-          </Container>
+            </div>
+          </div>
         )}
 
         {!isMinified && (
-          <Container className="justify-end">
+          <div className="justify-end">
             {!saving && (
               <button
                 className="bg-blue white px64 py8 br4"
@@ -305,25 +304,25 @@ function NewVentComponent({ isBirthdayPost, miniVersion, ventID }: any) {
                 Submit
               </button>
             )}
-          </Container>
+          </div>
         )}
         {isMinified && quote && (
-          <Container className="flex-fill full-center">
-            <Container className="column flex-fill align-center">
+          <div className="grow full-center">
+            <div className="flex flex-col grow items-center">
               <h1
                 className={
-                  "fs-18 no-bold grey-1 italic tac " +
-                  (getIsMobileOrTablet() ? "flex-fill" : "container medium")
+                  "fs-18 no-bold grey-1 italic text-center " +
+                  (getIsMobileOrTablet() ? "grow" : "container medium")
                 }
               >
                 {quote.value}
               </h1>
               <Link href={"/profile?" + quote.userID}>
-                <p className="blue tac lh-1">
+                <p className="blue text-center lh-1">
                   - {capitolizeFirstChar(quote.displayName)}
                 </p>
               </Link>
-            </Container>
+            </div>
             <Tooltip
               placement="bottom"
               title="Win the Feel Good Quote Contest to have your quote featured here :)"
@@ -332,19 +331,19 @@ function NewVentComponent({ isBirthdayPost, miniVersion, ventID }: any) {
                 <FontAwesomeIcon icon={faQuestionCircle} />
               </Link>
             </Tooltip>
-          </Container>
+          </div>
         )}
-      </Container>
+      </div>
       {!miniVersion && (
-        <Container
-          className="column pa32"
+        <div
+          className="flex flex-col pa32"
           style={{ borderTop: "2px solid var(--grey-color-2)" }}
         >
           <p>
             If you or someone you know is in danger, call your local emergency
             services or police.
           </p>
-        </Container>
+        </div>
       )}
       {starterModal && (
         <StarterModal
@@ -378,7 +377,7 @@ function SelectedTag({
   tags: any;
 }) {
   return (
-    <Container
+    <div
       className="button-2 br4 gap8 pa8"
       onClick={() => {
         if (postingDisableFunction) return postingDisableFunction();
@@ -388,10 +387,10 @@ function SelectedTag({
         setTags(temp);
       }}
     >
-      <p className="ic flex-fill">{viewTagFunction(tag.id)}</p>
+      <p className="ic grow">{viewTagFunction(tag.id)}</p>
 
       <FontAwesomeIcon icon={faTimes} />
-    </Container>
+    </div>
   );
 }
 

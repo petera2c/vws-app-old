@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Space } from "antd";
 
-import { faComet } from "@fortawesome/pro-duotone-svg-icons/faComet";
-import { faMeteor } from "@fortawesome/pro-duotone-svg-icons/faMeteor";
-import { faStarShooting } from "@fortawesome/pro-duotone-svg-icons/faStarShooting";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import Container from "../../containers/Container/Container";
 import { getIsMobileOrTablet } from "../../../util";
+import {
+  faMeteor,
+  faSailboat,
+  faStar,
+} from "@fortawesome/free-solid-svg-icons";
 
-function NewRewardModal({ close, newReward }) {
+function NewRewardModal({ close, newReward }: { close: any; newReward: any }) {
   const [isMobileOrTablet, setIsMobileOrTablet] = useState<boolean>();
   const [canClose, setCanClose] = useState(false);
 
@@ -20,33 +21,35 @@ function NewRewardModal({ close, newReward }) {
   }, []);
 
   return (
-    <Container
+    <div
       className="modal-container full-center"
       onClick={() => {
         if (canClose) close();
       }}
     >
-      <Container
+      <div
         className={
-          "modal column align-center ov-auto bg-white pa32 br8 " +
+          "modal flex flex-col items-center overflow-auto bg-white pa32 br8 " +
           (isMobileOrTablet ? "mx8" : "container medium")
         }
       >
-        <Space className="column x-fill" size="large">
-          <Container className="column">
-            <h1 className="blue tac">Congratulations!</h1>
-            <h4 className="tac">{newReward.title}</h4>
-            <p className="blue tac">+ {newReward.karma_gained} Karma Points</p>
-          </Container>
+        <Space className="flex flex-col w-full" size="large">
+          <div className="flex flex-col">
+            <h1 className="blue text-center">Congratulations!</h1>
+            <h4 className="text-center">{newReward.title}</h4>
+            <p className="blue text-center">
+              + {newReward.karma_gained} Karma Points
+            </p>
+          </div>
           <Space>
-            <FontAwesomeIcon className="blue" icon={faComet} size="5x" />
+            <FontAwesomeIcon className="blue" icon={faSailboat} size="5x" />
             <FontAwesomeIcon className="blue" icon={faMeteor} size="5x" />
-            <FontAwesomeIcon className="blue" icon={faStarShooting} size="5x" />
+            <FontAwesomeIcon className="blue" icon={faStar} size="5x" />
           </Space>
         </Space>
-      </Container>
-      <Container className="modal-background" />
-    </Container>
+      </div>
+      <div className="modal-background" />
+    </div>
   );
 }
 

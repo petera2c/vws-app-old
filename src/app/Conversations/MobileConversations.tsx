@@ -16,7 +16,6 @@ import {
 } from "./util";
 import ConversationType from "@/types/ConversationType";
 import Page from "@/components/containers/Page/Page";
-import Container from "@/components/containers/Container/Container";
 import Link from "next/link";
 
 function MobileConversations() {
@@ -59,13 +58,13 @@ function MobileConversations() {
 
   return (
     <Page className="bg-blue-2">
-      <Container
-        className="flex-fill column ov-auto bg-white pa8 br4"
+      <div
+        className="grow flex flex-col overflow-auto bg-white pa8 br4"
         style={{ display: activeConversation ? "none" : "flex" }}
       >
         {conversations.length === 0 && (
           <Link className="" href="/people-online">
-            <h1 className="button-1 grey-1 tac">
+            <h1 className="button-1 grey-1 text-center">
               <span className="blue">Start</span> a conversation with someone!
             </h1>
           </Link>
@@ -108,12 +107,12 @@ function MobileConversations() {
             Load More Conversations
           </button>
         )}
-      </Container>
+      </div>
       {activeConversation && (
-        <Container className="container mobile-full column ov-hidden flex-fill bg-white">
+        <div className="container mobile-full flex flex-col overflow-hidden grow bg-white">
           {!activeConversation && user && user.emailVerified && (
-            <Link className="grey-1 tac pa32" href="/people-online">
-              <h4 className="tac">
+            <Link className="grey-1 text-center pa32" href="/people-online">
+              <h4 className="text-center">
                 Check your messages from friends on Vent With Strangers,{" "}
               </h4>
               <h1 className="blue">See Who is Online :)</h1>
@@ -121,7 +120,7 @@ function MobileConversations() {
           )}
           {(!user || (user && !user.emailVerified)) && (
             <h4
-              className="button-1 grey-1 tac pa32"
+              className="button-1 grey-1 text-center pa32"
               onClick={() => {
                 if (!user) setStarterModal(true);
                 else {
@@ -152,7 +151,7 @@ function MobileConversations() {
                 userID={user.uid}
               />
             )}
-        </Container>
+        </div>
       )}
       {starterModal && (
         <StarterModal

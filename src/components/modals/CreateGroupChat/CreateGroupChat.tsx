@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { off } from "@firebase/database";
 import { Divider, message } from "antd";
 
-import Container from "../../containers/Container/Container";
 import KarmaBadge from "../../views/KarmaBadge";
 
 import { UserContext } from "../../../context";
@@ -50,18 +49,18 @@ function GroupChatCreateModal({ close, groupChatEditting }: any) {
     (groupChatEditting && groupChatEditting.group_owner === userBasicInfo?.id);
 
   return (
-    <Container className="modal-container full-center normal-cursor">
-      <Container className="modal container large column bg-white br4">
-        <Container className="x-fill justify-center bg-grey-10 py16">
-          <h4 className="grey-11 tac">
+    <div className="modal-container full-center normal-cursor">
+      <div className="modal container large flex flex-col bg-white br4">
+        <div className="w-full justify-center bg-grey-10 py16">
+          <h4 className="grey-11 text-center">
             {groupChatEditting
               ? groupChatEditting.chat_name
               : "Create New Group Chat"}
           </h4>
-        </Container>
-        <Container className="column flex-fill ov-auto py16 px32">
+        </div>
+        <div className="flex flex-col grow overflow-auto py16 px32">
           {existingUsers && existingUsers.length > 0 && (
-            <Container className="column gap16">
+            <div className="flex flex-col gap16">
               <h4>Users In Chat</h4>
               {existingUsers.map((user) => {
                 return (
@@ -74,14 +73,14 @@ function GroupChatCreateModal({ close, groupChatEditting }: any) {
                   />
                 );
               })}
-            </Container>
+            </div>
           )}
 
           {groupChatEditting &&
             groupChatEditting.group_owner === userBasicInfo?.id && <Divider />}
 
           {isNewGroupChatOrOwner && (
-            <Container className="column gap16">
+            <div className="flex flex-col gap16">
               <h4>Change Chat Name or Add Users</h4>
               <input
                 className="fs-22 br4 pa8"
@@ -107,9 +106,9 @@ function GroupChatCreateModal({ close, groupChatEditting }: any) {
                 value={userSearchString}
               /> */}
               {/* {hits.length > 0 && (
-                <Container className="column gap16">
+                <div className="flex flex-col gap16">
                   <h4>Search Results</h4>
-                  <Container className="wrap gap8">
+                  <div className="wrap gap8">
                     {hits.map((hit) => {
                       if (
                         users.find((user) => user.id === hit.objectID) ||
@@ -131,14 +130,14 @@ function GroupChatCreateModal({ close, groupChatEditting }: any) {
                           />
                         );
                     })}
-                  </Container>
-                </Container>
+                  </div>
+                </div>
               )} */}
               {/* {users.length > 0 && (
-                <Container className="column gap16">
+                <div className="flex flex-col gap16">
                   <h4>Selected People</h4>
-                  <Container
-                    className="align-start wrap gap8"
+                  <div
+                    className="items-start wrap gap8"
                     style={{ maxHeight: "100px" }}
                   >
                     {users.map((user:any) => {
@@ -164,19 +163,19 @@ function GroupChatCreateModal({ close, groupChatEditting }: any) {
                             });
                           }}
                         >
-                          <Container className="gap4">
+                          <div className="gap4">
                             <MakeAvatar
                               className=""
                               displayName={user.displayName}
                               size="small"
                               userBasicInfo={user}
                             />
-                            <Container className="full-center flex-fill ov-hidden ic">
+                            <div className="full-center grow overflow-hidden ic">
                               <h5 className="ic ellipsis fw-400 grey-11">
                                 {user.displayName}
                               </h5>
-                            </Container>
-                          </Container>
+                            </div>
+                          </div>
                           <KarmaBadge
                             noOnClick={true}
                             noTooltip={true}
@@ -186,14 +185,14 @@ function GroupChatCreateModal({ close, groupChatEditting }: any) {
                         </button>
                       );
                     })}
-                  </Container>
-                </Container>
+                  </div>
+                </div>
               )} */}
-            </Container>
+            </div>
           )}
-        </Container>
+        </div>
         {isNewGroupChatOrOwner && (
-          <Container className="full-center border-top pa16">
+          <div className="full-center border-top pa16">
             <button
               className="grey-1 border-all py8 px32 mx4 br4"
               onClick={() => close()}
@@ -215,11 +214,11 @@ function GroupChatCreateModal({ close, groupChatEditting }: any) {
             >
               Save
             </button>
-          </Container>
+          </div>
         )}
-      </Container>
-      <Container className="modal-background" onClick={close} />
-    </Container>
+      </div>
+      <div className="modal-background" onClick={close} />
+    </div>
   );
 }
 
@@ -234,8 +233,8 @@ function GroupChatCreateModal({ close, groupChatEditting }: any) {
 //   }, [hit, setUserBasicInfo]);
 
 //   return (
-//     <Container
-//       className="button-8 align-center gap8"
+//     <div
+//       className="button-8 items-center gap8"
 //       onClick={() => {
 //         setUsers((users) => {
 //           if (existingUsers.length + users.length >= GROUP_MAX) {
@@ -247,7 +246,7 @@ function GroupChatCreateModal({ close, groupChatEditting }: any) {
 //         });
 //       }}
 //     >
-//       <Container className="gap4">
+//       <div className="gap4">
 //         {userBasicInfo && (
 //           <MakeAvatar
 //             displayName={hit.displayName}
@@ -255,10 +254,10 @@ function GroupChatCreateModal({ close, groupChatEditting }: any) {
 //             userBasicInfo={userBasicInfo}
 //           />
 //         )}
-//         <Container className="full-center flex-fill ov-hidden ic">
+//         <div className="full-center grow overflow-hidden ic">
 //           <h5 className="ic ellipsis fw-400 grey-11">{hit.displayName}</h5>
-//         </Container>
-//       </Container>
+//         </div>
+//       </div>
 //       {userBasicInfo && (
 //         <KarmaBadge
 //           noOnClick={true}
@@ -266,7 +265,7 @@ function GroupChatCreateModal({ close, groupChatEditting }: any) {
 //           userBasicInfo={userBasicInfo}
 //         />
 //       )}
-//     </Container>
+//     </div>
 //   );
 // }
 
@@ -294,21 +293,21 @@ function DisplayExistingUser({
   }, [user]);
 
   return (
-    <Container className="align-center br4 gap8">
-      <Container className="align-center gap8">
+    <div className="items-center br4 gap8">
+      <div className="items-center gap8">
         <MakeAvatar
           displayName={user.displayName}
           size="small"
           userBasicInfo={user}
         />
         {/* <Link
-          className="full-center flex-fill ov-hidden ic gap4"
+          className="full-center grow overflow-hidden ic gap4"
           href={"/profile?" + user.id}
         >
           <h5 className="button-1 ellipsis grey-11">{user.displayName}</h5>
         </Link> */}
         {isUserOnline && <div className="online-dot" />}
-      </Container>
+      </div>
       <KarmaBadge noOnClick={true} noTooltip={true} userBasicInfo={user} />
       {groupChatEditting &&
         groupChatEditting.group_owner === userBasicInfo.id && (
@@ -330,7 +329,7 @@ function DisplayExistingUser({
             }}
           />
         )}
-    </Container>
+    </div>
   );
 }
 

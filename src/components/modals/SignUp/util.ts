@@ -14,10 +14,10 @@ import { displayNameErrors } from "../../../util";
 const cookies = new Cookies();
 
 export const signUp = (
-  { email, displayName, password, passwordConfirm },
-  navigate,
-  setActiveModal,
-  setUserBasicInfo
+  { email, displayName, password, passwordConfirm }: any,
+  navigate: any,
+  setActiveModal: any,
+  setUserBasicInfo: any
 ) => {
   if (displayNameErrors(displayName)) return;
 
@@ -30,7 +30,7 @@ export const signUp = (
     .then(async (res) => {
       if (res.user) {
         await setDoc(doc(db, "users_display_name", res.user.uid), {
-          server_timestamp: new dayjs(res.user.metadata.creationTime).valueOf(),
+          server_timestamp: dayjs(res.user.metadata.creationTime).valueOf(),
           displayName,
         });
 
@@ -68,7 +68,7 @@ export const signUp = (
         sendEmailVerification(res.user);
 
         setUserBasicInfo({
-          server_timestamp: new dayjs(res.user.metadata.creationTime).valueOf(),
+          server_timestamp: dayjs(res.user.metadata.creationTime).valueOf(),
           displayName,
         });
 

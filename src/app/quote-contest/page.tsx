@@ -32,7 +32,6 @@ import {
   saveQuote,
 } from "./util";
 import Page from "@/components/containers/Page/Page";
-import Container from "@/components/containers/Container/Container";
 import Quote from "@/types/Quote";
 import Link from "next/link";
 import {
@@ -77,22 +76,22 @@ function QuoteContestPage() {
 
   return (
     <Page className="pa16">
-      <Container className="gap8" style={{ height: "100%" }}>
-        <Container className="column flex-fill">
-          <Container className="column flex-fill ov-hidden bg-white br8">
-            <Container className="column flex-fill ov-auto gap8 pt8 px16">
-              <Container className="column border-bottom gap8 px16 pb16">
-                <h1 className="tac">Feel Good Quote Contest</h1>
-                <Container className="column gap4">
-                  <p className="tac">
+      <div className="gap8" style={{ height: "100%" }}>
+        <div className="flex flex-col grow">
+          <div className="flex flex-col grow overflow-hidden bg-white br8">
+            <div className="flex flex-col grow overflow-auto gap8 pt8 px16">
+              <div className="flex flex-col border-bottom gap8 px16 pb16">
+                <h1 className="text-center">Feel Good Quote Contest</h1>
+                <div className="flex flex-col gap4">
+                  <p className="text-center">
                     Every day we display a feel good quote. The winner from this
                     contest will be show cased for the following day
                   </p>
-                  <p className="tac lh-1">
+                  <p className="text-center lh-1">
                     Time left in contest: {formatSeconds(contestTimeLeft)}
                   </p>
-                </Container>
-              </Container>
+                </div>
+              </div>
               {quotes.map((quote: Quote, index) => {
                 return (
                   <Quote
@@ -118,16 +117,16 @@ function QuoteContestPage() {
                   Load More Quotes
                 </Button>
               )}
-            </Container>
+            </div>
 
-            <Container
+            <div
               className={
-                "x-fill shadow-2 gap8 pa16 " +
-                (isMobileOrTablet ? "column" : "align-center")
+                "w-full shadow-2 gap8 pa16 " +
+                (isMobileOrTablet ? "flex flex-col" : "items-center")
               }
             >
               <TextArea
-                className="flex-fill py8 px16 br4"
+                className="grow py8 px16 br4"
                 onChange={(event) => {
                   const userInteractionIssues = userSignUpProgress(user);
 
@@ -175,11 +174,11 @@ function QuoteContestPage() {
               >
                 Submit My Quote
               </Button>
-            </Container>
-          </Container>
-        </Container>
+            </div>
+          </div>
+        </div>
         <SubscribeColumn slot="1425588771" />
-      </Container>
+      </div>
       {starterModal && (
         <StarterModal
           activeModal={starterModal}
@@ -234,28 +233,28 @@ const Quote = ({
   if (isContentBlocked) return <div />;
 
   return (
-    <Container className={"py8 " + (isLast ? "" : "border-bottom")}>
-      <Container className="flex-fill align-center gap16">
+    <div className={"py8 " + (isLast ? "" : "border-bottom")}>
+      <div className="grow items-center gap16">
         <FontAwesomeIcon className="blue" icon={faQuoteLeft} size="3x" />
-        <Container className="column flex-fill align-center gap8">
-          <p className="italic tac">{quote.value}</p>
+        <div className="flex flex-col grow items-center gap8">
+          <p className="italic text-center">{quote.value}</p>
           <Link href={"/profile?" + quote.userID}>
-            <p className="blue tac">
+            <p className="blue text-center">
               - {capitolizeFirstChar(author?.displayName)}
             </p>
           </Link>
-        </Container>
-      </Container>
-      <Container className="gap8">
-        <Container className="align-end">
+        </div>
+      </div>
+      <div className="gap8">
+        <div className="items-end">
           <h4 className="grey-5" style={{ lineHeight: 1.1 }}>
             {quote.like_counter ? quote.like_counter : 0}
           </h4>
-        </Container>
+        </div>
 
-        <Container
+        <div
           className={
-            "column align-center gap4 " +
+            "flex flex-col items-center gap4 " +
             (user ? "justify-between " : "justify-end")
           }
         >
@@ -317,9 +316,9 @@ const Quote = ({
             }}
             size="2x"
           />
-        </Container>
-      </Container>
-    </Container>
+        </div>
+      </div>
+    </div>
   );
 };
 

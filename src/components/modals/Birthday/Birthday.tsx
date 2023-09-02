@@ -4,8 +4,6 @@ import { Button, Space } from "antd";
 import { faBirthdayCake } from "@fortawesome/free-solid-svg-icons/faBirthdayCake";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import Container from "../../containers/Container/Container";
-
 import { getIsMobileOrTablet } from "../../../util";
 import Link from "next/link";
 
@@ -22,25 +20,25 @@ function BirthdayModal({ close }: any) {
   }, []);
 
   return (
-    <Container
+    <div
       className="modal-container full-center"
       onClick={() => {
         if (canClose) close();
       }}
     >
-      <Container
+      <div
         className={
-          "modal column align-center ov-auto bg-white pa32 br8 " +
+          "modal flex flex-col items-center overflow-auto bg-white pa32 br8 " +
           (isMobileOrTablet ? "mx8" : "container medium")
         }
       >
-        <Space className="column x-fill" size="large">
-          <Container className="column">
-            <h1 className="blue tac">Happy Birthday!</h1>
-            <h4 className="tac">
+        <Space className="flex flex-col w-full" size="large">
+          <div className="flex flex-col">
+            <h1 className="blue text-center">Happy Birthday!</h1>
+            <h4 className="text-center">
               We are so happy to celebrate this special day with you!
             </h4>
-          </Container>
+          </div>
           <Link href="/birthday-post">
             <Button onClick={close} size="large" type="primary">
               Create Birthday Post
@@ -66,9 +64,9 @@ function BirthdayModal({ close }: any) {
             />
           </Space>
         </Space>
-      </Container>
-      <Container className="modal-background" />
-    </Container>
+      </div>
+      <div className="modal-background" />
+    </div>
   );
 }
 

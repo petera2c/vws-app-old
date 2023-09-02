@@ -12,7 +12,6 @@ import SubscribeColumn from "../../components/SubscribeColumn";
 import { UserContext } from "../../context";
 import { getIsMobileOrTablet, getUserBasicInfo } from "../../util";
 import { getBlockedUsers, unblockUser } from "../account/util";
-import Container from "@/components/containers/Container/Container";
 import Page from "@/components/containers/Page/Page";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import UserBasicInfo from "@/types/UserBasicInfo";
@@ -46,21 +45,21 @@ function SettingsSection() {
 
   if (!settingsSnapshot || !settingsSnapshot.data())
     return (
-      <Container
+      <div
         className={
-          "align-center container column px16 " +
+          "items-center container flex flex-col px16 " +
           (isMobileOrTablet ? "mobile-full" : "large")
         }
       >
         <LoadingHeart />
-      </Container>
+      </div>
     );
 
   return (
     <Page className="pa16">
-      <Container>
-        <Container className="column flex-fill bg-white br8 gap16 mb2 pa16">
-          <Container className="column">
+      <div>
+        <div className="flex flex-col grow bg-white br8 gap16 mb2 pa16">
+          <div className="flex flex-col">
             <h6 className="blue bold">Master Notifications</h6>
             <Setting
               description="Recieve a notification I post a new vent"
@@ -111,9 +110,9 @@ function SettingsSection() {
               setting="link_sign_up"
               settingsSnapshot={settingsSnapshot}
             />
-          </Container>
+          </div>
 
-          <Container className="column pl32">
+          <div className="flex flex-col pl32">
             <h6 className="blue bold">Email Notifications</h6>
             <Setting
               description="Email me when I post a new vent"
@@ -163,9 +162,9 @@ function SettingsSection() {
               setting="email_promotions"
               settingsSnapshot={settingsSnapshot}
             />
-          </Container>
+          </div>
 
-          <Container className="column pl32">
+          <div className="flex flex-col pl32">
             <h6 className="blue bold">Mobile Push Notifications</h6>
             <Setting
               description="Send a notification to my phone when I post a new vent"
@@ -209,10 +208,10 @@ function SettingsSection() {
               setting="mobile_link_sign_up"
               settingsSnapshot={settingsSnapshot}
             />
-          </Container>
+          </div>
           <h6 className="blue bold">Privacy and Content Preferences</h6>
 
-          <Container className="column align-start gap16">
+          <div className="flex flex-col items-start gap16">
             <button
               className="button-4"
               onClick={() => {
@@ -257,14 +256,14 @@ function SettingsSection() {
                 Load More
               </Button>
             )}
-          </Container>
+          </div>
 
           <p className="">
             Your private information will never be shared with anyone. Ever.
           </p>
-        </Container>
+        </div>
         <SubscribeColumn slot="1120703532" />
-      </Container>
+      </div>
     </Page>
   );
 }
@@ -318,8 +317,8 @@ const Setting = ({
   if (!setAll) main = setting;
 
   return (
-    <Container
-      className="clickable align-center"
+    <div
+      className="clickable items-center"
       onClick={() => {
         if (setAll) {
           handleChange(master, !settingsSnapshot.data()[master]);
@@ -336,7 +335,7 @@ const Setting = ({
       />
 
       <p className="">{description}</p>
-    </Container>
+    </div>
   );
 };
 

@@ -16,7 +16,6 @@ import {
   resetUnreadConversationCount,
 } from "./util";
 
-import Container from "../containers/Container/Container";
 import DisplayName from "../views/DisplayName";
 import NotificationList from "../NotificationList";
 import StarterModal from "../modals/Starter";
@@ -48,8 +47,6 @@ function Header() {
   const [isUserInQueue, setIsUserInQueue, isUserInQueueRef] = useState();
   const [notificationCounter, setNotificationCounter] = useState(0);
   const [notifications, setNotifications] = useState([]);
-  const [showFeedbackContainer, setShowFeedbackContainer] = useState(false);
-  const [showMobileAppDownload, setShowMobileAppDownload] = useState(false);
   const [unreadConversationsCount, setUnreadConversationsCount] = useState();
 
   const [ventSearchString, setVentSearchString] = useState(
@@ -116,10 +113,10 @@ function Header() {
   }, [isUserInQueueRef, navigate, pathname, setIsUserInQueue, user]);
 
   return (
-    <Container className="column x-fill">
-      <Container className="column x-fill justify-center bg-white border-top large active">
-        <Container className="grid-3 x-fill align-center px32 py8">
-          <Container className="full-center">
+    <div className="flex flex-col w-full">
+      <div className="flex flex-col w-full justify-center bg-white border-top large active">
+        <div className="grid-3 w-full items-center px32 py8">
+          <div className="full-center">
             <Link href="/">
               <img
                 alt="Go Home"
@@ -128,10 +125,10 @@ function Header() {
                 style={{ height: "50px", width: "50px" }}
               />
             </Link>
-          </Container>
+          </div>
 
-          <Container className="flex-fill full-center wrap gap32">
-            <Container className="wrap gap32">
+          <div className="grow full-center wrap gap32">
+            <div className="wrap gap32">
               <Link
                 className={
                   "full-center flex button-3 gap8 py4 " +
@@ -149,9 +146,9 @@ function Header() {
               <Link
                 className={
                   "full-center flex button-3 gap8 py4 " +
-                  isPageActive("/chat", pathname.substring(0, 14))
+                  isPageActive("/conversations", pathname.substring(0, 14))
                 }
-                href="/chat"
+                href="/conversations"
               >
                 <FontAwesomeIcon icon={faComments} />
                 <p className="ic">Inbox</p>
@@ -162,8 +159,8 @@ function Header() {
                   </p>
                 )}
               </Link>
-            </Container>
-            <Container className="full-center">
+            </div>
+            <div className="full-center">
               <Input
                 autoFocus={
                   pathname.substring(0, 7) === "/search" ? true : false
@@ -184,24 +181,30 @@ function Header() {
                 type="text"
                 value={ventSearchString}
               />
-            </Container>
+            </div>
             <Link href="/vent-to-strangers">
               <Button size="large" type="primary">
                 Post a Vent
               </Button>
             </Link>
-          </Container>
-          <Container className="full-center wrap gap8">
+          </div>
+          <div className="full-center wrap gap8">
             {!user && (
-              <Button onClick={() => setActiveModal("login")}>Login</Button>
+              <Button onClick={() => setActiveModal("login")} size="large">
+                Login
+              </Button>
             )}
             {!user && (
-              <Button onClick={() => setActiveModal("signUp")} type="primary">
+              <Button
+                onClick={() => setActiveModal("signUp")}
+                size="large"
+                type="primary"
+              >
                 Sign Up
               </Button>
             )}
             {user && (
-              <Container className="align-center gap16">
+              <div className="items-center gap16">
                 <Dropdown
                   overlay={
                     <div className="bg-white shadow-2 pa8 br8">
@@ -242,7 +245,7 @@ function Header() {
                   placement="bottomRight"
                   trigger={["click"]}
                 >
-                  <Container className="flex-fill align-center ov-hidden clickable gap8">
+                  <div className="grow items-center overflow-hidden clickable gap8">
                     <DisplayName
                       displayName={userBasicInfo?.displayName}
                       isLink={false}
@@ -251,37 +254,37 @@ function Header() {
                       userBasicInfo={userBasicInfo}
                     />
                     <FontAwesomeIcon icon={faChevronDown} />
-                  </Container>
+                  </div>
                 </Dropdown>
 
                 <Dropdown
                   overlay={
-                    <Container
-                      className="column container small bg-white shadow-2 ov-auto br8"
+                    <div
+                      className="flex flex-col container small bg-white shadow-2 overflow-auto br8"
                       style={{
                         maxHeight: "300px",
                       }}
                     >
                       <NotificationList notifications={notifications} />
-                      <Container className="pa16">
-                        <Link className="x-fill" href="/notifications">
+                      <div className="pa16">
+                        <Link className="w-full" href="/notifications">
                           <Button
-                            className="x-fill"
+                            className="w-full"
                             size="large"
                             type="primary"
                           >
                             View All
                           </Button>
                         </Link>
-                      </Container>
-                    </Container>
+                      </div>
+                    </div>
                   }
                   onOpenChange={() => {
                     readNotifications(notifications, setNotificationCounter);
                   }}
                   trigger={["click"]}
                 >
-                  <Container className="clickable relative">
+                  <div className="clickable relative">
                     <FontAwesomeIcon className="blue" icon={faBell} size="2x" />
                     {notificationCounter > 0 && (
                       <p
@@ -296,76 +299,31 @@ function Header() {
                         {notificationCounter}
                       </p>
                     )}
-                  </Container>
+                  </div>
                 </Dropdown>
-              </Container>
+              </div>
             )}
-          </Container>
-        </Container>
-        {showMobileAppDownload && (
-          <Container className="full-center border-top gap8 pa8">
-            <Container className="full-center gap8">
-              <p className="fs-22 tac primary">
-                Download the Mobile App and give us a 5 star rating pretty
-                please 🙏🙌🙏
-              </p>
-              <a
-                className="button-4 fs-22 bold primary border-bottom"
-                href="https://apps.apple.com/us/app/vent-with-strangers/id1509120090"
-                rel="noreferrer"
-                target="_blank"
-              >
-                Apple
-              </a>
-              <a
-                className="button-4 fs-22 bold primary border-bottom"
-                href="https://play.google.com/store/apps/details?id=com.commontech.ventwithstrangers"
-                rel="noreferrer"
-                target="_blank"
-              >
-                Android
-              </a>
-            </Container>
-            <FontAwesomeIcon
-              className="button-9"
-              icon={faTimes}
-              onClick={() => setShowMobileAppDownload(false)}
-            />
-          </Container>
-        )}
-        {showFeedbackContainer && (
-          <Container className="full-center border-top gap8 pa8">
-            <a
-              className="fs-22 button-4 tac"
-              href="https://forms.gle/fQ5xyZL52HZTEp2C7"
-              rel="noreferrer"
-              target="_blank"
-            >
-              Please give us feedback on our site!
-            </a>
-            <FontAwesomeIcon
-              className="button-9"
-              icon={faTimes}
-              onClick={() => setShowFeedbackContainer(false)}
-            />
-          </Container>
-        )}
+          </div>
+        </div>
+
         <StarterModal
           activeModal={activeModal}
           setActiveModal={setActiveModal}
         />
-      </Container>
+      </div>
       {user && isUserInQueue && (
-        <Container className="x-fill full-center bg-white border-top gap8 py8">
+        <div className="w-full full-center bg-white border-top gap8 py8">
           <p>You are in queue to chat with a stranger</p>
           <Button onClick={() => leaveQueue(user.uid)} size="large" type="link">
             Leave Queue
           </Button>
-        </Container>
+        </div>
       )}
       {user && !user.emailVerified && (
-        <Container className="x-fill full-center bg-blue-2">
-          <h4 className="tac mr16">Please verify your email address!</h4>
+        <div className="w-full full-center bg-blue-2">
+          <h4 className="text-center mr16">
+            Please verify your email address!
+          </h4>
           <button
             className="button-2 no-bold py8 px16 my16 br8"
             onClick={() => {
@@ -381,9 +339,9 @@ function Header() {
           >
             Re-send verification link
           </button>
-        </Container>
+        </div>
       )}
-    </Container>
+    </div>
   );
 }
 
@@ -392,14 +350,14 @@ function AccountLink({ icon, link, onClick, pathname, text }: any) {
     return (
       <Link
         className={
-          "x-fill align-center grid-1 button-4 clickable py8 " +
+          "w-full items-center grid-1 button-4 clickable py8 " +
           isPageActive(link, pathname)
         }
         href={link}
       >
-        <Container className="flex blue x-fill full-center">
+        <div className="flex blue w-full full-center">
           <FontAwesomeIcon icon={icon} style={{ fontSize: "1.25rem" }} />
-        </Container>
+        </div>
         <h5 className="grey-1 ic">{text}</h5>
       </Link>
     );
@@ -407,12 +365,12 @@ function AccountLink({ icon, link, onClick, pathname, text }: any) {
   if (onClick)
     return (
       <div
-        className="x-fill align-center grid-1 button-4 clickable py8"
+        className="w-full items-center grid-1 button-4 clickable py8"
         onClick={onClick}
       >
-        <Container className="full-center">
+        <div className="full-center">
           <FontAwesomeIcon icon={icon} style={{ fontSize: "1.25rem" }} />
-        </Container>
+        </div>
         <h5 className="grey-1 ic">{text}</h5>
       </div>
     );

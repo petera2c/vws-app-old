@@ -40,8 +40,8 @@ function SearchPage() {
   return <></>;
 
   // return (
-  //   <Page className="align-center bg-blue-2" title={search ? search : "Search"}>
-  //     <Container className="gap16">
+  //   <Page className="items-center bg-blue-2" title={search ? search : "Search"}>
+  //     <div className="gap16">
   //       <button
   //         className={
   //           "button-2 no-bold py8 px16 my16 br8 " + (isUsers ? "active" : "")
@@ -58,9 +58,9 @@ function SearchPage() {
   //       >
   //         Vents
   //       </button>
-  //     </Container>
+  //     </div>
   //     {isUsers && (
-  //       <Container
+  //       <div
   //         className={
   //           "wrap full-center gap32 " +
   //           (isMobileOrTablet
@@ -88,19 +88,19 @@ function SearchPage() {
   //         {users && users.length === 0 && (
   //           <h4 className="fw-400">No users found.</h4>
   //         )}
-  //       </Container>
+  //       </div>
   //     )}
   //     {!isUsers && (
-  //       <Container
+  //       <div
   //         className={
-  //           "column align-center py32 " +
+  //           "flex flex-col items-center py32 " +
   //           (isMobileOrTablet
   //             ? "container mobile-full px16"
   //             : "container large px16")
   //         }
   //       >
   //         {vents && (
-  //           <Space className="x-fill" direction="vertical" size="middle">
+  //           <Space className="w-full" direction="vertical" size="middle">
   //             {vents &&
   //               vents.map((vent, index) => (
   //                 <Vent
@@ -119,7 +119,7 @@ function SearchPage() {
   //         {vents && vents.length === 0 && (
   //           <h4 className="fw-400">No vents found.</h4>
   //         )}
-  //       </Container>
+  //       </div>
   //     )}
   //   </Page>
   // );
