@@ -188,9 +188,9 @@ function Comment({
           </div>
         </div>
       )}
-      <div className="items-center justify-between wrap gap8 py16">
+      <div className="flex items-center justify-between flex-wrap gap-2 py16">
         <div
-          className="clickable items-center"
+          className="flex items-center clickable"
           onClick={async (e: any) => {
             e.preventDefault();
 

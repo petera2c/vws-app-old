@@ -148,11 +148,6 @@ h6 {
   position: fixed;
   z-index: 1;
 }
-.wrap {
-  flex-shrink: 0;
-  display: flex;
-  flex-wrap: wrap;
-}
 .avatar {
   width: 60px !important;
   height: 60px !important;
@@ -210,12 +205,17 @@ h6 {
 .x-50 {
   width: 50%;
 }
-
+.grid {
+  display: grid;
+}
 .flex {
   display: flex;
 }
 .flex-col {
   flex-direction: column;
+}
+.flex-wrap {
+  flex-wrap: wrap;
 }
 .full-center {
   justify-content: center;
@@ -973,29 +973,23 @@ h6 {
   margin-left: 1px;
 }
 
-.gap1 {
-  gap: 1px;
+.gap-1 {
+  gap: 0.25rem;
 }
-.gap2 {
-  gap: 2px;
+.gap-2 {
+  gap: 0.5rem;
 }
-.gap4 {
-  gap: 4px;
+.gap-3 {
+  gap: 0.75rem;
 }
-.gap8 {
-  gap: 8px;
+.gap-4 {
+  gap: 1rem;
 }
-.gap12 {
-  gap: 12px;
+.gap-8 {
+  gap: 2rem;
 }
-.gap16 {
-  gap: 16px;
-}
-.gap32 {
-  gap: 32px;
-}
-.gap64 {
-  gap: 64px;
+.gap-46 {
+  gap: 4rem;
 }
 
 .br2 {
@@ -1052,7 +1046,7 @@ h6 {
   border-width: 2px;
 }
 
-.clickable {
+.cursor-pointer {
   cursor: pointer;
 }
 

@@ -18,9 +18,9 @@ const NewVentPage = () => {
 
   return (
     <Page className="pa16" title="Happy Birthday!">
-      <div>
-        <div className="flex flex-col grow gap16">
-          <div className="full-center gap8">
+      <div className="flex">
+        <div className="flex flex-col grow gap-4">
+          <div className="full-center gap-2">
             <h1 className="text-center">Happy Birthday! ☺️ ☺️</h1>
             <FontAwesomeIcon className="blue" icon={faBirthdayCake} size="5x" />
           </div>

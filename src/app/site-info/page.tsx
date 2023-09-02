@@ -19,9 +19,9 @@ function AboutUsPage() {
 
   return (
     <Page className="pa16">
-      <div>
-        <div className="grow flex flex-col bg-white br8 gap16 pa32">
-          <div className="flex flex-col gap8">
+      <div className="flex">
+        <div className="flex flex-col grow bg-white br8 gap-4 pa32">
+          <div className="flex flex-col gap-2">
             <h1 className="text-center">Vent Online With People Who Care</h1>
             <p className="text-center fw-400 mb16">
               People care and help is here. Vent and chat anonymously to be a
@@ -31,7 +31,7 @@ function AboutUsPage() {
             </p>
           </div>
 
-          <div className="flex flex-col gap8">
+          <div className="flex flex-col gap-2">
             <Link href="/quote-contest">
               <h4>Daily Feel Good Quote Contest</h4>
             </Link>
@@ -42,7 +42,7 @@ function AboutUsPage() {
             </p>
           </div>
 
-          <div className="flex flex-col gap8">
+          <div className="flex flex-col gap-2">
             <h4>What the Heck are Karma Points?</h4>
             <p>
               Karma Points are gained when your vent or comment gets upvoted or
@@ -58,9 +58,9 @@ function AboutUsPage() {
             <h4 className="text-center">
               With Great Power Comes Great Responsibility
             </h4>
-            <div className="flex flex-col gap8">
+            <div className="flex flex-col gap-2">
               <p className="text-center">Click on a badge to learn more :)</p>
-              <div className="w-full full-center wrap gap16">
+              <div className="w-full full-center flex-wrap gap-4">
                 <KarmaBadge
                   onClick={() => setActiveBadge(0)}
                   userBasicInfo={{ karma: 50 }}
@@ -107,10 +107,10 @@ function AboutUsPage() {
             </div>
           </div>
 
-          <div className="flex flex-col gap8">
+          <div className="flex flex-col gap-2">
             <h4>What Can You Do on VWS?</h4>
             <ul className="pl64">
-              <div className="flex flex-col gap8">
+              <div className="flex flex-col gap-2">
                 <li>Chat anonymously with strangers</li>
                 <li>
                   <Link
@@ -130,10 +130,10 @@ function AboutUsPage() {
             </ul>
           </div>
 
-          <div className="flex flex-col gap8">
+          <div className="flex flex-col gap-2">
             <h4>How Do You Gain Karma Points?</h4>
             <ul className="pl64">
-              <div className="flex flex-col gap8">
+              <div className="flex flex-col gap-2">
                 <li>
                   <span className="green">+4</span> For an upvote on your
                   comment
@@ -155,7 +155,7 @@ function AboutUsPage() {
             </ul>
           </div>
 
-          <div className="flex flex-col gap8">
+          <div className="flex flex-col gap-2">
             <h4>If you have any issues please email us at</h4>
             <p>
               <a className="blue" href="mailto:ventwithstrangers@gmail.com">
@@ -164,7 +164,7 @@ function AboutUsPage() {
             </p>
           </div>
 
-          <div className="flex flex-col gap8">
+          <div className="flex flex-col gap-2">
             <h4>Where Else Can You Access VWS?</h4>
             <ul className="pl64">
               <li>
@@ -186,7 +186,7 @@ function AboutUsPage() {
             </ul>
           </div>
           <h6 className="bold">Follow Us on Social Media!</h6>
-          <div className="gap16">
+          <div className="gap-4">
             <a
               className="button-4 fs-20 pb4"
               href="https://blog.ventwithstrangers.com"

@@ -60,7 +60,7 @@ function GroupChatCreateModal({ close, groupChatEditting }: any) {
         </div>
         <div className="flex flex-col grow overflow-auto py16 px32">
           {existingUsers && existingUsers.length > 0 && (
-            <div className="flex flex-col gap16">
+            <div className="flex flex-col gap-4">
               <h4>Users In Chat</h4>
               {existingUsers.map((user) => {
                 return (
@@ -80,7 +80,7 @@ function GroupChatCreateModal({ close, groupChatEditting }: any) {
             groupChatEditting.group_owner === userBasicInfo?.id && <Divider />}
 
           {isNewGroupChatOrOwner && (
-            <div className="flex flex-col gap16">
+            <div className="flex flex-col gap-4">
               <h4>Change Chat Name or Add Users</h4>
               <input
                 className="fs-22 br4 pa8"
@@ -106,9 +106,9 @@ function GroupChatCreateModal({ close, groupChatEditting }: any) {
                 value={userSearchString}
               /> */}
               {/* {hits.length > 0 && (
-                <div className="flex flex-col gap16">
+                <div className="flex flex-col gap-4">
                   <h4>Search Results</h4>
-                  <div className="wrap gap8">
+                  <div className="flex-wrap gap-2">
                     {hits.map((hit) => {
                       if (
                         users.find((user) => user.id === hit.objectID) ||
@@ -134,16 +134,16 @@ function GroupChatCreateModal({ close, groupChatEditting }: any) {
                 </div>
               )} */}
               {/* {users.length > 0 && (
-                <div className="flex flex-col gap16">
+                <div className="flex flex-col gap-4">
                   <h4>Selected People</h4>
                   <div
-                    className="items-start wrap gap8"
+                    className="flex items-start flex-wrap gap-2"
                     style={{ maxHeight: "100px" }}
                   >
                     {users.map((user:any) => {
                       return (
                         <button
-                          className="button-2 br4 gap8 pa8"
+                          className="button-2 br4 gap-2 pa8"
                           key={user.id}
                           onClick={() => {
                             if (user.id === userBasicInfo?.id) {
@@ -163,7 +163,7 @@ function GroupChatCreateModal({ close, groupChatEditting }: any) {
                             });
                           }}
                         >
-                          <div className="gap4">
+                          <div className="gap-1">
                             <MakeAvatar
                               className=""
                               displayName={user.displayName}
@@ -234,7 +234,7 @@ function GroupChatCreateModal({ close, groupChatEditting }: any) {
 
 //   return (
 //     <div
-//       className="button-8 items-center gap8"
+//       className="button-8 items-center gap-2"
 //       onClick={() => {
 //         setUsers((users) => {
 //           if (existingUsers.length + users.length >= GROUP_MAX) {
@@ -246,7 +246,7 @@ function GroupChatCreateModal({ close, groupChatEditting }: any) {
 //         });
 //       }}
 //     >
-//       <div className="gap4">
+//       <div className="gap-1">
 //         {userBasicInfo && (
 //           <MakeAvatar
 //             displayName={hit.displayName}
@@ -293,15 +293,15 @@ function DisplayExistingUser({
   }, [user]);
 
   return (
-    <div className="items-center br4 gap8">
-      <div className="items-center gap8">
+    <div className="items-center br4 gap-2">
+      <div className="items-center gap-2">
         <MakeAvatar
           displayName={user.displayName}
           size="small"
           userBasicInfo={user}
         />
         {/* <Link
-          className="full-center grow overflow-hidden ic gap4"
+          className="full-center grow overflow-hidden ic gap-1"
           href={"/profile?" + user.id}
         >
           <h5 className="button-1 ellipsis grey-11">{user.displayName}</h5>

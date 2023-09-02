@@ -47,7 +47,7 @@ function NotificationsPage() {
     >
       <div
         className={
-          "flex flex-col overflow-visible gap16 " +
+          "flex flex-col overflow-visible gap-4 " +
           (isMobileOrTablet ? "" : "container large")
         }
       >

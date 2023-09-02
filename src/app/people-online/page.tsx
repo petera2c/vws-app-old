@@ -28,8 +28,8 @@ function OnlineUsers() {
   }, [setFirstOnlineUsers, setOnlineUsers, setTotalOnlineUsers, userLoadCount]);
 
   return (
-    <Page className="flex flex-col items-center bg-blue-2 gap16 pa16">
-      <div className="justify-center wrap  gap16">
+    <Page className="flex flex-col items-center bg-blue-2 gap-4 pa16">
+      <div className="flex justify-center flex-wrap gap-4">
         {onlineUsers.map(({ lastOnline, userID }, index) => {
           return (
             <UserComp

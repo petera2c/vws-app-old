@@ -41,7 +41,7 @@ function SearchPage() {
 
   // return (
   //   <Page className="items-center bg-blue-2" title={search ? search : "Search"}>
-  //     <div className="gap16">
+  //     <div className="gap-4">
   //       <button
   //         className={
   //           "button-2 no-bold py8 px16 my16 br8 " + (isUsers ? "active" : "")
@@ -62,7 +62,7 @@ function SearchPage() {
   //     {isUsers && (
   //       <div
   //         className={
-  //           "wrap full-center gap32 " +
+  //           "flex-wrap full-center gap-8 " +
   //           (isMobileOrTablet
   //             ? "container mobile-full px16"
   //             : "container large px16")

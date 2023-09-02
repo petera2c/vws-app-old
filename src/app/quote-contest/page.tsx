@@ -76,13 +76,13 @@ function QuoteContestPage() {
 
   return (
     <Page className="pa16">
-      <div className="gap8" style={{ height: "100%" }}>
+      <div className="flex gap-2" style={{ height: "100%" }}>
         <div className="flex flex-col grow">
           <div className="flex flex-col grow overflow-hidden bg-white br8">
-            <div className="flex flex-col grow overflow-auto gap8 pt8 px16">
-              <div className="flex flex-col border-bottom gap8 px16 pb16">
+            <div className="flex flex-col grow overflow-auto gap-2 pt8 px16">
+              <div className="flex flex-col border-bottom gap-2 px16 pb16">
                 <h1 className="text-center">Feel Good Quote Contest</h1>
-                <div className="flex flex-col gap4">
+                <div className="flex flex-col gap-1">
                   <p className="text-center">
                     Every day we display a feel good quote. The winner from this
                     contest will be show cased for the following day
@@ -121,8 +121,8 @@ function QuoteContestPage() {
 
             <div
               className={
-                "w-full shadow-2 gap8 pa16 " +
-                (isMobileOrTablet ? "flex flex-col" : "items-center")
+                "flex w-full shadow-2 gap-2 pa16 " +
+                (isMobileOrTablet ? "flex-col" : "items-center")
               }
             >
               <TextArea
@@ -234,9 +234,9 @@ const Quote = ({
 
   return (
     <div className={"py8 " + (isLast ? "" : "border-bottom")}>
-      <div className="grow items-center gap16">
+      <div className="grow items-center gap-4">
         <FontAwesomeIcon className="blue" icon={faQuoteLeft} size="3x" />
-        <div className="flex flex-col grow items-center gap8">
+        <div className="flex flex-col grow items-center gap-2">
           <p className="italic text-center">{quote.value}</p>
           <Link href={"/profile?" + quote.userID}>
             <p className="blue text-center">
@@ -245,7 +245,7 @@ const Quote = ({
           </Link>
         </div>
       </div>
-      <div className="gap8">
+      <div className="gap-2">
         <div className="items-end">
           <h4 className="grey-5" style={{ lineHeight: 1.1 }}>
             {quote.like_counter ? quote.like_counter : 0}
@@ -254,7 +254,7 @@ const Quote = ({
 
         <div
           className={
-            "flex flex-col items-center gap4 " +
+            "flex flex-col items-center gap-1 " +
             (user ? "justify-between " : "justify-end")
           }
         >

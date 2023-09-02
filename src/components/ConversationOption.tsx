@@ -126,7 +126,7 @@ function ConversationOption({
       }}
     >
       <div className="grow flex flex-col overflow-hidden">
-        <div className="items-center grow gap4 mr16">
+        <div className="items-center grow gap-1 mr16">
           <div
             className="items-end"
             style={{ width: userBasicInfoArray.length * 20 + 32 + "px" }}
@@ -303,7 +303,7 @@ function DisplayOnlineAndName({
   }, [chatName, userBasicInfo]);
 
   return (
-    <div className="grow items-center overflow-hidden gap8" style={style}>
+    <div className="grow items-center overflow-hidden gap-2" style={style}>
       <h6 className={"ellipsis " + (hasSeen ? "grey-1" : "primary")}>
         {chatName
           ? chatName

@@ -65,7 +65,7 @@ const UserComponent = ({
       className="button-6 flex flex flex-col container twentyvw overflow-hidden bg-white br8 pa16"
       href={"/profile?" + userID}
     >
-      <div className="flex flex-col w-full grow gap8">
+      <div className="flex flex-col w-full grow gap-2">
         <div className="w-full full-center">
           <MakeAvatar
             displayName={userInfo?.displayName}
@@ -74,8 +74,8 @@ const UserComponent = ({
           />
         </div>
 
-        <div className="grow justify-end flex flex-col gap4">
-          <div className="w-full items-center wrap gap8">
+        <div className="grow justify-end flex flex-col gap-1">
+          <div className="w-full items-center flex-wrap gap-2">
             <DisplayName
               big
               displayName={userInfo?.displayName}
@@ -88,7 +88,7 @@ const UserComponent = ({
           <p className="lh-1">{karmaPoints} Karma Points</p>
         </div>
         {(userInfo?.birth_date || userInfo?.gender || userInfo?.pronouns) && (
-          <div className="gap8">
+          <div className="gap-2">
             {Boolean(dayjs().year() - dayjs(userInfo?.birth_date).year()) && (
               <div className="flex flex-col">
                 <h6 className="fw-400">Age</h6>
@@ -114,7 +114,7 @@ const UserComponent = ({
         )}
 
         {showAdditionaluserInformation && (
-          <Space wrap>
+          <div className="flex flex-wrap">
             {additionalUserInfo?.education !== undefined && (
               <div className="border-all items-center px8 py4 br4">
                 <p>
@@ -155,11 +155,11 @@ const UserComponent = ({
                 </p>
               </div>
             )}
-          </Space>
+          </div>
         )}
 
         {showMessageUser && (
-          <div className="flex flex-col grow justify-end gap8">
+          <div className="flex flex-col grow justify-end gap-2">
             {lastOnline && (
               <p className="w-full lh-1">
                 Last Seen: {dayjs(lastOnline).fromNow()}

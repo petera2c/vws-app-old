@@ -124,13 +124,13 @@ const SideBarLink = ({
     return (
       <Link
         className={
-          "items-center button-4 clickable py8 " +
+          "flex items-center button-4 clickable py8 " +
           isPageActive(link, pathname) +
           (firstOnlineUsers ? " grid-2" : " grid-1")
         }
         href={link}
       >
-        <div className="blue w-full full-center">
+        <div className="flex full-center w-full blue">
           <FontAwesomeIcon icon={icon} style={{ fontSize: "1.25rem" }} />
         </div>
         <h5 className="ellipsis ic">{text}</h5>

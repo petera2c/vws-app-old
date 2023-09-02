@@ -45,7 +45,7 @@ function VentPage() {
 
   return (
     <Page className="px16 pt16" title={title}>
-      <div>
+      <div className="flex">
         {ventFound === false && <h4>Vent Not Found</h4>}
         {ventFound === undefined && ventID && (
           <div

@@ -54,10 +54,10 @@ const VentsPage = () => {
   return (
     <Page className="pa16" id="scrollable-div">
       <div className="flex grow w-full">
-        <div className="flex flex-col grow gap16">
+        <div className="flex flex-col grow gap-4">
           <NewVentComponent miniVersion />
 
-          <div className="flex w-full full-center bg-white br8 gap16 pa16">
+          <div className="flex w-full full-center bg-white br8 gap-4 pa16">
             <Link className="grow" href="/recent">
               <h2
                 className={
@@ -100,7 +100,7 @@ const VentsPage = () => {
           {(whatPage === "trending" ||
             whatPage === "trending-week" ||
             whatPage === "trending-month") && (
-            <div className="w-full full-center bg-white br8 gap16 pa16">
+            <div className="w-full full-center bg-white br8 gap-4 pa16">
               <Link href="/trending">
                 <h2
                   className={
@@ -170,7 +170,7 @@ const VentsPage = () => {
                 {vents &&
                   vents.map((vent: any, index: number) => {
                     return (
-                      <div className="flex flex-col w-full gap8" key={vent.id}>
+                      <div className="flex flex-col w-full gap-2" key={vent.id}>
                         <Vent
                           previewMode={true}
                           ventID={vent.id}

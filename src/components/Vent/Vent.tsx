@@ -188,19 +188,19 @@ function Vent({
       {vent && (
         <div className="w-full flex flex-col bg-white pt16 br8">
           <div
-            className={`flex flex-col border-bottom gap8 py16 px32 ${
+            className={`flex flex-col border-bottom gap-2 py16 px32 ${
               disablePostOnClick ? "" : "clickable"
             }`}
             onClick={() => {
               if (!disablePostOnClick) router.push(partialLink);
             }}
           >
-            <div className="flex w-full items-center gap4">
+            <div className="flex w-full items-center gap-1">
               <MakeAvatar
                 displayName={author?.displayName}
                 userBasicInfo={author}
               />
-              <div className="grow items-center overflow-hidden gap4">
+              <div className="grow items-center overflow-hidden gap-1">
                 <Link
                   className="overflow-hidden"
                   onClick={(e) => e.stopPropagation()}
@@ -214,7 +214,7 @@ function Vent({
                 <KarmaBadge userBasicInfo={author} />
               </div>
               {vent.is_birthday_post && (
-                <div className="items-center gap8">
+                <div className="items-center gap-2">
                   <FontAwesomeIcon
                     className="orange"
                     icon={faBirthdayCake}
@@ -251,7 +251,7 @@ function Vent({
             </div>
 
             {vent.new_tags && vent.new_tags.length > 0 && (
-              <div className="wrap gap8">
+              <div className="flex- gap-2">
                 {vent.new_tags.map((tag: string, index: number) => (
                   <Tag key={index} tag={tag} />
                 ))}
@@ -289,14 +289,14 @@ function Vent({
           {!searchPreviewMode && (
             <div
               className={
-                "relative justify-between wrap py16 px32 gap8 " +
+                "relative justify-between flex-wrap py16 px32 gap-2 " +
                 (!searchPreviewMode && displayCommentField
                   ? "border-bottom"
                   : "")
               }
             >
-              <div className="items-center gap16">
-                <div className="items-center gap4">
+              <div className="items-center gap-4">
+                <div className="items-center gap-1">
                   <img
                     alt="Support"
                     className={`clickable heart ${hasLiked ? "red" : "grey-5"}`}
@@ -328,7 +328,7 @@ function Vent({
                 </div>
 
                 <SmartLink
-                  className="flex items-center gap4"
+                  className="flex items-center gap-1"
                   disablePostOnClick={disablePostOnClick}
                   href={vent && vent.title && vent.id ? partialLink : ""}
                 >
@@ -349,7 +349,7 @@ function Vent({
 
               {(!user || (user && user.uid !== vent.userID && author?.id)) && (
                 <div
-                  className="button-2 wrap px16 py8 br8"
+                  className="button-2 flex-wrap px16 py8 br8"
                   onClick={() => {
                     if (signUpProgressFunction) return signUpProgressFunction();
 
@@ -366,7 +366,7 @@ function Vent({
           )}
 
           {!searchPreviewMode && displayCommentField && comments && (
-            <div className="flex flex-col gap16">
+            <div className="flex flex-col gap-4">
               {vent.comment_counter > 0 && (
                 <div className="border-bottom px32 py16">
                   <Dropdown
@@ -495,7 +495,7 @@ function Vent({
                   </Button>
                 </Link>
               )}
-              <div className="grow items-center gap8">
+              <div className="grow items-center gap-2">
                 {/* <div className="relative flex flex-col grow">
                   <MentionsInput
                     className="mentions"
@@ -526,7 +526,7 @@ function Vent({
                       markup="@[__display__](__id__)"
                       renderSuggestion={(entry) => {
                         return (
-                          <div className="grow items-center pa8 gap8">
+                          <div className="grow items-center pa8 gap-2">
                             <MakeAvatar
                               displayName={entry.displayName}
                               userBasicInfo={entry}

@@ -12,7 +12,7 @@ function DeleteAccountModal({ close, submit }: { close: any; submit: any }) {
         <div className="w-full justify-center bg-grey-10 py16">
           <h4 className="grey-11 text-center">Permanently Delete Account</h4>
         </div>
-        <div className="grow flex flex-col w-full overflow-auto gap16 py16 px32">
+        <div className="grow flex flex-col w-full overflow-auto gap-4 py16 px32">
           <p className="text-center">
             {isDeleting
               ? "Loading..."

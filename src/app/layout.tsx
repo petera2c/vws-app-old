@@ -146,7 +146,7 @@ export default function RootLayout({
                     totalOnlineUsers,
                   }}
                 >
-                  <div className="screen-container column">
+                  <div className="flex flex-col screen-container">
                     {!(window.screen.width < 940) ? (
                       <Header />
                     ) : (

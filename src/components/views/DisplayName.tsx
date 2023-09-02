@@ -26,9 +26,9 @@ function DisplayName({
 
   if (isLink)
     return (
-      <div className="items-center grow overflow-hidden gap4">
+      <div className="items-center grow overflow-hidden gap-1">
         <Link
-          className="flex clickable items-center overflow-hidden gap4"
+          className="flex clickable items-center overflow-hidden gap-1"
           onClick={(e) => {
             e.stopPropagation();
           }}
@@ -39,7 +39,7 @@ function DisplayName({
             userBasicInfo={userBasicInfo}
           />
           {userBasicInfo && (
-            <div className="full-center grow overflow-hidden gap4">
+            <div className="full-center grow overflow-hidden gap-1">
               <h5 className="button-1 ellipsis fw-400 grey-11">
                 {capitolizedDisplayName}
               </h5>
@@ -59,7 +59,7 @@ function DisplayName({
   else
     return (
       <div className="items-center grow overflow-hidden">
-        <div className="grow items-center overflow-hidden gap4">
+        <div className="grow items-center overflow-hidden gap-1">
           {!noAvatar && (
             <MakeAvatar
               displayName={userBasicInfo.displayName}
@@ -67,7 +67,7 @@ function DisplayName({
             />
           )}
           {userBasicInfo && (
-            <div className="full-center grow overflow-hidden gap4">
+            <div className="full-center grow overflow-hidden gap-1">
               <h5
                 className={
                   "ellipsis fw-400 " + (big ? "fs-24 primary" : "grey-11")

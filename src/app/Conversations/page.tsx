@@ -64,7 +64,7 @@ function Conversations() {
 
   return (
     <Page className="bg-blue-2 overflow-hidden">
-      <div className="grow w-full gap4 overflow-hidden pa4">
+      <div className="grow w-full gap-1 overflow-hidden pa4">
         <div className="container small flex flex-col overflow-auto bg-white br4 pa8">
           {user && user.emailVerified && (
             <Button

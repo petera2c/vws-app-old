@@ -58,16 +58,16 @@ const AvatarSection = () => {
 
   return (
     <Page className="pa16">
-      <div className="w-full grow">
+      <div className="flex grow w-full">
         <div className="flex flex-col grow">
           <div
-            className="overflow-hidden gap16"
+            className="overflow-hidden gap-4"
             style={{ maxHeight: "calc(70vh - 80px)" }}
           >
             <div className="flex flex-col bg-white overflow-auto pa16 br8">
               <button
                 className={
-                  "flex items-center grey-1 gap8 mb16 " +
+                  "flex items-center grey-1 gap-2 mb16 " +
                   (activeSection === 0 ? "blue" : "")
                 }
                 onClick={() => setActiveSection(0)}
@@ -77,7 +77,7 @@ const AvatarSection = () => {
               </button>
               <button
                 className={
-                  "flex items-center grey-1 gap8 mb16 " +
+                  "flex items-center grey-1 gap-2 mb16 " +
                   (activeSection === 1 ? "blue" : "")
                 }
                 onClick={() => setActiveSection(1)}
@@ -87,7 +87,7 @@ const AvatarSection = () => {
               </button>
               <button
                 className={
-                  "flex items-center grey-1 gap8 mb16 " +
+                  "flex items-center grey-1 gap-2 mb16 " +
                   (activeSection === 2 ? "blue" : "")
                 }
                 onClick={() => setActiveSection(2)}
@@ -97,7 +97,7 @@ const AvatarSection = () => {
               </button>
               <button
                 className={
-                  "flex items-center grey-1 gap8 mb16 " +
+                  "flex items-center grey-1 gap-2 mb16 " +
                   (activeSection === 3 ? "blue" : "")
                 }
                 onClick={() => setActiveSection(3)}
@@ -107,7 +107,7 @@ const AvatarSection = () => {
               </button>
               <button
                 className={
-                  "flex items-center grey-1 gap8 mb16 " +
+                  "flex items-center grey-1 gap-2 mb16 " +
                   (activeSection === 4 ? "blue" : "")
                 }
                 onClick={() => setActiveSection(4)}
@@ -117,7 +117,7 @@ const AvatarSection = () => {
               </button>
               <button
                 className={
-                  "flex items-center grey-1 gap8 mb16 " +
+                  "flex items-center grey-1 gap-2 mb16 " +
                   (activeSection === 5 ? "blue" : "")
                 }
                 onClick={() => setActiveSection(5)}
@@ -127,7 +127,7 @@ const AvatarSection = () => {
               </button>
               <button
                 className={
-                  "flex items-center grey-1 gap8 mb16 " +
+                  "flex items-center grey-1 gap-2 mb16 " +
                   (activeSection === 6 ? "blue" : "")
                 }
                 onClick={() => setActiveSection(6)}
@@ -137,7 +137,7 @@ const AvatarSection = () => {
               </button>
               <button
                 className={
-                  "flex items-center grey-1 gap8 mb16 " +
+                  "flex items-center grey-1 gap-2 mb16 " +
                   (activeSection === 7 ? "blue" : "")
                 }
                 onClick={() => setActiveSection(7)}
@@ -146,7 +146,7 @@ const AvatarSection = () => {
               </button>
               <button
                 className={
-                  "flex items-center grey-1 gap8 " +
+                  "flex items-center grey-1 gap-2 " +
                   (activeSection === 8 ? "blue" : "")
                 }
                 onClick={() => setActiveSection(8)}

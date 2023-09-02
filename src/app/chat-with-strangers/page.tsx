@@ -42,8 +42,8 @@ function ChatWithStrangersPage() {
 
   return (
     <Page className="pa16">
-      <div className="">
-        <div className="flex flex-col grow full-center gap32">
+      <div className="flex">
+        <div className="flex flex-col grow full-center gap-8">
           <div className="container medium flex flex-col items-center bg-white br8 pa32">
             <h1 className="text-center">Chat With Strangers</h1>
             <p className="text-center">

@@ -10,7 +10,7 @@ function SignUpPage() {
 
   return (
     <Page className="pa16" title="Sign Up">
-      <div>
+      <div className="flex">
         <div className="grow full-center bg-white pa16 br8">
           <h1
             className="grey-1 clickable text-center"

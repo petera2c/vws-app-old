@@ -57,8 +57,8 @@ function SettingsSection() {
 
   return (
     <Page className="pa16">
-      <div>
-        <div className="flex flex-col grow bg-white br8 gap16 mb2 pa16">
+      <div className="flex">
+        <div className="flex flex-col grow bg-white br8 gap-4 mb2 pa16">
           <div className="flex flex-col">
             <h6 className="blue bold">Master Notifications</h6>
             <Setting
@@ -211,7 +211,7 @@ function SettingsSection() {
           </div>
           <h6 className="blue bold">Privacy and Content Preferences</h6>
 
-          <div className="flex flex-col items-start gap16">
+          <div className="flex flex-col items-start gap-4">
             <button
               className="button-4"
               onClick={() => {
@@ -287,7 +287,7 @@ const UserDisplay = ({
 
   return (
     <button
-      className="button-2 fs-18 br4 gap8 pa8"
+      className="button-2 fs-18 br4 gap-2 pa8"
       onClick={() => unblockUser(blockedUserID, setBlockedUsers, userID)}
     >
       {userBasicInfo?.displayName}

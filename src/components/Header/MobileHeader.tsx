@@ -439,7 +439,7 @@ function Header() {
         </Space>
       )}
       {user && isUserInQueue && (
-        <div className="w-full full-center bg-white border-top gap8 py8 px16">
+        <div className="w-full full-center bg-white border-top gap-2 py8 px16">
           <p>You are in queue to chat with a stranger</p>
           <Button
             onClick={() => leaveQueue(user.uid)}

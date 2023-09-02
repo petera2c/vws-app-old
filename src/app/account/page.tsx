@@ -78,11 +78,11 @@ const AccountSection = () => {
 
   return (
     <Page className="pa16">
-      <div>
+      <div className="flex">
         <div className="grow flex flex-col">
           <form className="grow flex flex-col bg-white pa16 mb2 br8">
             <h6 className="blue bold mb16">Personal Information</h6>
-            <div className="wrap">
+            <div className="flex-wrap">
               <div
                 className={
                   "flex flex-col pr8 mb16 " +
@@ -122,7 +122,7 @@ const AccountSection = () => {
               </div>
             </div>
 
-            <div className="wrap">
+            <div className="flex-wrap">
               <div
                 className={
                   "flex flex-col pr8 mb16 " +
@@ -201,7 +201,7 @@ const AccountSection = () => {
               value={bio}
             />
 
-            <div className="w-full wrap">
+            <div className="w-full flex-wrap">
               <div className="flex flex-col pr8 mb16">
                 <div className="items-center justify-start py8">
                   <p className="mr8 mb8">Birthday</p>
@@ -238,7 +238,7 @@ const AccountSection = () => {
                 </p>
                 <div className="w-full flex flex-col items-start justify-center py8 mt16">
                   <p className="mr8 mb8">Partying</p>
-                  <div className="gap8 wrap">
+                  <div className="gap-2 flex-wrap">
                     {partyingList.map((str, index) => {
                       return (
                         <Button
@@ -263,7 +263,7 @@ const AccountSection = () => {
 
                 <div className="w-full flex flex-col items-start justify-center py8 mt16">
                   <p className="mr8 mb8">Political Beliefs</p>
-                  <div className="gap8 wrap">
+                  <div className="gap-2 flex-wrap">
                     {politicalBeliefsList.map((str, index) => {
                       return (
                         <Button
@@ -288,7 +288,7 @@ const AccountSection = () => {
                 </div>
                 <div className="w-full flex flex-col items-start justify-center py8 mt16">
                   <p className="mr8 mb8">Religious Beliefs</p>
-                  <div className="gap8 wrap">
+                  <div className="gap-2 flex-wrap">
                     {religiousBeliefsList.map((str, index) => {
                       return (
                         <Button
@@ -313,7 +313,7 @@ const AccountSection = () => {
                 </div>
                 <div className="w-full flex flex-col items-start justify-center py8 mt16">
                   <p className="mr8 mb8">Education</p>
-                  <div className="gap8 wrap">
+                  <div className="gap-2 flex-wrap">
                     {educationList.map((str, index) => {
                       return (
                         <Button
@@ -338,7 +338,7 @@ const AccountSection = () => {
                 </div>
                 <div className="w-full flex flex-col items-start justify-center py8 mt16">
                   <p className="mb8 mr8">Do you have kids?</p>
-                  <div className="gap8 wrap">
+                  <div className="gap-2 flex-wrap">
                     {kidsList.map((str, index) => {
                       return (
                         <Button
@@ -366,7 +366,7 @@ const AccountSection = () => {
 
             <h6 className="blue bold mb16">Change your Password</h6>
 
-            <div className="wrap">
+            <div className="flex-wrap">
               <div
                 className={
                   "flex flex-col pr8 mb16 " +

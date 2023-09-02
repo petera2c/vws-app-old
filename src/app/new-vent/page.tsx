@@ -22,7 +22,7 @@ function NewVentPage() {
 
   return (
     <Page className="pa16">
-      <div>
+      <div className="flex">
         <div className="grow">
           <NewVentComponent ventID={search ? search.substring(1) : null} />
         </div>

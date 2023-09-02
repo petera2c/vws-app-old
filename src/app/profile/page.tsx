@@ -130,15 +130,15 @@ function ProfileSection() {
           : null
       }
     >
-      <div className="grow w-full">
+      <div className="flex grow w-full">
         <div
-          className="flex flex-col grow gap16"
+          className="flex flex-col grow gap-4"
           style={{
             maxWidth: isMobileOrTablet ? "" : "calc(100% - 316px)",
           }}
         >
           {search && (
-            <div className="flex flex-col w-full overflow-hidden bg-white pa16 gap8 br8">
+            <div className="flex flex-col w-full overflow-hidden bg-white pa16 gap-2 br8">
               <div className="w-full full-center">
                 <MakeAvatar
                   displayName={userBasicInfo?.displayName}
@@ -147,9 +147,9 @@ function ProfileSection() {
                 />
               </div>
 
-              <div className="wrap gap16">
+              <div className="flex-wrap gap-4">
                 <div className="flex flex-col">
-                  <div className="items-center gap8">
+                  <div className="items-center gap-2">
                     {isUserOnline && isUserOnline?.state === "online" && (
                       <div className="online-dot" />
                     )}
@@ -214,7 +214,7 @@ function ProfileSection() {
                 userInfo.partying !== undefined ||
                 userInfo.politics !== undefined ||
                 userInfo.religion !== undefined) && (
-                <div className="wrap gap8">
+                <div className="flex-wrap gap-2">
                   {userInfo.education !== undefined && (
                     <div className="border-all items-center px8 py4 br4">
                       <FontAwesomeIcon className="mr8" icon={faSchool} />
@@ -252,7 +252,7 @@ function ProfileSection() {
                 (user ? search !== user.uid : true) && (
                   <div className="items-center justify-between">
                     <div
-                      className="button-2 wrap px16 py8 br8"
+                      className="button-2 flex-wrap px16 py8 br8"
                       onClick={() => {
                         const userInteractionIssues = userSignUpProgress(user);
 
@@ -271,7 +271,7 @@ function ProfileSection() {
                       </p>
                     </div>
                     <div
-                      className="button-2 wrap px16 py8 br8"
+                      className="button-2 flex-wrap px16 py8 br8"
                       onClick={() => {
                         const userInteractionIssues = userSignUpProgress(user);
 

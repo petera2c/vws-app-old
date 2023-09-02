@@ -19,8 +19,8 @@ function QuoteWinnersPage() {
   }, [setQuotes]);
 
   return (
-    <Page className="items-center gap16 pa32">
-      <div className="flex flex-col bg-white br8 gap16 pa32">
+    <Page className="items-center gap-4 pa32">
+      <div className="flex flex-col bg-white br8 gap-4 pa32">
         <h1 className="text-center lh-1">
           {thisMonthYearFormatted} Feel Good Quotes
         </h1>
@@ -31,7 +31,7 @@ function QuoteWinnersPage() {
         </div>
       </div>
 
-      <div className="justify-center w-full wrap gap16">
+      <div className="justify-center w-full flex-wrap gap-4">
         {quotes.map((quote) => (
           <QuoteDisplay key={quote.id} quote={quote} />
         ))}
@@ -50,7 +50,7 @@ function QuoteDisplay({ quote }: { quote: Quote }) {
   }, [quote, setUserBasicInfo]);
 
   return (
-    <div className="flex flex-col w-full bg-white br8 gap8 pa16">
+    <div className="flex flex-col w-full bg-white br8 gap-2 pa16">
       <p className="italic primary fs-20 text-center">
         "{capitolizeFirstChar(quote.value)}"
       </p>

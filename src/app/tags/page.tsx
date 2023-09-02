@@ -33,9 +33,9 @@ function IndividualTag() {
       keywords={viewTagFunction(tagID)}
       title={`Vents About ${viewTagFunction(tagID)}`}
     >
-      <div>
-        <div className="flex flex-col grow gap16">
-          <div className="flex flex-col bg-white br8 gap16 pa32">
+      <div className="flex">
+        <div className="flex flex-col grow gap-4">
+          <div className="flex flex-col bg-white br8 gap-4 pa32">
             <h1 className="text-center">{`Recent Vents About ${viewTagFunction(
               tagID
             )}`}</h1>
@@ -43,7 +43,7 @@ function IndividualTag() {
               View All Tags
             </Link>
           </div>
-          <div className="flex flex-col gap8">
+          <div className="flex flex-col gap-2">
             {vents.map((vent, index) => (
               <Vent
                 key={vent.id}

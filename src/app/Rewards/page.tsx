@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { Progress, Space, Tooltip } from "antd";
+import { Progress, Tooltip } from "antd";
 
 import { UserContext } from "../../context";
 
@@ -36,93 +36,85 @@ function RewardsPage() {
 
   return (
     <Page className="pa16">
-      <div>
-        <Space className="flex flex-col grow" direction="vertical">
-          <div className="flex flex-col bg-white pa32 br8">
-            <h1 className="text-center mb32">Your Upcoming Rewards</h1>
-            <div className="gap32">
-              <Space className="grow" direction="vertical" size="large">
-                <CounterDisplay
-                  counter={userRewards?.created_vents_counter}
-                  size="small"
-                  tooltip="The total number of vents you have created :)"
-                  title="Vents Created"
-                />
-                <CounterDisplay
-                  counter={userRewards?.created_vent_supports_counter}
-                  size="medium"
-                  tooltip="The total number of vents you have supported :)"
-                  title="Vents You Supported"
-                />
-                <CounterDisplay
-                  counter={userRewards?.received_vent_supports_counter}
-                  size="medium"
-                  tooltip="The total number of supports received on your vents :)"
-                  title="Vent Supports Received"
-                />
-              </Space>
-              <Space className="grow" direction="vertical" size="large">
-                <CounterDisplay
-                  counter={userRewards?.created_comments_counter}
-                  size="small"
-                  tooltip="The total number of comments you have created :)"
-                  title="Comments Created"
-                />
-                <CounterDisplay
-                  counter={userRewards?.created_comment_supports_counter}
-                  size="medium"
-                  tooltip="The total number of comments you have supported :)"
-                  title="Comments You Supported"
-                />
-                <CounterDisplay
-                  counter={userRewards?.received_comment_supports_counter}
-                  size="medium"
-                  tooltip="The total number of supports received on your comments :)"
-                  title="Comment Supports Received"
-                />
-              </Space>
-              <Space className="grow" direction="vertical" size="large">
-                <CounterDisplay
-                  counter={userRewards?.created_quotes_counter}
-                  size="small"
-                  tooltip="The total number of quotes you have created :)"
-                  title="Quotes Created"
-                />
-                <CounterDisplay
-                  counter={userRewards?.created_quote_supports_counter}
-                  size="medium"
-                  tooltip="The total number of quotes you have supported :)"
-                  title="Quotes You Supported"
-                />
-                <CounterDisplay
-                  counter={userRewards?.received_quote_supports_counter}
-                  size="medium"
-                  tooltip="The total number of supports received on your quotes :)"
-                  title="Quote Supports Received"
-                />
-                <CounterDisplay
-                  counter={userRewards?.quote_contests_won_counter}
-                  size="tiny"
-                  tooltip="The total number of quote contests you have won :)"
-                  title="Quote Contests Won"
-                />
-              </Space>
+      <div className="flex flex-col grow">
+        <div className="flex flex-col bg-white pa32 br8">
+          <h1 className="text-center mb32">Your Upcoming Rewards</h1>
+          <div
+            className="grid gap-8"
+            style={{ gridTemplateColumns: "1fr 1fr 1fr" }}
+          >
+            <CounterDisplay
+              counter={userRewards?.created_vents_counter}
+              size="small"
+              tooltip="The total number of vents you have created :)"
+              title="Vents Created"
+            />
+            <CounterDisplay
+              counter={userRewards?.created_vent_supports_counter}
+              size="medium"
+              tooltip="The total number of vents you have supported :)"
+              title="Vents You Supported"
+            />
+            <CounterDisplay
+              counter={userRewards?.received_vent_supports_counter}
+              size="medium"
+              tooltip="The total number of supports received on your vents :)"
+              title="Vent Supports Received"
+            />
+            <CounterDisplay
+              counter={userRewards?.created_comments_counter}
+              size="small"
+              tooltip="The total number of comments you have created :)"
+              title="Comments Created"
+            />
+            <CounterDisplay
+              counter={userRewards?.created_comment_supports_counter}
+              size="medium"
+              tooltip="The total number of comments you have supported :)"
+              title="Comments You Supported"
+            />
+            <CounterDisplay
+              counter={userRewards?.received_comment_supports_counter}
+              size="medium"
+              tooltip="The total number of supports received on your comments :)"
+              title="Comment Supports Received"
+            />
+            <CounterDisplay
+              counter={userRewards?.created_quotes_counter}
+              size="small"
+              tooltip="The total number of quotes you have created :)"
+              title="Quotes Created"
+            />
+            <CounterDisplay
+              counter={userRewards?.created_quote_supports_counter}
+              size="medium"
+              tooltip="The total number of quotes you have supported :)"
+              title="Quotes You Supported"
+            />
+            <CounterDisplay
+              counter={userRewards?.received_quote_supports_counter}
+              size="medium"
+              tooltip="The total number of supports received on your quotes :)"
+              title="Quote Supports Received"
+            />
+            <CounterDisplay
+              counter={userRewards?.quote_contests_won_counter}
+              size="tiny"
+              tooltip="The total number of quote contests you have won :)"
+              title="Quote Contests Won"
+            />
+          </div>
+        </div>
+        <div className="flex flex-col gap-2">
+          <h1>Recent Rewards</h1>
+          {recentRewards.map((obj, index) => (
+            <div className="flex flex-col w-full bg-white pa16 br8" key={index}>
+              <h6>{obj.title}</h6>
+              <p className="blue">+ {obj.karma_gained} Karma Points</p>
+              <p>{dayjs(obj.server_timestamp).fromNow()}</p>
             </div>
-          </div>
-          <div className="flex flex-col grow gap8">
-            <h1>Recent Rewards</h1>
-            {recentRewards.map((obj, index) => (
-              <div
-                className="flex flex-col w-full bg-white pa16 br8"
-                key={index}
-              >
-                <h6>{obj.title}</h6>
-                <p className="blue">+ {obj.karma_gained} Karma Points</p>
-                <p>{dayjs(obj.server_timestamp).fromNow()}</p>
-              </div>
-            ))}
-          </div>
-        </Space>
+          ))}
+        </div>
       </div>
     </Page>
   );
@@ -140,15 +132,15 @@ const CounterDisplay = ({
   title: string;
 }) => {
   return (
-    <Space className="w-full" direction="vertical">
-      <Space align="center">
+    <div className="w-full">
+      <div className="flex items-center">
         <h4>
           {counter}/{getNextMilestone(counter, size)}
         </h4>
         <Tooltip placement="bottom" title={tooltip}>
           <h6 className="blue">{title}</h6>
         </Tooltip>
-      </Space>
+      </div>
       <Progress
         percent={Math.floor((counter / getNextMilestone(counter, size)) * 100)}
         strokeColor="#2096f2"
@@ -161,7 +153,7 @@ const CounterDisplay = ({
           {calculateMilestone(counter, size)} Karma Points
         </p>
       </Tooltip>
-    </Space>
+    </div>
   );
 };
 

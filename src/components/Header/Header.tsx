@@ -127,11 +127,11 @@ function Header() {
             </Link>
           </div>
 
-          <div className="grow full-center wrap gap32">
-            <div className="wrap gap32">
+          <div className="flex full-center flex-wrap grow gap-8">
+            <div className="flex flex-wrap gap-8">
               <Link
                 className={
-                  "full-center flex button-3 gap8 py4 " +
+                  "full-center flex button-3 gap-2 py4 " +
                   isPageActive("/", pathname) +
                   isPageActive("/my-feed", pathname.substring(0, 8)) +
                   isPageActive("/recent", pathname.substring(0, 7)) +
@@ -145,7 +145,7 @@ function Header() {
 
               <Link
                 className={
-                  "full-center flex button-3 gap8 py4 " +
+                  "full-center flex button-3 gap-2 py4 " +
                   isPageActive("/conversations", pathname.substring(0, 14))
                 }
                 href="/conversations"
@@ -188,7 +188,7 @@ function Header() {
               </Button>
             </Link>
           </div>
-          <div className="full-center wrap gap8">
+          <div className="flex full-center flex-wrap gap-2">
             {!user && (
               <Button onClick={() => setActiveModal("login")} size="large">
                 Login
@@ -204,7 +204,7 @@ function Header() {
               </Button>
             )}
             {user && (
-              <div className="items-center gap16">
+              <div className="items-center gap-4">
                 <Dropdown
                   overlay={
                     <div className="bg-white shadow-2 pa8 br8">
@@ -245,7 +245,7 @@ function Header() {
                   placement="bottomRight"
                   trigger={["click"]}
                 >
-                  <div className="grow items-center overflow-hidden clickable gap8">
+                  <div className="grow items-center overflow-hidden clickable gap-2">
                     <DisplayName
                       displayName={userBasicInfo?.displayName}
                       isLink={false}
@@ -312,7 +312,7 @@ function Header() {
         />
       </div>
       {user && isUserInQueue && (
-        <div className="w-full full-center bg-white border-top gap8 py8">
+        <div className="w-full full-center bg-white border-top gap-2 py8">
           <p>You are in queue to chat with a stranger</p>
           <Button onClick={() => leaveQueue(user.uid)} size="large" type="link">
             Leave Queue

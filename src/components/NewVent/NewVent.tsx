@@ -116,7 +116,7 @@ function NewVentComponent({ isBirthdayPost, miniVersion, ventID }: any) {
       }}
     >
       <div
-        className={"flex flex-col br4 pa32 " + (isMinified ? "gap8" : "gap16")}
+        className={"flex flex-col br4 pa32 " + (isMinified ? "gap-2" : "gap-4")}
       >
         {!miniVersion && quote && (
           <div className="flex flex-col grow items-center">
@@ -137,7 +137,7 @@ function NewVentComponent({ isBirthdayPost, miniVersion, ventID }: any) {
             <h1 className="text-center">{userVentTimeOutFormatted}</h1>
           </Space>
         )}
-        <div className="flex items-center gap8">
+        <div className="flex items-center gap-2">
           {(!isMobileOrTablet || (isMobileOrTablet && isMinified)) && (
             <Link href="/avatar">
               <MakeAvatar
@@ -226,7 +226,7 @@ function NewVentComponent({ isBirthdayPost, miniVersion, ventID }: any) {
               value={tagText}
             />
             {searchedVentTags && searchedVentTags.length > 0 && (
-              <div className="wrap gap8">
+              <div className="flex-wrap gap-2">
                 {searchedVentTags.map((tagHit: any) => (
                   <Tag
                     key={tagHit.id}
@@ -241,9 +241,9 @@ function NewVentComponent({ isBirthdayPost, miniVersion, ventID }: any) {
           </Space>
         )}
         {!isMinified && tags && tags.length > 0 && (
-          <div className="flex flex-col gap8">
+          <div className="flex flex-col gap-2">
             <h5>Selected Tags</h5>
-            <div className="w-full wrap gap8">
+            <div className="w-full flex-wrap gap-2">
               {tags.map((tag: Tag, index) => (
                 <SelectedTag
                   postingDisableFunction={postingDisableFunction}
@@ -378,7 +378,7 @@ function SelectedTag({
 }) {
   return (
     <div
-      className="button-2 br4 gap8 pa8"
+      className="button-2 br4 gap-2 pa8"
       onClick={() => {
         if (postingDisableFunction) return postingDisableFunction();
 

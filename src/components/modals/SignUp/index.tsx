@@ -61,7 +61,7 @@ const SignUpModal = ({ setActiveModal }: any) => {
               <p className="fw-400 mb8">
                 (Your email address will never be shown to anyone.)
               </p>
-              <div className="w-full wrap">
+              <div className="w-full flex-wrap">
                 <div
                   className={
                     "flex flex-col " + (isMobileOrTablet ? "x-100" : "x-50 pr8")

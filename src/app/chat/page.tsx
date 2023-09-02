@@ -148,7 +148,7 @@ function Chat({
       <div className="justify-between w-full border-bottom pa16">
         <div
           className={
-            "items-center gap4 " +
+            "items-center gap-1 " +
             (activeConversation.is_group ? "clickable" : "")
           }
           onClick={() => {
@@ -233,7 +233,7 @@ function Chat({
 
         <div
           className={
-            "flex flex-col grow overflow-auto gap8 " +
+            "flex flex-col grow overflow-auto gap-2 " +
             (canLoadMore ? "" : "pt8")
           }
         >
