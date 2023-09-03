@@ -1,3 +1,4 @@
+import { Modal } from "antd";
 import React, { useState } from "react";
 
 const ReportModal = ({ close, submit }: any) => {
@@ -30,7 +31,7 @@ const ReportModal = ({ close, submit }: any) => {
   };
 
   return (
-    <div className="modal-container full-center" style={{ zIndex: 10 }}>
+    <Modal onCancel={close}>
       <div className="modal container medium flex flex-col overflow-auto bg-white br4">
         <div className="w-full justify-center bg-grey-10 py16">
           <h4 className="grey-11 text-center">Report</h4>
@@ -137,8 +138,7 @@ const ReportModal = ({ close, submit }: any) => {
           </div>
         )}
       </div>
-      <div className="modal-background" onClick={close} />
-    </div>
+    </Modal>
   );
 };
 

@@ -11,7 +11,6 @@ import CommentType from "../../types/CommentType";
 import KarmaBadge from "../views/KarmaBadge";
 import LoadingHeart from "../views/loaders/Heart";
 import Options from "../Options";
-import StarterModal from "../modals/Starter";
 
 import { UserContext } from "../../context";
 import {
@@ -47,6 +46,8 @@ import {
   faComments,
 } from "@fortawesome/free-solid-svg-icons";
 import Comment from "../Comment/Comment";
+import { useRecoilState } from "recoil";
+import { starterModalAtom } from "@/atoms/ModalVisibility";
 
 dayjs.extend(relativeTime);
 
@@ -62,7 +63,7 @@ const SmartLink = ({ children, className, disablePostOnClick, to }: any) => {
   }
 };
 
-function Vent({
+const Vent = ({
   disablePostOnClick,
   displayCommentField,
   isOnSingleVentPage,
@@ -71,28 +72,28 @@ function Vent({
   setTitle,
   ventID,
   ventInit,
-}: any) {
+}: any) => {
   const router = useRouter();
   const textInput = useRef(null);
 
   const userContext = useContext(UserContext);
+  const [, setStarterModal] = useRecoilState(starterModalAtom);
+
   const user = userContext?.user;
   const userBasicInfo = userContext?.userBasicInfo;
 
   const [activeSort, setActiveSort] = useState("First");
   const [author, setAuthor] = useState<UserBasicInfo>();
   const [canLoadMoreComments, setCanLoadMoreComments] = useState(false);
-  const [comments, setComments] = useState<CommentType[]>([]);
   const [commentString, setCommentString] = useState("");
+  const [comments, setComments] = useState<CommentType[]>([]);
   const [hasLiked, setHasLiked] = useState(false);
   const [isContentBlocked, setIsContentBlocked] = useState(user ? true : false);
-  const [isUserOnline, setIsUserOnline] = useState<boolean | string>(false);
-  const [starterModal, setStarterModal] = useState(false);
-  const [vent, setVent] = useState(ventInit);
-
   const [isUserAccountNewLocal, setIsUserAccountNewLocal] = useState<Boolean>();
-  const [signUpProgressFunction, setSignUpProgressFunction] = useState<any>();
+  const [isUserOnline, setIsUserOnline] = useState<boolean | string>(false);
   const [partialLink, setPartialLink] = useState("");
+  const [signUpProgressFunction, setSignUpProgressFunction] = useState<any>();
+  const [vent, setVent] = useState(ventInit);
   const [ventPreview, setVentPreview] = useState("");
 
   useEffect(() => {
@@ -564,16 +565,9 @@ function Vent({
           )}
         </div>
       )}
-
-      {starterModal && (
-        <StarterModal
-          activeModal={starterModal}
-          setActiveModal={setStarterModal}
-        />
-      )}
     </div>
   );
-}
+};
 
 function Tag({ tag }: { tag: string }) {
   return (

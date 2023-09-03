@@ -5,7 +5,6 @@ import { message, Space, Tooltip } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import HandleOutsideClick from "../containers/HandleOutsideClick/HandleOutsideClick";
-import StarterModal from "../modals/Starter";
 
 import { UserContext } from "../../context";
 
@@ -33,30 +32,31 @@ import Vent from "@/types/VentType";
 import { useRouter } from "next/navigation";
 import Tag from "@/types/Tag";
 import Emoji from "../Emoji/Emoji";
+import { useRecoilState } from "recoil";
+import { starterModalAtom } from "@/atoms/ModalVisibility";
 
 const TITLE_LENGTH_MINIMUM = 0;
 const TITLE_LENGTH_MAXIMUM = 100;
 
-function NewVentComponent({ isBirthdayPost, miniVersion, ventID }: any) {
+const NewVentComponent = ({ isBirthdayPost, miniVersion, ventID }: any) => {
   const { user, userBasicInfo } = useContext(UserContext);
+  const [, setStarterModal] = useRecoilState(starterModalAtom);
 
   const [description, setDescription] = useState("");
+  const [hasStartedToWriteVent, setHasStartedToWriteVent] = useState(false);
   const [isMinified, setIsMinified] = useState(miniVersion);
   const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
+  const [placeholderText, setPlaceholderText] = useState("");
+  const [postingDisableFunction, setPostingDisableFunction] = useState<any>();
   const [quote, setQuote] = useState<Quote>();
   const [saving, setSaving] = useState(false);
-  const [starterModal, setStarterModal] = useState(false);
-  const [tags, setTags] = useState([]);
+  const [searchedVentTags, setSearchedVentTags] = useState<any>([]);
   const [tagText, setTagText] = useState("");
+  const [tags, setTags] = useState([]);
   const [title, setTitle] = useState("");
   const [userVentTimeOut, setUserVentTimeOut] = useState<any>();
   const [userVentTimeOutFormatted, setUserVentTimeOutFormatted] = useState("");
   const [ventTags, setVentTags] = useState<{ id: string }[]>([]);
-  const [searchedVentTags, setSearchedVentTags] = useState<any>([]);
-
-  const [hasStartedToWriteVent, setHasStartedToWriteVent] = useState(false);
-  const [placeholderText, setPlaceholderText] = useState("");
-  const [postingDisableFunction, setPostingDisableFunction] = useState<any>();
 
   const router = useRouter();
 
@@ -345,15 +345,9 @@ function NewVentComponent({ isBirthdayPost, miniVersion, ventID }: any) {
           </p>
         </div>
       )}
-      {starterModal && (
-        <StarterModal
-          activeModal={starterModal}
-          setActiveModal={setStarterModal}
-        />
-      )}
     </HandleOutsideClick>
   );
-}
+};
 
 function searchStringInArray(str: string, strArray: { id: string }[]) {
   let temp = [];

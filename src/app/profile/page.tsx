@@ -10,7 +10,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import KarmaBadge from "../../components/views/KarmaBadge";
 import LoadingHeart from "../../components/views/loaders/Heart";
-import StarterModal from "../../components/modals/Starter";
 import SubscribeColumn from "../../components/SubscribeColumn";
 
 import { UserContext } from "../../context";
@@ -59,12 +58,15 @@ import Comment from "@/components/Comment/Comment";
 import CommentType from "@/types/CommentType";
 import Vent from "@/components/Vent/Vent";
 import VentType from "@/types/VentType";
+import { useRecoilState } from "recoil";
+import { starterModalAtom } from "@/atoms/ModalVisibility";
 
 dayjs.extend(relativeTime);
 
 function ProfileSection() {
   const router = useRouter();
   const { user } = useContext(UserContext);
+  const [, setStarterModal] = useRecoilState(starterModalAtom);
 
   let { search } = location;
 
@@ -75,7 +77,6 @@ function ProfileSection() {
   const [isMobileOrTablet, setIsMobileOrTablet] = useState<boolean>();
   const [isUserOnline, setIsUserOnline] = useState<any>(false);
   const [postsSection, setPostsSection] = useState(true);
-  const [starterModal, setStarterModal] = useState(false);
   const [userBasicInfo, setUserBasicInfo] = useState<UserBasicInfo>();
   const [userInfo, setUserInfo] = useState<any>({});
 
@@ -476,12 +477,6 @@ function ProfileSection() {
             blockUser(user!.uid, search);
           }}
           title="Block User"
-        />
-      )}
-      {starterModal && (
-        <StarterModal
-          activeModal={starterModal}
-          setActiveModal={setStarterModal}
         />
       )}
     </Page>

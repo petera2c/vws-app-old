@@ -6,10 +6,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getIsMobileOrTablet } from "../../../util";
 import { login } from "./util";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-import { Input } from "antd";
+import { Input, Modal } from "antd";
+import { useRecoilState } from "recoil";
+import { starterModalAtom } from "@/atoms/ModalVisibility";
 
 const LoginModal = ({ setActiveModal }: any) => {
   const { register, handleSubmit } = useForm();
+  const [startedModal] = useRecoilState(starterModalAtom);
 
   const [canSeePassword, setCanSeePassword] = useState(false);
   const [isMobileOrTablet, setIsMobileOrTablet] = useState<boolean>();
@@ -19,10 +22,10 @@ const LoginModal = ({ setActiveModal }: any) => {
   }, [setIsMobileOrTablet]);
 
   return (
-    <div className="modal-container">
+    <Modal onCancel={() => setActiveModal("")} open={startedModal === "login"}>
       <div
         className={
-          "modal flex flex-col items-center overflow-auto bg-white br4 " +
+          "flex flex-col items-center overflow-auto bg-white br4 " +
           (isMobileOrTablet ? "mx8" : "container medium")
         }
       >
@@ -93,14 +96,7 @@ const LoginModal = ({ setActiveModal }: any) => {
           </form>
         </div>
       </div>
-      <div
-        className="modal-background"
-        onClick={(e: any) => {
-          e.preventDefault();
-          setActiveModal("");
-        }}
-      />
-    </div>
+    </Modal>
   );
 };
 

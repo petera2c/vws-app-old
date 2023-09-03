@@ -33,6 +33,10 @@ import {
 
 import "../config/firebase_init";
 import Header from "@/components/Header/Header";
+import StarterModal from "@/components/modals/Starter";
+import LoginModal from "@/components/modals/Login";
+import SignUpModal from "@/components/modals/SignUp";
+import ForgotPasswordModal from "@/components/modals/ForgotPassword/ForgotPassword";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -152,7 +156,6 @@ export default function RootLayout({
                     ) : (
                       <MobileHeader />
                     )}
-
                     <div className="flex grow overflow-hidden">
                       {window.screen.width > 940 && <Sidebar />}
 
@@ -173,6 +176,9 @@ export default function RootLayout({
                         </Suspense>
                       )}
                     </div>
+                    <LoginModal />
+                    <SignUpModal />
+                    <ForgotPasswordModal />
                   </div>
                 </OnlineUsersContext.Provider>
               </UserContext.Provider>

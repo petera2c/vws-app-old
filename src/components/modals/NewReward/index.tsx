@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Space } from "antd";
+import { Modal, Space } from "antd";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -21,9 +21,8 @@ function NewRewardModal({ close, newReward }: { close: any; newReward: any }) {
   }, []);
 
   return (
-    <div
-      className="modal-container full-center"
-      onClick={() => {
+    <Modal
+      onCancel={() => {
         if (canClose) close();
       }}
     >
@@ -48,8 +47,7 @@ function NewRewardModal({ close, newReward }: { close: any; newReward: any }) {
           </Space>
         </Space>
       </div>
-      <div className="modal-background" />
-    </div>
+    </Modal>
   );
 }
 

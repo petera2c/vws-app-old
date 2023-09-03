@@ -9,7 +9,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import DisplayName from "../views/DisplayName";
 import Options from "../Options";
-import StarterModal from "../modals/Starter";
 
 import { UserContext } from "../../context";
 
@@ -30,6 +29,8 @@ import {
 } from "./util";
 import UserBasicInfo from "@/types/UserBasicInfo";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
+import { useRecoilState } from "recoil";
+import { starterModalAtom } from "@/atoms/ModalVisibility";
 dayjs.extend(relativeTime);
 
 function Comment({
@@ -46,6 +47,7 @@ function Comment({
   setComments?: any;
 }) {
   const { user } = useContext(UserContext);
+  const [, setStarterModal] = useRecoilState(starterModalAtom);
 
   const [comment, setComment] = useState(comment2);
   const [commentString, setCommentString] = useState("");
@@ -53,7 +55,6 @@ function Comment({
   const [hasLiked, setHasLiked] = useState(false);
   const [isContentBlocked, setIsContentBlocked] = useState(user ? true : false);
   const [isUserOnline, setIsUserOnline] = useState(false);
-  const [starterModal, setStarterModal] = useState(false);
   const [userBasicInfo, setUserBasicInfo] = useState<UserBasicInfo>();
 
   useEffect(() => {
@@ -229,13 +230,6 @@ function Comment({
           </p>
         </div>
       </div>
-
-      {starterModal && (
-        <StarterModal
-          activeModal={starterModal}
-          setActiveModal={setStarterModal}
-        />
-      )}
     </div>
   );
 }

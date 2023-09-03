@@ -4,7 +4,6 @@ import { Button } from "antd";
 
 import Chat from "../chat/page";
 import MobileIndex from "./MobileConversations";
-import StarterModal from "../../components/modals/Starter";
 
 import { UserContext } from "../../context";
 
@@ -19,9 +18,12 @@ import Page from "@/components/containers/Page/Page";
 import Link from "next/link";
 import ConversationOption from "@/components/ConversationOption";
 import CreateGroupChatModal from "@/components/modals/CreateGroupChat/CreateGroupChat";
+import { useRecoilState } from "recoil";
+import { starterModalAtom } from "@/atoms/ModalVisibility";
 
 function Conversations() {
   const { user } = useContext(UserContext);
+  const [, setStarterModal] = useRecoilState(starterModalAtom);
 
   const [activeChatUserBasicInfos, setActiveChatUserBasicInfos] = useState();
   const [activeConversation, setActiveConversation] =
@@ -31,7 +33,6 @@ function Conversations() {
   const [groupChatEditting, setGroupChatEditting] = useState<boolean>();
   const [isCreateGroupModalVisible, setIsCreateGroupModalVisible] =
     useState<boolean>();
-  const [starterModal, setStarterModal] = useState(!user);
 
   useEffect(() => {
     let newMessageListenerUnsubscribe: any;
@@ -174,12 +175,7 @@ function Conversations() {
             )}
         </div>
       </div>
-      {starterModal && (
-        <StarterModal
-          activeModal={starterModal}
-          setActiveModal={setStarterModal}
-        />
-      )}
+
       {isCreateGroupModalVisible && (
         <CreateGroupChatModal
           close={() => setIsCreateGroupModalVisible(false)}

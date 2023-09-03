@@ -8,12 +8,16 @@ import { getIsMobileOrTablet } from "../../../util";
 import { signUp } from "./util";
 import { useRouter } from "next/router";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { Modal } from "antd";
+import { useRecoilState } from "recoil";
+import { starterModalAtom } from "@/atoms/ModalVisibility";
 
-const SignUpModal = ({ setActiveModal }: any) => {
+const SignUpModal = () => {
   const router = useRouter();
   const { register, handleSubmit } = useForm();
 
   const { setUserBasicInfo } = useContext(UserContext);
+  const [, setStarterModal] = useRecoilState(starterModalAtom);
 
   const [canSeePassword, setCanSeePassword] = useState(false);
   const [isMobileOrTablet, setIsMobileOrTablet] = useState<boolean>();
@@ -23,10 +27,10 @@ const SignUpModal = ({ setActiveModal }: any) => {
   }, [setIsMobileOrTablet]);
 
   return (
-    <div className="modal-container full-center">
+    <Modal className="full-center">
       <div
         className={
-          "modal flex flex-col items-center overflow-auto bg-white br4 " +
+          "flex flex-col items-center overflow-auto bg-white br4 " +
           (isMobileOrTablet ? "mx8" : "container medium")
         }
       >
@@ -38,7 +42,7 @@ const SignUpModal = ({ setActiveModal }: any) => {
           <form
             className="w-full flex flex-col"
             onSubmit={handleSubmit((data) => {
-              signUp(data, router, setActiveModal, setUserBasicInfo);
+              signUp(data, router, setStarterModal, setUserBasicInfo);
             })}
           >
             <div className="w-full flex flex-col px32 py16">
@@ -112,7 +116,7 @@ const SignUpModal = ({ setActiveModal }: any) => {
                   className="clickable blue"
                   onClick={(e) => {
                     e.preventDefault();
-                    setActiveModal("login");
+                    setStarterModal("login");
                   }}
                 >
                   Login
@@ -126,10 +130,10 @@ const SignUpModal = ({ setActiveModal }: any) => {
         className="modal-background"
         onClick={(e) => {
           e.preventDefault();
-          setActiveModal("");
+          setStarterModal("");
         }}
       />
-    </div>
+    </Modal>
   );
 };
 

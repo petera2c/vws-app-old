@@ -6,7 +6,6 @@ import { Button, Space } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import DisplayName from "./views/DisplayName";
-import StarterModal from "./modals/Starter";
 
 import { UserContext } from "../context";
 
@@ -34,6 +33,8 @@ import {
   faPray,
   faSchool,
 } from "@fortawesome/free-solid-svg-icons";
+import { useRecoilState } from "recoil";
+import { starterModalAtom } from "@/atoms/ModalVisibility";
 
 dayjs.extend(relativeTime);
 
@@ -47,9 +48,9 @@ const UserComponent = ({
   userID,
 }: any) => {
   const { user } = useContext(UserContext);
+  const [, setStarterModal] = useRecoilState(starterModalAtom);
 
   const [userInfo, setUserInfo] = useState<UserBasicInfo>();
-  const [starterModal, setStarterModal] = useState(false);
 
   const [karmaPoints, setKarmaPoints] = useState(0);
 
@@ -189,12 +190,6 @@ const UserComponent = ({
           </div>
         )}
       </div>
-      {starterModal && (
-        <StarterModal
-          activeModal={starterModal}
-          setActiveModal={setStarterModal}
-        />
-      )}
     </Link>
   );
 };

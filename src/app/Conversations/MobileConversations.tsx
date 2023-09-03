@@ -2,8 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 
 import { UserContext } from "../../context";
 
-import StarterModal from "../../components/modals/Starter";
-
 import ConversationOption from "../../components/ConversationOption";
 import Chat from "../chat/page";
 
@@ -152,12 +150,6 @@ function MobileConversations() {
               />
             )}
         </div>
-      )}
-      {starterModal && (
-        <StarterModal
-          activeModal={starterModal}
-          setActiveModal={setStarterModal}
-        />
       )}
     </Page>
   );

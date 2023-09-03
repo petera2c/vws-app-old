@@ -18,7 +18,7 @@ import {
 
 import DisplayName from "../views/DisplayName";
 import NotificationList from "../NotificationList";
-import StarterModal from "../modals/Starter";
+
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import Link from "next/link";

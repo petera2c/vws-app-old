@@ -1,12 +1,13 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 
-import StarterModal from "../../components/modals/Starter";
 import SubscribeColumn from "../../components/SubscribeColumn";
 import Page from "@/components/containers/Page/Page";
+import { useRecoilState } from "recoil";
+import { starterModalAtom } from "@/atoms/ModalVisibility";
 
 function SignUpPage() {
-  const [starterModal, setStarterModal] = useState(true);
+  const [, setStarterModal] = useRecoilState(starterModalAtom);
 
   return (
     <Page className="pa16" title="Sign Up">
@@ -21,12 +22,6 @@ function SignUpPage() {
         </div>
         <SubscribeColumn slot="2023362297" />
       </div>
-      {starterModal && (
-        <StarterModal
-          activeModal={starterModal}
-          setActiveModal={setStarterModal}
-        />
-      )}
     </Page>
   );
 }

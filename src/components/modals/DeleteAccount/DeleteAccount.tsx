@@ -1,3 +1,4 @@
+import { Modal } from "antd";
 import React, { useRef, useState } from "react";
 
 function DeleteAccountModal({ close, submit }: { close: any; submit: any }) {
@@ -7,8 +8,8 @@ function DeleteAccountModal({ close, submit }: { close: any; submit: any }) {
   const [isDeleting, setIsDeleting] = useState(false);
 
   return (
-    <div className="modal-container full-center normal-cursor">
-      <div className="modal container large flex flex-col bg-white br4">
+    <Modal className="full-center normal-cursor" onCancel={close}>
+      <div className="container large flex flex-col bg-white br4">
         <div className="w-full justify-center bg-grey-10 py16">
           <h4 className="grey-11 text-center">Permanently Delete Account</h4>
         </div>
@@ -58,8 +59,7 @@ function DeleteAccountModal({ close, submit }: { close: any; submit: any }) {
           </div>
         )}
       </div>
-      <div className="modal-background" onClick={close} />
-    </div>
+    </Modal>
   );
 }
 

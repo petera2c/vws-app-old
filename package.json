@@ -47,6 +47,7 @@
     "react-string-replace": "^1.1.1",
     "react-textarea-autosize": "^8.5.2",
     "react-usestateref": "^1.0.8",
+    "recoil": "^0.7.7",
     "universal-cookie": "^4.0.4"
   },
   "devDependencies": {

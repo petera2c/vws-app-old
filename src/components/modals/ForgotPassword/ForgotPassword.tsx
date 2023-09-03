@@ -4,9 +4,14 @@ import { useForm } from "react-hook-form";
 import { getIsMobileOrTablet } from "../../../util";
 
 import { sendPasswordReset } from "./util";
+import { Modal } from "antd";
+import { useRecoilState } from "recoil";
+import { starterModalAtom } from "@/atoms/ModalVisibility";
 
-function ForgotPasswordModal({ setActiveModal }: { setActiveModal: any }) {
+const ForgotPasswordModal = () => {
   const { register, handleSubmit } = useForm();
+
+  const [startedModal, setStarterModal] = useRecoilState(starterModalAtom);
 
   const [isMobileOrTablet, setIsMobileOrTablet] = useState<any>();
 
@@ -15,10 +20,13 @@ function ForgotPasswordModal({ setActiveModal }: { setActiveModal: any }) {
   }, [setIsMobileOrTablet]);
 
   return (
-    <div className="modal-container full-center">
+    <Modal
+      onCancel={() => setStarterModal("")}
+      open={startedModal === "forgotPassword"}
+    >
       <div
         className={
-          "modal flex flex-col items-center overflow-auto bg-white br4 " +
+          "flex flex-col items-center overflow-auto bg-white br4 " +
           (isMobileOrTablet ? "mx8" : "container medium")
         }
       >
@@ -32,7 +40,7 @@ function ForgotPasswordModal({ setActiveModal }: { setActiveModal: any }) {
               Already have an account?&nbsp;
               <span
                 className="clickable blue"
-                onClick={() => setActiveModal("login")}
+                onClick={() => setStarterModal("login")}
               >
                 Login
               </span>
@@ -63,15 +71,8 @@ function ForgotPasswordModal({ setActiveModal }: { setActiveModal: any }) {
           </form>
         </div>
       </div>
-      <div
-        className="modal-background"
-        onClick={(e: any) => {
-          e.preventDefault();
-          setActiveModal("");
-        }}
-      />
-    </div>
+    </Modal>
   );
-}
+};
 
 export default ForgotPasswordModal;

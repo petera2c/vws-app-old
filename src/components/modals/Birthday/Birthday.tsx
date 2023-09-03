@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Space } from "antd";
+import { Button, Modal, Space } from "antd";
 
 import { faBirthdayCake } from "@fortawesome/free-solid-svg-icons/faBirthdayCake";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,15 +20,14 @@ function BirthdayModal({ close }: any) {
   }, []);
 
   return (
-    <div
-      className="modal-container full-center"
-      onClick={() => {
+    <Modal
+      onCancel={() => {
         if (canClose) close();
       }}
     >
       <div
         className={
-          "modal flex flex-col items-center overflow-auto bg-white pa32 br8 " +
+          "flex flex-col items-center overflow-auto bg-white pa32 br8 " +
           (isMobileOrTablet ? "mx8" : "container medium")
         }
       >
@@ -66,7 +65,7 @@ function BirthdayModal({ close }: any) {
         </Space>
       </div>
       <div className="modal-background" />
-    </div>
+    </Modal>
   );
 }
 

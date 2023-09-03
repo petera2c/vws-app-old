@@ -1,7 +1,6 @@
 "use client";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 
-import StarterModal from "../../components/modals/Starter";
 import SubscribeColumn from "../../components/SubscribeColumn";
 
 import { UserContext } from "../../context";
@@ -14,7 +13,6 @@ const NewVentPage = () => {
   const { user } = useContext(UserContext);
 
   const { search } = location;
-  const [starterModal, setStarterModal] = useState(!user);
 
   return (
     <Page className="pa16" title="Happy Birthday!">
@@ -31,12 +29,6 @@ const NewVentPage = () => {
         </div>
         <SubscribeColumn slot="3226323822" />
       </div>
-      {starterModal && (
-        <StarterModal
-          activeModal={starterModal}
-          setActiveModal={setStarterModal}
-        />
-      )}
     </Page>
   );
 };

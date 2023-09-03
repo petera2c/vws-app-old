@@ -7,7 +7,6 @@ import { Button, message } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Options from "../../components/Options";
-import StarterModal from "../../components/modals/Starter";
 import SubscribeColumn from "../../components/SubscribeColumn";
 
 import { UserContext } from "../../context";
@@ -179,12 +178,6 @@ function QuoteContestPage() {
         </div>
         <SubscribeColumn slot="1425588771" />
       </div>
-      {starterModal && (
-        <StarterModal
-          activeModal={starterModal}
-          setActiveModal={setStarterModal}
-        />
-      )}
     </Page>
   );
 }

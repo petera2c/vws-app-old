@@ -1,18 +1,19 @@
 "use client";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 
-import StarterModal from "../../components/modals/Starter";
 import SubscribeColumn from "../../components/SubscribeColumn";
 
 import { UserContext } from "../../context";
 import Page from "@/components/containers/Page/Page";
 import NewVentComponent from "@/components/NewVent/NewVent";
+import { useRecoilState } from "recoil";
+import { starterModalAtom } from "@/atoms/ModalVisibility";
 
-function NewVentPage() {
+const NewVentPage = () => {
   const { user } = useContext(UserContext);
+  const [, setStarterModal] = useRecoilState(starterModalAtom);
 
   const { search } = location;
-  const [starterModal, setStarterModal] = useState(false);
 
   useEffect(() => {
     if (!user) {
@@ -28,15 +29,8 @@ function NewVentPage() {
         </div>
         <SubscribeColumn slot="3872937497" />
       </div>
-
-      {starterModal && (
-        <StarterModal
-          activeModal={starterModal}
-          setActiveModal={setStarterModal}
-        />
-      )}
     </Page>
   );
-}
+};
 
 export default NewVentPage;

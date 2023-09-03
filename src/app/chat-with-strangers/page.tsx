@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import StarterModal from "../../components/modals/Starter";
 import SubscribeColumn from "../../components/SubscribeColumn";
 
 import { UserContext } from "../../context";
@@ -16,13 +15,15 @@ import { getIsMobileOrTablet, userSignUpProgress } from "../../util";
 import { joinQueue } from "./util";
 import Page from "@/components/containers/Page/Page";
 import { faHandsHelping } from "@fortawesome/free-solid-svg-icons";
+import { useRecoilState } from "recoil";
+import { starterModalAtom } from "@/atoms/ModalVisibility";
 
 function ChatWithStrangersPage() {
   const { user } = useContext(UserContext);
 
   const [isMobileOrTablet, setIsMobileOrTablet] = useState<boolean>();
   const [isUserInQueue, setIsUserInQueue] = useState();
-  const [starterModal, setStarterModal] = useState<boolean>();
+  const [, setStarterModal] = useRecoilState(starterModalAtom);
 
   useEffect(() => {
     setIsMobileOrTablet(getIsMobileOrTablet());
@@ -111,12 +112,6 @@ function ChatWithStrangersPage() {
         </div>
         <SubscribeColumn slot="1591936277" />
       </div>
-      {starterModal && (
-        <StarterModal
-          activeModal={starterModal}
-          setActiveModal={setStarterModal}
-        />
-      )}
     </Page>
   );
 }

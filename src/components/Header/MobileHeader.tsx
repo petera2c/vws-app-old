@@ -5,7 +5,6 @@ import { Button, message, Space } from "antd";
 
 import HandleOutsideClick from "../containers/HandleOutsideClick/HandleOutsideClick";
 import DisplayName from "../views/DisplayName";
-import StarterModal from "../modals/Starter";
 
 import { UserContext, OnlineUsersContext } from "../../context";
 
@@ -471,12 +470,6 @@ function Header() {
             Re-send verification link
           </button>
         </div>
-      )}
-      {starterModal && (
-        <StarterModal
-          activeModal={starterModal}
-          setActiveModal={setStarterModal}
-        />
       )}
     </HandleOutsideClick>
   );

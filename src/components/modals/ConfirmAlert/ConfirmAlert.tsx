@@ -1,9 +1,10 @@
+import { Modal } from "antd";
 import React from "react";
 
 function ConfirmAlertModal({ close, message, submit, title }: any) {
   return (
-    <div className="modal-container full-center normal-cursor">
-      <div className="modal container medium flex flex-col overflow-auto bg-white br4">
+    <Modal className="full-center normal-cursor">
+      <div className="container medium flex flex-col overflow-auto bg-white br4">
         <div className="w-full justify-center bg-grey-10 py16">
           <h4 className="grey-11 text-center">{title}</h4>
         </div>
@@ -29,7 +30,7 @@ function ConfirmAlertModal({ close, message, submit, title }: any) {
         </div>
       </div>
       <div className="modal-background" onClick={close} />
-    </div>
+    </Modal>
   );
 }
 

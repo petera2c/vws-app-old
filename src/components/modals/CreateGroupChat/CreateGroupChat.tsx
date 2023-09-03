@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { off } from "@firebase/database";
-import { Divider, message } from "antd";
+import { Divider, Modal, message } from "antd";
 
 import KarmaBadge from "../../views/KarmaBadge";
 
@@ -49,8 +49,8 @@ function GroupChatCreateModal({ close, groupChatEditting }: any) {
     (groupChatEditting && groupChatEditting.group_owner === userBasicInfo?.id);
 
   return (
-    <div className="modal-container full-center normal-cursor">
-      <div className="modal container large flex flex-col bg-white br4">
+    <Modal className="full-center normal-cursor">
+      <div className="container large flex flex-col bg-white br4">
         <div className="w-full justify-center bg-grey-10 py16">
           <h4 className="grey-11 text-center">
             {groupChatEditting
@@ -218,7 +218,7 @@ function GroupChatCreateModal({ close, groupChatEditting }: any) {
         )}
       </div>
       <div className="modal-background" onClick={close} />
-    </div>
+    </Modal>
   );
 }
 
