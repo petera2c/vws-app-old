@@ -427,9 +427,9 @@ function Header() {
           </Space>
           {!user && (
             <Space>
-              <Button onClick={() => setStarterModal("login")}>Login</Button>
+              <Button onClick={() => setStarterModal("sign-in")}>Login</Button>
 
-              <Button onClick={() => setStarterModal("signUp")} type="primary">
+              <Button onClick={() => setStarterModal("sign-up")} type="primary">
                 Sign Up
               </Button>
             </Space>

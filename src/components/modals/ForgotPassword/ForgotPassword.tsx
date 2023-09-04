@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { getIsMobileOrTablet } from "../../../util";
 
 import { sendPasswordReset } from "./util";
-import { Input, Modal } from "antd";
+import { Button, Input, Modal } from "antd";
 import { useRecoilState } from "recoil";
 import { starterModalAtom } from "@/atoms/ModalVisibility";
 
@@ -21,8 +21,9 @@ const ForgotPasswordModal = () => {
 
   return (
     <Modal
+      footer={null}
       onCancel={() => setStarterModal("")}
-      open={startedModal === "forgotPassword"}
+      open={startedModal === "forgot-password"}
     >
       <div
         className={
@@ -40,7 +41,7 @@ const ForgotPasswordModal = () => {
               Already have an account?&nbsp;
               <span
                 className="cursor-pointer blue"
-                onClick={() => setStarterModal("login")}
+                onClick={() => setStarterModal("sign-in")}
               >
                 Login
               </span>
@@ -53,7 +54,7 @@ const ForgotPasswordModal = () => {
               sendPasswordReset(data);
             })}
           >
-            <div className="w-full flex flex-col px32 py16">
+            <div className="flex flex-col w-full gap-2 px32 py16">
               <Input
                 className="mb8"
                 type="text"
@@ -64,9 +65,9 @@ const ForgotPasswordModal = () => {
               />
             </div>
             <div className="flex full-center w-full border-top px32 py16">
-              <button className="w-full bg-blue white py8 br4" type="submit">
+              <Button className="w-full" size="large" type="primary">
                 Send Email Password Reset Link
-              </button>
+              </Button>
             </div>
           </form>
         </div>

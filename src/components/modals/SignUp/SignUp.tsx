@@ -7,7 +7,7 @@ import { UserContext } from "../../../context";
 import { getIsMobileOrTablet } from "../../../util";
 import { signUp } from "./util";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-import { Input, Modal } from "antd";
+import { Button, Input, Modal } from "antd";
 import { useRecoilState } from "recoil";
 import { starterModalAtom } from "@/atoms/ModalVisibility";
 import { useRouter } from "next/navigation";
@@ -17,7 +17,7 @@ const SignUpModal = () => {
   const { register, handleSubmit } = useForm();
 
   const { setUserBasicInfo } = useContext(UserContext);
-  const [, setStarterModal] = useRecoilState(starterModalAtom);
+  const [starterModal, setStarterModal] = useRecoilState(starterModalAtom);
 
   const [canSeePassword, setCanSeePassword] = useState(false);
   const [isMobileOrTablet, setIsMobileOrTablet] = useState<boolean>();
@@ -27,13 +27,13 @@ const SignUpModal = () => {
   }, [setIsMobileOrTablet]);
 
   return (
-    <Modal className="full-center">
-      <div
-        className={
-          "flex flex-col items-center overflow-auto bg-white br4 " +
-          (isMobileOrTablet ? "mx8" : "container medium")
-        }
-      >
+    <Modal
+      className="full-center"
+      footer={null}
+      onCancel={() => setStarterModal("")}
+      open={starterModal === "sign-up"}
+    >
+      <div className={"flex flex-col "}>
         <div className="w-full justify-center bg-blue py16">
           <h4 className="text-center white">Create an Account</h4>
         </div>
@@ -45,7 +45,7 @@ const SignUpModal = () => {
               signUp(data, router, setStarterModal, setUserBasicInfo);
             })}
           >
-            <div className="w-full flex flex-col px32 py16">
+            <div className="flex flex-col w-full gap-2 px32 py16">
               <Input
                 className="mb8"
                 type="text"
@@ -64,7 +64,7 @@ const SignUpModal = () => {
               <p className="fw-400 mb8">
                 (Your email address will never be shown to anyone.)
               </p>
-              <div className="w-full flex-wrap">
+              <div className="flex w-full flex-wrap">
                 <div
                   className={
                     "flex flex-col " + (isMobileOrTablet ? "x-100" : "x-50 pr8")
@@ -105,9 +105,9 @@ const SignUpModal = () => {
               </div>
             </div>
             <div className="flex flex-col w-full full-center border-top px32 py16">
-              <button className="w-full bg-blue white py8 br4" type="submit">
+              <Button className="w-full" size="large" type="primary">
                 Create Account
-              </button>
+              </Button>
 
               <p className="w-full text-center mt8">
                 Already have an account?&nbsp;
@@ -115,7 +115,7 @@ const SignUpModal = () => {
                   className="cursor-pointer blue"
                   onClick={(e) => {
                     e.preventDefault();
-                    setStarterModal("login");
+                    setStarterModal("sign-in");
                   }}
                 >
                   Login
@@ -125,13 +125,6 @@ const SignUpModal = () => {
           </form>
         </div>
       </div>
-      <div
-        className="modal-background"
-        onClick={(e) => {
-          e.preventDefault();
-          setStarterModal("");
-        }}
-      />
     </Modal>
   );
 };

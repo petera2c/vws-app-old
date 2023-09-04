@@ -3,7 +3,7 @@ import React from "react";
 
 function ConfirmAlertModal({ close, message, submit, title }: any) {
   return (
-    <Modal className="full-center normal-cursor">
+    <Modal className="full-center normal-cursor" onCancel={close}>
       <div className="container medium flex flex-col overflow-auto bg-white br4">
         <div className="w-full justify-center bg-grey-10 py16">
           <h4 className="grey-11 text-center">{title}</h4>
@@ -29,7 +29,6 @@ function ConfirmAlertModal({ close, message, submit, title }: any) {
           </button>
         </div>
       </div>
-      <div className="modal-background" onClick={close} />
     </Modal>
   );
 }

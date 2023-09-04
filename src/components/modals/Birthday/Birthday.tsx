@@ -64,7 +64,6 @@ function BirthdayModal({ close }: any) {
           </Space>
         </Space>
       </div>
-      <div className="modal-background" />
     </Modal>
   );
 }

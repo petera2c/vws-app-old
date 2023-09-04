@@ -5,20 +5,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { login } from "./util";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-import { Input, Modal } from "antd";
+import { Button, Input, Modal } from "antd";
 import { useRecoilState } from "recoil";
 import { starterModalAtom } from "@/atoms/ModalVisibility";
 
 const LoginModal = () => {
   const { register, handleSubmit } = useForm();
-  const [startedModal, setStarterModal] = useRecoilState(starterModalAtom);
+  const [starterModal, setStarterModal] = useRecoilState(starterModalAtom);
 
   const [canSeePassword, setCanSeePassword] = useState(false);
 
   return (
     <Modal
+      footer={null}
       onCancel={() => setStarterModal("")}
-      open={startedModal === "login" || startedModal === true}
+      open={starterModal === "sign-in" || starterModal === true}
     >
       <div className="flex flex-col">
         <div className="w-full justify-center bg-blue py16">
@@ -31,9 +32,8 @@ const LoginModal = () => {
               login(formData, setStarterModal);
             })}
           >
-            <div className="w-full flex flex-col px32 py16">
+            <div className="flex flex-col w-full gap-2 px32 py16">
               <Input
-                className="py8 px16 mb8 br4"
                 type="text"
                 placeholder="Email Address"
                 {...register("email", {
@@ -42,7 +42,7 @@ const LoginModal = () => {
               />
               <div className="flex full-center w-full">
                 <Input
-                  className="grow py8 px16 mb8 br4"
+                  className="grow"
                   type={canSeePassword ? "" : "password"}
                   placeholder="Password"
                   {...register("password", {
@@ -61,7 +61,7 @@ const LoginModal = () => {
                 className="text-center cursor-pointer mb8"
                 onClick={(e) => {
                   e.preventDefault();
-                  setStarterModal("forgotPassword");
+                  setStarterModal("forgot-password");
                 }}
               >
                 Have you forgotten your password?{" "}
@@ -70,9 +70,9 @@ const LoginModal = () => {
             </div>
 
             <div className="flex flex-col w-full full-center border-top px32 py16">
-              <button className="w-full bg-blue white py8 br4" type="submit">
+              <Button className="w-full" size="large" type="primary">
                 Sign In
-              </button>
+              </Button>
 
               <p className="w-full text-center mt8">
                 Don't have an account?&nbsp;{" "}
@@ -80,7 +80,7 @@ const LoginModal = () => {
                   className="cursor-pointer blue"
                   onClick={(e) => {
                     e.preventDefault();
-                    setStarterModal("signUp");
+                    setStarterModal("sign-up");
                   }}
                 >
                   Create Account

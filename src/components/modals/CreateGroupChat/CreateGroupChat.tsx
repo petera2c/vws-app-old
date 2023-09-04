@@ -49,7 +49,7 @@ function GroupChatCreateModal({ close, groupChatEditting }: any) {
     (groupChatEditting && groupChatEditting.group_owner === userBasicInfo?.id);
 
   return (
-    <Modal className="full-center normal-cursor">
+    <Modal className="full-center normal-cursor" onCancel={close}>
       <div className="container large flex flex-col bg-white br4">
         <div className="w-full justify-center bg-grey-10 py16">
           <h4 className="grey-11 text-center">
@@ -215,7 +215,6 @@ function GroupChatCreateModal({ close, groupChatEditting }: any) {
           </div>
         )}
       </div>
-      <div className="modal-background" onClick={close} />
     </Modal>
   );
 }

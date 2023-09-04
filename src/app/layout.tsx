@@ -16,7 +16,7 @@ import Head from "next/head";
 import { RootStyleRegistry } from "@/components/RootStyleRegistry";
 
 import "../styles/global.css";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import LoadingHeart from "@/components/views/loaders/Heart";
 import Sidebar from "@/components/Sidebar";
 import { OnlineUsersContext, UserContext } from "@/context";
@@ -33,8 +33,8 @@ import {
 
 import "../config/firebase_init";
 import Header from "@/components/Header/Header";
-import LoginModal from "@/components/modals/Login";
-import SignUpModal from "@/components/modals/SignUp";
+import SignInModal from "@/components/modals/SignIn/SignIn";
+import SignUpModal from "@/components/modals/SignUp/SignUp";
 import ForgotPasswordModal from "@/components/modals/ForgotPassword/ForgotPassword";
 import { RecoilRoot } from "recoil";
 
@@ -173,7 +173,7 @@ export default function RootLayout({
                           </Hydrate>
                         )}
                       </div>
-                      <LoginModal />
+                      <SignInModal />
                       <SignUpModal />
                       <ForgotPasswordModal />
                     </div>
