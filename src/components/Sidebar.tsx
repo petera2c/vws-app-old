@@ -51,10 +51,7 @@ function Sidebar() {
   }, [setFirstOnlineUsers, setTotalOnlineUsers]);
 
   return (
-    <Space
-      className="container small flex flex-col overflow-auto bg-white border-top pt8 px16 pb16"
-      direction="vertical"
-    >
+    <div className="flex flex-col shrink-0 container small overflow-auto bg-white border-top gap-2 pt8 px16 pb16">
       <SideBarLink
         icon={faUserFriends}
         link="/people-online"
@@ -107,7 +104,7 @@ function Sidebar() {
         pathname={pathname}
         text="VWS Info"
       />
-    </Space>
+    </div>
   );
 }
 
@@ -124,7 +121,7 @@ const SideBarLink = ({
     return (
       <Link
         className={
-          "flex items-center button-4 clickable py8 " +
+          "flex items-center button-4 py8 " +
           isPageActive(link, pathname) +
           (firstOnlineUsers ? " grid-2" : " grid-1")
         }
@@ -171,10 +168,10 @@ const SideBarLink = ({
   if (onClick)
     return (
       <div
-        className="w-full items-center grid-1 button-4 clickable py8"
+        className="w-full items-center grid-1 button-4 cursor-pointer py8"
         onClick={onClick}
       >
-        <div className="flex w-full full-center">
+        <div className="flex full-center w-full">
           <FontAwesomeIcon icon={icon} style={{ fontSize: "1.25rem" }} />
         </div>
         <h5 className="grey-1 ic">{text}</h5>

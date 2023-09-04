@@ -16,7 +16,7 @@ import Head from "next/head";
 import { RootStyleRegistry } from "@/components/RootStyleRegistry";
 
 import "../styles/global.css";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import LoadingHeart from "@/components/views/loaders/Heart";
 import Sidebar from "@/components/Sidebar";
 import { OnlineUsersContext, UserContext } from "@/context";
@@ -33,10 +33,10 @@ import {
 
 import "../config/firebase_init";
 import Header from "@/components/Header/Header";
-import StarterModal from "@/components/modals/Starter";
 import LoginModal from "@/components/modals/Login";
 import SignUpModal from "@/components/modals/SignUp";
 import ForgotPasswordModal from "@/components/modals/ForgotPassword/ForgotPassword";
+import { RecoilRoot } from "recoil";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -150,36 +150,34 @@ export default function RootLayout({
                     totalOnlineUsers,
                   }}
                 >
-                  <div className="flex flex-col screen-container">
-                    {!(window.screen.width < 940) ? (
-                      <Header />
-                    ) : (
-                      <MobileHeader />
-                    )}
-                    <div className="flex grow overflow-hidden">
-                      {window.screen.width > 940 && <Sidebar />}
+                  <RecoilRoot>
+                    <div className="flex flex-col screen-container">
+                      {!(window.screen.width < 940) ? (
+                        <Header />
+                      ) : (
+                        <MobileHeader />
+                      )}
+                      <div className="flex grow overflow-hidden">
+                        {window.screen.width > 940 && <Sidebar />}
 
-                      {!loading && (
-                        <Suspense
-                          fallback={
-                            <div className="flex grow justify-center bg-blue-2">
-                              <LoadingHeart />
-                            </div>
-                          }
-                        >
+                        {loading ? (
+                          <div className="flex grow justify-center bg-blue-2">
+                            <LoadingHeart />
+                          </div>
+                        ) : (
                           <Hydrate>
                             <div className="flex flex-col grow overflow-hidden p-8">
                               {children}
                             </div>
                             <ReactQueryDevtools initialIsOpen={false} />
                           </Hydrate>
-                        </Suspense>
-                      )}
+                        )}
+                      </div>
+                      <LoginModal />
+                      <SignUpModal />
+                      <ForgotPasswordModal />
                     </div>
-                    <LoginModal />
-                    <SignUpModal />
-                    <ForgotPasswordModal />
-                  </div>
+                  </RecoilRoot>
                 </OnlineUsersContext.Provider>
               </UserContext.Provider>
             </QueryClientProvider>

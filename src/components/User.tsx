@@ -67,7 +67,7 @@ const UserComponent = ({
       href={"/profile?" + userID}
     >
       <div className="flex flex-col w-full grow gap-2">
-        <div className="w-full full-center">
+        <div className="flex full-center w-full">
           <MakeAvatar
             displayName={userInfo?.displayName}
             size="large"

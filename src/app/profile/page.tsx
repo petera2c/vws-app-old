@@ -140,7 +140,7 @@ function ProfileSection() {
         >
           {search && (
             <div className="flex flex-col w-full overflow-hidden bg-white pa16 gap-2 br8">
-              <div className="w-full full-center">
+              <div className="flex full-center w-full">
                 <MakeAvatar
                   displayName={userBasicInfo?.displayName}
                   size="large"
@@ -325,7 +325,7 @@ function ProfileSection() {
                       overlay={
                         <div className="flex flex-col w-full bg-white border-all px16 py8 br8">
                           <div
-                            className="button-8 clickable items-center"
+                            className="button-8 cursor-pointer items-center"
                             onClick={(e: any) => {
                               e.preventDefault();
                               setBlockModal(!blockModal);
@@ -343,7 +343,7 @@ function ProfileSection() {
                       trigger={["click"]}
                     >
                       <FontAwesomeIcon
-                        className="clickable grey-9"
+                        className="cursor-pointer grey-9"
                         icon={faEllipsisV}
                         size="2x"
                         style={{ width: "50px" }}
@@ -359,7 +359,7 @@ function ProfileSection() {
             <div>
               <div
                 className={
-                  "x-50 button-4 clickable full-center py16" +
+                  "x-50 button-4 cursor-pointer full-center py16" +
                   isActive(postsSection)
                 }
                 onClick={() => setPostsSection(true)}
@@ -368,7 +368,7 @@ function ProfileSection() {
               </div>
               <div
                 className={
-                  "x-50 button-4 clickable full-center py16" +
+                  "x-50 button-4 cursor-pointer full-center py16" +
                   isActive(!postsSection)
                 }
                 onClick={() => {
@@ -393,7 +393,7 @@ function ProfileSection() {
               }
               hasMore={canLoadMoreVents}
               loader={
-                <div className="w-full full-center">
+                <div className="flex full-center w-full">
                   <LoadingHeart />
                 </div>
               }
@@ -461,7 +461,7 @@ function ProfileSection() {
             </div>
           )}
           {((!vents && postsSection) || (!comments && !postsSection)) && (
-            <div className="w-full full-center">
+            <div className="flex full-center w-full">
               <LoadingHeart />
             </div>
           )}

@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import TextArea from "react-textarea-autosize";
-import { message, Space, Tooltip } from "antd";
+import { Button, Input, message, Space, Tooltip } from "antd";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -21,7 +20,9 @@ import {
   getTags,
   getUserVentTimeOut,
   getVent,
+  saveVent,
   selectEncouragingMessage,
+  updateTags,
 } from "./util";
 import { checks } from "./util";
 import Link from "next/link";
@@ -34,6 +35,7 @@ import Tag from "@/types/Tag";
 import Emoji from "../Emoji/Emoji";
 import { useRecoilState } from "recoil";
 import { starterModalAtom } from "@/atoms/ModalVisibility";
+import TextArea from "antd/es/input/TextArea";
 
 const TITLE_LENGTH_MINIMUM = 0;
 const TITLE_LENGTH_MAXIMUM = 100;
@@ -147,9 +149,9 @@ const NewVentComponent = ({ isBirthdayPost, miniVersion, ventID }: any) => {
             </Link>
           )}
           <TextArea
-            className="w-full py8 px16 br4"
+            className="w-full"
             onChange={(event) => {
-              // if (postingDisableFunction) return postingDisableFunction();
+              if (postingDisableFunction) return postingDisableFunction();
 
               setDescription(event.target.value);
             }}
@@ -164,7 +166,6 @@ const NewVentComponent = ({ isBirthdayPost, miniVersion, ventID }: any) => {
                 ? "You can vent again in " + userVentTimeOutFormatted
                 : placeholderText
             }
-            minRows={isMinified ? 1 : 3}
             value={description}
           />
           {!isMobileOrTablet && hasStartedToWriteVent && (
@@ -180,8 +181,8 @@ const NewVentComponent = ({ isBirthdayPost, miniVersion, ventID }: any) => {
         {!isMinified && (
           <Space className="w-full" direction="vertical">
             <h5 className="fw-400">Title</h5>
-            <input
-              className="w-full py8 px16 br4"
+            <Input
+              className="w-full"
               onChange={(e) => {
                 if (postingDisableFunction) return postingDisableFunction();
 
@@ -210,8 +211,8 @@ const NewVentComponent = ({ isBirthdayPost, miniVersion, ventID }: any) => {
         {!isMinified && (
           <Space className="w-full" direction="vertical">
             <h5 className="fw-400">Tag this vent</h5>
-            <input
-              className="w-full py8 px16 br4"
+            <Input
+              className="w-full"
               onChange={(e) => {
                 if (postingDisableFunction) return postingDisableFunction();
 
@@ -261,7 +262,7 @@ const NewVentComponent = ({ isBirthdayPost, miniVersion, ventID }: any) => {
         {!isMinified && (
           <div className="justify-end">
             {!saving && (
-              <button
+              <Button
                 className="bg-blue white px64 py8 br4"
                 onClick={() => {
                   if (postingDisableFunction) return postingDisableFunction();
@@ -274,35 +275,34 @@ const NewVentComponent = ({ isBirthdayPost, miniVersion, ventID }: any) => {
                     setTagText("");
                     setSaving(true);
 
-                    import("./util").then((functions) => {
-                      functions.saveVent(
-                        (vent: Vent) => {
-                          setSaving(false);
-                          router.push(
-                            "/vent/" +
-                              vent.id +
-                              "/" +
-                              vent.title
-                                .replace(/[^a-zA-Z ]/g, "")
-                                .replace(/ /g, "-")
-                                .toLowerCase()
-                          );
-                        },
-                        isBirthdayPost,
-                        tags,
-                        {
-                          description,
-                          title,
-                        },
-                        ventID,
-                        user
-                      );
-                    });
+                    saveVent(
+                      (vent: Vent) => {
+                        setSaving(false);
+                        router.push(
+                          "/vent/" +
+                            vent.id +
+                            "/" +
+                            vent.title
+                              .replace(/[^a-zA-Z ]/g, "")
+                              .replace(/ /g, "-")
+                              .toLowerCase()
+                        );
+                      },
+                      isBirthdayPost,
+                      tags,
+                      {
+                        description,
+                        title,
+                      },
+                      ventID,
+                      user
+                    );
                   }
                 }}
+                type="primary"
               >
                 Submit
-              </button>
+              </Button>
             )}
           </div>
         )}
@@ -388,24 +388,21 @@ function SelectedTag({
   );
 }
 
-function Tag({ postingDisableFunction, setTags, tagHit, tags }: any) {
+const Tag = ({ postingDisableFunction, setTags, tagHit, tags }: any) => {
   return (
-    <button
-      className="button-10 br4 px8 py4"
+    <Button
       onClick={() => {
         if (postingDisableFunction) return postingDisableFunction();
 
         if (tags && tags.length >= 3) {
           return message.info("You can not set more than 3 tags in a vent!");
         }
-        import("./util").then((functions) => {
-          functions.updateTags(setTags, tagHit);
-        });
+        updateTags(setTags, tagHit);
       }}
     >
       {viewTagFunction(tagHit.id)}
-    </button>
+    </Button>
   );
-}
+};
 
 export default NewVentComponent;

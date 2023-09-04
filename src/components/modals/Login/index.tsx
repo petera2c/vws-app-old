@@ -1,34 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { getIsMobileOrTablet } from "../../../util";
 import { login } from "./util";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { Input, Modal } from "antd";
 import { useRecoilState } from "recoil";
 import { starterModalAtom } from "@/atoms/ModalVisibility";
 
-const LoginModal = ({ setActiveModal }: any) => {
+const LoginModal = () => {
   const { register, handleSubmit } = useForm();
-  const [startedModal] = useRecoilState(starterModalAtom);
+  const [startedModal, setStarterModal] = useRecoilState(starterModalAtom);
 
   const [canSeePassword, setCanSeePassword] = useState(false);
-  const [isMobileOrTablet, setIsMobileOrTablet] = useState<boolean>();
-
-  useEffect(() => {
-    setIsMobileOrTablet(getIsMobileOrTablet());
-  }, [setIsMobileOrTablet]);
 
   return (
-    <Modal onCancel={() => setActiveModal("")} open={startedModal === "login"}>
-      <div
-        className={
-          "flex flex-col items-center overflow-auto bg-white br4 " +
-          (isMobileOrTablet ? "mx8" : "container medium")
-        }
-      >
+    <Modal
+      onCancel={() => setStarterModal("")}
+      open={startedModal === "login" || startedModal === true}
+    >
+      <div className="flex flex-col">
         <div className="w-full justify-center bg-blue py16">
           <h4 className="text-center white">Sign In</h4>
         </div>
@@ -36,7 +28,7 @@ const LoginModal = ({ setActiveModal }: any) => {
           <form
             className="w-full flex flex-col"
             onSubmit={handleSubmit((formData) => {
-              login(formData, setActiveModal);
+              login(formData, setStarterModal);
             })}
           >
             <div className="w-full flex flex-col px32 py16">
@@ -48,7 +40,7 @@ const LoginModal = ({ setActiveModal }: any) => {
                   required: "Required",
                 })}
               />
-              <div className="w-full full-center">
+              <div className="flex full-center w-full">
                 <Input
                   className="grow py8 px16 mb8 br4"
                   type={canSeePassword ? "" : "password"}
@@ -58,16 +50,18 @@ const LoginModal = ({ setActiveModal }: any) => {
                   })}
                 />
                 <FontAwesomeIcon
-                  className={"clickable ml8 " + (canSeePassword ? "blue" : "")}
+                  className={
+                    "cursor-pointer ml8 " + (canSeePassword ? "blue" : "")
+                  }
                   icon={faEye}
                   onClick={() => setCanSeePassword(!canSeePassword)}
                 />
               </div>
               <p
-                className="text-center clickable mb8"
+                className="text-center cursor-pointer mb8"
                 onClick={(e) => {
                   e.preventDefault();
-                  setActiveModal("forgotPassword");
+                  setStarterModal("forgotPassword");
                 }}
               >
                 Have you forgotten your password?{" "}
@@ -83,10 +77,10 @@ const LoginModal = ({ setActiveModal }: any) => {
               <p className="w-full text-center mt8">
                 Don't have an account?&nbsp;{" "}
                 <span
-                  className="clickable blue"
+                  className="cursor-pointer blue"
                   onClick={(e) => {
                     e.preventDefault();
-                    setActiveModal("signUp");
+                    setStarterModal("signUp");
                   }}
                 >
                   Create Account

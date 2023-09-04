@@ -5,6 +5,7 @@ import UserBasicInfo from "@/types/UserBasicInfo";
 
 import { faMedal, faRocket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { calculateKarma } from "@/util";
 
 /*{
     "displayName": "Noelle",
@@ -57,9 +58,7 @@ const KarmaBadge = ({
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
 
   useEffect(() => {
-    import("../../util").then((functions) => {
-      setKarma(functions.calculateKarma(userBasicInfo));
-    });
+    setKarma(calculateKarma(userBasicInfo));
     setIsAdmin(
       typeof userBasicInfo === "object"
         ? Boolean(userBasicInfo.is_admin)
@@ -75,7 +74,7 @@ const KarmaBadge = ({
       >
         <span>
           <div
-            className="clickable"
+            className="cursor-pointer"
             onClick={(e) => {
               if (noOnClick) return;
               e.stopPropagation();
@@ -129,7 +128,7 @@ const KarmaBadge = ({
       >
         <span>
           <div
-            className="clickable"
+            className="cursor-pointer"
             onClick={(e) => {
               if (noOnClick) return;
               e.stopPropagation();

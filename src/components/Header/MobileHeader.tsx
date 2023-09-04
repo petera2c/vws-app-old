@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import useState from "react-usestateref";
 import { sendEmailVerification } from "@firebase/auth";
-import { Button, message, Space } from "antd";
+import { Button, Input, message, Space } from "antd";
 
 import HandleOutsideClick from "../containers/HandleOutsideClick/HandleOutsideClick";
 import DisplayName from "../views/DisplayName";
@@ -150,7 +150,7 @@ function Header() {
         <Link href="/">
           <img
             alt="Go Home"
-            className="clickable"
+            className="cursor-pointer"
             onClick={() => setMobileHeaderActive(false)}
             src="/svgs/icon.svg"
             style={{ height: "50px", width: "50px" }}
@@ -160,7 +160,7 @@ function Header() {
           {user && (
             <Link className="relative mr16" href="/notifications">
               <FontAwesomeIcon
-                className="clickable blue"
+                className="cursor-pointer blue"
                 icon={faBell}
                 onClick={() => {
                   setShowNotificationDropdown(!showNotificationDropdown);
@@ -206,9 +206,8 @@ function Header() {
             icon={faSearch}
             onClick={() => setMobileHeaderActive(false)}
           />
-          <input
+          <Input
             autoFocus={pathname.substring(0, 7) === "/search" ? true : false}
-            className="no-border bg-grey-4 br4"
             onChange={(e) => {
               setVentSearchString(e.target.value);
               navigate.push("/search?" + e.target.value);
@@ -438,7 +437,7 @@ function Header() {
         </Space>
       )}
       {user && isUserInQueue && (
-        <div className="w-full full-center bg-white border-top gap-2 py8 px16">
+        <div className="flex full-center w-full bg-white border-top gap-2 py8 px16">
           <p>You are in queue to chat with a stranger</p>
           <Button
             onClick={() => leaveQueue(user.uid)}
@@ -450,7 +449,7 @@ function Header() {
         </div>
       )}
       {user && !user.emailVerified && (
-        <div className="w-full full-center bg-blue-2">
+        <div className="flex full-center w-full bg-blue-2">
           <h4 className="text-center mr16">
             Please verify your email address!
           </h4>

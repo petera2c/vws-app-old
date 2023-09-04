@@ -60,7 +60,7 @@ function AboutUsPage() {
             </h4>
             <div className="flex flex-col gap-2">
               <p className="text-center">Click on a badge to learn more :)</p>
-              <div className="w-full full-center flex-wrap gap-4">
+              <div className="flex full-center flex-wrap w-full gap-4">
                 <KarmaBadge
                   onClick={() => setActiveBadge(0)}
                   userBasicInfo={{ karma: 50 }}
@@ -201,7 +201,7 @@ function AboutUsPage() {
               target="_blank"
             >
               <FontAwesomeIcon
-                className="clickable common-border white round-icon round pa8"
+                className="cursor-pointer common-border white round-icon round pa8"
                 // @ts-ignore
                 icon={faInstagram}
                 style={{
@@ -215,7 +215,7 @@ function AboutUsPage() {
               target="_blank"
             >
               <FontAwesomeIcon
-                className="clickable common-border white round-icon round pa8"
+                className="cursor-pointer common-border white round-icon round pa8"
                 // @ts-ignore
                 icon={faFacebook}
                 style={{
@@ -229,7 +229,7 @@ function AboutUsPage() {
               target="_blank"
             >
               <FontAwesomeIcon
-                className="clickable common-border white round-icon round pa8"
+                className="cursor-pointer common-border white round-icon round pa8"
                 // @ts-ignore
                 icon={faLinkedinIn}
                 style={{

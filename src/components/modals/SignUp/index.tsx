@@ -6,11 +6,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { UserContext } from "../../../context";
 import { getIsMobileOrTablet } from "../../../util";
 import { signUp } from "./util";
-import { useRouter } from "next/router";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-import { Modal } from "antd";
+import { Input, Modal } from "antd";
 import { useRecoilState } from "recoil";
 import { starterModalAtom } from "@/atoms/ModalVisibility";
+import { useRouter } from "next/navigation";
 
 const SignUpModal = () => {
   const router = useRouter();
@@ -46,16 +46,15 @@ const SignUpModal = () => {
             })}
           >
             <div className="w-full flex flex-col px32 py16">
-              <input
-                className="py8 px16 mb8 br4"
+              <Input
+                className="mb8"
                 type="text"
                 placeholder="Display Name"
                 {...register("displayName", {
                   required: "Required",
                 })}
               />
-              <input
-                className="py8 px16 br4"
+              <Input
                 type="text"
                 placeholder="Email Address"
                 {...register("email", {
@@ -71,8 +70,8 @@ const SignUpModal = () => {
                     "flex flex-col " + (isMobileOrTablet ? "x-100" : "x-50 pr8")
                   }
                 >
-                  <input
-                    className="py8 px16 mb8 br4"
+                  <Input
+                    className="mb8"
                     type={canSeePassword ? "" : "password"}
                     placeholder="Password"
                     {...register("password", {
@@ -85,9 +84,9 @@ const SignUpModal = () => {
                     "flex flex-col " + (isMobileOrTablet ? "x-100" : "x-50 pl8")
                   }
                 >
-                  <div className="w-full full-center">
-                    <input
-                      className="py8 px16 mb8 br4"
+                  <div className="flex full-center w-full">
+                    <Input
+                      className="mb8"
                       type={canSeePassword ? "" : "password"}
                       placeholder="Confirm Password"
                       {...register("passwordConfirm", {
@@ -96,7 +95,7 @@ const SignUpModal = () => {
                     />
                     <FontAwesomeIcon
                       className={
-                        "clickable ml8 " + (canSeePassword ? "blue" : "")
+                        "cursor-pointer ml8 " + (canSeePassword ? "blue" : "")
                       }
                       icon={faEye}
                       onClick={() => setCanSeePassword(!canSeePassword)}
@@ -113,7 +112,7 @@ const SignUpModal = () => {
               <p className="w-full text-center mt8">
                 Already have an account?&nbsp;
                 <span
-                  className="clickable blue"
+                  className="cursor-pointer blue"
                   onClick={(e) => {
                     e.preventDefault();
                     setStarterModal("login");

@@ -82,7 +82,7 @@ function Message({
           </div>
           <div className="relative br4">
             <div
-              className="clickable items-end pr2"
+              className="cursor-pointer items-end pr2"
               onClick={() => {
                 setMessageOptions(!messageOptions);
               }}
@@ -104,7 +104,7 @@ function Message({
               >
                 <div className="flex flex-col w-full bg-white border-all px16 py8 br8">
                   <div
-                    className="button-8 clickable items-center"
+                    className="button-8 cursor-pointer items-center"
                     onClick={(e: any) => {
                       e.preventDefault();
                       if (message.userID === userID) {

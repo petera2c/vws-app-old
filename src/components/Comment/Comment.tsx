@@ -191,7 +191,7 @@ function Comment({
       )}
       <div className="flex items-center justify-between flex-wrap gap-2 py16">
         <div
-          className="flex items-center clickable"
+          className="flex items-center cursor-pointer"
           onClick={async (e: any) => {
             e.preventDefault();
 
@@ -224,7 +224,10 @@ function Comment({
           </p>
         </div>
         <div className="items-center">
-          <FontAwesomeIcon className="clickable grey-5 mr8" icon={faClock} />
+          <FontAwesomeIcon
+            className="cursor-pointer grey-5 mr8"
+            icon={faClock}
+          />
           <p className="grey-5 fs-16">
             {dayjs(comment.server_timestamp).fromNow()}
           </p>

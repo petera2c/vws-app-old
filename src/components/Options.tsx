@@ -37,7 +37,7 @@ const OptionsComponent = ({
           <div className="flex flex-col bg-white shadow-2 br8 gap-2 pa16">
             {objectUserID === userID && (
               <div
-                className="button-8 clickable items-center justify-between gap-2"
+                className="button-8 cursor-pointer items-center justify-between gap-2"
                 onClick={(e: any) => {
                   e.preventDefault();
                   editFunction(objectID);
@@ -49,7 +49,7 @@ const OptionsComponent = ({
             )}
             {objectUserID === userID && (
               <div
-                className="button-8 clickable items-center justify-between gap-2"
+                className="button-8 cursor-pointer items-center justify-between gap-2"
                 onClick={(e: any) => {
                   e.preventDefault();
                   deleteFunction(objectID);
@@ -61,7 +61,7 @@ const OptionsComponent = ({
             )}
             {objectUserID !== userID && (
               <div
-                className="button-8 clickable items-center justify-between gap-2"
+                className="button-8 cursor-pointer items-center justify-between gap-2"
                 onClick={(e: any) => {
                   e.preventDefault();
                   if (canUserInteractFunction) return canUserInteractFunction();
@@ -75,7 +75,7 @@ const OptionsComponent = ({
             )}
             {objectUserID !== userID && (
               <div
-                className="button-8 clickable items-center justify-between gap-2"
+                className="button-8 cursor-pointer items-center justify-between gap-2"
                 onClick={(e: any) => {
                   e.preventDefault();
                   if (canUserInteractFunction) return canUserInteractFunction();
@@ -92,7 +92,7 @@ const OptionsComponent = ({
         placement="bottomRight"
         trigger={["click"]}
       >
-        <div className="clickable pa16">
+        <div className="cursor-pointer pa16">
           <FontAwesomeIcon className="grey-9" icon={faEllipsisV} />
         </div>
       </Dropdown>

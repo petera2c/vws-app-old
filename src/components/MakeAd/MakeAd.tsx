@@ -27,7 +27,7 @@ function MakeAd({ banner, className, layoutKey, slot }: any) {
     else
       return (
         <div
-          className={"flex w-full full-center test3 br8 " + className}
+          className={"flex full-center w-full test3 br8 " + className}
           style={{
             minWidth: "100px",
             width: "100%",

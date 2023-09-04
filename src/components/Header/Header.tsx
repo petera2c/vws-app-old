@@ -31,7 +31,6 @@ import {
   faHouse,
   faSearch,
   faSignOut,
-  faTimes,
   faUser,
   faUserAstronaut,
 } from "@fortawesome/free-solid-svg-icons";
@@ -116,11 +115,11 @@ function Header() {
     <div className="flex flex-col w-full">
       <div className="flex flex-col w-full justify-center bg-white border-top large active">
         <div className="grid-3 w-full items-center px32 py8">
-          <div className="full-center">
+          <div className="flex full-center">
             <Link href="/">
               <img
                 alt="Go Home"
-                className="clickable"
+                className="cursor-pointer"
                 src="/svgs/icon.svg"
                 style={{ height: "50px", width: "50px" }}
               />
@@ -204,7 +203,7 @@ function Header() {
               </Button>
             )}
             {user && (
-              <div className="items-center gap-4">
+              <div className="flex items-center gap-4">
                 <Dropdown
                   overlay={
                     <div className="bg-white shadow-2 pa8 br8">
@@ -245,7 +244,7 @@ function Header() {
                   placement="bottomRight"
                   trigger={["click"]}
                 >
-                  <div className="grow items-center overflow-hidden clickable gap-2">
+                  <div className="grow items-center overflow-hidden cursor-pointer gap-2">
                     <DisplayName
                       displayName={userBasicInfo?.displayName}
                       isLink={false}
@@ -284,7 +283,7 @@ function Header() {
                   }}
                   trigger={["click"]}
                 >
-                  <div className="clickable relative">
+                  <div className="cursor-pointer relative">
                     <FontAwesomeIcon className="blue" icon={faBell} size="2x" />
                     {notificationCounter > 0 && (
                       <p
@@ -305,14 +304,9 @@ function Header() {
             )}
           </div>
         </div>
-
-        <StarterModal
-          activeModal={activeModal}
-          setActiveModal={setActiveModal}
-        />
       </div>
       {user && isUserInQueue && (
-        <div className="w-full full-center bg-white border-top gap-2 py8">
+        <div className="flex full-center w-full bg-white border-top gap-2 py8">
           <p>You are in queue to chat with a stranger</p>
           <Button onClick={() => leaveQueue(user.uid)} size="large" type="link">
             Leave Queue
@@ -320,7 +314,7 @@ function Header() {
         </div>
       )}
       {user && !user.emailVerified && (
-        <div className="w-full full-center bg-blue-2">
+        <div className="flex full-center w-full bg-blue-2">
           <h4 className="text-center mr16">
             Please verify your email address!
           </h4>
@@ -350,7 +344,7 @@ function AccountLink({ icon, link, onClick, pathname, text }: any) {
     return (
       <Link
         className={
-          "w-full items-center grid-1 button-4 clickable py8 " +
+          "w-full items-center grid-1 button-4 cursor-pointer py8 " +
           isPageActive(link, pathname)
         }
         href={link}
@@ -365,7 +359,7 @@ function AccountLink({ icon, link, onClick, pathname, text }: any) {
   if (onClick)
     return (
       <div
-        className="w-full items-center grid-1 button-4 clickable py8"
+        className="w-full items-center grid-1 button-4 cursor-pointer py8"
         onClick={onClick}
       >
         <div className="full-center">

@@ -58,7 +58,7 @@ function VentsPage() {
         <div className="flex flex-col grow gap-4">
           <NewVentComponent miniVersion />
 
-          <div className="flex w-full full-center bg-white br8 gap-4 pa16">
+          <div className="flex full-center w-full bg-white br8 gap-4 pa16">
             <Link className="grow" href="/recent">
               <h2
                 className={
@@ -145,7 +145,7 @@ function VentsPage() {
               }
               hasMore={canLoadMore}
               loader={
-                <div className="w-full full-center">
+                <div className="flex full-center w-full">
                   <LoadingHeart />
                 </div>
               }

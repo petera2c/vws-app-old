@@ -1,7 +1,6 @@
 "use client";
 import React, { useContext, useEffect, useState } from "react";
 import dayjs from "dayjs";
-import TextArea from "react-textarea-autosize";
 import { Button, Input, message } from "antd";
 import DatePicker from "../../components/DatePicker";
 
@@ -30,6 +29,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Page from "@/components/containers/Page/Page";
 import DeleteAccountModal from "@/components/modals/DeleteAccount/DeleteAccount";
+import TextArea from "antd/es/input/TextArea";
 
 const AccountSection = () => {
   const { user, userBasicInfo, setUserBasicInfo } = useContext(UserContext);
@@ -92,8 +92,8 @@ const AccountSection = () => {
                 <p className="mb8">Display Name</p>
                 <div className="full-center bg-grey-4 py4 px8 br4">
                   <FontAwesomeIcon className="grey-5 mr8" icon={faMonument} />
-                  <input
-                    className="w-full no-border bg-grey-4 br4"
+                  <Input
+                    className="w-full"
                     onChange={(e) => setDisplayName(e.target.value)}
                     placeholder="Art Vandalay"
                     type="text"
@@ -136,7 +136,7 @@ const AccountSection = () => {
                     className="grey-5 mr8"
                     icon={faTransgenderAlt}
                   />
-                  <input
+                  <Input
                     className="w-full no-border bg-grey-4 br4"
                     onChange={(e) => {
                       if (e.target.value.length > 50)
@@ -165,7 +165,7 @@ const AccountSection = () => {
                     className="grey-5 mr8"
                     icon={faTransgenderAlt}
                   />
-                  <input
+                  <Input
                     autoComplete="off"
                     className="w-full no-border bg-grey-4 br4"
                     onChange={(e) => {
@@ -197,7 +197,6 @@ const AccountSection = () => {
                 setBio(event.target.value);
               }}
               placeholder="Let us know about you :)"
-              minRows={3}
               value={bio}
             />
 
@@ -377,7 +376,7 @@ const AccountSection = () => {
                 <div className="full-center bg-grey-4 py4 px8 br4">
                   <FontAwesomeIcon className="grey-5 mr8" icon={faUnlockAlt} />
 
-                  <input
+                  <Input
                     autoComplete="off"
                     className="w-full no-border bg-grey-4 br4"
                     name="password-change"
@@ -400,7 +399,7 @@ const AccountSection = () => {
                       className="grey-5 mr8"
                       icon={faUnlockAlt}
                     />
-                    <input
+                    <Input
                       autoComplete="off"
                       className="w-full no-border bg-grey-4 br4"
                       name="confirm-password-change"
@@ -412,7 +411,8 @@ const AccountSection = () => {
                   </div>
                   <FontAwesomeIcon
                     className={
-                      "clickable ml8 " + (canSeePassword ? "blue active" : "")
+                      "cursor-pointer ml8 " +
+                      (canSeePassword ? "blue active" : "")
                     }
                     icon={faEye}
                     onClick={() => setCanSeePassword(!canSeePassword)}

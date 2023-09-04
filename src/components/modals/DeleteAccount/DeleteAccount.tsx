@@ -1,4 +1,4 @@
-import { Modal } from "antd";
+import { Input, Modal } from "antd";
 import React, { useRef, useState } from "react";
 
 function DeleteAccountModal({ close, submit }: { close: any; submit: any }) {
@@ -20,8 +20,7 @@ function DeleteAccountModal({ close, submit }: { close: any; submit: any }) {
               : "This will permanently delete every single item we have related to your account. None of this information will be recoverable. Are you sure you want to proceed?"}
           </p>
           {!isDeleting && (
-            <input
-              className="br4 pa8"
+            <Input
               onChange={(e) => {
                 setInputString(e.target.value);
               }}

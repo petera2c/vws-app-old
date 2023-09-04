@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { getIsMobileOrTablet } from "../../../util";
 
 import { sendPasswordReset } from "./util";
-import { Modal } from "antd";
+import { Input, Modal } from "antd";
 import { useRecoilState } from "recoil";
 import { starterModalAtom } from "@/atoms/ModalVisibility";
 
@@ -35,11 +35,11 @@ const ForgotPasswordModal = () => {
         </div>
 
         <div className="w-full flex flex-col">
-          <div className="w-full full-center px32">
+          <div className="flex full-center w-full px32">
             <p className="w-full text-center border-bottom py16">
               Already have an account?&nbsp;
               <span
-                className="clickable blue"
+                className="cursor-pointer blue"
                 onClick={() => setStarterModal("login")}
               >
                 Login
@@ -54,8 +54,8 @@ const ForgotPasswordModal = () => {
             })}
           >
             <div className="w-full flex flex-col px32 py16">
-              <input
-                className="py8 px16 mb8 br4"
+              <Input
+                className="mb8"
                 type="text"
                 placeholder="Email Address"
                 {...register("email", {
@@ -63,7 +63,7 @@ const ForgotPasswordModal = () => {
                 })}
               />
             </div>
-            <div className="w-full full-center border-top px32 py16">
+            <div className="flex full-center w-full border-top px32 py16">
               <button className="w-full bg-blue white py8 br4" type="submit">
                 Send Email Password Reset Link
               </button>

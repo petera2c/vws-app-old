@@ -14,7 +14,7 @@ function SignUpPage() {
       <div className="flex">
         <div className="grow full-center bg-white pa16 br8">
           <h1
-            className="grey-1 clickable text-center"
+            className="grey-1 cursor-pointer text-center"
             onClick={() => setStarterModal(true)}
           >
             Please <span className="blue">sign in</span> to view your profile :)

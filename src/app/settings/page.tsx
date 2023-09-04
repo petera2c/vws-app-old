@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { doc, updateDoc } from "@firebase/firestore";
 import { db } from "../../config/db_init";
 import { useDocument } from "react-firebase-hooks/firestore";
-import { Button, message } from "antd";
+import { Button, Input, message } from "antd";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -318,7 +318,7 @@ const Setting = ({
 
   return (
     <div
-      className="clickable items-center"
+      className="cursor-pointer items-center"
       onClick={() => {
         if (setAll) {
           handleChange(master, !settingsSnapshot.data()[master]);
@@ -327,7 +327,7 @@ const Setting = ({
         } else handleChange(main, !settingsSnapshot.data()[main]);
       }}
     >
-      <input
+      <Input
         className="mr8"
         checked={settingsSnapshot.data()[main]}
         style={{ minWidth: "13px" }}

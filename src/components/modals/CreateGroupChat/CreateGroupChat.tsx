@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { off } from "@firebase/database";
-import { Divider, Modal, message } from "antd";
+import { Divider, Input, Modal, message } from "antd";
 
 import KarmaBadge from "../../views/KarmaBadge";
 
@@ -82,16 +82,14 @@ function GroupChatCreateModal({ close, groupChatEditting }: any) {
           {isNewGroupChatOrOwner && (
             <div className="flex flex-col gap-4">
               <h4>Change Chat Name or Add Users</h4>
-              <input
-                className="fs-22 br4 pa8"
+              <Input
                 onChange={(e) => {
                   setChatNameString(e.target.value);
                 }}
                 placeholder="Chat Name"
                 value={chatNameString}
               />
-              {/* <input
-                className="fs-22 br4 pa8"
+              {/* <Input
                 onChange={(e) => {
                   setUserSearchString(e.target.value);
                   usersIndex

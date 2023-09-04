@@ -1,4 +1,4 @@
-import { Modal } from "antd";
+import { Input, Modal } from "antd";
 import React, { useState } from "react";
 
 const ReportModal = ({ close, submit }: any) => {
@@ -39,7 +39,7 @@ const ReportModal = ({ close, submit }: any) => {
         <div className="flex flex-col w-full pa16">
           <h6 className="blue bold mb16">Reasons for the report</h6>
           <div
-            className="clickable items-center mb16"
+            className="cursor-pointer items-center mb16"
             onClick={() =>
               handleChange({
                 option: 1,
@@ -47,7 +47,7 @@ const ReportModal = ({ close, submit }: any) => {
               })
             }
           >
-            <input
+            <Input
               className="mr8"
               checked={violence}
               style={{ minWidth: "13px" }}
@@ -56,7 +56,7 @@ const ReportModal = ({ close, submit }: any) => {
             <p>Threatening or explicit violence</p>
           </div>
           <div
-            className="clickable items-center mb16"
+            className="cursor-pointer items-center mb16"
             onClick={() =>
               handleChange({
                 abuse: !abuse,
@@ -64,7 +64,7 @@ const ReportModal = ({ close, submit }: any) => {
               })
             }
           >
-            <input
+            <Input
               className="mr8"
               checked={abuse}
               style={{ minWidth: "13px" }}
@@ -73,7 +73,7 @@ const ReportModal = ({ close, submit }: any) => {
             <p>Commits abuse or is harmful</p>
           </div>
           <div
-            className="clickable items-center mb16"
+            className="cursor-pointer items-center mb16"
             onClick={() =>
               handleChange({
                 option: 3,
@@ -81,7 +81,7 @@ const ReportModal = ({ close, submit }: any) => {
               })
             }
           >
-            <input
+            <Input
               className="mr8"
               checked={privateInformation}
               style={{ minWidth: "13px" }}
@@ -90,7 +90,7 @@ const ReportModal = ({ close, submit }: any) => {
             <p>Private and personal information</p>
           </div>
           <div
-            className="clickable items-center mb16"
+            className="cursor-pointer items-center mb16"
             onClick={() =>
               handleChange({
                 illegal: !illegal,
@@ -98,7 +98,7 @@ const ReportModal = ({ close, submit }: any) => {
               })
             }
           >
-            <input
+            <Input
               className="mr8"
               checked={illegal}
               style={{ minWidth: "13px" }}
@@ -107,7 +107,7 @@ const ReportModal = ({ close, submit }: any) => {
             <p>Illegal activities</p>
           </div>
           <div
-            className="clickable items-center mb16"
+            className="cursor-pointer items-center mb16"
             onClick={() =>
               handleChange({
                 malicious: !malicious,
@@ -115,7 +115,7 @@ const ReportModal = ({ close, submit }: any) => {
               })
             }
           >
-            <input
+            <Input
               className="mr8"
               checked={malicious}
               style={{ minWidth: "13px" }}

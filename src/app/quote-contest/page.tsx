@@ -1,6 +1,5 @@
 "use client";
 import React, { useContext, useEffect, useState } from "react";
-import TextArea from "react-textarea-autosize";
 import dayjs from "dayjs";
 import { Button, message } from "antd";
 
@@ -38,6 +37,7 @@ import {
   faQuoteLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import UserBasicInfo from "@/types/UserBasicInfo";
+import TextArea from "antd/es/input/TextArea";
 
 function QuoteContestPage() {
   const { user, userBasicInfo } = useContext(UserContext);
@@ -144,7 +144,6 @@ function QuoteContestPage() {
                   setMyQuote(event.target.value);
                 }}
                 placeholder="Change someone's day :)"
-                minRows={1}
                 value={myQuote}
               />
               <Button
@@ -227,7 +226,7 @@ const Quote = ({
 
   return (
     <div className={"py8 " + (isLast ? "" : "border-bottom")}>
-      <div className="grow items-center gap-4">
+      <div className="flex items-center grow gap-4">
         <FontAwesomeIcon className="blue" icon={faQuoteLeft} size="3x" />
         <div className="flex flex-col grow items-center gap-2">
           <p className="italic text-center">{quote.value}</p>
@@ -287,7 +286,9 @@ const Quote = ({
           )}
 
           <FontAwesomeIcon
-            className={`clickable button-8 ${hasLiked ? "blue" : "grey-5"}`}
+            className={`cursor-pointer button-8 ${
+              hasLiked ? "blue" : "grey-5"
+            }`}
             icon={faChevronCircleUp}
             onClick={async () => {
               const userInteractionIssues = userSignUpProgress(user);

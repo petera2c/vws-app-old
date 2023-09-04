@@ -19,7 +19,7 @@ function QuoteWinnersPage() {
   }, [setQuotes]);
 
   return (
-    <Page className="items-center gap-4 pa32">
+    <Page className="flex items-center gap-4 pa32">
       <div className="flex flex-col bg-white br8 gap-4 pa32">
         <h1 className="text-center lh-1">
           {thisMonthYearFormatted} Feel Good Quotes

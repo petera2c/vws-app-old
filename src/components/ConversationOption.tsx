@@ -116,7 +116,7 @@ function ConversationOption({
   return (
     <div
       className={
-        "w-full relative items-center justify-between clickable pa8 br4 " +
+        "w-full relative items-center justify-between cursor-pointer pa8 br4 " +
         (isActive ? "bg-blue-1" : "")
       }
       onClick={() => {
@@ -192,7 +192,7 @@ function ConversationOption({
         overlay={
           <div className="flex flex-col w-full bg-white border-all px16 py8 br8">
             <div
-              className="button-8 clickable items-center"
+              className="button-8 cursor-pointer items-center"
               onClick={() => {
                 setIsMuted(!isMuted);
                 muteChat(conversation.id, userID, !isMuted);
@@ -208,7 +208,7 @@ function ConversationOption({
               />
             </div>
             <div
-              className="button-8 clickable items-center"
+              className="button-8 cursor-pointer items-center"
               onClick={() => {
                 setBlockModal(!blockModal);
               }}
@@ -217,7 +217,7 @@ function ConversationOption({
               <FontAwesomeIcon className="ml8" icon={faUserLock} />
             </div>
             <div
-              className="button-9 clickable items-center"
+              className="button-9 cursor-pointer items-center"
               onClick={() => {
                 setDeleteConversationConfirm(true);
               }}
@@ -230,7 +230,7 @@ function ConversationOption({
         placement="bottomRight"
         trigger={["click"]}
       >
-        <div className="clickable px8">
+        <div className="cursor-pointer px8">
           <FontAwesomeIcon className="grey-9" icon={faEllipsisV} />
         </div>
       </Dropdown>

@@ -177,7 +177,7 @@ const Vent = ({
 
   if ((!vent || (vent && !vent.server_timestamp)) && isOnSingleVentPage)
     return (
-      <div className="w-full full-center">
+      <div className="flex full-center w-full">
         <LoadingHeart />
       </div>
     );
@@ -190,18 +190,18 @@ const Vent = ({
         <div className="w-full flex flex-col bg-white pt16 br8">
           <div
             className={`flex flex-col border-bottom gap-2 py16 px32 ${
-              disablePostOnClick ? "" : "clickable"
+              disablePostOnClick ? "" : "cursor-pointer"
             }`}
             onClick={() => {
               if (!disablePostOnClick) router.push(partialLink);
             }}
           >
-            <div className="flex w-full items-center gap-1">
+            <div className="flex items-center w-full gap-1">
               <MakeAvatar
                 displayName={author?.displayName}
                 userBasicInfo={author}
               />
-              <div className="grow items-center overflow-hidden gap-1">
+              <div className="flex items-center grow overflow-hidden gap-1">
                 <Link
                   className="overflow-hidden"
                   onClick={(e) => e.stopPropagation()}
@@ -262,7 +262,7 @@ const Vent = ({
           <SmartLink
             className={
               "main-container flex flex-col border-bottom py16 px32 " +
-              (disablePostOnClick ? "" : "clickable")
+              (disablePostOnClick ? "" : "cursor-pointer")
             }
             disablePostOnClick={disablePostOnClick}
             href={vent && vent.title && vent.id ? partialLink : ""}
@@ -290,17 +290,19 @@ const Vent = ({
           {!searchPreviewMode && (
             <div
               className={
-                "relative justify-between flex-wrap py16 px32 gap-2 " +
+                "relative flex justify-between flex-wrap py16 px32 gap-2 " +
                 (!searchPreviewMode && displayCommentField
                   ? "border-bottom"
                   : "")
               }
             >
-              <div className="items-center gap-4">
-                <div className="items-center gap-1">
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-1">
                   <img
                     alt="Support"
-                    className={`clickable heart ${hasLiked ? "red" : "grey-5"}`}
+                    className={`cursor-pointer heart ${
+                      hasLiked ? "red" : "grey-5"
+                    }`}
                     onClick={(e) => {
                       e.preventDefault();
 
@@ -334,7 +336,7 @@ const Vent = ({
                   href={vent && vent.title && vent.id ? partialLink : ""}
                 >
                   <FontAwesomeIcon
-                    className="clickable blue"
+                    className="cursor-pointer blue"
                     icon={faComments}
                     onClick={() => {
                       // @ts-ignore
@@ -358,9 +360,7 @@ const Vent = ({
                   }}
                 >
                   <FontAwesomeIcon className="mr8" icon={faComments} />
-                  <p className="ic ellipsis">
-                    Message {capitolizeFirstChar(author?.displayName)}
-                  </p>
+                  <p className="ic ellipsis">Message</p>
                 </div>
               )}
             </div>
@@ -479,7 +479,7 @@ const Vent = ({
             </div>
           )}
           {displayCommentField && !comments && (
-            <div className="w-full full-center">
+            <div className="flex full-center w-full">
               <LoadingHeart />
             </div>
           )}

@@ -31,7 +31,7 @@ export default SubscribeColumn;
 
 /*{user && !uniqueShareLink && (
   <Space
-    className="w-full full-center bg-white pa16 br8"
+    className="flex full-center w-full bg-white pa16 br8"
     direction="vertical"
   >
     <h4 className="text-center">Become a Subscriber</h4>

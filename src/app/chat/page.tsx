@@ -148,8 +148,8 @@ function Chat({
       <div className="justify-between w-full border-bottom pa16">
         <div
           className={
-            "items-center gap-1 " +
-            (activeConversation.is_group ? "clickable" : "")
+            "flex items-center gap-1 " +
+            (activeConversation.is_group ? "cursor-pointer" : "")
           }
           onClick={() => {
             if (!activeConversation.is_group) return;

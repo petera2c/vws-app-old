@@ -1,11 +1,12 @@
+import { omit } from "lodash";
 import React, { useEffect, useRef } from "react";
 
-function HandleOutsideClickContainer(props: {
+const HandleOutsideClickContainer = (props: {
   className?: string;
   children: any;
   close: any;
   style?: any;
-}) {
+}) => {
   const { children, close } = props;
   const someRef = useRef(null);
 
@@ -21,11 +22,12 @@ function HandleOutsideClickContainer(props: {
     };
   }, [close]);
 
+  const divProps = omit(props, ["close"]);
   return (
-    <div ref={someRef} {...props}>
+    <div ref={someRef} {...divProps}>
       {children}
     </div>
   );
-}
+};
 
 export default HandleOutsideClickContainer;
