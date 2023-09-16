@@ -51,14 +51,14 @@ function GroupChatCreateModal({ close, groupChatEditting }: any) {
   return (
     <Modal className="full-center normal-cursor" onCancel={close}>
       <div className="container large flex flex-col bg-white br4">
-        <div className="w-full justify-center bg-grey-10 py16">
+        <div className="w-full justify-center bg-grey-10 py-4">
           <h4 className="grey-11 text-center">
             {groupChatEditting
               ? groupChatEditting.chat_name
               : "Create New Group Chat"}
           </h4>
         </div>
-        <div className="flex flex-col grow overflow-auto py16 px32">
+        <div className="flex flex-col grow overflow-auto py-4 px-8">
           {existingUsers && existingUsers.length > 0 && (
             <div className="flex flex-col gap-4">
               <h4>Users In Chat</h4>
@@ -106,7 +106,7 @@ function GroupChatCreateModal({ close, groupChatEditting }: any) {
               {/* {hits.length > 0 && (
                 <div className="flex flex-col gap-4">
                   <h4>Search Results</h4>
-                  <div className="flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2">
                     {hits.map((hit) => {
                       if (
                         users.find((user) => user.id === hit.objectID) ||
@@ -141,7 +141,7 @@ function GroupChatCreateModal({ close, groupChatEditting }: any) {
                     {users.map((user:any) => {
                       return (
                         <button
-                          className="button-2 br4 gap-2 pa8"
+                          className="button-2 br4 gap-2 p-2"
                           key={user.id}
                           onClick={() => {
                             if (user.id === userBasicInfo?.id) {
@@ -190,15 +190,15 @@ function GroupChatCreateModal({ close, groupChatEditting }: any) {
           )}
         </div>
         {isNewGroupChatOrOwner && (
-          <div className="full-center border-top pa16">
+          <div className="full-center border-top p-4">
             <button
-              className="grey-1 border-all py8 px32 mx4 br4"
+              className="grey-1 border-all py-2 px-8 mx4 br4"
               onClick={() => close()}
             >
               Cancel
             </button>
             <button
-              className="button-2 py8 px32 mx4 br4"
+              className="button-2 py-2 px-8 mx4 br4"
               onClick={() => {
                 // saveGroup(
                 //   chatNameString,

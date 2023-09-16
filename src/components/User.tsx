@@ -63,7 +63,7 @@ const UserComponent = ({
 
   return (
     <Link
-      className="button-6 flex flex flex-col container twentyvw overflow-hidden bg-white br8 pa16"
+      className="button-6 flex flex flex-col container twentyvw overflow-hidden bg-white br8 p-4"
       href={"/profile?" + userID}
     >
       <div className="flex flex-col w-full grow gap-2">
@@ -76,7 +76,7 @@ const UserComponent = ({
         </div>
 
         <div className="grow justify-end flex flex-col gap-1">
-          <div className="w-full items-center flex-wrap gap-2">
+          <div className="flex items-center flex-wrap w-full gap-2">
             <DisplayName
               big
               displayName={userInfo?.displayName}
@@ -117,7 +117,7 @@ const UserComponent = ({
         {showAdditionaluserInformation && (
           <div className="flex flex-wrap">
             {additionalUserInfo?.education !== undefined && (
-              <div className="border-all items-center px8 py4 br4">
+              <div className="border-all items-center px-2 py-1 br4">
                 <p>
                   <FontAwesomeIcon className="mr8" icon={faSchool} />
                   {educationList[additionalUserInfo?.education]}
@@ -125,7 +125,7 @@ const UserComponent = ({
               </div>
             )}
             {additionalUserInfo?.kids !== undefined && (
-              <div className="border-all items-center px8 py4 br4">
+              <div className="border-all items-center px-2 py-1 br4">
                 <p>
                   <FontAwesomeIcon className="mr8" icon={faBaby} />
                   {kidsList[additionalUserInfo?.kids]}
@@ -133,7 +133,7 @@ const UserComponent = ({
               </div>
             )}
             {additionalUserInfo?.partying !== undefined && (
-              <div className="border-all items-center px8 py4 br4">
+              <div className="border-all items-center px-2 py-1 br4">
                 <p>
                   <FontAwesomeIcon className="mr8" icon={faGlassCheers} />
                   {partyingList[additionalUserInfo?.partying]}
@@ -141,7 +141,7 @@ const UserComponent = ({
               </div>
             )}
             {additionalUserInfo?.politics !== undefined && (
-              <div className="border-all items-center px8 py4 br4">
+              <div className="border-all items-center px-2 py-1 br4">
                 <p>
                   <FontAwesomeIcon className="mr8" icon={faLandmark} />
                   {politicalBeliefsList[additionalUserInfo?.politics]}
@@ -149,7 +149,7 @@ const UserComponent = ({
               </div>
             )}
             {additionalUserInfo?.religion !== undefined && (
-              <div className="border-all items-center px8 py4 br4">
+              <div className="border-all items-center px-2 py-1 br4">
                 <p>
                   <FontAwesomeIcon className="mr8" icon={faPray} />
                   {additionalUserInfo?.religion}
@@ -168,7 +168,7 @@ const UserComponent = ({
             )}
             {(!user || (user && user.uid !== userID)) && (
               <Button
-                className="w-full px16 py8 br8"
+                className="w-full px-4 py-2 br8"
                 onClick={(e) => {
                   e.preventDefault();
 

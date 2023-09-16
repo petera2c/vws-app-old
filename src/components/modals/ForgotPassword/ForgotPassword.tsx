@@ -31,13 +31,13 @@ const ForgotPasswordModal = () => {
           (isMobileOrTablet ? "mx8" : "container medium")
         }
       >
-        <div className="w-full justify-center bg-blue py16">
+        <div className="w-full justify-center bg-blue py-4">
           <h4 className="text-center white">Password Reset</h4>
         </div>
 
         <div className="w-full flex flex-col">
-          <div className="flex full-center w-full px32">
-            <p className="w-full text-center border-bottom py16">
+          <div className="flex full-center w-full px-8">
+            <p className="w-full text-center border-bottom py-4">
               Already have an account?&nbsp;
               <span
                 className="cursor-pointer blue"
@@ -54,7 +54,7 @@ const ForgotPasswordModal = () => {
               sendPasswordReset(data);
             })}
           >
-            <div className="flex flex-col w-full gap-2 px32 py16">
+            <div className="flex flex-col w-full gap-2 px-8 py-4">
               <Input
                 className="mb8"
                 type="text"
@@ -64,7 +64,7 @@ const ForgotPasswordModal = () => {
                 })}
               />
             </div>
-            <div className="flex full-center w-full border-top px32 py16">
+            <div className="flex full-center w-full border-top px-8 py-4">
               <Button className="w-full" size="large" type="primary">
                 Send Email Password Reset Link
               </Button>

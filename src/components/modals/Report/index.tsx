@@ -33,13 +33,13 @@ const ReportModal = ({ close, submit }: any) => {
   return (
     <Modal onCancel={close}>
       <div className="modal container medium flex flex-col overflow-auto bg-white br4">
-        <div className="w-full justify-center bg-grey-10 py16">
+        <div className="w-full justify-center bg-grey-10 py-4">
           <h4 className="grey-11 text-center">Report</h4>
         </div>
-        <div className="flex flex-col w-full pa16">
-          <h6 className="blue bold mb16">Reasons for the report</h6>
+        <div className="flex flex-col w-full p-4">
+          <h6 className="blue bold mb-4">Reasons for the report</h6>
           <div
-            className="cursor-pointer items-center mb16"
+            className="cursor-pointer items-center mb-4"
             onClick={() =>
               handleChange({
                 option: 1,
@@ -56,7 +56,7 @@ const ReportModal = ({ close, submit }: any) => {
             <p>Threatening or explicit violence</p>
           </div>
           <div
-            className="cursor-pointer items-center mb16"
+            className="cursor-pointer items-center mb-4"
             onClick={() =>
               handleChange({
                 abuse: !abuse,
@@ -73,7 +73,7 @@ const ReportModal = ({ close, submit }: any) => {
             <p>Commits abuse or is harmful</p>
           </div>
           <div
-            className="cursor-pointer items-center mb16"
+            className="cursor-pointer items-center mb-4"
             onClick={() =>
               handleChange({
                 option: 3,
@@ -90,7 +90,7 @@ const ReportModal = ({ close, submit }: any) => {
             <p>Private and personal information</p>
           </div>
           <div
-            className="cursor-pointer items-center mb16"
+            className="cursor-pointer items-center mb-4"
             onClick={() =>
               handleChange({
                 illegal: !illegal,
@@ -107,7 +107,7 @@ const ReportModal = ({ close, submit }: any) => {
             <p>Illegal activities</p>
           </div>
           <div
-            className="cursor-pointer items-center mb16"
+            className="cursor-pointer items-center mb-4"
             onClick={() =>
               handleChange({
                 malicious: !malicious,
@@ -125,9 +125,9 @@ const ReportModal = ({ close, submit }: any) => {
           </div>
         </div>
         {somethingChanged && (
-          <div className="full-center border-top pa16">
+          <div className="full-center border-top p-4">
             <button
-              className="button-2 py8 px32 mx4 br4"
+              className="button-2 py-2 px-8 mx4 br4"
               onClick={() => {
                 submit(option);
                 close();

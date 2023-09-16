@@ -17,7 +17,7 @@ function SubscribeColumn({
 
   if (!getIsMobileOrTablet())
     return (
-      <div className="container ad flex flex-col pl16">
+      <div className="container ad flex flex-col pl-4">
         <div className="sticky top-0 flex flex-col w-full gap-4">
           {uniqueShareLink && <UniqueShareLink user={user} />}
           <MakeAd slot={slot} />
@@ -31,7 +31,7 @@ export default SubscribeColumn;
 
 /*{user && !uniqueShareLink && (
   <Space
-    className="flex full-center w-full bg-white pa16 br8"
+    className="flex full-center w-full bg-white p-4 br8"
     direction="vertical"
   >
     <h4 className="text-center">Become a Subscriber</h4>

@@ -34,7 +34,7 @@ const SignUpModal = () => {
       open={starterModal === "sign-up"}
     >
       <div className={"flex flex-col "}>
-        <div className="w-full justify-center bg-blue py16">
+        <div className="w-full justify-center bg-blue py-4">
           <h4 className="text-center white">Create an Account</h4>
         </div>
 
@@ -45,7 +45,7 @@ const SignUpModal = () => {
               signUp(data, router, setStarterModal, setUserBasicInfo);
             })}
           >
-            <div className="flex flex-col w-full gap-2 px32 py16">
+            <div className="flex flex-col w-full gap-2 px-8 py-4">
               <Input
                 className="mb8"
                 type="text"
@@ -67,7 +67,8 @@ const SignUpModal = () => {
               <div className="flex w-full flex-wrap">
                 <div
                   className={
-                    "flex flex-col " + (isMobileOrTablet ? "x-100" : "x-50 pr8")
+                    "flex flex-col " +
+                    (isMobileOrTablet ? "x-100" : "x-50 pr-2")
                   }
                 >
                   <Input
@@ -81,7 +82,8 @@ const SignUpModal = () => {
                 </div>
                 <div
                   className={
-                    "flex flex-col " + (isMobileOrTablet ? "x-100" : "x-50 pl8")
+                    "flex flex-col " +
+                    (isMobileOrTablet ? "x-100" : "x-50 pl-2")
                   }
                 >
                   <div className="flex full-center w-full">
@@ -104,7 +106,7 @@ const SignUpModal = () => {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col w-full full-center border-top px32 py16">
+            <div className="flex flex-col w-full full-center border-top px-8 py-4">
               <Button className="w-full" size="large" type="primary">
                 Create Account
               </Button>

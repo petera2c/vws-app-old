@@ -22,7 +22,7 @@ const NewVentPage = () => {
   }, [setStarterModal, user]);
 
   return (
-    <Page className="pa16">
+    <Page className="p-4">
       <div className="flex">
         <div className="grow">
           <NewVentComponent ventID={search ? search.substring(1) : null} />

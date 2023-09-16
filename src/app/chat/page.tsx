@@ -145,7 +145,7 @@ function Chat({
 
   return (
     <div className="flex flex-col grow w-full full-center overflow-hidden br4">
-      <div className="justify-between w-full border-bottom pa16">
+      <div className="justify-between w-full border-bottom p-4">
         <div
           className={
             "flex items-center gap-1 " +
@@ -223,7 +223,7 @@ function Chat({
         )}
       </div>
 
-      <div className="flex flex-col w-full grow overflow-hidden px16">
+      <div className="flex flex-col w-full grow overflow-hidden px-4">
         {!messages ||
           ((messages && messages.length) === 0 && (
             <h4 className="text-center">
@@ -234,12 +234,12 @@ function Chat({
         <div
           className={
             "flex flex-col grow overflow-auto gap-2 " +
-            (canLoadMore ? "" : "pt8")
+            (canLoadMore ? "" : "pt-2")
           }
         >
           {canLoadMore && (
             <button
-              className="button-2 pa8 mb8 br4"
+              className="button-2 p-2 mb8 br4"
               onClick={() =>
                 getMessages(
                   activeConversation.id,
@@ -288,7 +288,7 @@ function Chat({
         }}
       >
         <div className="bg-none overflow-hidden full-center">
-          <div className="items-end pl16">
+          <div className="items-end pl-4">
             {activeChatUserBasicInfos && activeChatUserBasicInfos[0] && (
               <MakeAvatar
                 displayName={activeChatUserBasicInfos[0].displayName}
@@ -306,7 +306,7 @@ function Chat({
         }}
       >
         <div className="bg-none overflow-hidden full-center">
-          <div className="items-end pl16">
+          <div className="items-end pl-4">
             <p className="">
               {arrayOfUsersTyping.length}
               {arrayOfUsersTyping.length === 1 ? " person is " : " people are "}
@@ -320,7 +320,7 @@ function Chat({
         <div
           className={
             "w-full border-top  " +
-            (isMobileOrTablet ? "" : "items-center pr16")
+            (isMobileOrTablet ? "" : "items-center pr-4")
           }
         >
           <textarea
@@ -371,7 +371,7 @@ function Chat({
           />
           <button
             className={
-              "button-2 " + (isMobileOrTablet ? "px8 py4" : "px32 py8 br4")
+              "button-2 " + (isMobileOrTablet ? "px-2 py-1" : "px-8 py-2 br4")
             }
             onClick={() => {
               if (!messageString) return;

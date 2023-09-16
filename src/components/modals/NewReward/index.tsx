@@ -28,7 +28,7 @@ function NewRewardModal({ close, newReward }: { close: any; newReward: any }) {
     >
       <div
         className={
-          "modal flex flex-col items-center overflow-auto bg-white pa32 br8 " +
+          "modal flex flex-col items-center overflow-auto bg-white p-8 br8 " +
           (isMobileOrTablet ? "mx8" : "container medium")
         }
       >

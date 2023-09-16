@@ -47,7 +47,7 @@ function SettingsSection() {
     return (
       <div
         className={
-          "items-center container flex flex-col px16 " +
+          "items-center container flex flex-col px-4 " +
           (isMobileOrTablet ? "mobile-full" : "large")
         }
       >
@@ -56,9 +56,9 @@ function SettingsSection() {
     );
 
   return (
-    <Page className="pa16">
+    <Page className="p-4">
       <div className="flex">
-        <div className="flex flex-col grow bg-white br8 gap-4 mb2 pa16">
+        <div className="flex flex-col grow bg-white br8 gap-4 mb2 p-4">
           <div className="flex flex-col">
             <h6 className="blue bold">Master Notifications</h6>
             <Setting
@@ -112,7 +112,7 @@ function SettingsSection() {
             />
           </div>
 
-          <div className="flex flex-col pl32">
+          <div className="flex flex-col pl-8">
             <h6 className="blue bold">Email Notifications</h6>
             <Setting
               description="Email me when I post a new vent"
@@ -164,7 +164,7 @@ function SettingsSection() {
             />
           </div>
 
-          <div className="flex flex-col pl32">
+          <div className="flex flex-col pl-8">
             <h6 className="blue bold">Mobile Push Notifications</h6>
             <Setting
               description="Send a notification to my phone when I post a new vent"
@@ -287,7 +287,7 @@ const UserDisplay = ({
 
   return (
     <button
-      className="button-2 fs-18 br4 gap-2 pa8"
+      className="button-2 fs-18 br4 gap-2 p-2"
       onClick={() => unblockUser(blockedUserID, setBlockedUsers, userID)}
     >
       {userBasicInfo?.displayName}

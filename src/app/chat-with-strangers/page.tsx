@@ -42,10 +42,10 @@ function ChatWithStrangersPage() {
   }, [user]);
 
   return (
-    <Page className="pa16">
+    <Page className="p-4">
       <div className="flex">
         <div className="flex flex-col grow full-center gap-8">
-          <div className="container medium flex flex-col items-center bg-white br8 pa32">
+          <div className="container medium flex flex-col items-center bg-white br8 p-8">
             <h1 className="text-center">Chat With Strangers</h1>
             <p className="text-center">
               This button will only connect you with someone you have no current
@@ -69,7 +69,7 @@ function ChatWithStrangersPage() {
               <div
                 className={
                   "flex flex-col w-full grow full-center " +
-                  (isMobileOrTablet ? "py32" : "py64")
+                  (isMobileOrTablet ? "py-8" : "py-16")
                 }
               >
                 {/* <FontAwesomeIcon
@@ -97,7 +97,7 @@ function ChatWithStrangersPage() {
               <div
                 className={
                   "flex flex-col w-full grow full-center " +
-                  (isMobileOrTablet ? "py32" : "py64")
+                  (isMobileOrTablet ? "py-8" : "py-16")
                 }
               >
                 <FontAwesomeIcon

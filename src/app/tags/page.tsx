@@ -24,7 +24,7 @@ function IndividualTag() {
 
   return (
     <Page
-      className="br-grey-2 pt32 px16 pb16"
+      className="br-grey-2 pt-8 px-4 pb-4"
       description={
         "Read vents about " +
         viewTagFunction(tagID) +
@@ -35,7 +35,7 @@ function IndividualTag() {
     >
       <div className="flex">
         <div className="flex flex-col grow gap-4">
-          <div className="flex flex-col bg-white br8 gap-4 pa32">
+          <div className="flex flex-col bg-white br8 gap-4 p-8">
             <h1 className="text-center">{`Recent Vents About ${viewTagFunction(
               tagID
             )}`}</h1>

@@ -28,7 +28,7 @@ function OnlineUsers() {
   }, [setFirstOnlineUsers, setOnlineUsers, setTotalOnlineUsers, userLoadCount]);
 
   return (
-    <Page className="flex flex-col items-center bg-blue-2 gap-4 pa16">
+    <Page className="flex flex-col items-center bg-blue-2 gap-4 p-4">
       <div className="flex justify-center flex-wrap gap-4">
         {onlineUsers.map(({ lastOnline, userID }, index) => {
           return (

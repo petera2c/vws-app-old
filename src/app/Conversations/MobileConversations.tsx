@@ -57,7 +57,7 @@ function MobileConversations() {
   return (
     <Page className="bg-blue-2">
       <div
-        className="grow flex flex-col overflow-auto bg-white pa8 br4"
+        className="grow flex flex-col overflow-auto bg-white p-2 br4"
         style={{ display: activeConversation ? "none" : "flex" }}
       >
         {conversations.length === 0 && (
@@ -86,7 +86,7 @@ function MobileConversations() {
         })}
         {!userSignUpProgress(user, true) && canLoadMore && (
           <button
-            className="button-2 pa8 my8 br4"
+            className="button-2 p-2 my8 br4"
             onClick={() => {
               getConversations(
                 conversations,
@@ -109,7 +109,7 @@ function MobileConversations() {
       {activeConversation && (
         <div className="container mobile-full flex flex-col overflow-hidden grow bg-white">
           {!activeConversation && user && user.emailVerified && (
-            <Link className="grey-1 text-center pa32" href="/people-online">
+            <Link className="grey-1 text-center p-8" href="/people-online">
               <h4 className="text-center">
                 Check your messages from friends on Vent With Strangers,{" "}
               </h4>
@@ -118,7 +118,7 @@ function MobileConversations() {
           )}
           {(!user || (user && !user.emailVerified)) && (
             <h4
-              className="button-1 grey-1 text-center pa32"
+              className="button-1 grey-1 text-center p-8"
               onClick={() => {
                 if (!user) setStarterModal(true);
                 else {

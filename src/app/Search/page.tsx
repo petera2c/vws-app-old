@@ -44,7 +44,7 @@ function SearchPage() {
   //     <div className="gap-4">
   //       <button
   //         className={
-  //           "button-2 no-bold py8 px16 my16 br8 " + (isUsers ? "active" : "")
+  //           "button-2 no-bold py-2 px-4 my-4 br8 " + (isUsers ? "active" : "")
   //         }
   //         onClick={() => setIsUsers(true)}
   //       >
@@ -52,7 +52,7 @@ function SearchPage() {
   //       </button>
   //       <button
   //         className={
-  //           "button-2 no-bold py8 px16 my16 br8 " + (isUsers ? "" : "active")
+  //           "button-2 no-bold py-2 px-4 my-4 br8 " + (isUsers ? "" : "active")
   //         }
   //         onClick={() => setIsUsers(false)}
   //       >
@@ -64,8 +64,8 @@ function SearchPage() {
   //         className={
   //           "flex-wrap full-center gap-8 " +
   //           (isMobileOrTablet
-  //             ? "container mobile-full px16"
-  //             : "container large px16")
+  //             ? "container mobile-full px-4"
+  //             : "container large px-4")
   //         }
   //       >
   //         {users &&
@@ -93,10 +93,10 @@ function SearchPage() {
   //     {!isUsers && (
   //       <div
   //         className={
-  //           "flex flex-col items-center py32 " +
+  //           "flex flex-col items-center py-8 " +
   //           (isMobileOrTablet
-  //             ? "container mobile-full px16"
-  //             : "container large px16")
+  //             ? "container mobile-full px-4"
+  //             : "container large px-4")
   //         }
   //       >
   //         {vents && (

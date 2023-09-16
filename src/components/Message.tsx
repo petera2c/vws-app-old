@@ -44,7 +44,7 @@ function Message({
       <div className="w-full">
         {urlify(message.body).map((obj, index) => {
           return (
-            <p className="grey-11 py8" key={index}>
+            <p className="grey-11 py-2" key={index}>
               {obj}
             </p>
           );
@@ -60,7 +60,7 @@ function Message({
           }
           style={{ maxWidth: "80%" }}
         >
-          <div className="flex flex-col grow px16 py8">
+          <div className="flex flex-col grow px-4 py-2">
             {message.userID !== userID &&
               shouldShowDisplayName &&
               displayName && <p className="orange">{displayName}</p>}
@@ -82,7 +82,7 @@ function Message({
           </div>
           <div className="relative br4">
             <div
-              className="cursor-pointer items-end pr2"
+              className="cursor-pointer items-end pr-0.5"
               onClick={() => {
                 setMessageOptions(!messageOptions);
               }}
@@ -99,10 +99,10 @@ function Message({
             </div>
             {messageOptions && (
               <div
-                className="absolute top-100 left-0 pt4"
+                className="absolute top-100 left-0 pt-1"
                 style={{ zIndex: 1 }}
               >
-                <div className="flex flex-col w-full bg-white border-all px16 py8 br8">
+                <div className="flex flex-col w-full bg-white border-all px-4 py-2 br8">
                   <div
                     className="button-8 cursor-pointer items-center"
                     onClick={(e: any) => {

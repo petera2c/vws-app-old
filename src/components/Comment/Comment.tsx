@@ -97,7 +97,7 @@ function Comment({
         borderBottomRightRadius: arrayLength - 1 === commentIndex ? "8px" : "",
       }}
     >
-      <div className="justify-between py16">
+      <div className="justify-between py-4">
         <DisplayName
           displayName={userBasicInfo?.displayName}
           isUserOnline={isUserOnline}
@@ -160,7 +160,7 @@ function Comment({
                 markup="@{{[[[__id__]]]||[[[__display__]]]}}"
                 renderSuggestion={(entry) => {
                   return (
-                    <div className="button-7 flex flex-col pa16" key={entry.id}>
+                    <div className="button-7 flex flex-col p-4" key={entry.id}>
                       <h6>{entry.display}</h6>
                     </div>
                   );
@@ -171,13 +171,13 @@ function Comment({
           </div> */}
           <div className="mt8">
             <button
-              className="button-5 px32 py8 mr8 br4"
+              className="button-5 px-8 py-2 mr8 br4"
               onClick={() => setEditingComment(false)}
             >
               Cancel
             </button>
             <button
-              className="button-2 px32 py8 br4"
+              className="button-2 px-8 py-2 br4"
               onClick={() => {
                 editComment(comment.id, commentString, setComments);
 
@@ -189,7 +189,7 @@ function Comment({
           </div>
         </div>
       )}
-      <div className="flex items-center justify-between flex-wrap gap-2 py16">
+      <div className="flex items-center justify-between flex-wrap gap-2 py-4">
         <div
           className="flex items-center cursor-pointer"
           onClick={async (e: any) => {

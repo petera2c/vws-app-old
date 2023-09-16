@@ -5,12 +5,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { login } from "./util";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-import { Button, Input, Modal } from "antd";
+import { Button, Form, Input, Modal } from "antd";
 import { useRecoilState } from "recoil";
 import { starterModalAtom } from "@/atoms/ModalVisibility";
 
 const LoginModal = () => {
-  const { register, handleSubmit } = useForm();
   const [starterModal, setStarterModal] = useRecoilState(starterModalAtom);
 
   const [canSeePassword, setCanSeePassword] = useState(false);
@@ -22,33 +21,39 @@ const LoginModal = () => {
       open={starterModal === "sign-in" || starterModal === true}
     >
       <div className="flex flex-col">
-        <div className="w-full justify-center bg-blue py16">
+        <div className="w-full justify-center bg-blue py-4">
           <h4 className="text-center white">Sign In</h4>
         </div>
         <div className="w-full flex flex-col">
-          <form
+          <Form
             className="w-full flex flex-col"
-            onSubmit={handleSubmit((formData) => {
-              login(formData, setStarterModal);
-            })}
+            onFinish={(values: any) => {
+              console.log(values);
+              //login(values, setStarterModal);
+            }}
           >
-            <div className="flex flex-col w-full gap-2 px32 py16">
-              <Input
-                type="text"
-                placeholder="Email Address"
-                {...register("email", {
-                  required: "Required",
-                })}
-              />
-              <div className="flex full-center w-full">
+            <div className="flex flex-col w-full px-8 py-4">
+              <Form.Item name="email">
                 <Input
-                  className="grow"
-                  type={canSeePassword ? "" : "password"}
-                  placeholder="Password"
-                  {...register("password", {
-                    required: "Required",
-                  })}
+                  className="mb-4"
+                  placeholder="Email Address"
+                  type="text"
                 />
+              </Form.Item>
+              <div className="flex full-center w-full mb-1">
+                <Form.Item
+                  className="grow"
+                  name="password"
+                  rules={[
+                    { required: true, message: "Please input your email!" },
+                  ]}
+                >
+                  <Input
+                    className="grow"
+                    placeholder="Password"
+                    type={canSeePassword ? "" : "password"}
+                  />
+                </Form.Item>
                 <FontAwesomeIcon
                   className={
                     "cursor-pointer ml8 " + (canSeePassword ? "blue" : "")
@@ -69,8 +74,13 @@ const LoginModal = () => {
               </p>
             </div>
 
-            <div className="flex flex-col w-full full-center border-top px32 py16">
-              <Button className="w-full" size="large" type="primary">
+            <div className="flex flex-col w-full full-center border-top gap-2 px-8 py-4">
+              <Button
+                className="w-full"
+                htmlType="submit"
+                size="large"
+                type="primary"
+              >
                 Sign In
               </Button>
 
@@ -87,7 +97,7 @@ const LoginModal = () => {
                 </span>
               </p>
             </div>
-          </form>
+          </Form>
         </div>
       </div>
     </Modal>

@@ -18,12 +18,12 @@ function AboutUsPage() {
   const [activeBadge, setActiveBadge] = useState(0);
 
   return (
-    <Page className="pa16">
+    <Page className="p-4">
       <div className="flex">
-        <div className="flex flex-col grow bg-white br8 gap-4 pa32">
+        <div className="flex flex-col grow bg-white br8 gap-4 p-8">
           <div className="flex flex-col gap-2">
             <h1 className="text-center">Vent Online With People Who Care</h1>
-            <p className="text-center fw-400 mb16">
+            <p className="text-center fw-400 mb-4">
               People care and help is here. Vent and chat anonymously to be a
               part of a community committed to making the world a better place.
               This is a website for people that want to be heard and people that
@@ -94,7 +94,7 @@ function AboutUsPage() {
                   userBasicInfo={{ karma: 10000 }}
                 />
               </div>
-              <div className="flex flex-col w-full full-center pb16">
+              <div className="flex flex-col w-full full-center pb-4">
                 <h6>{badgeDescriptions[activeBadge].title}</h6>
                 <ul>
                   {badgeDescriptions[activeBadge].benefits.map(
@@ -109,7 +109,7 @@ function AboutUsPage() {
 
           <div className="flex flex-col gap-2">
             <h4>What Can You Do on VWS?</h4>
-            <ul className="pl64">
+            <ul className="pl-16">
               <div className="flex flex-col gap-2">
                 <li>Chat anonymously with strangers</li>
                 <li>
@@ -132,7 +132,7 @@ function AboutUsPage() {
 
           <div className="flex flex-col gap-2">
             <h4>How Do You Gain Karma Points?</h4>
-            <ul className="pl64">
+            <ul className="pl-16">
               <div className="flex flex-col gap-2">
                 <li>
                   <span className="green">+4</span> For an upvote on your
@@ -166,7 +166,7 @@ function AboutUsPage() {
 
           <div className="flex flex-col gap-2">
             <h4>Where Else Can You Access VWS?</h4>
-            <ul className="pl64">
+            <ul className="pl-16">
               <li>
                 <a
                   className="underline no-bold a-tag-common-link"
@@ -188,7 +188,7 @@ function AboutUsPage() {
           <h6 className="bold">Follow Us on Social Media!</h6>
           <div className="gap-4">
             <a
-              className="button-4 fs-20 pb4"
+              className="button-4 fs-20 pb-1"
               href="https://blog.ventwithstrangers.com"
               rel="noopener noreferrer"
               target="_blank"
@@ -201,7 +201,7 @@ function AboutUsPage() {
               target="_blank"
             >
               <FontAwesomeIcon
-                className="cursor-pointer common-border white round-icon round pa8"
+                className="cursor-pointer common-border white round-icon round p-2"
                 // @ts-ignore
                 icon={faInstagram}
                 style={{
@@ -215,7 +215,7 @@ function AboutUsPage() {
               target="_blank"
             >
               <FontAwesomeIcon
-                className="cursor-pointer common-border white round-icon round pa8"
+                className="cursor-pointer common-border white round-icon round p-2"
                 // @ts-ignore
                 icon={faFacebook}
                 style={{
@@ -229,7 +229,7 @@ function AboutUsPage() {
               target="_blank"
             >
               <FontAwesomeIcon
-                className="cursor-pointer common-border white round-icon round pa8"
+                className="cursor-pointer common-border white round-icon round p-2"
                 // @ts-ignore
                 icon={faLinkedinIn}
                 style={{

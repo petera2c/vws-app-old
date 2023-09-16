@@ -74,12 +74,12 @@ function QuoteContestPage() {
   }, [user]);
 
   return (
-    <Page className="pa16">
+    <Page className="p-4">
       <div className="flex gap-2" style={{ height: "100%" }}>
         <div className="flex flex-col grow">
           <div className="flex flex-col grow overflow-hidden bg-white br8">
-            <div className="flex flex-col grow overflow-auto gap-2 pt8 px16">
-              <div className="flex flex-col border-bottom gap-2 px16 pb16">
+            <div className="flex flex-col grow overflow-auto gap-2 pt-2 px-4">
+              <div className="flex flex-col border-bottom gap-2 px-4 pb-4">
                 <h1 className="text-center">Feel Good Quote Contest</h1>
                 <div className="flex flex-col gap-1">
                   <p className="text-center">
@@ -120,12 +120,12 @@ function QuoteContestPage() {
 
             <div
               className={
-                "flex w-full shadow-2 gap-2 pa16 " +
+                "flex w-full shadow-2 gap-2 p-4 " +
                 (isMobileOrTablet ? "flex-col" : "items-center")
               }
             >
               <TextArea
-                className="grow py8 px16 br4"
+                className="grow py-2 px-4 br4"
                 onChange={(event) => {
                   const userInteractionIssues = userSignUpProgress(user);
 
@@ -225,7 +225,7 @@ const Quote = ({
   if (isContentBlocked) return <div />;
 
   return (
-    <div className={"py8 " + (isLast ? "" : "border-bottom")}>
+    <div className={"py-2 " + (isLast ? "" : "border-bottom")}>
       <div className="flex items-center grow gap-4">
         <FontAwesomeIcon className="blue" icon={faQuoteLeft} size="3x" />
         <div className="flex flex-col grow items-center gap-2">

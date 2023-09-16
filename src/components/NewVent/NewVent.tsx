@@ -118,7 +118,7 @@ const NewVentComponent = ({ isBirthdayPost, miniVersion, ventID }: any) => {
       }}
     >
       <div
-        className={"flex flex-col br4 pa32 " + (isMinified ? "gap-2" : "gap-4")}
+        className={"flex flex-col br4 p-8 " + (isMinified ? "gap-2" : "gap-4")}
       >
         {!miniVersion && quote && (
           <div className="flex flex-col grow items-center">
@@ -227,7 +227,7 @@ const NewVentComponent = ({ isBirthdayPost, miniVersion, ventID }: any) => {
               value={tagText}
             />
             {searchedVentTags && searchedVentTags.length > 0 && (
-              <div className="flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2">
                 {searchedVentTags.map((tagHit: any) => (
                   <Tag
                     key={tagHit.id}
@@ -244,7 +244,7 @@ const NewVentComponent = ({ isBirthdayPost, miniVersion, ventID }: any) => {
         {!isMinified && tags && tags.length > 0 && (
           <div className="flex flex-col gap-2">
             <h5>Selected Tags</h5>
-            <div className="w-full flex-wrap gap-2">
+            <div className="flex flex-wrap w-full gap-2">
               {tags.map((tag: Tag, index) => (
                 <SelectedTag
                   postingDisableFunction={postingDisableFunction}
@@ -263,7 +263,7 @@ const NewVentComponent = ({ isBirthdayPost, miniVersion, ventID }: any) => {
           <div className="justify-end">
             {!saving && (
               <Button
-                className="bg-blue white px64 py8 br4"
+                className="bg-blue white px-16 py-2 br4"
                 onClick={() => {
                   if (postingDisableFunction) return postingDisableFunction();
 
@@ -336,7 +336,7 @@ const NewVentComponent = ({ isBirthdayPost, miniVersion, ventID }: any) => {
       </div>
       {!miniVersion && (
         <div
-          className="flex flex-col pa32"
+          className="flex flex-col p-8"
           style={{ borderTop: "2px solid var(--grey-color-2)" }}
         >
           <p>
@@ -372,7 +372,7 @@ function SelectedTag({
 }) {
   return (
     <div
-      className="button-2 br4 gap-2 pa8"
+      className="button-2 br4 gap-2 p-2"
       onClick={() => {
         if (postingDisableFunction) return postingDisableFunction();
 

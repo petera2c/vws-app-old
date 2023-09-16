@@ -57,17 +57,17 @@ const AvatarSection = () => {
   }, [setAvatar, user]);
 
   return (
-    <Page className="pa16">
+    <Page className="p-4">
       <div className="flex grow w-full">
         <div className="flex flex-col grow">
           <div
             className="overflow-hidden gap-4"
             style={{ maxHeight: "calc(70vh - 80px)" }}
           >
-            <div className="flex flex-col bg-white overflow-auto pa16 br8">
+            <div className="flex flex-col bg-white overflow-auto p-4 br8">
               <button
                 className={
-                  "flex items-center grey-1 gap-2 mb16 " +
+                  "flex items-center grey-1 gap-2 mb-4 " +
                   (activeSection === 0 ? "blue" : "")
                 }
                 onClick={() => setActiveSection(0)}
@@ -77,7 +77,7 @@ const AvatarSection = () => {
               </button>
               <button
                 className={
-                  "flex items-center grey-1 gap-2 mb16 " +
+                  "flex items-center grey-1 gap-2 mb-4 " +
                   (activeSection === 1 ? "blue" : "")
                 }
                 onClick={() => setActiveSection(1)}
@@ -87,7 +87,7 @@ const AvatarSection = () => {
               </button>
               <button
                 className={
-                  "flex items-center grey-1 gap-2 mb16 " +
+                  "flex items-center grey-1 gap-2 mb-4 " +
                   (activeSection === 2 ? "blue" : "")
                 }
                 onClick={() => setActiveSection(2)}
@@ -97,7 +97,7 @@ const AvatarSection = () => {
               </button>
               <button
                 className={
-                  "flex items-center grey-1 gap-2 mb16 " +
+                  "flex items-center grey-1 gap-2 mb-4 " +
                   (activeSection === 3 ? "blue" : "")
                 }
                 onClick={() => setActiveSection(3)}
@@ -107,7 +107,7 @@ const AvatarSection = () => {
               </button>
               <button
                 className={
-                  "flex items-center grey-1 gap-2 mb16 " +
+                  "flex items-center grey-1 gap-2 mb-4 " +
                   (activeSection === 4 ? "blue" : "")
                 }
                 onClick={() => setActiveSection(4)}
@@ -117,7 +117,7 @@ const AvatarSection = () => {
               </button>
               <button
                 className={
-                  "flex items-center grey-1 gap-2 mb16 " +
+                  "flex items-center grey-1 gap-2 mb-4 " +
                   (activeSection === 5 ? "blue" : "")
                 }
                 onClick={() => setActiveSection(5)}
@@ -127,7 +127,7 @@ const AvatarSection = () => {
               </button>
               <button
                 className={
-                  "flex items-center grey-1 gap-2 mb16 " +
+                  "flex items-center grey-1 gap-2 mb-4 " +
                   (activeSection === 6 ? "blue" : "")
                 }
                 onClick={() => setActiveSection(6)}
@@ -137,7 +137,7 @@ const AvatarSection = () => {
               </button>
               <button
                 className={
-                  "flex items-center grey-1 gap-2 mb16 " +
+                  "flex items-center grey-1 gap-2 mb-4 " +
                   (activeSection === 7 ? "blue" : "")
                 }
                 onClick={() => setActiveSection(7)}
@@ -160,7 +160,7 @@ const AvatarSection = () => {
                 <div key={index}>
                   <button
                     className={
-                      "grow grey-1 py16 " +
+                      "grow grey-1 py-4 " +
                       (index !== sectionsArray[activeSection].length - 1
                         ? "border-bottom "
                         : " ") +
@@ -179,7 +179,7 @@ const AvatarSection = () => {
               ))}
             </div>
           </div>
-          <div className="items-center justify-between mt16">
+          <div className="items-center justify-between mt-4">
             <Avatar
               // @ts-ignore
               avatarStyle="Circle"
@@ -195,7 +195,7 @@ const AvatarSection = () => {
               style={{ width: "100px", height: "100px" }}
             />
             <button
-              className="button-2 px16 py8 br4"
+              className="button-2 px-4 py-2 br4"
               onClick={() => saveAvatar(avatar, setUserBasicInfo, user!.uid)}
             >
               Save Avatar

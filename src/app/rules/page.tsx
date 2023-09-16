@@ -7,10 +7,10 @@ import Page from "@/components/containers/Page/Page";
 
 function RulesPage() {
   return (
-    <Page className="pa16">
+    <Page className="p-4">
       <div className="flex">
         <Space
-          className="items-center grow bg-white pa32 br8"
+          className="items-center grow bg-white p-8 br8"
           direction="vertical"
           size="large"
         >

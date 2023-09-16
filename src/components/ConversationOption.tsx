@@ -116,7 +116,7 @@ function ConversationOption({
   return (
     <div
       className={
-        "w-full relative items-center justify-between cursor-pointer pa8 br4 " +
+        "w-full relative items-center justify-between cursor-pointer p-2 br4 " +
         (isActive ? "bg-blue-1" : "")
       }
       onClick={() => {
@@ -126,7 +126,7 @@ function ConversationOption({
       }}
     >
       <div className="grow flex flex-col overflow-hidden">
-        <div className="items-center grow gap-1 mr16">
+        <div className="items-center grow gap-1 mr-4">
           <div
             className="items-end"
             style={{ width: userBasicInfoArray.length * 20 + 32 + "px" }}
@@ -190,7 +190,7 @@ function ConversationOption({
 
       <Dropdown
         overlay={
-          <div className="flex flex-col w-full bg-white border-all px16 py8 br8">
+          <div className="flex flex-col w-full bg-white border-all px-4 py-2 br8">
             <div
               className="button-8 cursor-pointer items-center"
               onClick={() => {
@@ -230,7 +230,7 @@ function ConversationOption({
         placement="bottomRight"
         trigger={["click"]}
       >
-        <div className="cursor-pointer px8">
+        <div className="cursor-pointer px-2">
           <FontAwesomeIcon className="grey-9" icon={faEllipsisV} />
         </div>
       </Dropdown>

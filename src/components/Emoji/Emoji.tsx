@@ -33,7 +33,7 @@ function Emoji({
 
   return (
     <HandleOutsideClick
-      className="flex flex-col relative pa8 mx8"
+      className="flex flex-col relative p-2 mx8"
       close={setDisplayEmojiDropdown}
     >
       <button onClick={() => setDisplayEmojiDropdown(!displayEmojiDropdown)}>

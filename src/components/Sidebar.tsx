@@ -51,7 +51,7 @@ function Sidebar() {
   }, [setFirstOnlineUsers, setTotalOnlineUsers]);
 
   return (
-    <div className="flex flex-col shrink-0 container small overflow-auto bg-white border-top gap-2 pt8 px16 pb16">
+    <div className="flex flex-col shrink-0 container small overflow-auto bg-white border-top gap-2 pt-2 px-4 pb-4">
       <SideBarLink
         icon={faUserFriends}
         link="/people-online"
@@ -121,7 +121,7 @@ const SideBarLink = ({
     return (
       <Link
         className={
-          "flex items-center button-4 py8 " +
+          "flex items-center button-4 py-2 " +
           isPageActive(link, pathname) +
           (firstOnlineUsers ? " grid-2" : " grid-1")
         }
@@ -168,7 +168,7 @@ const SideBarLink = ({
   if (onClick)
     return (
       <div
-        className="w-full items-center grid-1 button-4 cursor-pointer py8"
+        className="w-full items-center grid-1 button-4 cursor-pointer py-2"
         onClick={onClick}
       >
         <div className="flex full-center w-full">

@@ -14,7 +14,7 @@ function UniqueShareLink({ user }: { user: any }) {
 
   return (
     <div className="flex items-start w-full gap-2">
-      <div className="flex flex-col items-center bg-white br8 gap-2 pa16">
+      <div className="flex flex-col items-center bg-white br8 gap-2 p-4">
         <h4 className="text-center">Gain 100 karma points!</h4>
         <p className="text-center">
           Share our site! No one will know your profile or username from your

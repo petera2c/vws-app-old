@@ -17,7 +17,7 @@ function NotificationList({
       {notifications.map((notification, index) => {
         return (
           <Link
-            className="flex flex-col border-bottom grey-1 pa16"
+            className="flex flex-col border-bottom grey-1 p-4"
             key={index}
             href={notification.link}
           >
@@ -30,7 +30,7 @@ function NotificationList({
       })}
       {((notifications && notifications.length === 0) || !notifications) && (
         <div className="full-center">
-          <h6 className="fw-400 pa16">There are no notifications to show!</h6>
+          <h6 className="fw-400 p-4">There are no notifications to show!</h6>
         </div>
       )}
     </div>

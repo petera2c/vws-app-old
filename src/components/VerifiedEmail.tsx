@@ -30,10 +30,10 @@ function VerifiedEmail() {
       description=""
       title="Email Verified"
     >
-      <Space align="center" className="py32" direction="vertical">
+      <Space align="center" className="py-8" direction="vertical">
         <Space
           align="center"
-          className="container large bg-white pa16 br8"
+          className="container large bg-white p-4 br8"
           direction="vertical"
           size="small"
         >
@@ -46,7 +46,7 @@ function VerifiedEmail() {
                 : "Please try again :'("}
             </h1>
 
-            <p className="text-center mb16">
+            <p className="text-center mb-4">
               {!errorMessage
                 ? verifiedSuccessfully
                   ? "Click continue' to go home!"

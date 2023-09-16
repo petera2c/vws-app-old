@@ -27,7 +27,7 @@ function BirthdayModal({ close }: any) {
     >
       <div
         className={
-          "flex flex-col items-center overflow-auto bg-white pa32 br8 " +
+          "flex flex-col items-center overflow-auto bg-white p-8 br8 " +
           (isMobileOrTablet ? "mx8" : "container medium")
         }
       >

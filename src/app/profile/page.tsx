@@ -122,7 +122,7 @@ function ProfileSection() {
 
   return (
     <Page
-      className="pa16"
+      className="p-4"
       id="scrollable-div"
       title={
         userBasicInfo && userBasicInfo.displayName
@@ -139,7 +139,7 @@ function ProfileSection() {
           }}
         >
           {search && (
-            <div className="flex flex-col w-full overflow-hidden bg-white pa16 gap-2 br8">
+            <div className="flex flex-col w-full overflow-hidden bg-white p-4 gap-2 br8">
               <div className="flex full-center w-full">
                 <MakeAvatar
                   displayName={userBasicInfo?.displayName}
@@ -215,33 +215,33 @@ function ProfileSection() {
                 userInfo.partying !== undefined ||
                 userInfo.politics !== undefined ||
                 userInfo.religion !== undefined) && (
-                <div className="flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2">
                   {userInfo.education !== undefined && (
-                    <div className="border-all items-center px8 py4 br4">
+                    <div className="border-all items-center px-2 py-1 br4">
                       <FontAwesomeIcon className="mr8" icon={faSchool} />
                       <p>{educationList[userInfo.education]}</p>
                     </div>
                   )}
                   {userInfo.kids !== undefined && (
-                    <div className="border-all items-center px8 py4 br4">
+                    <div className="border-all items-center px-2 py-1 br4">
                       <FontAwesomeIcon className="mr8" icon={faBaby} />
                       <p>{kidsList[userInfo.kids]}</p>
                     </div>
                   )}
                   {userInfo.partying !== undefined && (
-                    <div className="border-all items-center px8 py4 br4">
+                    <div className="border-all items-center px-2 py-1 br4">
                       <FontAwesomeIcon className="mr8" icon={faGlassCheers} />
                       <p>{partyingList[userInfo.partying]}</p>
                     </div>
                   )}
                   {userInfo.politics !== undefined && (
-                    <div className="border-all items-center px8 py4 br4">
+                    <div className="border-all items-center px-2 py-1 br4">
                       <FontAwesomeIcon className="mr8" icon={faLandmark} />
                       <p>{politicalBeliefsList[userInfo.politics]}</p>
                     </div>
                   )}
                   {userInfo.religion !== undefined && (
-                    <div className="border-all items-center px8 py4 br4">
+                    <div className="border-all items-center px-2 py-1 br4">
                       <FontAwesomeIcon className="mr8" icon={faPray} />
                       <p>{userInfo.religion}</p>
                     </div>
@@ -253,7 +253,7 @@ function ProfileSection() {
                 (user ? search !== user.uid : true) && (
                   <div className="items-center justify-between">
                     <div
-                      className="button-2 flex-wrap px16 py8 br8"
+                      className="button-2 flex-wrap px-4 py-2 br8"
                       onClick={() => {
                         const userInteractionIssues = userSignUpProgress(user);
 
@@ -272,7 +272,7 @@ function ProfileSection() {
                       </p>
                     </div>
                     <div
-                      className="button-2 flex-wrap px16 py8 br8"
+                      className="button-2 flex-wrap px-4 py-2 br8"
                       onClick={() => {
                         const userInteractionIssues = userSignUpProgress(user);
 
@@ -323,7 +323,7 @@ function ProfileSection() {
                   search !== user.uid && (
                     <Dropdown
                       overlay={
-                        <div className="flex flex-col w-full bg-white border-all px16 py8 br8">
+                        <div className="flex flex-col w-full bg-white border-all px-4 py-2 br8">
                           <div
                             className="button-8 cursor-pointer items-center"
                             onClick={(e: any) => {
@@ -359,7 +359,7 @@ function ProfileSection() {
             <div>
               <div
                 className={
-                  "x-50 button-4 cursor-pointer full-center py16" +
+                  "x-50 button-4 cursor-pointer full-center py-4" +
                   isActive(postsSection)
                 }
                 onClick={() => setPostsSection(true)}
@@ -368,7 +368,7 @@ function ProfileSection() {
               </div>
               <div
                 className={
-                  "x-50 button-4 cursor-pointer full-center py16" +
+                  "x-50 button-4 cursor-pointer full-center py-4" +
                   isActive(!postsSection)
                 }
                 onClick={() => {
@@ -384,7 +384,7 @@ function ProfileSection() {
               dataLength={vents.length}
               endMessage={
                 vents.length !== 0 ? (
-                  <p className="primary text-center mt16">
+                  <p className="primary text-center mt-4">
                     <b>Yay! You have seen it all</b>
                   </p>
                 ) : (
@@ -419,7 +419,7 @@ function ProfileSection() {
           {!postsSection && (
             <div className="w-full flex flex-col">
               {comments && comments.length > 0 && (
-                <div className="flex flex-col bg-white br8 px32 py16">
+                <div className="flex flex-col bg-white br8 px-8 py-4">
                   {comments &&
                     comments.map((comment: CommentType, index) => {
                       return (
@@ -443,7 +443,7 @@ function ProfileSection() {
               {canLoadMoreComments && (
                 <Button
                   block
-                  className="mt16"
+                  className="mt-4"
                   onClick={() =>
                     getUsersComments(
                       search,

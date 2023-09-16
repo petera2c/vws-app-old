@@ -77,20 +77,20 @@ const AccountSection = () => {
   }, [user]);
 
   return (
-    <Page className="pa16">
+    <Page className="p-4">
       <div className="flex">
         <div className="grow flex flex-col">
-          <form className="grow flex flex-col bg-white pa16 mb2 br8">
-            <h6 className="blue bold mb16">Personal Information</h6>
+          <form className="grow flex flex-col bg-white p-4 mb2 br8">
+            <h6 className="blue bold mb-4">Personal Information</h6>
             <div className="flex-wrap">
               <div
                 className={
-                  "flex flex-col pr8 mb16 " +
+                  "flex flex-col pr-2 mb-4 " +
                   (isMobileOrTablet ? "x-100" : "x-50")
                 }
               >
                 <p className="mb8">Display Name</p>
-                <div className="full-center bg-grey-4 py4 px8 br4">
+                <div className="full-center bg-grey-4 py-1 px-2 br4">
                   <FontAwesomeIcon className="grey-5 mr8" icon={faMonument} />
                   <Input
                     className="w-full"
@@ -103,12 +103,12 @@ const AccountSection = () => {
               </div>
               <div
                 className={
-                  "flex flex-col pr8 mb16 " +
+                  "flex flex-col pr-2 mb-4 " +
                   (isMobileOrTablet ? "x-100" : "x-50")
                 }
               >
                 <p className="mb8">Email</p>
-                <div className="full-center bg-grey-4 py4 px8 br4">
+                <div className="full-center bg-grey-4 py-1 px-2 br4">
                   <FontAwesomeIcon className="grey-5 mr8" icon={faPaperPlane} />
                   <Input
                     className="w-full no-border bg-grey-4 br4"
@@ -125,12 +125,12 @@ const AccountSection = () => {
             <div className="flex-wrap">
               <div
                 className={
-                  "flex flex-col pr8 mb16 " +
+                  "flex flex-col pr-2 mb-4 " +
                   (isMobileOrTablet ? "x-100" : "x-50")
                 }
               >
                 <p className="mb8">Gender</p>
-                <div className="full-center bg-grey-4 py4 px8 br4">
+                <div className="full-center bg-grey-4 py-1 px-2 br4">
                   <FontAwesomeIcon className="grey-5 mr8" icon={faVenusMars} />
                   <FontAwesomeIcon
                     className="grey-5 mr8"
@@ -154,12 +154,12 @@ const AccountSection = () => {
               </div>
               <div
                 className={
-                  "flex flex-col pr8 mb16 " +
+                  "flex flex-col pr-2 mb-4 " +
                   (isMobileOrTablet ? "x-100" : "x-50")
                 }
               >
                 <p className="mb8">Pronouns</p>
-                <div className="full-center bg-grey-4 py4 px8 br4">
+                <div className="full-center bg-grey-4 py-1 px-2 br4">
                   <FontAwesomeIcon className="grey-5 mr8" icon={faVenusMars} />
                   <FontAwesomeIcon
                     className="grey-5 mr8"
@@ -187,7 +187,7 @@ const AccountSection = () => {
 
             <p className="mb8">Bio</p>
             <TextArea
-              className="w-full py8 px16 br4"
+              className="w-full py-2 px-4 br4"
               onChange={(event) => {
                 if (calculateKarma(userBasicInfo) < 20)
                   return message.info(
@@ -201,8 +201,8 @@ const AccountSection = () => {
             />
 
             <div className="w-full flex-wrap">
-              <div className="flex flex-col pr8 mb16">
-                <div className="items-center justify-start py8">
+              <div className="flex flex-col pr-2 mb-4">
+                <div className="items-center justify-start py-2">
                   <p className="mr8 mb8">Birthday</p>
                   <FontAwesomeIcon className="grey-5" icon={faBirthdayCake} />
                 </div>
@@ -230,19 +230,19 @@ const AccountSection = () => {
                   />
                 </div>
 
-                <p className="mt32">
+                <p className="mt-8">
                   This information will be used to connect you with other users
                   with common interests. This information will not be sold or
                   shared with any 3rd party.
                 </p>
-                <div className="w-full flex flex-col items-start justify-center py8 mt16">
+                <div className="w-full flex flex-col items-start justify-center py-2 mt-4">
                   <p className="mr8 mb8">Partying</p>
                   <div className="gap-2 flex-wrap">
                     {partyingList.map((str, index) => {
                       return (
                         <Button
                           className={
-                            "grey-1 border-all px8 py4 br4 " +
+                            "grey-1 border-all px-2 py-1 br4 " +
                             (partying === index ? "blue active" : "")
                           }
                           key={index}
@@ -260,14 +260,14 @@ const AccountSection = () => {
                   </div>
                 </div>
 
-                <div className="w-full flex flex-col items-start justify-center py8 mt16">
+                <div className="w-full flex flex-col items-start justify-center py-2 mt-4">
                   <p className="mr8 mb8">Political Beliefs</p>
                   <div className="gap-2 flex-wrap">
                     {politicalBeliefsList.map((str, index) => {
                       return (
                         <Button
                           className={
-                            "grey-1 border-all px8 py4 br4 " +
+                            "grey-1 border-all px-2 py-1 br4 " +
                             (politics === index ? "blue active" : "")
                           }
                           key={index}
@@ -285,14 +285,14 @@ const AccountSection = () => {
                     })}
                   </div>
                 </div>
-                <div className="w-full flex flex-col items-start justify-center py8 mt16">
+                <div className="w-full flex flex-col items-start justify-center py-2 mt-4">
                   <p className="mr8 mb8">Religious Beliefs</p>
                   <div className="gap-2 flex-wrap">
                     {religiousBeliefsList.map((str, index) => {
                       return (
                         <Button
                           className={
-                            "grey-1 border-all px8 py4 br4 " +
+                            "grey-1 border-all px-2 py-1 br4 " +
                             (religion === str ? "blue active" : "")
                           }
                           key={index}
@@ -310,14 +310,14 @@ const AccountSection = () => {
                     })}
                   </div>
                 </div>
-                <div className="w-full flex flex-col items-start justify-center py8 mt16">
+                <div className="w-full flex flex-col items-start justify-center py-2 mt-4">
                   <p className="mr8 mb8">Education</p>
                   <div className="gap-2 flex-wrap">
                     {educationList.map((str, index) => {
                       return (
                         <Button
                           className={
-                            "grey-1 border-all px8 py4 br4 " +
+                            "grey-1 border-all px-2 py-1 br4 " +
                             (education === index ? "blue active" : "")
                           }
                           key={index}
@@ -335,14 +335,14 @@ const AccountSection = () => {
                     })}
                   </div>
                 </div>
-                <div className="w-full flex flex-col items-start justify-center py8 mt16">
+                <div className="w-full flex flex-col items-start justify-center py-2 mt-4">
                   <p className="mb8 mr8">Do you have kids?</p>
                   <div className="gap-2 flex-wrap">
                     {kidsList.map((str, index) => {
                       return (
                         <Button
                           className={
-                            "grey-1 border-all px8 py4 br4 " +
+                            "grey-1 border-all px-2 py-1 br4 " +
                             (kids === index ? "blue active" : "")
                           }
                           key={index}
@@ -363,17 +363,17 @@ const AccountSection = () => {
               </div>
             </div>
 
-            <h6 className="blue bold mb16">Change your Password</h6>
+            <h6 className="blue bold mb-4">Change your Password</h6>
 
             <div className="flex-wrap">
               <div
                 className={
-                  "flex flex-col pr8 mb16 " +
+                  "flex flex-col pr-2 mb-4 " +
                   (isMobileOrTablet ? "x-100" : "x-50")
                 }
               >
                 <p className="mb8">New Password</p>
-                <div className="full-center bg-grey-4 py4 px8 br4">
+                <div className="full-center bg-grey-4 py-1 px-2 br4">
                   <FontAwesomeIcon className="grey-5 mr8" icon={faUnlockAlt} />
 
                   <Input
@@ -389,12 +389,12 @@ const AccountSection = () => {
               </div>
               <div
                 className={
-                  "flex flex-col mb16 " + (isMobileOrTablet ? "x-100" : "x-50")
+                  "flex flex-col mb-4 " + (isMobileOrTablet ? "x-100" : "x-50")
                 }
               >
                 <p className="mb8">Confirm Password</p>
                 <div className="items-center">
-                  <div className="grow full-center bg-grey-4 py4 px8 br4">
+                  <div className="grow full-center bg-grey-4 py-1 px-2 br4">
                     <FontAwesomeIcon
                       className="grey-5 mr8"
                       icon={faUnlockAlt}
@@ -421,9 +421,9 @@ const AccountSection = () => {
               </div>
             </div>
           </form>
-          <div className="full-center bg-white pa16 br8">
+          <div className="full-center bg-white p-4 br8">
             <Button
-              className="flex full-center cancel py8 px32 mx4 br4"
+              className="flex full-center cancel py-2 px-8 mx4 br4"
               onClick={() => {
                 setDisplayName(user?.displayName);
                 setEmail(user?.email);
@@ -436,7 +436,7 @@ const AccountSection = () => {
               Cancel
             </Button>
             <Button
-              className="button-2 py8 px32 mx4 br4"
+              className="button-2 py-2 px-8 mx4 br4"
               onClick={() =>
                 updateUser(
                   bio,
@@ -463,7 +463,7 @@ const AccountSection = () => {
             </Button>
           </div>
 
-          <div className="mt16">
+          <div className="mt-4">
             <Button
               className="button-1 grey-1"
               onClick={() => setDeleteAccountModal(true)}

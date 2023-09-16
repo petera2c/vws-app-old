@@ -34,7 +34,7 @@ const OptionsComponent = ({
     >
       <Dropdown
         overlay={
-          <div className="flex flex-col bg-white shadow-2 br8 gap-2 pa16">
+          <div className="flex flex-col bg-white shadow-2 br8 gap-2 p-4">
             {objectUserID === userID && (
               <div
                 className="button-8 cursor-pointer items-center justify-between gap-2"
@@ -92,7 +92,7 @@ const OptionsComponent = ({
         placement="bottomRight"
         trigger={["click"]}
       >
-        <div className="cursor-pointer pa16">
+        <div className="cursor-pointer p-4">
           <FontAwesomeIcon className="grey-9" icon={faEllipsisV} />
         </div>
       </Dropdown>

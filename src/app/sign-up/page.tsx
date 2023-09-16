@@ -10,9 +10,9 @@ function SignUpPage() {
   const [, setStarterModal] = useRecoilState(starterModalAtom);
 
   return (
-    <Page className="pa16" title="Sign Up">
+    <Page className="p-4" title="Sign Up">
       <div className="flex">
-        <div className="grow full-center bg-white pa16 br8">
+        <div className="grow full-center bg-white p-4 br8">
           <h1
             className="grey-1 cursor-pointer text-center"
             onClick={() => setStarterModal(true)}

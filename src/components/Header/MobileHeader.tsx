@@ -146,7 +146,7 @@ function Header() {
       }}
       style={{ zIndex: 10 }}
     >
-      <div className="w-full items-center justify-between border-bottom py8 px16">
+      <div className="w-full items-center justify-between border-bottom py-2 px-4">
         <Link href="/">
           <img
             alt="Go Home"
@@ -158,7 +158,7 @@ function Header() {
         </Link>
         <div>
           {user && (
-            <Link className="relative mr16" href="/notifications">
+            <Link className="relative mr-4" href="/notifications">
               <FontAwesomeIcon
                 className="cursor-pointer blue"
                 icon={faBell}
@@ -171,7 +171,7 @@ function Header() {
               />
               {notificationCounter > 0 && !showNotificationDropdown && (
                 <p
-                  className="fs-14 bg-red white pa4 br8"
+                  className="fs-14 bg-red white p-1 br8"
                   style={{
                     position: "absolute",
                     top: "-12px",
@@ -186,7 +186,7 @@ function Header() {
             </Link>
           )}
 
-          <div className="full-center border-all active pa8 br4">
+          <div className="full-center border-all active p-2 br4">
             <FontAwesomeIcon
               className="blue"
               icon={faBars}
@@ -200,7 +200,7 @@ function Header() {
       </div>
 
       {(mobileHeaderActive || pathname.substring(0, 7) === "/search") && (
-        <Space align="center" className="bg-grey-4 py4 px8 my8 br4">
+        <Space align="center" className="bg-grey-4 py-1 px-2 my8 br4">
           <FontAwesomeIcon
             className="grey-5 mr8"
             icon={faSearch}
@@ -222,7 +222,7 @@ function Header() {
       {mobileHeaderActive && (
         <Space
           align="center"
-          className="mobile-header overflow-auto shadow-2 pa16"
+          className="mobile-header overflow-auto shadow-2 p-4"
           direction="vertical"
           onClick={() => setMobileHeaderActive(false)}
           size="large"
@@ -249,7 +249,7 @@ function Header() {
               {accountSectionActive && (
                 <Space
                   align="center"
-                  className="pt16"
+                  className="pt-4"
                   direction="vertical"
                   size="middle"
                 >
@@ -364,7 +364,7 @@ function Header() {
               <p className="ic">Inbox</p>
 
               {Boolean(unreadConversationsCount) && (
-                <p className="fs-14 bg-red white round ml4 pa4 br4">
+                <p className="fs-14 bg-red white round ml4 p-1 br4">
                   {unreadConversationsCount}
                 </p>
               )}
@@ -437,7 +437,7 @@ function Header() {
         </Space>
       )}
       {user && isUserInQueue && (
-        <div className="flex full-center w-full bg-white border-top gap-2 py8 px16">
+        <div className="flex full-center w-full bg-white border-top gap-2 py-2 px-4">
           <p>You are in queue to chat with a stranger</p>
           <Button
             onClick={() => leaveQueue(user.uid)}
@@ -450,11 +450,11 @@ function Header() {
       )}
       {user && !user.emailVerified && (
         <div className="flex full-center w-full bg-blue-2">
-          <h4 className="text-center mr16">
+          <h4 className="text-center mr-4">
             Please verify your email address!
           </h4>
           <button
-            className="button-2 no-bold py8 px16 my16 br8"
+            className="button-2 no-bold py-2 px-4 my-4 br8"
             onClick={() => {
               user.reload();
               sendEmailVerification(user)

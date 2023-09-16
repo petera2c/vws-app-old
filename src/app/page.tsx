@@ -52,12 +52,12 @@ const VentsPage = () => {
   }, [pathname, search, setCanLoadMore, user]);
 
   return (
-    <Page className="pa16" id="scrollable-div">
+    <Page className="p-4" id="scrollable-div">
       <div className="flex grow w-full">
         <div className="flex flex-col grow gap-4">
           <NewVentComponent miniVersion />
 
-          <div className="flex full-center w-full bg-white br8 gap-4 pa16">
+          <div className="flex full-center w-full bg-white br8 gap-4 p-4">
             <Link className="grow" href="/recent">
               <h2
                 className={
@@ -100,7 +100,7 @@ const VentsPage = () => {
           {(whatPage === "trending" ||
             whatPage === "trending-week" ||
             whatPage === "trending-month") && (
-            <div className="flex w-full full-center bg-white br8 gap-4 pa16">
+            <div className="flex w-full full-center bg-white br8 gap-4 p-4">
               <Link href="/trending">
                 <h2
                   className={
@@ -138,7 +138,7 @@ const VentsPage = () => {
             <InfiniteScroll
               dataLength={vents.length}
               endMessage={
-                <p className="primary text-center mt16">
+                <p className="primary text-center mt-4">
                   <b>Yay! You have seen it all</b>
                 </p>
               }

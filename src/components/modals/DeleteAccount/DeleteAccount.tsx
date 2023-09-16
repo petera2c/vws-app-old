@@ -10,10 +10,10 @@ function DeleteAccountModal({ close, submit }: { close: any; submit: any }) {
   return (
     <Modal className="full-center normal-cursor" onCancel={close}>
       <div className="container large flex flex-col bg-white br4">
-        <div className="w-full justify-center bg-grey-10 py16">
+        <div className="w-full justify-center bg-grey-10 py-4">
           <h4 className="grey-11 text-center">Permanently Delete Account</h4>
         </div>
-        <div className="grow flex flex-col w-full overflow-auto gap-4 py16 px32">
+        <div className="grow flex flex-col w-full overflow-auto gap-4 py-4 px-8">
           <p className="text-center">
             {isDeleting
               ? "Loading..."
@@ -31,16 +31,16 @@ function DeleteAccountModal({ close, submit }: { close: any; submit: any }) {
           )}
         </div>
         {!isDeleting && (
-          <div className="full-center border-top pa16">
+          <div className="full-center border-top p-4">
             <button
-              className="grey-1 border-all py8 px32 mx4 br4"
+              className="grey-1 border-all py-2 px-8 mx4 br4"
               onClick={() => close()}
             >
               Cancel
             </button>
             <button
               className={
-                "py8 px32 mx4 br4 " +
+                "py-2 px-8 mx4 br4 " +
                 (inputString === "delete permanently" ? "button-2" : "grey-1")
               }
               onClick={() => {

@@ -16,10 +16,10 @@ const AllTags = () => {
   }, [setTags, tags]);
 
   return (
-    <Page className="br-grey-2 pt32 px16 pb16">
+    <Page className="br-grey-2 pt-8 px-4 pb-4">
       <div className="flex">
         <div className="flex flex-col grow gap-4">
-          <div className="flex flex-col bg-white br8 gap-4 pa32">
+          <div className="flex flex-col bg-white br8 gap-4 p-8">
             <h1 className="text-center lh-1">All Tag Categories</h1>
             <p className="text-center">
               Click on a category to find problems just like yours
@@ -40,7 +40,7 @@ const AllTags = () => {
 function Tag({ tag }: { tag: Tag }) {
   return (
     <Link
-      className="button-8 flex flex-col full-center bg-white br8 gap-2 pa32"
+      className="button-8 flex flex-col full-center bg-white br8 gap-2 p-8"
       href={`/tags/${tag.id}`}
     >
       <h2 className="ic text-center">{tag.display}</h2>

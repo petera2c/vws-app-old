@@ -35,10 +35,10 @@ function RewardsPage() {
   }, [user]);
 
   return (
-    <Page className="pa16">
+    <Page className="p-4">
       <div className="flex flex-col grow">
-        <div className="flex flex-col bg-white pa32 br8">
-          <h1 className="text-center mb32">Your Upcoming Rewards</h1>
+        <div className="flex flex-col bg-white p-8 br8">
+          <h1 className="text-center mb-8">Your Upcoming Rewards</h1>
           <div
             className="grid gap-8"
             style={{ gridTemplateColumns: "1fr 1fr 1fr" }}
@@ -108,7 +108,7 @@ function RewardsPage() {
         <div className="flex flex-col gap-2">
           <h1>Recent Rewards</h1>
           {recentRewards.map((obj, index) => (
-            <div className="flex flex-col w-full bg-white pa16 br8" key={index}>
+            <div className="flex flex-col w-full bg-white p-4 br8" key={index}>
               <h6>{obj.title}</h6>
               <p className="blue">+ {obj.karma_gained} Karma Points</p>
               <p>{dayjs(obj.server_timestamp).fromNow()}</p>

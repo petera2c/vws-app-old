@@ -15,7 +15,7 @@ const NewVentPage = () => {
   const { search } = location;
 
   return (
-    <Page className="pa16" title="Happy Birthday!">
+    <Page className="p-4" title="Happy Birthday!">
       <div className="flex">
         <div className="flex flex-col grow gap-4">
           <div className="full-center gap-2">

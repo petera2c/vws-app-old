@@ -86,7 +86,7 @@ const KarmaBadge = ({
               }
             }}
           >
-            <h5 className="bg-blue white fw-400 px8 py4 br8">Moderator</h5>
+            <h5 className="bg-blue white fw-400 px-2 py-1 br8">Moderator</h5>
           </div>
         </span>
       </Tooltip>

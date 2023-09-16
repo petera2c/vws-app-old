@@ -40,7 +40,7 @@ function NotificationsPage() {
 
   return (
     <Page
-      className="justify-start items-center bg-blue-2 pa16"
+      className="justify-start items-center bg-blue-2 p-4"
       description=""
       keywords=""
       title="Notifications"
@@ -51,7 +51,7 @@ function NotificationsPage() {
           (isMobileOrTablet ? "" : "container large")
         }
       >
-        <div className="full-center bg-white overflow-hidden br8 pa32">
+        <div className="full-center bg-white overflow-hidden br8 p-8">
           <h1 className="fw-600 text-center">Notifications</h1>
         </div>
         <div className="bg-white overflow-hidden br8">

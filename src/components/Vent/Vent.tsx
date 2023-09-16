@@ -187,9 +187,9 @@ const Vent = ({
   return (
     <div className="w-full">
       {vent && (
-        <div className="w-full flex flex-col bg-white pt16 br8">
+        <div className="w-full flex flex-col bg-white pt-4 br8">
           <div
-            className={`flex flex-col border-bottom gap-2 py16 px32 ${
+            className={`flex flex-col border-bottom gap-2 py-4 px-8 ${
               disablePostOnClick ? "" : "cursor-pointer"
             }`}
             onClick={() => {
@@ -261,7 +261,7 @@ const Vent = ({
           </div>
           <SmartLink
             className={
-              "main-container flex flex-col border-bottom py16 px32 " +
+              "main-container flex flex-col border-bottom py-4 px-8 " +
               (disablePostOnClick ? "" : "cursor-pointer")
             }
             disablePostOnClick={disablePostOnClick}
@@ -290,7 +290,7 @@ const Vent = ({
           {!searchPreviewMode && (
             <div
               className={
-                "relative flex justify-between flex-wrap py16 px32 gap-2 " +
+                "relative flex justify-between flex-wrap py-4 px-8 gap-2 " +
                 (!searchPreviewMode && displayCommentField
                   ? "border-bottom"
                   : "")
@@ -352,7 +352,7 @@ const Vent = ({
 
               {(!user || (user && user.uid !== vent.userID && author?.id)) && (
                 <div
-                  className="button-2 flex-wrap px16 py8 br8"
+                  className="button-2 flex-wrap px-4 py-2 br8"
                   onClick={() => {
                     if (signUpProgressFunction) return signUpProgressFunction();
 
@@ -369,12 +369,12 @@ const Vent = ({
           {!searchPreviewMode && displayCommentField && comments && (
             <div className="flex flex-col gap-4">
               {vent.comment_counter > 0 && (
-                <div className="border-bottom px32 py16">
+                <div className="border-bottom px-8 py-4">
                   <Dropdown
                     overlay={
-                      <div className="flex flex-col bg-white shadow-2 pa8 br8">
+                      <div className="flex flex-col bg-white shadow-2 p-2 br8">
                         <p
-                          className="button-4 py8"
+                          className="button-4 py-2"
                           onClick={() => {
                             setActiveSort("First");
 
@@ -392,7 +392,7 @@ const Vent = ({
                           First
                         </p>
                         <p
-                          className="button-4 py8"
+                          className="button-4 py-2"
                           onClick={() => {
                             setActiveSort("Best");
 
@@ -410,7 +410,7 @@ const Vent = ({
                           Best
                         </p>
                         <p
-                          className="button-4 py8"
+                          className="button-4 py-2"
                           onClick={() => {
                             setActiveSort("Last");
 
@@ -436,7 +436,7 @@ const Vent = ({
                 </div>
               )}
               {comments && comments.length > 0 && (
-                <div className="flex flex-col px32 pb16">
+                <div className="flex flex-col px-8 pb-4">
                   {comments.map((comment: CommentType, index) => {
                     return (
                       <Comment
@@ -472,7 +472,7 @@ const Vent = ({
               )}
               {vent.comment_counter === 0 &&
                 (!comments || (comments && comments.length === 0)) && (
-                  <p className="text-center px32 py16">
+                  <p className="text-center px-8 py-4">
                     There are no comments yet. Please help this person :)
                   </p>
                 )}
@@ -486,7 +486,7 @@ const Vent = ({
 
           {!searchPreviewMode && displayCommentField && (
             <div
-              className="sticky flex flex-col w-full bg-white border-top shadow-2 br8 pa16"
+              className="sticky flex flex-col w-full bg-white border-top shadow-2 br8 p-4"
               style={{ bottom: 0 }}
             >
               {isUserAccountNewLocal && (
@@ -527,7 +527,7 @@ const Vent = ({
                       markup="@[__display__](__id__)"
                       renderSuggestion={(entry) => {
                         return (
-                          <div className="grow items-center pa8 gap-2">
+                          <div className="grow items-center p-2 gap-2">
                             <MakeAvatar
                               displayName={entry.displayName}
                               userBasicInfo={entry}

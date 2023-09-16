@@ -34,15 +34,18 @@ import {
   faUser,
   faUserAstronaut,
 } from "@fortawesome/free-solid-svg-icons";
+import { useRecoilState } from "recoil";
+import { starterModalAtom } from "@/atoms/ModalVisibility";
 
 function Header() {
+  const [, setStarterModal] = useRecoilState(starterModalAtom);
+
   const navigate = useRouter();
   const pathname = usePathname();
   const { search } = location;
 
   const { user, userBasicInfo } = useContext(UserContext);
 
-  const [activeModal, setActiveModal] = useState<string | boolean>("");
   const [isUserInQueue, setIsUserInQueue, isUserInQueueRef] = useState();
   const [notificationCounter, setNotificationCounter] = useState(0);
   const [notifications, setNotifications] = useState([]);
@@ -114,7 +117,7 @@ function Header() {
   return (
     <div className="flex flex-col w-full">
       <div className="flex flex-col w-full justify-center bg-white border-top large active">
-        <div className="grid-3 w-full items-center px32 py8">
+        <div className="grid-3 w-full items-center px-8 py-2">
           <div className="flex full-center">
             <Link href="/">
               <img
@@ -130,7 +133,7 @@ function Header() {
             <div className="flex flex-wrap gap-8">
               <Link
                 className={
-                  "full-center flex button-3 gap-2 py4 " +
+                  "full-center flex button-3 gap-2 py-1 " +
                   isPageActive("/", pathname) +
                   isPageActive("/my-feed", pathname.substring(0, 8)) +
                   isPageActive("/recent", pathname.substring(0, 7)) +
@@ -144,7 +147,7 @@ function Header() {
 
               <Link
                 className={
-                  "full-center flex button-3 gap-2 py4 " +
+                  "full-center flex button-3 gap-2 py-1 " +
                   isPageActive("/conversations", pathname.substring(0, 14))
                 }
                 href="/conversations"
@@ -153,7 +156,7 @@ function Header() {
                 <p className="ic">Inbox</p>
 
                 {Boolean(unreadConversationsCount) && (
-                  <p className="fs-14 bg-red white round ml4 pa4 br4">
+                  <p className="fs-14 bg-red white round ml4 p-1 br4">
                     {unreadConversationsCount}
                   </p>
                 )}
@@ -189,13 +192,13 @@ function Header() {
           </div>
           <div className="flex full-center flex-wrap gap-2">
             {!user && (
-              <Button onClick={() => setActiveModal("login")} size="large">
+              <Button onClick={() => setStarterModal("sign-in")} size="large">
                 Login
               </Button>
             )}
             {!user && (
               <Button
-                onClick={() => setActiveModal("signUp")}
+                onClick={() => setStarterModal("sign-up")}
                 size="large"
                 type="primary"
               >
@@ -206,7 +209,7 @@ function Header() {
               <div className="flex items-center gap-4">
                 <Dropdown
                   overlay={
-                    <div className="bg-white shadow-2 pa8 br8">
+                    <div className="bg-white shadow-2 p-2 br8">
                       {/* <AccountLink
                         icon={faChartNetwork}
                         link="/profile"
@@ -265,7 +268,7 @@ function Header() {
                       }}
                     >
                       <NotificationList notifications={notifications} />
-                      <div className="pa16">
+                      <div className="p-4">
                         <Link className="w-full" href="/notifications">
                           <Button
                             className="w-full"
@@ -287,7 +290,7 @@ function Header() {
                     <FontAwesomeIcon className="blue" icon={faBell} size="2x" />
                     {notificationCounter > 0 && (
                       <p
-                        className="fs-14 bg-red white pa4 br8"
+                        className="fs-14 bg-red white p-1 br8"
                         style={{
                           position: "absolute",
                           top: "-12px",
@@ -306,7 +309,7 @@ function Header() {
         </div>
       </div>
       {user && isUserInQueue && (
-        <div className="flex full-center w-full bg-white border-top gap-2 py8">
+        <div className="flex full-center w-full bg-white border-top gap-2 py-2">
           <p>You are in queue to chat with a stranger</p>
           <Button onClick={() => leaveQueue(user.uid)} size="large" type="link">
             Leave Queue
@@ -315,11 +318,11 @@ function Header() {
       )}
       {user && !user.emailVerified && (
         <div className="flex full-center w-full bg-blue-2">
-          <h4 className="text-center mr16">
+          <h4 className="text-center mr-4">
             Please verify your email address!
           </h4>
           <button
-            className="button-2 no-bold py8 px16 my16 br8"
+            className="button-2 no-bold py-2 px-4 my-4 br8"
             onClick={() => {
               user.reload();
               sendEmailVerification(user)
@@ -344,7 +347,7 @@ function AccountLink({ icon, link, onClick, pathname, text }: any) {
     return (
       <Link
         className={
-          "w-full items-center grid-1 button-4 cursor-pointer py8 " +
+          "w-full items-center grid-1 button-4 cursor-pointer py-2 " +
           isPageActive(link, pathname)
         }
         href={link}
@@ -359,7 +362,7 @@ function AccountLink({ icon, link, onClick, pathname, text }: any) {
   if (onClick)
     return (
       <div
-        className="w-full items-center grid-1 button-4 cursor-pointer py8"
+        className="w-full items-center grid-1 button-4 cursor-pointer py-2"
         onClick={onClick}
       >
         <div className="full-center">

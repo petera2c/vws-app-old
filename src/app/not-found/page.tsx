@@ -7,7 +7,7 @@ import Page from "@/components/containers/Page/Page";
 const NotFoundPage = () => {
   return (
     <Page
-      className="items-center bg-blue-2 gap-8 pt64"
+      className="items-center bg-blue-2 gap-8 pt-16"
       description="Page not found."
       keywords=""
       title="Not Found"
