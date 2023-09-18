@@ -42,6 +42,7 @@ import SignInModal from "@/components/modals/SignIn/SignIn";
 import SignUpModal from "@/components/modals/SignUp/SignUp";
 import ForgotPasswordModal from "@/components/modals/ForgotPassword/ForgotPassword";
 import { RecoilRoot } from "recoil";
+import { canUseWindow } from "@/misc/util";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -155,10 +156,11 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
                 >
                   <RecoilRoot>
                     <div className="flex flex-col screen-container">
-                      {isMobileOrTablet ? <MobileHeader /> : <Header />}
+                      <Header />
+                      {isMobileOrTablet && <MobileHeader />}
 
                       <div className="flex grow overflow-hidden">
-                        {!isMobileOrTablet && <Sidebar />}
+                        <Sidebar />
 
                         {loading ? (
                           <div className="flex grow justify-center bg-blue-2">
