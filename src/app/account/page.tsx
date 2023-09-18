@@ -91,7 +91,7 @@ const AccountSection = () => {
               >
                 <p className="mb8">Display Name</p>
                 <div className="full-center bg-grey-4 py-1 px-2 br4">
-                  <FontAwesomeIcon className="grey-5 mr8" icon={faMonument} />
+                  <FontAwesomeIcon className="grey-5 mr-2" icon={faMonument} />
                   <Input
                     className="w-full"
                     onChange={(e) => setDisplayName(e.target.value)}
@@ -109,7 +109,10 @@ const AccountSection = () => {
               >
                 <p className="mb8">Email</p>
                 <div className="full-center bg-grey-4 py-1 px-2 br4">
-                  <FontAwesomeIcon className="grey-5 mr8" icon={faPaperPlane} />
+                  <FontAwesomeIcon
+                    className="grey-5 mr-2"
+                    icon={faPaperPlane}
+                  />
                   <Input
                     className="w-full no-border bg-grey-4 br4"
                     onChange={(e) => setEmail(e.target.value)}
@@ -131,9 +134,9 @@ const AccountSection = () => {
               >
                 <p className="mb8">Gender</p>
                 <div className="full-center bg-grey-4 py-1 px-2 br4">
-                  <FontAwesomeIcon className="grey-5 mr8" icon={faVenusMars} />
+                  <FontAwesomeIcon className="grey-5 mr-2" icon={faVenusMars} />
                   <FontAwesomeIcon
-                    className="grey-5 mr8"
+                    className="grey-5 mr-2"
                     icon={faTransgenderAlt}
                   />
                   <Input
@@ -160,9 +163,9 @@ const AccountSection = () => {
               >
                 <p className="mb8">Pronouns</p>
                 <div className="full-center bg-grey-4 py-1 px-2 br4">
-                  <FontAwesomeIcon className="grey-5 mr8" icon={faVenusMars} />
+                  <FontAwesomeIcon className="grey-5 mr-2" icon={faVenusMars} />
                   <FontAwesomeIcon
-                    className="grey-5 mr8"
+                    className="grey-5 mr-2"
                     icon={faTransgenderAlt}
                   />
                   <Input
@@ -203,7 +206,7 @@ const AccountSection = () => {
             <div className="w-full flex-wrap">
               <div className="flex flex-col pr-2 mb-4">
                 <div className="items-center justify-start py-2">
-                  <p className="mr8 mb8">Birthday</p>
+                  <p className="mr-2 mb8">Birthday</p>
                   <FontAwesomeIcon className="grey-5" icon={faBirthdayCake} />
                 </div>
 
@@ -236,7 +239,7 @@ const AccountSection = () => {
                   shared with any 3rd party.
                 </p>
                 <div className="w-full flex flex-col items-start justify-center py-2 mt-4">
-                  <p className="mr8 mb8">Partying</p>
+                  <p className="mr-2 mb8">Partying</p>
                   <div className="gap-2 flex-wrap">
                     {partyingList.map((str, index) => {
                       return (
@@ -261,7 +264,7 @@ const AccountSection = () => {
                 </div>
 
                 <div className="w-full flex flex-col items-start justify-center py-2 mt-4">
-                  <p className="mr8 mb8">Political Beliefs</p>
+                  <p className="mr-2 mb8">Political Beliefs</p>
                   <div className="gap-2 flex-wrap">
                     {politicalBeliefsList.map((str, index) => {
                       return (
@@ -286,7 +289,7 @@ const AccountSection = () => {
                   </div>
                 </div>
                 <div className="w-full flex flex-col items-start justify-center py-2 mt-4">
-                  <p className="mr8 mb8">Religious Beliefs</p>
+                  <p className="mr-2 mb8">Religious Beliefs</p>
                   <div className="gap-2 flex-wrap">
                     {religiousBeliefsList.map((str, index) => {
                       return (
@@ -311,7 +314,7 @@ const AccountSection = () => {
                   </div>
                 </div>
                 <div className="w-full flex flex-col items-start justify-center py-2 mt-4">
-                  <p className="mr8 mb8">Education</p>
+                  <p className="mr-2 mb8">Education</p>
                   <div className="gap-2 flex-wrap">
                     {educationList.map((str, index) => {
                       return (
@@ -336,7 +339,7 @@ const AccountSection = () => {
                   </div>
                 </div>
                 <div className="w-full flex flex-col items-start justify-center py-2 mt-4">
-                  <p className="mb8 mr8">Do you have kids?</p>
+                  <p className="mb8 mr-2">Do you have kids?</p>
                   <div className="gap-2 flex-wrap">
                     {kidsList.map((str, index) => {
                       return (
@@ -374,7 +377,7 @@ const AccountSection = () => {
               >
                 <p className="mb8">New Password</p>
                 <div className="full-center bg-grey-4 py-1 px-2 br4">
-                  <FontAwesomeIcon className="grey-5 mr8" icon={faUnlockAlt} />
+                  <FontAwesomeIcon className="grey-5 mr-2" icon={faUnlockAlt} />
 
                   <Input
                     autoComplete="off"
@@ -396,7 +399,7 @@ const AccountSection = () => {
                 <div className="items-center">
                   <div className="grow full-center bg-grey-4 py-1 px-2 br4">
                     <FontAwesomeIcon
-                      className="grey-5 mr8"
+                      className="grey-5 mr-2"
                       icon={faUnlockAlt}
                     />
                     <Input

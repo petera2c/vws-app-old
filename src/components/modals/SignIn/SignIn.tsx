@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -27,10 +26,9 @@ const LoginModal = () => {
         <div className="w-full flex flex-col">
           <Form
             className="w-full flex flex-col"
-            onFinish={(values: any) => {
-              console.log(values);
-              //login(values, setStarterModal);
-            }}
+            onFinish={(values: { email: string; password: string }) =>
+              login(values, setStarterModal)
+            }
           >
             <div className="flex flex-col w-full px-8 py-4">
               <Form.Item name="email">

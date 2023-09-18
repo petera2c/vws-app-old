@@ -279,8 +279,8 @@ const Vent = ({
             >
               {ventPreview}
             </p>
-            <div className="w-full items-center justify-end">
-              <FontAwesomeIcon className="grey-5 mr8" icon={faClock} />
+            <div className="flex items-center justify-end w-full">
+              <FontAwesomeIcon className="grey-5 mr-2" icon={faClock} />
               <p className="grey-5 fs-16">
                 {dayjs(vent.server_timestamp).fromNow()}
               </p>
@@ -359,7 +359,7 @@ const Vent = ({
                     startConversation(user, vent.userID);
                   }}
                 >
-                  <FontAwesomeIcon className="mr8" icon={faComments} />
+                  <FontAwesomeIcon className="mr-2" icon={faComments} />
                   <p className="ic ellipsis">Message</p>
                 </div>
               )}
@@ -533,7 +533,7 @@ const Vent = ({
                               userBasicInfo={entry}
                             />
                             <div className="button-7">
-                              <h5 className="ellipsis fw-400 mr8">
+                              <h5 className="ellipsis fw-400 mr-2">
                                 {capitolizeFirstChar(entry.displayName)}
                               </h5>
                             </div>

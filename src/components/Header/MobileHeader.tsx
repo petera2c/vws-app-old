@@ -25,7 +25,7 @@ import {
   readNotifications,
   resetUnreadConversationCount,
 } from "./util";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -49,7 +49,8 @@ import {
 function Header() {
   const pathname = usePathname();
   const navigate = useRouter();
-  const { search } = location;
+  const searchParams = useSearchParams();
+  const search = searchParams.toString();
 
   const { setFirstOnlineUsers, setTotalOnlineUsers, totalOnlineUsers } =
     useContext(OnlineUsersContext);
@@ -202,7 +203,7 @@ function Header() {
       {(mobileHeaderActive || pathname.substring(0, 7) === "/search") && (
         <Space align="center" className="bg-grey-4 py-1 px-2 my8 br4">
           <FontAwesomeIcon
-            className="grey-5 mr8"
+            className="grey-5 mr-2"
             icon={faSearch}
             onClick={() => setMobileHeaderActive(false)}
           />
@@ -317,7 +318,7 @@ function Header() {
               }
               href="/people-online"
             >
-              <FontAwesomeIcon className="mr8" icon={faUserFriends} />
+              <FontAwesomeIcon className="mr-2" icon={faUserFriends} />
               <p className="ic">
                 {totalOnlineUsers}{" "}
                 {totalOnlineUsers === 1 ? "Person" : "People"} Online
@@ -330,7 +331,7 @@ function Header() {
               }
               href="/vent-to-strangers"
             >
-              <FontAwesomeIcon className="mr8" icon={faConciergeBell} />
+              <FontAwesomeIcon className="mr-2" icon={faConciergeBell} />
               <p className="ic">Post a Vent</p>
             </Link>
             <Link
@@ -341,7 +342,7 @@ function Header() {
               }
               href="/trending"
             >
-              {/* <FontAwesomeIcon className="mr8" icon={faAnalytics} /> */}
+              {/* <FontAwesomeIcon className="mr-2" icon={faAnalytics} /> */}
               <p className="ic">Trending</p>
             </Link>
             <Link
@@ -350,7 +351,7 @@ function Header() {
               }
               href="/recent"
             >
-              <FontAwesomeIcon className="mr8" icon={faConciergeBell} />
+              <FontAwesomeIcon className="mr-2" icon={faConciergeBell} />
               <p className="ic">Recent</p>
             </Link>
             <Link
@@ -360,7 +361,7 @@ function Header() {
               }
               href="/chat"
             >
-              <FontAwesomeIcon className="mr8" icon={faComments} />
+              <FontAwesomeIcon className="mr-2" icon={faComments} />
               <p className="ic">Inbox</p>
 
               {Boolean(unreadConversationsCount) && (
@@ -377,7 +378,7 @@ function Header() {
               }
               href="/chat-with-strangers"
             >
-              <FontAwesomeIcon className="mr8" icon={faComments} />
+              <FontAwesomeIcon className="mr-2" icon={faComments} />
               <p className="ic">
                 {"Chat With Strangers" +
                   (queueLength === -1 ? "" : ` (${queueLength})`)}
@@ -390,7 +391,7 @@ function Header() {
               }
               href="/rewards"
             >
-              {/* <FontAwesomeIcon className="mr8" icon={faStarShooting} /> */}
+              {/* <FontAwesomeIcon className="mr-2" icon={faStarShooting} /> */}
               <p className="ic">Rewards</p>
             </Link>
             <Link
@@ -400,7 +401,7 @@ function Header() {
               }
               href="/quote-contest"
             >
-              <FontAwesomeIcon className="mr8" icon={faQuoteLeft} />
+              <FontAwesomeIcon className="mr-2" icon={faQuoteLeft} />
               <p className="ic">Daily Quote Contest</p>
             </Link>
             <Link
@@ -410,7 +411,7 @@ function Header() {
               }
               href="/feel-good-quotes-month"
             >
-              <FontAwesomeIcon className="mr8" icon={faSmileBeam} />
+              <FontAwesomeIcon className="mr-2" icon={faSmileBeam} />
               <p className="ic">Feel Good Quotes</p>
             </Link>
 
@@ -421,7 +422,7 @@ function Header() {
               }
               href="/site-info"
             >
-              <FontAwesomeIcon className="mr8" icon={faInfo} />
+              <FontAwesomeIcon className="mr-2" icon={faInfo} />
               <p className="ic">Site Info</p>
             </Link>
           </Space>

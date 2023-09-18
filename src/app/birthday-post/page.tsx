@@ -8,11 +8,13 @@ import Page from "@/components/containers/Page/Page";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBirthdayCake } from "@fortawesome/free-solid-svg-icons";
 import NewVentComponent from "@/components/NewVent/NewVent";
+import { useSearchParams } from "next/navigation";
 
 const NewVentPage = () => {
   const { user } = useContext(UserContext);
 
-  const { search } = location;
+  const searchParams = useSearchParams();
+  const search = searchParams.toString();
 
   return (
     <Page className="p-4" title="Happy Birthday!">

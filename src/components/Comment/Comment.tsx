@@ -171,7 +171,7 @@ function Comment({
           </div> */}
           <div className="mt8">
             <button
-              className="button-5 px-8 py-2 mr8 br4"
+              className="button-5 px-8 py-2 mr-2 br4"
               onClick={() => setEditingComment(false)}
             >
               Cancel
@@ -225,7 +225,7 @@ function Comment({
         </div>
         <div className="items-center">
           <FontAwesomeIcon
-            className="cursor-pointer grey-5 mr8"
+            className="cursor-pointer grey-5 mr-2"
             icon={faClock}
           />
           <p className="grey-5 fs-16">

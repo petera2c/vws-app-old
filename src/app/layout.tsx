@@ -152,11 +152,12 @@ export default function RootLayout({
                 >
                   <RecoilRoot>
                     <div className="flex flex-col screen-container">
-                      {!(window.screen.width < 940) ? (
+                      {window.screen.width > 940 ? (
                         <Header />
                       ) : (
                         <MobileHeader />
                       )}
+
                       <div className="flex grow overflow-hidden">
                         {window.screen.width > 940 && <Sidebar />}
 
@@ -166,7 +167,7 @@ export default function RootLayout({
                           </div>
                         ) : (
                           <Hydrate>
-                            <div className="flex flex-col grow overflow-hidden p-8">
+                            <div className="flex flex-col grow overflow-hidden">
                               {children}
                             </div>
                             <ReactQueryDevtools initialIsOpen={false} />

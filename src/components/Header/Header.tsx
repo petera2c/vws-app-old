@@ -19,7 +19,7 @@ import {
 import DisplayName from "../views/DisplayName";
 import NotificationList from "../NotificationList";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -42,7 +42,8 @@ function Header() {
 
   const navigate = useRouter();
   const pathname = usePathname();
-  const { search } = location;
+  const searchParams = useSearchParams();
+  const search = searchParams.toString();
 
   const { user, userBasicInfo } = useContext(UserContext);
 
@@ -178,7 +179,7 @@ function Header() {
                 }}
                 placeholder="Search"
                 prefix={
-                  <FontAwesomeIcon className="grey-5 mr8" icon={faSearch} />
+                  <FontAwesomeIcon className="grey-5 mr-2" icon={faSearch} />
                 }
                 type="text"
                 value={ventSearchString}

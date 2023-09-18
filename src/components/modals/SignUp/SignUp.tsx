@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -7,14 +6,13 @@ import { UserContext } from "../../../context";
 import { getIsMobileOrTablet } from "../../../util";
 import { signUp } from "./util";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-import { Button, Input, Modal } from "antd";
+import { Button, Form, Input, Modal } from "antd";
 import { useRecoilState } from "recoil";
 import { starterModalAtom } from "@/atoms/ModalVisibility";
 import { useRouter } from "next/navigation";
 
 const SignUpModal = () => {
   const router = useRouter();
-  const { register, handleSubmit } = useForm();
 
   const { setUserBasicInfo } = useContext(UserContext);
   const [starterModal, setStarterModal] = useRecoilState(starterModalAtom);
@@ -39,28 +37,20 @@ const SignUpModal = () => {
         </div>
 
         <div className="w-full flex flex-col">
-          <form
+          <Form
             className="w-full flex flex-col"
-            onSubmit={handleSubmit((data) => {
+            onFinish={(data: any) => {
+              console.log(data);
               signUp(data, router, setStarterModal, setUserBasicInfo);
-            })}
+            }}
           >
             <div className="flex flex-col w-full gap-2 px-8 py-4">
-              <Input
-                className="mb8"
-                type="text"
-                placeholder="Display Name"
-                {...register("displayName", {
-                  required: "Required",
-                })}
-              />
-              <Input
-                type="text"
-                placeholder="Email Address"
-                {...register("email", {
-                  required: "Required",
-                })}
-              />
+              <Form.Item name="displayName" required>
+                <Input className="mb8" type="text" placeholder="Display Name" />
+              </Form.Item>
+              <Form.Item name="email">
+                <Input type="text" placeholder="Email Address" />
+              </Form.Item>
               <p className="fw-400 mb8">
                 (Your email address will never be shown to anyone.)
               </p>
@@ -71,14 +61,13 @@ const SignUpModal = () => {
                     (isMobileOrTablet ? "x-100" : "x-50 pr-2")
                   }
                 >
-                  <Input
-                    className="mb8"
-                    type={canSeePassword ? "" : "password"}
-                    placeholder="Password"
-                    {...register("password", {
-                      required: "Required",
-                    })}
-                  />
+                  <Form.Item name="password" required>
+                    <Input
+                      className="mb8"
+                      type={canSeePassword ? "" : "password"}
+                      placeholder="Password"
+                    />
+                  </Form.Item>
                 </div>
                 <div
                   className={
@@ -87,14 +76,13 @@ const SignUpModal = () => {
                   }
                 >
                   <div className="flex full-center w-full">
-                    <Input
-                      className="mb8"
-                      type={canSeePassword ? "" : "password"}
-                      placeholder="Confirm Password"
-                      {...register("passwordConfirm", {
-                        required: "Required",
-                      })}
-                    />
+                    <Form.Item name="passwordConfirm" required>
+                      <Input
+                        className="mb8"
+                        type={canSeePassword ? "" : "password"}
+                        placeholder="Confirm Password"
+                      />
+                    </Form.Item>
                     <FontAwesomeIcon
                       className={
                         "cursor-pointer ml8 " + (canSeePassword ? "blue" : "")
@@ -124,7 +112,7 @@ const SignUpModal = () => {
                 </span>
               </p>
             </div>
-          </form>
+          </Form>
         </div>
       </div>
     </Modal>

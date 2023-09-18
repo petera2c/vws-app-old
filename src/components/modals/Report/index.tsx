@@ -48,7 +48,7 @@ const ReportModal = ({ close, submit }: any) => {
             }
           >
             <Input
-              className="mr8"
+              className="mr-2"
               checked={violence}
               style={{ minWidth: "13px" }}
               type="checkbox"
@@ -65,7 +65,7 @@ const ReportModal = ({ close, submit }: any) => {
             }
           >
             <Input
-              className="mr8"
+              className="mr-2"
               checked={abuse}
               style={{ minWidth: "13px" }}
               type="checkbox"
@@ -82,7 +82,7 @@ const ReportModal = ({ close, submit }: any) => {
             }
           >
             <Input
-              className="mr8"
+              className="mr-2"
               checked={privateInformation}
               style={{ minWidth: "13px" }}
               type="checkbox"
@@ -99,7 +99,7 @@ const ReportModal = ({ close, submit }: any) => {
             }
           >
             <Input
-              className="mr8"
+              className="mr-2"
               checked={illegal}
               style={{ minWidth: "13px" }}
               type="checkbox"
@@ -116,7 +116,7 @@ const ReportModal = ({ close, submit }: any) => {
             }
           >
             <Input
-              className="mr8"
+              className="mr-2"
               checked={malicious}
               style={{ minWidth: "13px" }}
               type="checkbox"

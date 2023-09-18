@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   collection,
   doc,
@@ -243,7 +243,13 @@ export const hasUserBlockedUser = async (
   else return callback(false);
 };
 
-export const getIsMobileOrTablet = () => window.screen.width < 940;
+export const useIsMobileOrTablet = () => {
+  const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
+  useEffect(() => {
+    setIsMobileOrTablet(window.screen.width < 940);
+  }, [window.screen.width]);
+  return isMobileOrTablet;
+};
 
 export const isPageActive = (page: string, pathname: string) => {
   if (page === pathname) return " active ";

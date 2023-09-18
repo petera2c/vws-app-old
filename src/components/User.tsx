@@ -119,7 +119,7 @@ const UserComponent = ({
             {additionalUserInfo?.education !== undefined && (
               <div className="border-all items-center px-2 py-1 br4">
                 <p>
-                  <FontAwesomeIcon className="mr8" icon={faSchool} />
+                  <FontAwesomeIcon className="mr-2" icon={faSchool} />
                   {educationList[additionalUserInfo?.education]}
                 </p>
               </div>
@@ -127,7 +127,7 @@ const UserComponent = ({
             {additionalUserInfo?.kids !== undefined && (
               <div className="border-all items-center px-2 py-1 br4">
                 <p>
-                  <FontAwesomeIcon className="mr8" icon={faBaby} />
+                  <FontAwesomeIcon className="mr-2" icon={faBaby} />
                   {kidsList[additionalUserInfo?.kids]}
                 </p>
               </div>
@@ -135,7 +135,7 @@ const UserComponent = ({
             {additionalUserInfo?.partying !== undefined && (
               <div className="border-all items-center px-2 py-1 br4">
                 <p>
-                  <FontAwesomeIcon className="mr8" icon={faGlassCheers} />
+                  <FontAwesomeIcon className="mr-2" icon={faGlassCheers} />
                   {partyingList[additionalUserInfo?.partying]}
                 </p>
               </div>
@@ -143,7 +143,7 @@ const UserComponent = ({
             {additionalUserInfo?.politics !== undefined && (
               <div className="border-all items-center px-2 py-1 br4">
                 <p>
-                  <FontAwesomeIcon className="mr8" icon={faLandmark} />
+                  <FontAwesomeIcon className="mr-2" icon={faLandmark} />
                   {politicalBeliefsList[additionalUserInfo?.politics]}
                 </p>
               </div>
@@ -151,7 +151,7 @@ const UserComponent = ({
             {additionalUserInfo?.religion !== undefined && (
               <div className="border-all items-center px-2 py-1 br4">
                 <p>
-                  <FontAwesomeIcon className="mr8" icon={faPray} />
+                  <FontAwesomeIcon className="mr-2" icon={faPray} />
                   {additionalUserInfo?.religion}
                 </p>
               </div>
@@ -181,7 +181,7 @@ const UserComponent = ({
 
                   startConversation(user, userID);
                 }}
-                icon={<FontAwesomeIcon className="mr8" icon={faComments} />}
+                icon={<FontAwesomeIcon className="mr-2" icon={faComments} />}
                 type="primary"
               >
                 Message

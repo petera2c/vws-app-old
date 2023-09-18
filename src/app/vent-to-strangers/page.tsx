@@ -8,12 +8,14 @@ import Page from "@/components/containers/Page/Page";
 import NewVentComponent from "@/components/NewVent/NewVent";
 import { useRecoilState } from "recoil";
 import { starterModalAtom } from "@/atoms/ModalVisibility";
+import { useSearchParams } from "next/navigation";
 
 const NewVentPage = () => {
   const { user } = useContext(UserContext);
   const [, setStarterModal] = useRecoilState(starterModalAtom);
 
-  const { search } = location;
+  const searchParams = useSearchParams();
+  const search = searchParams.toString();
 
   useEffect(() => {
     if (!user) {

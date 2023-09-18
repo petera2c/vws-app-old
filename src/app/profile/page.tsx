@@ -218,31 +218,31 @@ function ProfileSection() {
                 <div className="flex flex-wrap gap-2">
                   {userInfo.education !== undefined && (
                     <div className="border-all items-center px-2 py-1 br4">
-                      <FontAwesomeIcon className="mr8" icon={faSchool} />
+                      <FontAwesomeIcon className="mr-2" icon={faSchool} />
                       <p>{educationList[userInfo.education]}</p>
                     </div>
                   )}
                   {userInfo.kids !== undefined && (
                     <div className="border-all items-center px-2 py-1 br4">
-                      <FontAwesomeIcon className="mr8" icon={faBaby} />
+                      <FontAwesomeIcon className="mr-2" icon={faBaby} />
                       <p>{kidsList[userInfo.kids]}</p>
                     </div>
                   )}
                   {userInfo.partying !== undefined && (
                     <div className="border-all items-center px-2 py-1 br4">
-                      <FontAwesomeIcon className="mr8" icon={faGlassCheers} />
+                      <FontAwesomeIcon className="mr-2" icon={faGlassCheers} />
                       <p>{partyingList[userInfo.partying]}</p>
                     </div>
                   )}
                   {userInfo.politics !== undefined && (
                     <div className="border-all items-center px-2 py-1 br4">
-                      <FontAwesomeIcon className="mr8" icon={faLandmark} />
+                      <FontAwesomeIcon className="mr-2" icon={faLandmark} />
                       <p>{politicalBeliefsList[userInfo.politics]}</p>
                     </div>
                   )}
                   {userInfo.religion !== undefined && (
                     <div className="border-all items-center px-2 py-1 br4">
-                      <FontAwesomeIcon className="mr8" icon={faPray} />
+                      <FontAwesomeIcon className="mr-2" icon={faPray} />
                       <p>{userInfo.religion}</p>
                     </div>
                   )}
@@ -266,7 +266,7 @@ function ProfileSection() {
                         // startConversation(user);
                       }}
                     >
-                      <FontAwesomeIcon className="mr8" icon={faComments} />
+                      <FontAwesomeIcon className="mr-2" icon={faComments} />
                       <p className="ic ellipsis">
                         Message {capitolizeFirstChar(userBasicInfo.displayName)}
                       </p>
@@ -291,7 +291,7 @@ function ProfileSection() {
                       }}
                     >
                       <FontAwesomeIcon
-                        className="mr8"
+                        className="mr-2"
                         icon={faSpaceShuttle}
                         size="2x"
                       />

@@ -183,7 +183,7 @@ function Chat({
                 className="flex"
                 href={"/profile?" + activeChatUserBasicInfos[0].id}
               >
-                <h5 className="button-1 mr8">
+                <h5 className="button-1 mr-2">
                   {capitolizeFirstChar(activeChatUserBasicInfos[0].displayName)}
                 </h5>
 

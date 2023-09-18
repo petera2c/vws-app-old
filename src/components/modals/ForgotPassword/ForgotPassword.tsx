@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 
 import { getIsMobileOrTablet } from "../../../util";
 
 import { sendPasswordReset } from "./util";
-import { Button, Input, Modal } from "antd";
+import { Button, Form, Input, Modal } from "antd";
 import { useRecoilState } from "recoil";
 import { starterModalAtom } from "@/atoms/ModalVisibility";
 
 const ForgotPasswordModal = () => {
-  const { register, handleSubmit } = useForm();
-
   const [startedModal, setStarterModal] = useRecoilState(starterModalAtom);
 
   const [isMobileOrTablet, setIsMobileOrTablet] = useState<any>();
@@ -48,28 +45,27 @@ const ForgotPasswordModal = () => {
             </p>
           </div>
 
-          <form
+          <Form
             className="w-full column"
-            onSubmit={handleSubmit((data: any) => {
+            onFinish={(data: any) => {
               sendPasswordReset(data);
-            })}
+            }}
           >
             <div className="flex flex-col w-full gap-2 px-8 py-4">
-              <Input
-                className="mb8"
-                type="text"
-                placeholder="Email Address"
-                {...register("email", {
-                  required: "Required",
-                })}
-              />
+              <Form.Item name="email" required>
+                <Input
+                  className="mb8"
+                  type="text"
+                  placeholder="Email Address"
+                />
+              </Form.Item>
             </div>
             <div className="flex full-center w-full border-top px-8 py-4">
               <Button className="w-full" size="large" type="primary">
                 Send Email Password Reset Link
               </Button>
             </div>
-          </form>
+          </Form>
         </div>
       </div>
     </Modal>

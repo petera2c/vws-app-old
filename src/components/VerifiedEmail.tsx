@@ -9,7 +9,8 @@ function VerifiedEmail() {
   const [verifiedSuccessfully, setVerifiedSuccessly] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
 
-  const search = useSearchParams();
+  const searchParams = useSearchParams();
+  const search = searchParams.toString();
   const router = useRouter();
 
   useEffect(() => {

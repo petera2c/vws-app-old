@@ -34,6 +34,7 @@ import {
 } from "../../util";
 import MessageType from "@/types/MessageType";
 import ConversationType from "@/types/ConversationType";
+import { useSearchParams } from "next/navigation";
 
 export const conversationListener = (
   currentConversation: any,
@@ -414,7 +415,8 @@ export const setInitialConversationsAndActiveConversation = async (
   setCanLoadMore: any,
   setConversations: any
 ) => {
-  const search = window.location.search;
+  const searchParams = useSearchParams();
+  const search = searchParams.toString();
 
   if (newConversations.length < 5) setCanLoadMore(false);
 

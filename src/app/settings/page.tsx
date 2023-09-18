@@ -328,7 +328,7 @@ const Setting = ({
       }}
     >
       <Input
-        className="mr8"
+        className="mr-2"
         checked={settingsSnapshot.data()[main]}
         style={{ minWidth: "13px" }}
         type="checkbox"
