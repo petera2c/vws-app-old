@@ -11,7 +11,7 @@ import {
   isUserInQueueListener,
   leaveQueue,
 } from "../../components/Header/util";
-import { getIsMobileOrTablet, userSignUpProgress } from "../../util";
+import { useIsMobileOrTablet, userSignUpProgress } from "../../util";
 import { joinQueue } from "./util";
 import Page from "@/components/containers/Page/Page";
 import { faHandsHelping } from "@fortawesome/free-solid-svg-icons";
@@ -21,13 +21,12 @@ import { starterModalAtom } from "@/atoms/ModalVisibility";
 function ChatWithStrangersPage() {
   const { user } = useContext(UserContext);
 
-  const [isMobileOrTablet, setIsMobileOrTablet] = useState<boolean>();
+  const isMobileOrTablet = useIsMobileOrTablet();
+
   const [isUserInQueue, setIsUserInQueue] = useState();
   const [, setStarterModal] = useRecoilState(starterModalAtom);
 
   useEffect(() => {
-    setIsMobileOrTablet(getIsMobileOrTablet());
-
     let isUserInQueueUnsubscribe: any;
 
     if (user)

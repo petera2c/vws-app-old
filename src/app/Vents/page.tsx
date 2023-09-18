@@ -171,7 +171,7 @@ function VentsPage() {
                 {vents &&
                   vents.map((vent: VentType, index) => {
                     return (
-                      <div className="flex flex-col w-full gap-2" key={vent.id}>
+                      <div className="flex flex-col w-full gap-2" key={index}>
                         <Vent
                           previewMode={true}
                           ventID={vent.id}

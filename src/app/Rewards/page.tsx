@@ -6,7 +6,6 @@ import { Progress, Tooltip } from "antd";
 
 import { UserContext } from "../../context";
 
-import { getIsMobileOrTablet } from "../../util";
 import {
   calculateMilestone,
   getNextMilestone,
@@ -21,13 +20,10 @@ dayjs.extend(relativeTime);
 function RewardsPage() {
   const { user } = useContext(UserContext);
 
-  const [isMobileOrTablet, setIsMobileOrTablet] = useState<boolean>();
   const [recentRewards, setRecentRewards] = useState<Reward[]>([]);
   const [userRewards, setUserRewards] = useState<Reward>();
 
   useEffect(() => {
-    setIsMobileOrTablet(getIsMobileOrTablet());
-
     if (user) {
       getUserRecentRewards(setRecentRewards, user.uid);
       getUserRewardsProgress(setUserRewards, user.uid);

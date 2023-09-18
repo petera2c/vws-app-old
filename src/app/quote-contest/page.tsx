@@ -15,9 +15,9 @@ import {
   capitolizeFirstChar,
   countdown,
   formatSeconds,
-  getIsMobileOrTablet,
   getUserBasicInfo,
   hasUserBlockedUser,
+  useIsMobileOrTablet,
   userSignUpProgress,
 } from "../../util";
 import {
@@ -41,19 +41,17 @@ import TextArea from "antd/es/input/TextArea";
 
 function QuoteContestPage() {
   const { user, userBasicInfo } = useContext(UserContext);
+  const isMobileOrTablet = useIsMobileOrTablet();
 
   const [canLoadMoreQuotes, setCanLoadMoreQuotes] = useState(true);
   const [canUserCreateQuote, setCanUserCreateQuote] = useState(true);
   const [contestTimeLeft, setContestTimeLeft] = useState();
-  const [isMobileOrTablet, setIsMobileOrTablet] = useState<Boolean>();
   const [myQuote, setMyQuote] = useState("");
   const [quoteID, setQuoteID] = useState<string>();
   const [quotes, setQuotes] = useState([]);
   const [starterModal, setStarterModal] = useState<boolean>();
 
   useEffect(() => {
-    setIsMobileOrTablet(getIsMobileOrTablet());
-
     if (user) getCanUserCreateQuote(setCanUserCreateQuote, user.uid);
     getQuotes(setCanLoadMoreQuotes, setQuotes);
     let timeLeftDayjs = dayjs().utcOffset(0).add(1, "day");
@@ -95,7 +93,7 @@ function QuoteContestPage() {
                 return (
                   <Quote
                     isLast={index === quotes.length - 1}
-                    key={quote.id}
+                    key={index}
                     quote1={quote}
                     setCanUserCreateQuote={setCanUserCreateQuote}
                     setMyQuote={setMyQuote}

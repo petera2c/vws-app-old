@@ -445,7 +445,7 @@ const Vent = ({
                         commentIndex={index}
                         comment2={comment}
                         setComments={setComments}
-                        key={comment.id}
+                        key={index}
                       />
                     );
                   })}

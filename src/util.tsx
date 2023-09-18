@@ -245,9 +245,11 @@ export const hasUserBlockedUser = async (
 
 export const useIsMobileOrTablet = () => {
   const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
-  useEffect(() => {
-    setIsMobileOrTablet(window.screen.width < 940);
-  }, [window.screen.width]);
+
+  // useEffect(() => {
+  //   //setIsMobileOrTablet(window.screen.width < 940);
+  // }, []);
+
   return isMobileOrTablet;
 };
 

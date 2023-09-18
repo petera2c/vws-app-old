@@ -62,11 +62,11 @@ function GroupChatCreateModal({ close, groupChatEditting }: any) {
           {existingUsers && existingUsers.length > 0 && (
             <div className="flex flex-col gap-4">
               <h4>Users In Chat</h4>
-              {existingUsers.map((user) => {
+              {existingUsers.map((user, index) => {
                 return (
                   <DisplayExistingUser
                     groupChatEditting={groupChatEditting}
-                    key={user.id}
+                    key={index}
                     setExistingUsers={setExistingUsers}
                     user={user}
                     userBasicInfo={userBasicInfo}

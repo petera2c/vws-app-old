@@ -137,7 +137,7 @@ const SideBarLink = ({
               (userBasicInfo: UserBasicInfo, index: number) => (
                 <div
                   className="avatar small items-end"
-                  key={userBasicInfo.id}
+                  key={index}
                   style={{
                     transform: `translateX(-${index * 28}px)`,
                   }}

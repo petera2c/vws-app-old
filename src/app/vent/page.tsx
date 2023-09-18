@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-import { getIsMobileOrTablet } from "../../util";
+import { useIsMobileOrTablet } from "../../util";
 import { getMeta } from "../vents/util";
 import { usePathname } from "next/navigation";
 import Page from "@/components/containers/Page/Page";
@@ -21,11 +21,11 @@ const getVentIdFromURL = (pathname: string) => {
   }
 };
 
-function VentPage() {
+const VentPage = () => {
+  const isMobileOrTablet = useIsMobileOrTablet();
   const pathname = usePathname();
 
   const [title, setTitle] = useState("");
-  const [isMobileOrTablet, setIsMobileOrTablet] = useState<boolean>();
   const [ventFound, setVentFound] = useState();
 
   const objectFromMetaData = getMeta("vent-data");
@@ -38,10 +38,6 @@ function VentPage() {
   if (regexMatch) ventID = regexMatch;
 
   if (ventFromMeta && ventFromMeta.id !== ventID) ventFromMeta = null;
-
-  useEffect(() => {
-    setIsMobileOrTablet(getIsMobileOrTablet());
-  }, []);
 
   return (
     <Page className="px-4 pt-4" title={title}>
@@ -67,6 +63,6 @@ function VentPage() {
       </div>
     </Page>
   );
-}
+};
 
 export default VentPage;

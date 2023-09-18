@@ -32,8 +32,8 @@ function QuoteWinnersPage() {
       </div>
 
       <div className="justify-center w-full flex-wrap gap-4">
-        {quotes.map((quote) => (
-          <QuoteDisplay key={quote.id} quote={quote} />
+        {quotes.map((quote, index) => (
+          <QuoteDisplay key={index} quote={quote} />
         ))}
       </div>
     </Page>

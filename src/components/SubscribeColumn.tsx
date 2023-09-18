@@ -4,7 +4,7 @@ import MakeAd from "./MakeAd/MakeAd";
 import UniqueShareLink from "./views/UniqueShareLink/UniqueShareLink";
 
 import { UserContext } from "../context";
-import { getIsMobileOrTablet } from "../util";
+import { useIsMobileOrTablet } from "../util";
 
 function SubscribeColumn({
   slot,
@@ -14,8 +14,9 @@ function SubscribeColumn({
   uniqueShareLink?: boolean;
 }) {
   const { user } = useContext(UserContext);
+  const isMobileOrTablet = useIsMobileOrTablet();
 
-  if (!getIsMobileOrTablet())
+  if (!isMobileOrTablet)
     return (
       <div className="container ad flex flex-col pl-4">
         <div className="sticky top-0 flex flex-col w-full gap-4">

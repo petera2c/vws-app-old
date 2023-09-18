@@ -3,7 +3,7 @@ import { Modal, Space } from "antd";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { getIsMobileOrTablet } from "../../../util";
+import { useIsMobileOrTablet } from "../../../util";
 import {
   faMeteor,
   faSailboat,
@@ -11,12 +11,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 function NewRewardModal({ close, newReward }: { close: any; newReward: any }) {
-  const [isMobileOrTablet, setIsMobileOrTablet] = useState<boolean>();
+  const isMobileOrTablet = useIsMobileOrTablet();
+
   const [canClose, setCanClose] = useState(false);
 
   useEffect(() => {
-    setIsMobileOrTablet(getIsMobileOrTablet());
-
     setTimeout(() => setCanClose(true), 2000);
   }, []);
 

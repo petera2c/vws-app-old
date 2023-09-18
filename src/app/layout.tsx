@@ -21,7 +21,12 @@ import LoadingHeart from "@/components/views/loaders/Heart";
 import Sidebar from "@/components/Sidebar";
 import { OnlineUsersContext, UserContext } from "@/context";
 import { useIdleTimer } from "react-idle-timer";
-import { getTotalOnlineUsers, getUserAvatars, getUserBasicInfo } from "@/util";
+import {
+  getTotalOnlineUsers,
+  getUserAvatars,
+  getUserBasicInfo,
+  useIsMobileOrTablet,
+} from "@/util";
 import { User, getAuth, onAuthStateChanged } from "@firebase/auth";
 import UserBasicInfo from "@/types/UserBasicInfo";
 import {
@@ -50,11 +55,9 @@ const queryClient = new QueryClient({
   },
 });
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+const RootLayout = ({ children }: { children: React.ReactNode }) => {
+  const isMobileOrTablet = useIsMobileOrTablet();
+
   const [firstOnlineUsers, setFirstOnlineUsers] = useState([]);
   const [isUsersBirthday, setIsUsersBirthday] = useState(false);
   const [newReward, setNewReward] = useState();
@@ -152,14 +155,10 @@ export default function RootLayout({
                 >
                   <RecoilRoot>
                     <div className="flex flex-col screen-container">
-                      {window.screen.width > 940 ? (
-                        <Header />
-                      ) : (
-                        <MobileHeader />
-                      )}
+                      {isMobileOrTablet ? <MobileHeader /> : <Header />}
 
                       <div className="flex grow overflow-hidden">
-                        {window.screen.width > 940 && <Sidebar />}
+                        {!isMobileOrTablet && <Sidebar />}
 
                         {loading ? (
                           <div className="flex grow justify-center bg-blue-2">
@@ -187,4 +186,6 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

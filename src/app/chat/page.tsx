@@ -7,8 +7,8 @@ import Message from "../../components/Message";
 
 import {
   capitolizeFirstChar,
-  getIsMobileOrTablet,
   getUserBasicInfo,
+  useIsMobileOrTablet,
 } from "../../util";
 import {
   getConversationPartnerUserID,
@@ -50,6 +50,8 @@ function Chat({
 }) {
   const router = useRouter();
 
+  const isMobileOrTablet = useIsMobileOrTablet();
+
   const dummyRef = useRef<any>();
   const textInput = useRef(null);
   const isUserTypingTimeout = useRef();
@@ -69,7 +71,6 @@ function Chat({
     useState(true);
   const [arrayOfUsersTyping, setArrayOfUsersTyping] = useState([]);
   const [canLoadMore, setCanLoadMore] = useState(true);
-  const [isMobileOrTablet, setIsMobileOrTablet] = useState<boolean>();
   const [messages, setMessages] = useState<MessageType[]>([]);
   const [messageString, setMessageString] = useState("");
   const [showPartnerIsTyping, setShowPartnerIsTyping] = useState(false);
@@ -78,7 +79,6 @@ function Chat({
     let messageListenerUnsubscribe: any;
     let isUserTypingUnsubscribe: any;
 
-    setIsMobileOrTablet(getIsMobileOrTablet());
     setCanLoadMore(true);
     setShowPartnerIsTyping(false);
 

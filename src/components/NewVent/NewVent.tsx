@@ -10,8 +10,8 @@ import { UserContext } from "../../context";
 import {
   capitolizeFirstChar,
   countdown,
-  getIsMobileOrTablet,
   isUserKarmaSufficient,
+  useIsMobileOrTablet,
   viewTagFunction,
 } from "../../util";
 import {
@@ -44,10 +44,11 @@ const NewVentComponent = ({ isBirthdayPost, miniVersion, ventID }: any) => {
   const { user, userBasicInfo } = useContext(UserContext);
   const [, setStarterModal] = useRecoilState(starterModalAtom);
 
+  const isMobileOrTablet = useIsMobileOrTablet();
+
   const [description, setDescription] = useState("");
   const [hasStartedToWriteVent, setHasStartedToWriteVent] = useState(false);
   const [isMinified, setIsMinified] = useState(miniVersion);
-  const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
   const [placeholderText, setPlaceholderText] = useState("");
   const [postingDisableFunction, setPostingDisableFunction] = useState<any>();
   const [quote, setQuote] = useState<Quote>();
@@ -66,7 +67,6 @@ const NewVentComponent = ({ isBirthdayPost, miniVersion, ventID }: any) => {
     let interval: any;
 
     setPlaceholderText(selectEncouragingMessage());
-    setIsMobileOrTablet(getIsMobileOrTablet());
 
     getTags(setSearchedVentTags, setVentTags);
 
@@ -247,9 +247,9 @@ const NewVentComponent = ({ isBirthdayPost, miniVersion, ventID }: any) => {
             <div className="flex flex-wrap w-full gap-2">
               {tags.map((tag: Tag, index) => (
                 <SelectedTag
-                  postingDisableFunction={postingDisableFunction}
                   index={index}
                   key={tag.id}
+                  postingDisableFunction={postingDisableFunction}
                   setTags={setTags}
                   tag={tag}
                   tags={tags}
@@ -312,7 +312,7 @@ const NewVentComponent = ({ isBirthdayPost, miniVersion, ventID }: any) => {
               <h1
                 className={
                   "fs-18 no-bold grey-1 italic text-center " +
-                  (getIsMobileOrTablet() ? "grow" : "container medium")
+                  (isMobileOrTablet ? "grow" : "container medium")
                 }
               >
                 {quote.value}

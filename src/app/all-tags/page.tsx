@@ -26,8 +26,8 @@ const AllTags = () => {
             </p>
           </div>
           <div className="full-center flex-wrap gap-4">
-            {tags.map((tag) => (
-              <Tag key={tag.id} tag={tag} />
+            {tags.map((tag, index) => (
+              <Tag key={index} tag={tag} />
             ))}
           </div>
         </div>

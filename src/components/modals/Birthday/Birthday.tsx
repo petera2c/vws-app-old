@@ -4,16 +4,15 @@ import { Button, Modal, Space } from "antd";
 import { faBirthdayCake } from "@fortawesome/free-solid-svg-icons/faBirthdayCake";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { getIsMobileOrTablet } from "../../../util";
+import { useIsMobileOrTablet } from "../../../util";
 import Link from "next/link";
 
 function BirthdayModal({ close }: any) {
+  const isMobileOrTablet = useIsMobileOrTablet();
+
   const [canClose, setCanClose] = useState(false);
-  const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
 
   useEffect(() => {
-    setIsMobileOrTablet(getIsMobileOrTablet());
-
     setTimeout(() => {
       setCanClose(true);
     }, 2000);

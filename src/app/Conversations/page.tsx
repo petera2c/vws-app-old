@@ -3,11 +3,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { Button } from "antd";
 
 import Chat from "../chat/page";
-import MobileIndex from "./MobileConversations";
+import MobileConversations from "./MobileConversations";
 
 import { UserContext } from "../../context";
 
-import { getIsMobileOrTablet, userSignUpProgress } from "../../util";
+import { useIsMobileOrTablet, userSignUpProgress } from "../../util";
 import {
   getConversations,
   mostRecentConversationListener,
@@ -21,8 +21,9 @@ import CreateGroupChatModal from "@/components/modals/CreateGroupChat/CreateGrou
 import { useRecoilState } from "recoil";
 import { starterModalAtom } from "@/atoms/ModalVisibility";
 
-function Conversations() {
+const Conversations = () => {
   const { user } = useContext(UserContext);
+
   const [, setStarterModal] = useRecoilState(starterModalAtom);
 
   const [activeChatUserBasicInfos, setActiveChatUserBasicInfos] = useState();
@@ -184,11 +185,13 @@ function Conversations() {
       )}
     </Page>
   );
-}
+};
 
-let temp;
+const Temp = () => {
+  const isMobileOrTablet = useIsMobileOrTablet();
 
-if (!getIsMobileOrTablet()) temp = Conversations;
-else temp = MobileIndex;
+  if (isMobileOrTablet) return <MobileConversations />;
+  else return <Conversations />;
+};
 
-export default temp;
+export default Temp;

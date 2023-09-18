@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { getIsMobileOrTablet } from "../../../util";
+import { useIsMobileOrTablet } from "../../../util";
 
 import { sendPasswordReset } from "./util";
 import { Button, Form, Input, Modal } from "antd";
@@ -8,13 +8,9 @@ import { useRecoilState } from "recoil";
 import { starterModalAtom } from "@/atoms/ModalVisibility";
 
 const ForgotPasswordModal = () => {
+  const isMobileOrTablet = useIsMobileOrTablet();
+
   const [startedModal, setStarterModal] = useRecoilState(starterModalAtom);
-
-  const [isMobileOrTablet, setIsMobileOrTablet] = useState<any>();
-
-  useEffect(() => {
-    setIsMobileOrTablet(getIsMobileOrTablet());
-  }, [setIsMobileOrTablet]);
 
   return (
     <Modal

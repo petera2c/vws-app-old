@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { UserContext } from "../../../context";
-import { getIsMobileOrTablet } from "../../../util";
+import { useIsMobileOrTablet } from "../../../util";
 import { signUp } from "./util";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { Button, Form, Input, Modal } from "antd";
@@ -12,17 +12,13 @@ import { starterModalAtom } from "@/atoms/ModalVisibility";
 import { useRouter } from "next/navigation";
 
 const SignUpModal = () => {
+  const isMobileOrTablet = useIsMobileOrTablet();
   const router = useRouter();
 
   const { setUserBasicInfo } = useContext(UserContext);
   const [starterModal, setStarterModal] = useRecoilState(starterModalAtom);
 
   const [canSeePassword, setCanSeePassword] = useState(false);
-  const [isMobileOrTablet, setIsMobileOrTablet] = useState<boolean>();
-
-  useEffect(() => {
-    setIsMobileOrTablet(getIsMobileOrTablet());
-  }, [setIsMobileOrTablet]);
 
   return (
     <Modal

@@ -15,7 +15,7 @@ import {
   politicalBeliefsList,
   religiousBeliefsList,
 } from "../../PersonalOptions";
-import { calculateKarma, getIsMobileOrTablet } from "../../util";
+import { calculateKarma, useIsMobileOrTablet } from "../../util";
 import { deleteAccountAndAllData, getUser, updateUser } from "./util";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -34,6 +34,8 @@ import TextArea from "antd/es/input/TextArea";
 const AccountSection = () => {
   const { user, userBasicInfo, setUserBasicInfo } = useContext(UserContext);
 
+  const isMobileOrTablet = useIsMobileOrTablet();
+
   const [bio, setBio] = useState("");
   const [birthDate, setBirthDate] = useState<any>();
   const [canSeePassword, setCanSeePassword] = useState(false);
@@ -44,7 +46,6 @@ const AccountSection = () => {
   );
   const [email, setEmail] = useState(user?.email);
   const [gender, setGender] = useState("");
-  const [isMobileOrTablet, setIsMobileOrTablet] = useState<any>();
   const [newPassword, setNewPassword] = useState("");
   const [pronouns, setPronouns] = useState("");
   const [userInfo, setUserInfo] = useState({});
@@ -68,8 +69,6 @@ const AccountSection = () => {
   };
 
   useEffect(() => {
-    setIsMobileOrTablet(getIsMobileOrTablet());
-
     getUser((userInfo: any) => {
       setAccountInfo(userInfo);
       if (userInfo) setUserInfo(userInfo);

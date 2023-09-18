@@ -46,7 +46,7 @@ function IndividualTag() {
           <div className="flex flex-col gap-2">
             {vents.map((vent, index) => (
               <Vent
-                key={vent.id}
+                key={index}
                 previewMode={true}
                 showVentHeader={false}
                 ventID={vent.id}

@@ -170,7 +170,7 @@ const VentsPage = () => {
                 {vents &&
                   vents.map((vent: any, index: number) => {
                     return (
-                      <div className="flex flex-col w-full gap-2" key={vent.id}>
+                      <div className="flex flex-col w-full gap-2" key={index}>
                         <Vent
                           previewMode={true}
                           ventID={vent.id}

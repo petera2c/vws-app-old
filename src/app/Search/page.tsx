@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 // import algoliasearch from "algoliasearch";
 import { Space } from "antd";
 
-import { capitolizeFirstChar, getIsMobileOrTablet } from "../../util";
+import { capitolizeFirstChar, useIsMobileOrTablet } from "../../util";
 // import { searchVents } from "./util";
 
 // const searchClient = algoliasearch(
@@ -12,18 +12,17 @@ import { capitolizeFirstChar, getIsMobileOrTablet } from "../../util";
 // );
 // const usersIndex = searchClient.initIndex("users");
 
-function SearchPage() {
+const SearchPage = () => {
   let search = location.search
     ? decodeURI(location.search.substring(1, location.search.length))
     : "";
+  const isMobileOrTablet = useIsMobileOrTablet();
 
-  const [isMobileOrTablet, setIsMobileOrTablet] = useState<boolean>();
   const [isUsers, setIsUsers] = useState(true);
   const [users, setUsers] = useState([]);
   const [vents, setVents] = useState([]);
 
   // useEffect(() => {
-  //   setIsMobileOrTablet(getIsMobileOrTablet());
 
   //   if (isUsers) {
   //     usersIndex
@@ -123,6 +122,6 @@ function SearchPage() {
   //     )}
   //   </Page>
   // );
-}
+};
 
 export default SearchPage;

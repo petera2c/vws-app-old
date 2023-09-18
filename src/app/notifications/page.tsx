@@ -10,19 +10,17 @@ import {
   getNotifications,
   newNotificationsListener,
 } from "../../components/Header/util";
-import { getIsMobileOrTablet } from "../../util";
+import { useIsMobileOrTablet } from "../../util";
 import Page from "@/components/containers/Page/Page";
 
 function NotificationsPage() {
   const { user } = useContext(UserContext);
+  const isMobileOrTablet = useIsMobileOrTablet();
 
   const [canShowLoadMore, setCanShowLoadMore] = useState(true);
-  const [isMobileOrTablet, setIsMobileOrTablet] = useState<boolean>();
   const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
-    setIsMobileOrTablet(getIsMobileOrTablet());
-
     let newNotificationsListenerUnsubscribe: any;
 
     getNotifications([], setCanShowLoadMore, undefined, setNotifications, user);

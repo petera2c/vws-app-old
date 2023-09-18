@@ -25,9 +25,9 @@ import {
   blockUser,
   calculateKarma,
   capitolizeFirstChar,
-  getIsMobileOrTablet,
   getIsUserOnline,
   getUserBasicInfo,
+  useIsMobileOrTablet,
   userSignUpProgress,
 } from "../../util";
 import {
@@ -68,13 +68,14 @@ function ProfileSection() {
   const { user } = useContext(UserContext);
   const [, setStarterModal] = useRecoilState(starterModalAtom);
 
+  const isMobileOrTablet = useIsMobileOrTablet();
+
   let { search } = location;
 
   const [blockModal, setBlockModal] = useState(false);
   const [canLoadMoreComments, setCanLoadMoreComments] = useState(true);
   const [canLoadMoreVents, setCanLoadMoreVents] = useState(true);
   const [isFollowing, setIsFollowing] = useState();
-  const [isMobileOrTablet, setIsMobileOrTablet] = useState<boolean>();
   const [isUserOnline, setIsUserOnline] = useState<any>(false);
   const [postsSection, setPostsSection] = useState(true);
   const [userBasicInfo, setUserBasicInfo] = useState<UserBasicInfo>();
@@ -93,7 +94,6 @@ function ProfileSection() {
 
   useEffect(() => {
     let isUserOnlineSubscribe: any;
-    setIsMobileOrTablet(getIsMobileOrTablet());
 
     setVents([]);
     setComments([]);

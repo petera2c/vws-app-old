@@ -10,7 +10,7 @@ import LoadingHeart from "../../components/views/loaders/Heart";
 import SubscribeColumn from "../../components/SubscribeColumn";
 
 import { UserContext } from "../../context";
-import { getIsMobileOrTablet, getUserBasicInfo } from "../../util";
+import { getUserBasicInfo, useIsMobileOrTablet } from "../../util";
 import { getBlockedUsers, unblockUser } from "../account/util";
 import Page from "@/components/containers/Page/Page";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -18,10 +18,10 @@ import UserBasicInfo from "@/types/UserBasicInfo";
 
 function SettingsSection() {
   const { user } = useContext(UserContext);
+  const isMobileOrTablet = useIsMobileOrTablet();
 
   const [blockedUsers, setBlockedUsers] = useState([]);
   const [canLoadMore, setCanLoadMore] = useState(false);
-  const [isMobileOrTablet, setIsMobileOrTablet] = useState<boolean>();
 
   // @ts-ignore
   const settingsRef = doc(db, "users_settings", user?.uid);
@@ -38,10 +38,6 @@ function SettingsSection() {
     await updateDoc(settingsRef, { [name]: checked });
     if (notify) message.success("Setting updated!");
   };
-
-  useEffect(() => {
-    setIsMobileOrTablet(getIsMobileOrTablet());
-  }, []);
 
   if (!settingsSnapshot || !settingsSnapshot.data())
     return (
@@ -231,10 +227,10 @@ function SettingsSection() {
               Blocked Users
             </button>
 
-            {blockedUsers.map((blockedUserID) => (
+            {blockedUsers.map((blockedUserID, index) => (
               <UserDisplay
                 blockedUserID={blockedUserID}
-                key={blockedUserID}
+                key={index}
                 setBlockedUsers={setBlockedUsers}
                 userID={user!.uid}
               />
